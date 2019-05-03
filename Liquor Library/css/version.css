@@ -1,0 +1,314 @@
+/* 
+font-family: 'Lato', sans-serif;
+font-family: 'Shadows Into Light', cursive;
+font-family: 'Cinzel', serif;
+font-family: 'Roboto', sans-serif;
+font-family: 'Open Sans', sans-serif;
+font-family: 'Montserrat', sans-serif;
+*/
+
+/* navbar */
+.navbar-inverse{
+    background-color: transparent!important;
+    border:none!important;
+  
+ }
+ .navbar-inverse .navbar-nav>li {
+    color: white!important;
+}
+.navbar-inverse .navbar-nav>li:hover {
+    color: black!important;
+}
+ .opaque-navbar {
+  /* Transparent = rgba(0,0,0,0) / Translucent = (0,0,0,0.5)  */
+    height: 60px;
+    border-bottom: 0px;
+    transition: background-color .5s ease 0s;
+}
+
+.opaque-navbar.opaque {
+    background-color: black!important;
+    height: 60px;
+    transition: background-color .5s ease 0s;
+}
+.opaque-navbar.opaque a,.opaque-navbar.opaque span{
+    color: white!important;
+}
+
+
+ul.dropdown-menu {
+    background-color: black;
+}
+
+
+@media (max-width: 992px) {
+  body
+  {
+    background:red;
+  }
+  .opaque-navbar {
+    background-color: black;
+    height: 60px;
+    transition: background-color .5s ease 0s;
+    
+}
+
+}
+.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover {
+    color: #fff;
+    background-color: transparent!important;
+ 
+}
+
+.navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
+    margin-left: -60px!important;
+}
+@media(max-width: 600px){
+    .navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
+        margin-left: 50px!important;
+    }
+
+}
+.navbar-inverse .navbar-nav>li>a:hover {
+    color: black!important;
+}
+.glyphicon:hover{
+    color: black!important;
+}
+/* ------------------------------------------------------------------------------------------------------------- */
+
+/* modal */
+.modal {
+  position: absolute;
+}
+.modal-lg{
+width: 1200px!important;
+height: 200px;
+}
+.modal-content{
+position: absolute;
+top: 45px;
+height: 100px!important;
+}
+
+.modal-backdrop.in {
+filter: alpha(opacity=50);
+opacity: 0!important;
+}
+
+
+
+/* ------------------------------------------------------------------------------------------------------------- */
+.contactms{
+    font-size: 8.5rem;
+    font-weight: 800;
+    color:  #8B0000;
+    font-family: 'Lato', sans-serif;
+    text-align: center;
+    margin-top: 150px;
+    animation-name: fadeIn;
+    animation-duration: 2s;
+}
+@media(max-width:700px){
+    .contactms{
+        font-size: 3rem;
+    }
+}
+.contactdes{
+    max-width: 600px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.7rem;
+    text-align: center;
+    margin:10px auto;
+}
+.em{
+    color:#8B0000;
+}
+
+/* text effect */
+@keyframes topFadeOut {
+    0% {
+      position: absolute;
+      top: -3rem;
+      opacity: 0;
+    }
+  
+    75% {
+      position: absolute;
+      top: 25%;
+      opacity: 1;
+    }
+  
+    100% {
+      opacity: 0;
+    }
+  }
+  
+  @keyframes bottomFadeOut {
+    0% {
+      position: absolute;
+      bottom: -5rem;
+      opacity: 0;
+    }
+  
+    75% {
+      position: absolute;
+      bottom: 25%;
+      opacity: 1;
+    }
+  
+    100% {
+      opacity: 0;
+    }
+    
+  }
+  
+  @keyframes topFadeOutVertical {
+    0% {
+      position: absolute;
+      top: -3rem;
+      opacity: 0;
+    }
+  
+    75% {
+      position: absolute;
+      top: 45%;
+      opacity: 1;
+    }
+  
+    100% {
+      opacity: 0;
+    }
+  }
+  
+  @keyframes rightFadeInOut {
+    0% {
+      position: absolute;
+      right: -3rem;
+      opacity: 0;
+    }
+  
+    75% {
+      position: absolute;
+      right: 10rem;
+      opacity: 1;
+    }
+  
+    100% {
+      opacity: 0;
+      right: 10rem;
+    }
+  }
+  
+  @keyframes fadeInOut {
+    0% {
+      opacity: 0;
+    }
+  
+    45% {
+      opacity: 1;
+    }
+  
+    100% {
+      opacity: 0%;
+    }
+  }
+  @keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+  }
+/* form------------------------------------------------------------------------------------ */
+.fieldbox{
+text-align: center;
+margin-top: 20px;
+}
+.row{
+    text-align: center!important;
+}
+.input2, select{
+    background: rgba(244, 232, 117, 0.7);
+    border: 1px solid #ececec;
+    border-radius: 2px;
+    transition: all 1.5s cubic-bezier(.19,1,.22,1);
+    /* padding: 20px; */
+    font: 12px/1 effra;
+    color: #000;
+    min-height: 40px;
+    width: 100%;
+}
+
+label{
+    color:rgba(124, 99, 84, 1);
+    font-family: 'Open Sans', sans-serif;
+}
+textarea{
+    border: 2px dashed rgba(244, 232, 117, 0.7);
+    border-radius: 2px;
+    transition: all 1.5s cubic-bezier(.19,1,.22,1);
+    font: 12px/1 effra;
+    color: #000;
+    min-height: 40px;
+    width: 100%;
+    background-color:#ececec;
+
+}
+
+#resetbutton{
+    background-color: white;
+    border: 1px solid #8B0000;
+    color: #8B0000;
+    width: 200px;
+    height: 70px;
+}
+#submitbutton{
+    background-color: #8B0000;
+    border: 1px solid #8B0000;
+    width: 200px;
+    height: 70px;
+}
+
+#resetbutton:hover{
+    background-color: #8B0000;
+    border: 1px solid #8B0000;
+    color: white;
+}
+#submitbutton:hover{
+    background-color: white;
+    border: 1px solid #8B0000;
+    color: #8B0000;
+}
+/* Register page Css */
+.mySlides {
+  display:none;
+
+}
+.content{
+   color: rgba(244, 232, 117, 1);
+   font-size: 5rem;
+   font-family: 'Lato', sans-serif;
+   font-weight: 900;
+   position: absolute;
+   z-index: 1;
+   top: 20%;
+   left: 12%;
+}
+.content2{
+   color: rgba(25,25,112);
+   font-size: 5rem;
+   font-family: 'Lato', sans-serif;
+   font-weight: 900;
+   position: absolute;
+   z-index: 1;
+   top: 30%;
+   left: 10%;
+}
+@media(max-width: 700px){
+   .content{
+       font-size: 2rem;  
+   }
+   .content2{
+       font-size: 2rem;  
+   }
+
+};
+
