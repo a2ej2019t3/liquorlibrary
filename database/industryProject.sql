@@ -40,7 +40,7 @@ create table warehousetype (
     );
     
 create table warehouse (
-	whID int(20) unique auto_increment primary key,
+	whID int(20) auto_increment primary key,
     typeID int(20) default 0,
     whName varchar(45),
     address varchar(45),
