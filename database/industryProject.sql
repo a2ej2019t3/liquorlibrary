@@ -8,10 +8,10 @@ create table product (
     );
     
     alter table product 
-    add foreign key (categoryID) references Category(categoryID);
+    add foreign key (categoryID) references category(categoryID);
     
 	alter table product 
-    add foreign key (brandId) references Brand(brandID);
+    add foreign key (brandId) references brand(brandID);
 
 	delimiter //
 		create trigger after_product_inserted
@@ -135,13 +135,13 @@ add foreign key (boID) references backorders(backorderID);
 alter table backorderitems
 add foreign key (boItemID) references product(productID);
     
-create table Admin (
+create table admin (
 	ID int(20) not null primary key auto_increment,
     password varchar(20),
     whID int(20) not null
     );
     
-alter table Admin
+alter table admin
 add foreign key (whID) references warehouse(whID);
     
     
