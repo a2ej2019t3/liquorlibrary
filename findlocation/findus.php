@@ -34,7 +34,7 @@
     </script>
 
 </head>
-<body>  
+<body class="fadeIn">  
         <div id="background"></div>
         <div class="container-fluid">
             <div class="overlay-content">
@@ -56,7 +56,7 @@
                                                 <option value="B9">Branch 9</option>
                                                 <option value="B10">Branch 10</option>
                                                 </select>
-                                                <button id="searchbutton" type="submit" class="btn btn-primary">Search</button>
+                                                
                         </div>
                 
                 </div>

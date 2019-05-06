@@ -107,16 +107,24 @@ opacity: 0!important;
     background-image: url("../images/liquor12.jpg");
     background-size: cover;
     position: absolute;
+    background-repeat: repeat;
+    background-attachment: scroll;
     top: 0;
     left: 0;
     z-index: -4;
     width: 100%;
-    height: 100%;
+    min-height: 100%;
     text-align: center;
     opacity:0.8;
     transition: .5s ease;
 }
 
+@media(max-width:600px){
+    #background{
+    width: 100%;
+    height: 700px;
+    }
+}
 .formbox{
     height: 100px;
     background-color: white;
@@ -156,6 +164,11 @@ select{
     border: 1px solid #8B0000;
     color: #8B0000;
 }
-.infoarea{
-  
-}
+.fadeIn {
+    -webkit-animation-duration: 3s;
+    animation-duration: 3s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-name: fadeIn;
+    animation-name: fadeIn;
+  }

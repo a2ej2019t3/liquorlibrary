@@ -65,7 +65,7 @@
     <div class="container">
         <div class="row">
             <div class="imgbox col-xs-12 col-md-6">
-                <img src="../images/location2.jpg" class="storeimg" alt="storeimg">
+                <img src="../images/location4.jpg" class="storeimg" alt="storeimg">
             </div>
             <div class="infobox col-xs-12 col-md-6">
                 <div class="addressbox">
