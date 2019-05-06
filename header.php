@@ -72,8 +72,15 @@
                                         <div class="row">
                                           
                                           <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                              <input type="text" placeholder="Search by keywords, categories" style="width:100%; height:60px; border-top: 6px solid rgba(48, 43, 41,1); ">
-                                          </div>
+                                              <!-- add id for search function -->
+                                              <input id="searchbox" type="text" placeholder="Search by keywords, categories" style="width:100%; height:60px; border-top: 6px solid rgba(48, 43, 41,1); ">
+                                              <!-- dropdown menu -->
+                                              <div class="ds-dropdown-menu col-xs-12 col-sm-12 col-md-12 col-lg-12" role="listbox" id="dropdownarea" style="margin-top:10px;">
+                                                          <!-- <div id="dropdownarea">
+                                                          </div> -->
+                                              </div>
+                                              <!-- dropdown menu end -->
+                                            </div>
                                           <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                                             <button id="submit" type="submit" class="btn btn-primary" style="width:100%; height:60px; background-color: rgba(48, 43, 41,1)!important; ">Submit</button>
                                           </div>                                          
