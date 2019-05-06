@@ -7,22 +7,6 @@ create table product (
     brandID int(20) not null
     );
     
-    alter table product 
-    add foreign key (categoryID) references category(categoryID);
-    
-	alter table product 
-    add foreign key (brandId) references brand(brandID);
-
-	delimiter //
-		create trigger after_product_inserted
-			after insert on product
-            for each row
-		begin
-			insert into stocklist (productID, whID)
-            values (new.productID, 1), (new.productID, 2), (new.productID, 3), (new.productID, 4), (new.productID, 5), (new.productID, 6), (new.productID, 7), (new.productID, 8), (new.productID, 9), (new.productID, 10), (new.productID, 11);
-		end;//
-	delimiter ;
-    
 create table category (
 	categoryID int(20) not null primary key auto_increment,
     parentCategoryID int(20),
@@ -48,9 +32,6 @@ create table warehouse (
     email varchar(45)
     );
     
-alter table warehouse
-add foreign key (typeID) references warehousetype(typeID);
-    
 create table stocklist (
 	listIndex int(20) not null primary key auto_increment,
 	productID int(20) not null,
@@ -58,12 +39,6 @@ create table stocklist (
     whID int(20) not null
     );
     
-alter table stocklist
-add foreign key (productID) references product(productID);
-
-alter table stocklist
-add foreign key (whID) references warehouse(whID);
-
 create table usertype (
 	typeID int(20) not null primary key auto_increment,
     typeName varchar(45)
@@ -79,8 +54,6 @@ create table users (
     address varchar(45)
     );
     
-alter table users
-add foreign key (typeID) references usertype(typeID);
     
 create table orders (
 	orderID int(20) not null primary key auto_increment,
@@ -90,11 +63,6 @@ create table orders (
     status boolean default 0
     );
     
-alter table orders
-add foreign key (buyerID) references users(userID);
-
-alter table orders
-add foreign key (whID) references warehouse(whID);
 
 create table orderitems (
 	itemID int(20) not null primary key auto_increment,
@@ -102,13 +70,7 @@ create table orderitems (
     quantity int(20) not null,
     price double 
     );
-    
-alter table orderitems
-add foreign key (itemID) references product(productID);
 
-alter table orderitems
-add foreign key (orderID) references orders(orderID);
-    
 create table backorders (
 	backorderID int(20) not null primary key auto_increment,
     out_whID int(20) not null, 
@@ -117,24 +79,14 @@ create table backorders (
     status boolean
     );
     
-alter table backorders 
-add foreign key (out_whID) references warehouse(whID);
 
-alter table backorders
-add foreign key (in_whID) references warehouse(whID);
-    
 create table backorderitems (
 	boItemID int(20) not null primary key auto_increment,
     boID int(20) not null,
     quantity int(20) default 0
     );
     
-alter table backorderitems
-add foreign key (boID) references backorders(backorderID);
 
-alter table backorderitems
-add foreign key (boItemID) references product(productID);
-    
 create table admin (
 	ID int(20) not null primary key auto_increment,
     password varchar(20),
@@ -143,7 +95,67 @@ create table admin (
     
 alter table admin
 add foreign key (whID) references warehouse(whID);
-    
-    
 
+################################################################################3333
+    alter table product 
+    add foreign key (categoryID) references category(categoryID);
     
+	alter table product 
+    add foreign key (brandId) references brand(brandID);
+
+	delimiter //
+		create trigger after_product_inserted
+			after insert on product
+            for each row
+		begin
+			insert into stocklist (productID, whID)
+            values (new.productID, 1), (new.productID, 2), (new.productID, 3), (new.productID, 4), (new.productID, 5), (new.productID, 6), (new.productID, 7), (new.productID, 8), (new.productID, 9), (new.productID, 10), (new.productID, 11);
+		end;//
+	delimiter ;
+#####################################################################
+    
+alter table warehouse
+add foreign key (typeID) references warehousetype(typeID);
+#####################################################################
+    
+alter table stocklist
+add foreign key (productID) references product(productID);
+
+alter table stocklist
+add foreign key (whID) references warehouse(whID);
+################################################################
+
+alter table users
+add foreign key (typeID) references usertype(typeID);
+###############################################################
+
+alter table orders
+add foreign key (buyerID) references users(userID);
+
+alter table orders
+add foreign key (whID) references warehouse(whID);
+
+###################################################################
+
+alter table orderitems
+add foreign key (itemID) references product(productID);
+
+alter table orderitems
+add foreign key (orderID) references orders(orderID);
+###################################################################
+
+alter table backorders 
+add foreign key (out_whID) references warehouse(whID);
+
+alter table backorders
+add foreign key (in_whID) references warehouse(whID);
+################################################################
+
+alter table backorderitems
+add foreign key (boID) references backorders(backorderID);
+
+alter table backorderitems
+add foreign key (boItemID) references product(productID);
+
+##################
+
