@@ -29,29 +29,27 @@ $('#myModal').on('shown.bs.modal', function() {
     $(document).off('focusin.modal');
 });
 
-
-
-// images sliders js
-var myIndex = 0;
-carousel();
-
-function carousel() {
-  var i;
-  var x = document.getElementsByClassName("mySlides");
-  for (i = 0; i < x.length; i++) {
-    x[i].style.display = "none";  
+// findus.php js
+// function initMap(){
+//     var location = {lat: -25.363, lng: 133.044};
+//     var map = new google.maps.Map(document.getElementById("map"),{
+//         zoom: 4,
+//         center: location
+//     });
+//     var marker = new google.maps.Marker({
+//         position: location,
+//         map:map
+//     });
+// }
+function fetchPage(name){
+    fetch(name).then(function(response){
+      response.text().then(function(text){
+        document.querySelector('article').innerHTML = text;
+      })
+    });
   }
-  myIndex++;
-  if (myIndex > x.length) {myIndex = 1}    
-  x[myIndex-1].style.display = "block";  
-  setTimeout(carousel, 3000); // Change image every 3 seconds
-}
-
-// find us js
-function openLocation() {
-    document.getElementById("myOverlay").style.display = "block";
-  }
-  
-  function closeLocation() {
-    document.getElementById("myOverlay").style.display = "none";
+  if(location.hash){
+    fetchPage(location.hash.substr(2));
+  } else {
+   //  fetchPage('welcome');
   }

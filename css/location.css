@@ -1,0 +1,161 @@
+/* 
+font-family: 'Lato', sans-serif;
+font-family: 'Shadows Into Light', cursive;
+font-family: 'Cinzel', serif;
+font-family: 'Roboto', sans-serif;
+font-family: 'Open Sans', sans-serif;
+font-family: 'Montserrat', sans-serif;
+*/
+body, html{
+    height: 100%;
+    width: 100%;
+    scroll-behavior: smooth;
+    margin:0;
+    padding:0;
+
+}
+.navbar-inverse{
+    background-color: transparent!important;
+    border:none!important;
+  
+ }
+ .navbar-inverse .navbar-nav>li {
+    color: white!important;
+}
+.navbar-inverse .navbar-nav>li:hover {
+    color: black!important;
+}
+ .opaque-navbar {
+  /* Transparent = rgba(0,0,0,0) / Translucent = (0,0,0,0.5)  */
+    height: 60px;
+    border-bottom: 0px;
+    transition: background-color .5s ease 0s;
+}
+
+.opaque-navbar.opaque {
+    background-color: black!important;
+    height: 60px;
+    transition: background-color .5s ease 0s;
+}
+.opaque-navbar.opaque a,.opaque-navbar.opaque span{
+    color: white!important;
+}
+
+
+ul.dropdown-menu {
+    background-color: black;
+}
+
+
+@media (max-width: 992px) {
+  body
+  {
+    background:red;
+  }
+  .opaque-navbar {
+    background-color: black;
+    height: 60px;
+    transition: background-color .5s ease 0s;
+    
+}
+
+}
+.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover {
+    color: #fff;
+    background-color: transparent!important;
+ 
+}
+
+.navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
+    margin-left: -60px!important;
+}
+@media(max-width: 600px){
+    .navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
+        margin-left: 50px!important;
+    }
+
+}
+.navbar-inverse .navbar-nav>li>a:hover {
+    color: black!important;
+}
+.glyphicon:hover{
+    color: black!important;
+}
+/* ------------------------------------------------------------------------------------------------------------- */
+
+/* modal */
+.modal {
+  position: absolute;
+}
+.modal-lg{
+width: 1200px!important;
+height: 200px;
+}
+.modal-content{
+position: absolute;
+top: 45px;
+height: 100px!important;
+}
+
+.modal-backdrop.in {
+filter: alpha(opacity=50);
+opacity: 0!important;
+}
+
+/* ------------------------------------ */
+#background{
+    background-image: url("../images/liquor12.jpg");
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -4;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    opacity:0.8;
+    transition: .5s ease;
+}
+
+.formbox{
+    height: 100px;
+    background-color: white;
+    margin:0;
+    text-align: center;
+}
+.indication{
+    font-size: 2rem;
+    font-family: 'Montserrat', sans-serif;
+    margin-top:18px;
+}
+select{
+    background: rgba(244, 232, 117, 0.7);
+    border: 1px solid #ececec;
+    border-radius: 2px;
+    transition: all 1.5s cubic-bezier(.19,1,.22,1);
+    /* padding: 20px; */
+    font: 12px/1 effra;
+    color: #000;
+    min-height: 40px;
+    width: 50%;
+}
+#searchbutton{
+    background-color: #8B0000;
+    border: 1px solid #8B0000;
+    width: 80px;
+    height: 40px;
+}
+
+#searchbutton:hover{
+    background-color: #8B0000;
+    border: 1px solid #8B0000;
+    color: white;
+}
+#searchbutton:hover{
+    background-color: white;
+    border: 1px solid #8B0000;
+    color: #8B0000;
+}
+.infoarea{
+  
+}

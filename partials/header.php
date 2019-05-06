@@ -48,7 +48,7 @@
                   <div class="collapse navbar-collapse" id="navMain">
                     <ul class="nav navbar-nav pull-right">
                       <li class="active"><a href="#aboutus" style="color: white; font-size: 1.6rem; font-family: 'Roboto', sans-serif;">About Us</a></li>
-                      <li><a href="#" style="color: white; font-size: 1.6rem; font-family: 'Roboto', sans-serif;">Find Us</a></li>
+                      <li><a href="findlocation/findus.php" style="color: white; font-size: 1.6rem; font-family: 'Roboto', sans-serif;">Find Us</a></li>
                       <li><a href="#" style="color: white; font-size: 1.6rem; font-family: 'Roboto', sans-serif;">Our Drinks</a></li> 
                       <li><a href="#" style="color: white; font-size: 1.6rem; font-family: 'Roboto', sans-serif;">Specials</a></li> 
                       <li><a href="#" style="color: white; font-size: 1.6rem; font-family: 'Roboto', sans-serif;">Cart</a></li>
@@ -82,9 +82,6 @@
                                       </form> 
                                     </div>  
                                   </div>
-                                  <!-- <div class="modal-footer">
-                                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                  </div> -->
                               </div>
                           </div>
                       </div>
@@ -93,6 +90,5 @@
                     </ul>
                   </div>
                 </div>
-              </div>     
-            
+              </div>   
 </header> 
