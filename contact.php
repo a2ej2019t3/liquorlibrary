@@ -17,7 +17,7 @@
 <section>
 
   <?php
-    include ("header2.php");
+    include ("partials/header2.php");
     ?>
 </section>
   
