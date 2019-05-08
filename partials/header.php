@@ -3,7 +3,7 @@
 
         <nav class="navbar navbar-expand-lg navbar-inverse fixed-top opaque-navbar">
                 <div class="container">
-                    <button type="button" class="btn btn-warning btn-sm trigger-btn" href="#myModal" data-toggle="modal" style="position:absolute; right: 35px; color:white!important; background-color: rgba(224, 184, 65, 1)!important; border:none;">Login</button>
+                    <button type="button" class="btn-warning btn-sm trigger-btn" href="#myModal" data-toggle="modal" style="position:absolute; right: 35px; top: 57px; color:white!important; background-color: rgba(224, 184, 65, 1)!important; border:none;">Login</button>
                     <br>
                     <div class="navbar-header">
                     
@@ -63,7 +63,7 @@
                   <!-- ------------ -->
                           <!-- search modal ----------------------------------------------------------------------------------------->
                           <div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="modal2Label" aria-hidden="true" data-trigger="hover">
-                          <div class="modal-dialog modal-lg modal-center" id="modal3" style="margin-left: 8%!important;">
+                          <div class="modal-dialog modal-lg modal-center" id="modal3">
                              
                              <div class="container">
                                 <div class="modal-content">

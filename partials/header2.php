@@ -3,7 +3,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-inverse fixed-top opaque-navbar">
         <div class="container">
-            <button type="button" class="btn btn-warning btn-sm header2li trigger-btn" href="#myModal" data-toggle="modal" style="position:absolute; right: 35px; color:white!important; background-color: rgba(224, 184, 65, 1)!important; border:none;">Login</button>
+            <button type="button" class="btn btn-warning btn-sm header2li trigger-btn" href="#myModal" data-toggle="modal" style="position:absolute; right: 35px; top: 57px;  color:white!important; background-color: rgba(224, 184, 65, 1)!important; border:none;">Login</button>
 
             <br>
             <div class="navbar-header">
@@ -12,7 +12,7 @@
             <span id="iconarea2"><i class="fas fa-angle-down"></i></span>
           </button>
           
-            <a class="navbar-brand header2li" href="#" style="font-size: 1.7rem;  font-family: 'Cinzel', serif;" >Liquor Library <br> <span style="font-size: 0.7rem; font-family: 'Open Sans', sans-serif; text-align: center; margin-left: 20px;">THE NEW INDUSTRY STANDARD</span></a>
+            <a class="navbar-brand header2li" href="index.php" style="font-size: 1.7rem;  font-family: 'Cinzel', serif;" >Liquor Library <br> <span style="font-size: 0.7rem; font-family: 'Open Sans', sans-serif; text-align: center; margin-left: 20px;">THE NEW INDUSTRY STANDARD</span></a>
           </div>
           <div class="collapse navbar-collapse" id="navMain">
             <ul class="nav navbar-nav ml-auto">
