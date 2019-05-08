@@ -1,6 +1,5 @@
 
  <header>
-
         <nav class="navbar navbar-expand-lg navbar-inverse fixed-top opaque-navbar">
                 <div class="container">
                     <button type="button" class="btn btn-warning btn-sm trigger-btn" href="#myModal" data-toggle="modal" style="position:absolute; right: 35px; color:white!important; background-color: rgba(224, 184, 65, 1)!important; border:none;">Login</button>
@@ -27,7 +26,6 @@
                           <button type="button" class="btn btn-primary btn-lg pull-right" style="background-color: transparent; border:none;" data-toggle="modal" data-target="#modal2">
                             <span style="color: white; font-size: 20px; margin-top:10px;" id="b2"><i class="fas fa-search"></i></span> 
                           </button>
-        
 
                   <!-- Login modal -->
                   <div id="myModal" class="modal fade" data-backdrop="false">
@@ -62,7 +60,7 @@
                   </nav>     
                   <!-- ------------ -->
                           <!-- search modal ----------------------------------------------------------------------------------------->
-                          <div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="modal2Label" aria-hidden="true" data-trigger="hover">
+                          <div class="modal fade" id="modal2" tabindex="-1" data-trigger="hover">
                           <div class="modal-dialog modal-lg modal-center" id="modal3" style="margin-left: 8%!important;">
                              
                              <div class="container">
@@ -87,10 +85,16 @@
                                       </form> 
                                     </div>  
                                   </div>
+
                              </div> <!--  container ends -->
                         </div>
+                        <div class="modal-footer">Don't have an account? <a href="signup.php">Sign up</a></div>
                       </div>
-                          <!-- - ------------------------------------------------------------------------------------------------>
+                    </div>
+                  </div>     
+                  <!-- ------------ -->
+
+
                       </li>
                     </ul>
                   </div>
