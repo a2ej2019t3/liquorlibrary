@@ -95,8 +95,8 @@
                               </div>                                          
                             </div>
                             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-                          </form> 
-                        </div>  
+                          </form>
+                        </div>
                       </div>
                       <!-- <div class="modal-footer">
                           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -105,5 +105,4 @@
               </div>
           </div>
               <!-- - ------------------------------------------------------------------------------------------------>
-            
 </header> 
