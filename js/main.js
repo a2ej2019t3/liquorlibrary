@@ -44,7 +44,30 @@ function carousel() {
   myIndex++;
   if (myIndex > x.length) {myIndex = 1}    
   x[myIndex-1].style.display = "block";  
-  setTimeout(carousel, 3000); // Change image every 2 seconds
-};
+  setTimeout(carousel, 3000); // Change image every 3 seconds
+}
 
+// find us js
+function openLocation() {
+    document.getElementById("myOverlay").style.display = "block";
+  }
+  
+  function closeLocation() {
+    document.getElementById("myOverlay").style.display = "none";
+  }
+  // page transition
+  window.transitionToPage = function(href) {
+    document.querySelector('body').style.opacity = 0
+    setTimeout(function() { 
+        window.location.href = href
+    }, 500)
+}
 
+document.addEventListener('DOMContentLoaded', function(event) {
+    document.querySelector('body').style.opacity = 1
+})
+
+$( document ).ready(function() {
+    $('body').show();
+ });
+ 
