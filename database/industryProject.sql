@@ -2,6 +2,7 @@ create table product (
 	productID int(20) not null primary key auto_increment,
     productName varchar(45) not null,
     price double,
+    discountprice double,
     img varchar(100),
     categoryID int(20) not null,
     brandID int(20) not null
@@ -47,7 +48,9 @@ create table usertype (
 create table users (
 	userID int(20) not null primary key auto_increment,
     typeID int(20) not null,
-    userName varchar(45) not null,
+    firstName varchar(45) not null,
+    lastName varchar(45) not null,
+    companyName varchar(45),
     password varchar(45),
     email varchar(45),
     phone bigint(20),

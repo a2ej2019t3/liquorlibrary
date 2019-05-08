@@ -1,6 +1,5 @@
 
  <header>
-
         <nav class="navbar navbar-expand-lg navbar-inverse fixed-top opaque-navbar">
                 <div class="container">
                     <button type="button" class="btn-warning btn-sm trigger-btn" href="#myModal" data-toggle="modal" style="position:absolute; right: 35px; top: 57px; color:white!important; background-color: rgba(224, 184, 65, 1)!important; border:none;">Login</button>
