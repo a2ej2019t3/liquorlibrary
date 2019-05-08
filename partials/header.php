@@ -3,8 +3,8 @@
 
         <nav class="navbar navbar-expand-lg navbar-inverse fixed-top opaque-navbar">
                 <div class="container">
-                    <span>  <a href="#myModal" class="trigger-btn" data-toggle="modal" style=" background-color: transparent; border:  none; color:  white; text-decoration: underline; position:absolute; right: 35px;">Login</a></span>
-                  <br>
+                    <button type="button" class="btn btn-warning btn-sm trigger-btn" href="#myModal" data-toggle="modal" style="position:absolute; right: 35px; color:white!important; background-color: rgba(224, 184, 65, 1)!important; border:none;">Login</button>
+                    <br>
                     <div class="navbar-header">
                     
                   <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navMain">

@@ -19,12 +19,6 @@ body, html{
     padding-right: 0!important;
     padding-left: 0!important;
 }
-.container-fluid {
-    /* padding-right: 0!important;
-    padding-left: 0!important;
-    margin-right: -15px!important; */
-}
-
 
   /* -------------------------------------------------------------------------------------------------------------------------------------- */
  /* navbar */
@@ -70,6 +64,7 @@ body, html{
     background-color: black!important;
     height: 110px!important;
     transition: background-color .6s ease 0s;
+    color: white!important;
 }
 .navbar-toggler{
 border: 1px solid white!important;
@@ -78,7 +73,8 @@ right: 45px;
 top: 15px;
 }
 .navbar-toggler:focus{
-  background-color: black;
+  /* background-color: black; */
+  color: white;
 }
 
 ul.dropdown-menu {
@@ -103,7 +99,7 @@ ul.dropdown-menu {
     text-decoration: none;
   }
 
-@media(max-width: 1000px){
+@media(max-width: 992px){
     .navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
         margin-right: 250px;
     }
@@ -120,7 +116,124 @@ ul.dropdown-menu {
 .fas:hover{
     color: black!important;
 }
-/* ----------------------------------------------------------------------------------------------------------------------------------------- */
+/* header2 related css */
+.header2li{
+  color: black!important;
+} 
+.opaque-navbar.opaque .header2li{
+  color: white!important;
+}
+#iconarea2{
+  color: black;
+}
+.opaque-navbar.opaque #iconarea2{
+  color: white!important;
+}
+
+/* header modal CSS */
+/* serch modal css */
+  /* modal */
+  .modal {
+    position: absolute;
+}
+.modal-lg{
+  max-width: 1200px!important;
+  /* height: 200px; */
+}
+.modal-content{
+ position: absolute;
+ top: 45px;
+ /* height: 100px!important; */
+ text-align: center;
+}
+/* @media(max-with:579px){
+  .modal-content{
+    height: 180px;
+  }
+} */
+.modal-backdrop.in {
+  filter: alpha(opacity=50);
+  opacity: 0!important;
+}
+/* login modal */
+
+.modal-login {
+  color: #636363;
+  width: 350px;
+}
+.modal-login .modal-content {
+  padding: 20px;
+  border-radius: 5px;
+  border: none;
+}
+.modal-login .modal-header {
+  border-bottom: none;
+  position: relative;
+  justify-content: center;
+}
+.modal-login h4 {
+  text-align: center;
+  font-size: 26px;
+}
+.modal-login  .form-group {
+  position: relative;
+}
+.modal-login i {
+  position: absolute;
+  left: 13px;
+  top: 11px;
+  font-size: 18px;
+}
+.modal-login .form-control {
+  padding-left: 40px;
+}
+.modal-login .form-control:focus {
+  border-color: rgba(48, 43, 41,1);
+
+}
+.modal-login .form-control, .modal-login .btn {
+  min-height: 40px;
+  border-radius: 3px; 
+      transition: all 0.5s;
+}
+.modal-login .close {
+      position: absolute;
+  top: -5px;
+  right: -5px;
+}
+  .modal-login input[type="checkbox"] {
+      margin-top: 1px;
+  }
+  .modal-login .forgot-link {
+      color: #12b5e5;
+      float: right;
+  }
+.modal-login .btn {
+  background: rgba(224, 184, 65, 1);
+  border: none;
+  line-height: normal;
+}
+.modal-login .btn:hover, .modal-login .btn:focus {
+  background: rgba(244, 232, 117, 1);
+}
+.modal-login .modal-footer {
+  color: #999;
+  border: none;
+  text-align: center;
+  border-radius: 5px;
+  font-size: 13px;
+   margin-top: -20px;
+  justify-content: center;
+}
+.modal-login .modal-footer a {
+  color: rgba(48, 43, 41,1);
+}
+.trigger-btn {
+  display: inline-block;
+  margin: 10px 10px;
+}
+
+/* ---Indexpage CSS-------------------------------------------------------------------------------------------------------------------------------------- */
 #mainscreen{
     background-image: url("../images/liquor10.jpg");
     height: 625px;
@@ -283,114 +396,126 @@ transform: translateX(-7px);
     /* transition: fadeIn .5s ease 0s; */
   }  
 
-
-/* ----------------------------------------------------------------------------------------- */
-/* serch modal css */
-
-
-
-
-
-
-  /* modal */
-  .modal {
-    position: absolute;
-}
-.modal-lg{
-  max-width: 1200px!important;
-  /* height: 200px; */
-}
-.modal-content{
- position: absolute;
- top: 45px;
- /* height: 100px!important; */
- text-align: center;
-}
-/* @media(max-with:579px){
-  .modal-content{
-    height: 180px;
-  }
-} */
-.modal-backdrop.in {
-  filter: alpha(opacity=50);
-  opacity: 0!important;
-}
-/* login modal */
-
-.modal-login {
-  color: #636363;
-  width: 350px;
-}
-.modal-login .modal-content {
-  padding: 20px;
-  border-radius: 5px;
-  border: none;
-}
-.modal-login .modal-header {
-  border-bottom: none;
-  position: relative;
-  justify-content: center;
-}
-.modal-login h4 {
+/* -Contact Us CSS---------------------------------------------------------------------------------------- */
+/* contact form */
+.contactms{
+  font-size: 6rem;
+  font-weight: 800;
+  color:  #8B0000;
+  font-family: 'Lato', sans-serif;
   text-align: center;
-  font-size: 26px;
+  margin-top: 150px;
+  animation-name: fadeIn;
+  animation-duration: 2s;
 }
-.modal-login  .form-group {
-  position: relative;
-}
-.modal-login i {
-  position: absolute;
-  left: 13px;
-  top: 11px;
-  font-size: 18px;
-}
-.modal-login .form-control {
-  padding-left: 40px;
-}
-.modal-login .form-control:focus {
-  border-color: rgba(48, 43, 41,1);
-
-}
-.modal-login .form-control, .modal-login .btn {
-  min-height: 40px;
-  border-radius: 3px; 
-      transition: all 0.5s;
-}
-.modal-login .close {
-      position: absolute;
-  top: -5px;
-  right: -5px;
-}
-  .modal-login input[type="checkbox"] {
-      margin-top: 1px;
+@media(max-width:700px){
+  .contactms{
+      font-size: 3rem;
   }
-  .modal-login .forgot-link {
-      color: #12b5e5;
-      float: right;
-  }
-.modal-login .btn {
-  background: rgba(224, 184, 65, 1);
-  border: none;
-  line-height: normal;
 }
-.modal-login .btn:hover, .modal-login .btn:focus {
-  background: rgba(244, 232, 117, 1);
-}
-.modal-login .modal-footer {
-  color: #999;
-  border: none;
+.contactdes{
+  max-width: 600px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.7rem;
   text-align: center;
-  border-radius: 5px;
-  font-size: 13px;
-   margin-top: -20px;
-  justify-content: center;
+  margin:10px auto;
 }
-.modal-login .modal-footer a {
-  color: rgba(48, 43, 41,1);
+.em{
+  color:#8B0000;
 }
-.trigger-btn {
-  display: inline-block;
-  margin: 10px 10px;
-}
-
-/* =-------------------------------- */
+/*  */
+.fieldbox{
+  text-align: center;
+  margin-top: 20px;
+  }
+  .row{
+      text-align: center!important;
+  }
+  .input2, select{
+      background: rgba(244, 232, 117, 0.7);
+      border: 1px solid #ececec;
+      border-radius: 2px;
+      transition: all 1.5s cubic-bezier(.19,1,.22,1);
+      /* padding: 20px; */
+      font: 12px/1 effra;
+      color: #000;
+      min-height: 40px;
+      width: 100%;
+  }
+  
+  label{
+      color:rgba(124, 99, 84, 1);
+      font-family: 'Open Sans', sans-serif;
+  }
+  textarea{
+      border: 2px dashed rgba(244, 232, 117, 0.7);
+      border-radius: 2px;
+      transition: all 1.5s cubic-bezier(.19,1,.22,1);
+      font: 12px/1 effra;
+      color: #000;
+      min-height: 40px;
+      width: 100%;
+      background-color:#ececec;
+  
+  }
+  
+  #resetbutton{
+      background-color: white;
+      border: 1px solid #8B0000;
+      color: #8B0000;
+      width: 200px;
+      height: 70px;
+  }
+  #submitbutton{
+      background-color: #8B0000;
+      border: 1px solid #8B0000;
+      width: 200px;
+      height: 70px;
+  }
+  
+  #resetbutton:hover{
+      background-color: #8B0000;
+      border: 1px solid #8B0000;
+      color: white;
+  }
+  #submitbutton:hover{
+      background-color: white;
+      border: 1px solid #8B0000;
+      color: #8B0000;
+  }
+  /* Register page Css--------------------------------------------------------------------------------------------------- */
+  .mySlides {
+    display:none;
+  
+  }
+  .content{
+     color: rgba(244, 232, 117, 1);
+     font-size: 3.5rem;
+     font-family: 'Lato', sans-serif;
+     font-weight: 900;
+     position: absolute;
+     z-index: 1;
+     top: 20%;
+     left: 12%;
+  }
+  .content2{
+     color: rgba(25,25,112);
+     font-size: 3.5rem;
+     font-family: 'Lato', sans-serif;
+     font-weight: 900;
+     position: absolute;
+     z-index: 1;
+     top: 30%;
+     left: 10%;
+  }
+  @media(max-width: 700px){
+     .content{
+         font-size: 2rem;  
+     }
+     .content2{
+         font-size: 2rem;  
+     }
+  
+  };
+  
+  

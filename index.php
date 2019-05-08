@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<title>Liquor Library Homepage</title>
   <?php
     include_once ("partials/head.php");
   ?>
