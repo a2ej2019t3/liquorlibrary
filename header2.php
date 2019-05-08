@@ -8,7 +8,7 @@
         <span class="glyphicon glyphicon-chevron-right" style="color:white;"></span>
           
         </button>
-            <a class="navbar-brand" href="index.php" style="font-size: 2.7rem; color: black; font-family: 'Cinzel', serif;">Liquor Library <br> <span style="font-size: 1.2rem; font-family: 'Open Sans', sans-serif; text-align: center; margin-left: 20px;">THE NEW INDUSTRY STANDARD</span></a>
+            <a class="navbar-brand" href="index.php" style="font-size: 2.7rem; color: black; font-family: 'Cinzel', serif; text-align:center;">Liquor Library <br> <span style="font-size: 1.2rem; font-family: 'Open Sans', sans-serif; text-align: center; margin-left: 20px;">THE NEW INDUSTRY STANDARD</span></a>
           </div>
           <div class="collapse navbar-collapse" id="navMain">
             <ul class="nav navbar-nav pull-right">
