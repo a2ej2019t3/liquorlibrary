@@ -138,6 +138,7 @@ ul.dropdown-menu {
 }
 .modal-lg{
   max-width: 1200px!important;
+  text-align: center;
   /* height: 200px; */
 }
 .modal-content{
