@@ -13,7 +13,7 @@
     }
 
     //search brand
-    $searchBrand_sql = "SELECT brandID, brandName, img FROM brand WHERE brandName LIKE '%$searchcontent%' LIMIT 3";
+    $searchBrand_sql = "SELECT brandID, brandName, img FROM brand WHERE brandName LIKE '%$searchcontent%' LIMIT 5";
     $searchBrand_res = mysqli_query($conn, $searchBrand_sql);
     $searchBrand_arr = mysqli_fetch_all($searchBrand_res);
 
