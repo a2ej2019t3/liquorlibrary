@@ -9,13 +9,13 @@ document.getElementById("searchbox").onkeyup = function () {
                     var res = xmlhttp.response;
                     var resText = xmlhttp.responseText;
                     document.getElementById("dropdownarea").innerHTML = res;
-                if (resText == "    false") {
+                if (resText == 0) {
                     document.getElementById("dropdownarea").style.display = "none";
                 } else {
                     document.getElementById("dropdownarea").style.display = "block";
                 }
             }
         };
-        xmlhttp.open("GET", "search.php?sc="+val, true);
+        xmlhttp.open("GET", "./search/search.php?sc="+val, true);
         xmlhttp.send();
 };
