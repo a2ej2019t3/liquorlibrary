@@ -98,7 +98,6 @@
                 </div>
             </div> <!--  container ends -->
         </div>
-        <div class="modal-footer">Don't have an account? <a href="signup.php">Sign up</a></div>
     </div>
 <!-- ------------ -->
 </header> 
