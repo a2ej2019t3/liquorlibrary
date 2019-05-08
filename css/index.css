@@ -31,10 +31,30 @@ body, html{
 .navbar-inverse{
     background-color: transparent!important;
     border:none!important;
-  
  }
 .navbar-inverse .navbar-nav>li {
     color: white!important;
+    width: 120px;
+    text-align: center;
+}
+#navMain.li{
+  margin: 0 auto!important;
+}
+ @media(max-width:992px){
+  .navbar-inverse .navbar-nav>li {
+    color: white!important;
+    background-color: rgba(124, 99, 84, 0.8);
+    text-align: center;
+    padding: 10px;
+    width: 100%;
+}
+  .navbar-inverse .navbar-nav>li>a {
+      margin-bottom: 5px;
+      /* font-size: 20px!important; */
+  }
+  #firstcol{
+    margin-top:12px;
+  }
 }
 .navbar-inverse .navbar-nav>li:hover {
     color: black!important;
@@ -51,14 +71,22 @@ body, html{
     height: 110px!important;
     transition: background-color .6s ease 0s;
 }
-
+.navbar-toggler{
+border: 1px solid white!important;
+position: absolute;
+right: 45px;
+top: 15px;
+}
+.navbar-toggler:focus{
+  background-color: black;
+}
 
 ul.dropdown-menu {
     background-color: black;
 }
 
 
-@media (max-width: 992px) {
+@media (max-width: 800px) {
   .opaque-navbar {
     background-color: black;
     height: 110px!important;
@@ -68,23 +96,24 @@ ul.dropdown-menu {
 
 .navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover {
     color: #fff;
-    background-color: transparent!important;
+    /* background-color: transparent!important; */
 }
 
 .navbar li a {
     text-decoration: none;
   }
 
-.navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
-    margin-left: -60px!important;
-
+@media(max-width: 1000px){
+    .navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
+        margin-right: 250px;
+    }
 }
 @media(max-width: 600px){
-    .navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
-        margin-left: 50px!important;
-    }
-
+  .navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
+      margin-right: 200px;
+  }
 }
+
 .navbar-inverse .navbar-nav>li>a:hover {
     color: black!important;
 }
@@ -146,6 +175,9 @@ transform: translateX(-7px);
     .brandlogo{
         max-width:200px;
         max-height: 200px;
+    }
+    .aboutdes{
+      font-size:20px;
     }
   }
   .brandlogo:hover{
@@ -251,21 +283,34 @@ transform: translateX(-7px);
     /* transition: fadeIn .5s ease 0s; */
   }  
 
+
+/* ----------------------------------------------------------------------------------------- */
+/* serch modal css */
+
+
+
+
+
+
   /* modal */
   .modal {
     position: absolute;
 }
 .modal-lg{
-  /* max-width: 1200px!important; */
-  height: 200px;
+  max-width: 1200px!important;
+  /* height: 200px; */
 }
 .modal-content{
  position: absolute;
  top: 45px;
- height: 100px!important;
+ /* height: 100px!important; */
  text-align: center;
 }
-
+/* @media(max-with:579px){
+  .modal-content{
+    height: 180px;
+  }
+} */
 .modal-backdrop.in {
   filter: alpha(opacity=50);
   opacity: 0!important;
