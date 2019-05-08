@@ -20,26 +20,26 @@ body, html{
     padding-left: 0!important;
 }
 .container-fluid {
-    padding-right: 0!important;
+    /* padding-right: 0!important;
     padding-left: 0!important;
-    margin-right: -15px!important;
+    margin-right: -15px!important; */
 }
 
 
   /* -------------------------------------------------------------------------------------------------------------------------------------- */
  /* navbar */
- .navbar-inverse{
+.navbar-inverse{
     background-color: transparent!important;
     border:none!important;
   
  }
- .navbar-inverse .navbar-nav>li {
+.navbar-inverse .navbar-nav>li {
     color: white!important;
 }
 .navbar-inverse .navbar-nav>li:hover {
     color: black!important;
 }
- .opaque-navbar {
+.opaque-navbar {
   /* Transparent = rgba(0,0,0,0) / Translucent = (0,0,0,0.5)  */
   height: 110px!important;
     border-bottom: 0px;
@@ -63,17 +63,21 @@ ul.dropdown-menu {
     background-color: black;
     height: 110px!important;
     transition: background-color .6s ease 0s;
+  }
 }
 
-}
 .navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover {
     color: #fff;
     background-color: transparent!important;
- 
 }
+
+.navbar li a {
+    text-decoration: none;
+  }
 
 .navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
     margin-left: -60px!important;
+
 }
 @media(max-width: 600px){
     .navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
@@ -84,7 +88,7 @@ ul.dropdown-menu {
 .navbar-inverse .navbar-nav>li>a:hover {
     color: black!important;
 }
-.glyphicon:hover{
+.fas:hover{
     color: black!important;
 }
 /* ----------------------------------------------------------------------------------------------------------------------------------------- */
