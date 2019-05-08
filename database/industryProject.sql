@@ -113,7 +113,6 @@ add foreign key (whID) references warehouse(whID);
 		end;//
 	delimiter ;
 #####################################################################
-    
 alter table warehouse
 add foreign key (typeID) references warehousetype(typeID);
 #####################################################################
@@ -156,5 +155,3 @@ add foreign key (boID) references backorders(backorderID);
 
 alter table backorderitems
 add foreign key (boItemID) references product(productID);
-    
-
