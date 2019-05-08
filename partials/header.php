@@ -56,8 +56,8 @@
                             <input type="submit" class="btn btn-primary btn-block btn-lg" value="Sign in">
                         </div>
                     </form>
+                    <div class="modal-footer">Don't have an account? <a href="signup.php">Sign up</a></div>
                 </div>
-                <div class="modal-footer">Don't have an account? <a href="signup.php">Sign up</a></div>
             </div>
         </div>
     </div>
@@ -65,7 +65,7 @@
 
 <!-- search modal ----------------------------------------------------------------------------------------->
     <div class="modal fade" id="modal2" tabindex="-1" data-trigger="hover">
-        <div class="modal-dialog modal-lg modal-center" id="modal3" style="margin-left: 8%!important;">
+        <div class="modal-dialog modal-lg modal-center" id="modal3">
             <div class="container">
                 <div class="modal-content">
                     <div class="modal-body">
@@ -90,7 +90,6 @@
                 </div>
             </div> <!--  container ends -->
         </div>
-        <div class="modal-footer">Don't have an account? <a href="signup.php">Sign up</a></div>
     </div>
 <!-- ------------ -->
 </header> 

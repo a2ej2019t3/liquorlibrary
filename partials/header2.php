@@ -63,7 +63,7 @@
 <!-- ------------ -->
 <!-- search modal ----------------------------------------------------------------------------------------->
     <div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="modal2Label" aria-hidden="true" data-trigger="hover">
-        <div class="modal-dialog modal-lg modal-center" id="modal3" style="margin-left: 8%!important;">
+        <div class="modal-dialog modal-lg modal-center" id="modal3">
             <div class="container">
                 <div class="modal-content">
                     <div class="modal-body">
