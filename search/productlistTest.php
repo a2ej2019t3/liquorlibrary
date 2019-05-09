@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <?php
-        include_once ("./partials/head.php");
+        include_once ("../partials/head.php");
     ?>
 </head>
 <body>
@@ -28,7 +28,7 @@
     </div>
 
     <?php
-        include_once ("./partials/foot.php");
+        include_once ("../partials/foot.php");
     ?>
 </body>
 </html>

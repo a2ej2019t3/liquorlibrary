@@ -16,7 +16,7 @@
                 <ul class="nav navbar-nav ml-auto">
                     <li class="col" id="firstcol"><a href="#aboutus" style="color: white; font-size: 1rem; font-family: 'Roboto', sans-serif;">About Us</a></li>
                     <li class="col"><a href="findlocation/findus.php" style="color: white; font-size: 1rem; font-family: 'Roboto', sans-serif;">Find Us</a></li>
-                    <li class="col"><a href="#" style="color: white; font-size: 1rem; font-family: 'Roboto', sans-serif;">Our Drinks</a></li> 
+                    <li class="col"><a href="#" id="ourdrinks" data-toggle="modal" data-target="#subnav" style="color: white; font-size: 1rem; font-family: 'Roboto', sans-serif;">Our Drinks</a></li> 
                     <li class="col"><a href="#" style="color: white; font-size: 1rem; font-family: 'Roboto', sans-serif;">Specials</a></li> 
                     <li class="col"><a href="#" style="color: white; font-size: 1rem; font-family: 'Roboto', sans-serif;">Cart</a></li>
                     <li class="col"><a href="#" style="color: white; font-size: 1rem; font-family: 'Roboto', sans-serif;">My orders</a></li>
@@ -93,5 +93,10 @@
             </div> <!--  container ends -->
         </div>
     </div>
+<!-- ------------ -->
+<!-- sub Category modal ----------------------------------------------------------------------------------------->
+<?php
+    include_once ("partials/subcategory.php");
+  ?>
 <!-- ------------ -->
 </header> 

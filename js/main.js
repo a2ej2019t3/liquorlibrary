@@ -28,6 +28,26 @@ $("#b2").hover(function () {
 $('#myModal').on('shown.bs.modal', function() {
     $(document).off('focusin.modal');
 });
+// tab link js
+
+function openCity(id) {
+    var i, tabcontent, tablinks;
+    var cityName = document.getElementById(id).value;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+  }
+  
+  // Get the element with id="defaultOpen" and click on it
+        document.getElementById("buttonIndex_0").click();
+
 
 
 
