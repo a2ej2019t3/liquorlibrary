@@ -40,14 +40,14 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="post">
+                    <form action="./signInUp/process_get_user.php" method="post">
                         <div class="form-group">
                             <i class="fa fa-user"></i>
-                            <input type="text" class="form-control" placeholder="Username" required="required">
+                            <input name="email" type="text" class="form-control" placeholder="Email" required="required">
                         </div>
                         <div class="form-group">
                             <i class="fa fa-lock"></i>
-                            <input type="password" class="form-control" placeholder="Password" required="required">					
+                            <input name="password" type="password" class="form-control" placeholder="Password" required="required">					
                         </div>
                             <div class="form-group small clearfix">
                                 <label class="checkbox-inline"><input type="checkbox"> Remember me</label>
@@ -57,7 +57,7 @@
                             <input type="submit" class="btn btn-primary btn-block btn-lg" value="Sign in">
                         </div>
                     </form>
-                    <div class="modal-footer">Don't have an account? <a href="signup.php">Sign up</a></div>
+                    <div class="modal-footer">Don't have an account? <a href="signInUp\signup.php">Sign up</a></div>
                 </div>
             </div>
         </div>

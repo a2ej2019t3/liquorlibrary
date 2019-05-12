@@ -16,7 +16,8 @@ create table category (
     
 create table brand (
 	brandID int(20) not null primary key auto_increment,
-    brandName varchar(45) not null
+    brandName varchar(45) not null,
+    img varchar(45)
     );
     
 create table warehousetype (
@@ -26,7 +27,7 @@ create table warehousetype (
     
 create table warehouse (
 	whID int(20) auto_increment primary key,
-    typeID int(20) default 0,
+    typeID int(20),
     whName varchar(45),
     address varchar(45),
     phone bigint(20),
