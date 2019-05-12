@@ -70,4 +70,16 @@ document.addEventListener('DOMContentLoaded', function(event) {
 $( document ).ready(function() {
     $('body').show();
  });
+
+
+// show register from for different user type
+
+document.getElementById("businessOptionLable").onclick = function () {
+    document.getElementById("forBusiness").style.display = "";
+    document.getElementById("company_name").value = "";
+}
+document.getElementById("individualOptionLable").onclick = function () {
+    document.getElementById("forBusiness").style.display = "none";
+    document.getElementById("typeID").value = 3;
+}
  

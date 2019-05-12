@@ -51,7 +51,7 @@ body, html{
   }
 }
 .navbar-inverse .navbar-nav>li:hover {
-    color: black!important;
+    /* color: black!important; */
 }
 .opaque-navbar {
   /* Transparent = rgba(0,0,0,0) / Translucent = (0,0,0,0.5)  */

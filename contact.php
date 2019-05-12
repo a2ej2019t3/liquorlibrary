@@ -3,14 +3,14 @@
 <head>
 <title>Contact US</title>
 <?php
-    include_once ("partials/head.php");
+    include_once ("./partials/head.php");
   ?>
+    <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
 <section>
-
   <?php
-    include ("partials/header2.php");
+    include_once ("./partials/header2.php");
     ?>
 </section>
   
@@ -85,17 +85,17 @@
         <div class="fieldbox col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <label for="lable">*Comment:  </label><br>
             <textarea name="comment" id="comment" cols="30" rows="5"></textarea>
-         </div>
-         <!-- button row -->
+        </div>
+        <!-- button row -->
          
-         <div class="row">
-           <br><br><br>
-            <div class="fieldbox col-xs-12 col-sm-12 col-md-6 col-lg-6">
-            <button id="resetbutton" type="submit" class="btn btn-primary">Reset</button>
-            </div>
-            <div class="fieldbox col-xs-12 col-sm-12 col-md-6 col-lg-6">
-            <button id="submitbutton" type="submit" class="btn btn-primary">Submit</button>
-            </div>
+        <div class="row">
+          <br><br><br>
+              <div class="fieldbox col-xs-12 col-sm-12 col-md-6 col-lg-6">
+              <button id="resetbutton" type="submit" class="btn btn-primary">Reset</button>
+              </div>
+              <div class="fieldbox col-xs-12 col-sm-12 col-md-6 col-lg-6">
+              <button id="submitbutton" type="submit" class="btn btn-primary">Submit</button>
+              </div>
         </div>
         <br><br><br>
   </div>
@@ -107,5 +107,8 @@
   <?php
     include_once ("partials/foot.php");
   ?>
+  <script type="text/javascript" src="js/main.js"></script>
+  <script type="text/javascript" src="js/search.js"></script>
+  
 </body>
 </html>
