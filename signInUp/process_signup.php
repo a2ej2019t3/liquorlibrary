@@ -57,14 +57,19 @@ if ($result = mysqli_query($connection, $selectQuery))
         if (mysqli_stmt_execute($stmt)) 
         {
             unset($_SESSION['error']);
-            // header("Location:index.php");
-        } else {
 
-          
+            // login directly
+            $selectQuery = "select * from users where email='" . $email . "'";
+            $result = mysqli_query($connection, $selectQuery);
+            $result_arr = mysqli_fetch_assoc($result);
+            $_SESSION['user'] = $result_arr;
+
+            // go to index pages
+            header("Location:../index.php");
+        } else {
             $_SESSION['error'] = "An error has occured while Registering  the customer ";
-            // header("Location:signup.php");
+            header("Location:./signInUp/signup.php");
 
         }
     }
-
 }

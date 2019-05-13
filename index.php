@@ -1,4 +1,7 @@
-
+<?php
+  session_start();
+  $_SESSION['location'] = "index";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

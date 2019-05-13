@@ -123,12 +123,18 @@ ul.dropdown-menu {
 .opaque-navbar.opaque .header2li{
   color: white!important;
 }
-#iconarea2{
+
+.iconarea {
+  color: white;
+}
+
+.iconarea2{
   color: black;
 }
-.opaque-navbar.opaque #iconarea2{
+.opaque-navbar.opaque .iconarea2{
   color: white!important;
 }
+
 
 /* header modal CSS */
 /* serch modal css */

@@ -7,7 +7,8 @@
             <div class="navbar-header">
             
           <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navMain">
-            <span id="iconarea2"><i class="fas fa-angle-down"></i></span>
+          <!-- change for contact page id="iconarea2" -->
+          <span id="icon"><i class="fas fa-angle-down"></i></span>
           </button>
           
             <a class="navbar-brand header2li" href="index.php" style="font-size: 1.7rem;  font-family: 'Cinzel', serif;" >Liquor Library <br> <span style="font-size: 0.7rem; font-family: 'Open Sans', sans-serif; text-align: center; margin-left: 20px;">THE NEW INDUSTRY STANDARD</span></a>
@@ -26,7 +27,11 @@
                   <button type="button" class="btn btn-primary btn-lg pull-right" style="background-color: transparent; border:none;" data-toggle="modal" data-target="#modal2">
                     <span style="font-size: 20px; margin-top:10px;" id="b2" class="header2li"><i class="fas fa-search"></i></span> 
                   </button>
-
+                  </li>
+                </ul>
+            </div>
+        </div>
+    </nav>     
 
           <!-- Login modal -->
           <div id="myModal" class="modal fade" data-backdrop="false">

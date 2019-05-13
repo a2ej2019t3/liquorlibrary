@@ -73,13 +73,16 @@ $( document ).ready(function() {
 
 
 // show register from for different user type
-
 document.getElementById("businessOptionLable").onclick = function () {
     document.getElementById("forBusiness").style.display = "";
     document.getElementById("company_name").value = "";
 }
 document.getElementById("individualOptionLable").onclick = function () {
     document.getElementById("forBusiness").style.display = "none";
-    document.getElementById("typeID").value = 3;
+    document.getElementsByName("typeID")[0].value = 3;
 }
- 
+
+function getBusinessType (id) {
+    document.getElementsByName("typeID")[0].value = id;
+}
+

@@ -1,3 +1,7 @@
+<?php
+  session_start();
+  $_SESSION['location'] = 'contact';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,11 +10,12 @@
     include_once ("./partials/head.php");
   ?>
     <link rel="stylesheet" href="css/index.css">
+    
 </head>
 <body>
 <section>
   <?php
-    include_once ("./partials/header2.php");
+    include_once ("./partials/header.php");
     ?>
 </section>
   
@@ -109,6 +114,5 @@
   ?>
   <script type="text/javascript" src="js/main.js"></script>
   <script type="text/javascript" src="js/search.js"></script>
-  
 </body>
 </html>

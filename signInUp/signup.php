@@ -65,14 +65,14 @@
             </div>
             <div class="fieldbox col-xs-12 col-sm-12 col-md-6 col-lg-6">
                 <label for="lable">*Last Name </label><br>
-                <input name= "last_name" class="input2" type="text" required>
+                <input name="last_name" class="input2" type="text" required>
             </div>
         </div>
         <!-- third row -->
         <div id="forBusiness" class="row">
             <div id="companyNameField" class="fieldbox col-xs-12 col-sm-12 col-md-6 col-lg-6">
                 <label for="lable">*Your company Name </label><br>
-                <input id="company_name" name="company_name" class="input2" type="text" required>
+                <input id="company_name" name="company_name" class="input2" type="text">
             </div>
             <div id="businessTypeField" class="fieldbox col-xs-12 col-sm-12 col-md-6 col-lg-6">
                 <label for="lable">*Please select the type of business(Business Client Only)</label><br>
@@ -85,7 +85,7 @@
                     if ($result = mysqli_query($connection, $selectQuery)) {
                         while ( $type = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
                     ?>
-                    <option value="<?php echo $type['typeID'] ?>"><?php echo $type['typeName'] ?></option>
+                    <option class="businessTypeOptions" value="<?php echo $type['typeID'] ?>"><?php echo $type['typeName'] ?></option>
                 <?php 
                         }
                     }
