@@ -6,6 +6,7 @@
   <?php
     include_once ("partials/head.php");
   ?>
+   <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
     <?php
@@ -35,6 +36,6 @@
   <?php
     include_once ("partials/foot.php");
   ?>
-
+    <script type="text/javascript" src="js/search.js"></script>
 </body>
 </html>

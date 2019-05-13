@@ -1,5 +1,5 @@
 <?php
-    include ('connection.php');
+    include ('../connection.php');
 
     $searchcontent = $_REQUEST['sc'];
     
@@ -24,7 +24,7 @@
 
 
     if ($searchcontent != "") {
-        $imgpath = 'img/';
+        $imgpath = 'images/';
         echo '
             
         ';

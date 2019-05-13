@@ -5,6 +5,7 @@
 <?php
     include_once ("partials/head.php");
   ?>
+  
 </head>
 <body>
 <section>
