@@ -1,70 +1,95 @@
 <?php
     include ('connection.php');
 
-    $searchstart = $_GET['passval'];
-    $searchend = $_GET['passval2'];
+    $searchstart = $_POST['searchstart'];
+    $searchend = $_POST['searchend'];
     $searchPrice_sql ="SELECT p.productID, p.img, p.productName, p.discountprice, p.price,p.categoryID, b.brandName, c.categoryName,c.categoryID FROM product AS p, brand AS b, category AS c WHERE p.brandID=b.brandID and p.categoryID=c.categoryID and discountprice BETWEEN $searchstart AND $searchend";
     $searchPrice_res = mysqli_query($conn, $searchPrice_sql);
     
     if ($searchPrice_res != "") {
-        $searchCategory_arr = mysqli_fetch_all($searchPrice_res);
-        $resultcount=count($searchCategory_arr);
+        $searchPrice_arr = mysqli_fetch_all($searchPrice_res);
+        $resultcount=count($searchPrice_arr);
     } else {
-        alert("result empty");
+        
     }
 
     
 ?>
-<section>
-        <div class="container">
-            
-     <center><h4 style="margin-top: 100px;"><hr>Price </h4></center>
-     <?php
-        echo '<div style="text-align:left;"><i class="far fa-compass" style="margin: 10px 10px;"></i><a style="color: black!important; text-decoration: none!important;" href="index.php">Home / </a> <span>Category / '.$category.' / '.$resultcount.'products</span></div>';
-         
-          if ($searchstart != "") {
-            $imgpath = 'images/';
-    
-            if (count($searchCategory_arr) != 0) { 
-                echo '<div class="productcontent">
-                <div class="product-grid product-grid--flexbox">
-                    <div class="product-grid__wrapper">';
 
-                for ($b = 0; $b <count($searchCategory_arr); $b++) {
-                    echo '
-                        
-                         
-                        <div class="product-grid__product col-sm-6 col-md-4 col-lg-3" style="text-align: center; font-family: Montserrat, sans-serif;">
-                            <div class="product-grid__img-wrapper" style="min-height: 200px; text-algin:center; ">			
-                                     <img src='.$imgpath.$searchCategory_arr[$b][1].' style="width: 150px; max-height: 190px;margin: 0 auto;">
-                             </div><br>
-                            <div class="product-grid__title" style="font-size: 1.2rem;font-weight: 600;"><span>'.$searchCategory_arr[$b][2].'</span></div><br>
-                             <div class="product-grid__price"><span style="font-size:1.4rem;">NZ$'.$searchCategory_arr[$b][3].'</span> <span style="text-decoration: line-through; color:rgba(48, 43, 41,1); font-size:1rem;"> $'.$searchCategory_arr[$b][4].'</span></div>
-                            
-                                    <div class="product-grid__extend" style="width:100%;">
-                                     <div class="row">
-                                        <div class="col-sm-6 col-md-6" style="padding:0!important;"><span class="product-grid__botton product-grid__add-to-cart"><i class="fa fa-cart-arrow-down"></i><br> Add to cart</span></div>
-                                        <div class="col-sm-6 col-md-6" style="padding:0!important;"><span class="product-grid__botton product-grid__view"><i class="fa fa-eye"></i><br>View more</span></div>
 
-                                    </div>
-                                    </div>
-                              
-                          
-                        </div>';
-                
-                }
-
-             echo '</div>
-                </div>';
-            } else {
-              
-            }
-    
-        } else {
-            echo $searchstart;
-            ob_clean();
-            echo 0;
-        }
-     ?>
-        </div>
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+ <?php
+    include_once ("partials/head.php");
+  ?>
+ 
+<title>Product_listbyCategory</title>
+ </head>
+ <body>
+     <section>
+        <?php
+            include_once ("partials/header2.php");
+        ?>        
      </section>
+     <br><br>
+    <?php
+    include ("partials/stickycart.php");
+    ?>
+<div class="container_fluid">
+    <div class="row">
+<!-- content body starts -->
+        <div class="sidenavbar col-md-3 col-xs-12 content-left" style="text-align:center;">
+            <!-- sideNave -->
+                <?php
+                    include_once ("partials/sideNav.php");
+                ?>
+        </div>
+
+        <div class="productresult col-md-9 col-xs-12 content-right">
+            <!-- product list results -->
+               <article id="content">
+                <?php
+                include_once ("priceresult.php");
+                ?>
+                </article>
+        
+        </div>
+
+    </div>
+
+</div>
+
+ </body>
+ <?php
+    include_once ("partials/foot.php");
+  ?>
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script>
+        //
+        $( document ).ready(function() {
+            $("#pricelist").css({ display: "block" });
+            });
+           
+        // Ajax test
+      $(document).ready(function(){
+        // Set trigger and container variables
+        var trigger = $('.pricetrigger'),
+            container = $('#content');
+        
+        // Fire on click
+        trigger.on('click', function(){
+          // Set $this for re-use. Set target from data attribute
+          var $this = $(this),
+            target = $this.find(':submitted').data('target');       
+          
+          // Load target page into container
+          container.load(target + '.php');
+          
+          // Stop normal link behavior
+          return false;
+        });
+      });
+    </script>
+ </html>

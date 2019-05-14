@@ -34,7 +34,9 @@
         ?>        
      </section>
      <br><br>
-
+<?php
+ include ("partials/stickycart.php");
+?>
 <div class="container_fluid">
     <div class="row">
 <!-- content body starts -->
@@ -75,7 +77,7 @@
         trigger.on('click', function(){
           // Set $this for re-use. Set target from data attribute
           var $this = $(this),
-            target = $this.data('target');       
+            target = $this.find(':submitted').data('target');       
           
           // Load target page into container
           container.load(target + '.php');

@@ -99,14 +99,9 @@ $( document ).ready(function() {
     $('body').show();
  });
  
- function priceselect(){
-   var searchstart = document.getElementsByClassName(startnumber).value;
-   var searchend= document.getElementsByClassName(endnumber).value;
-   $.ajax({
-    url:'pricesearch.php',
-    type:'GET',
-    data:{passval:searchstart,passval2:searchstend }, //Pass your varibale in data
-    success:function(getreturn){
-    alert(getreturn); //you get return value in this varibale, us it anywhere
-    }
-  })};
+ $('.cartbutton').click(function() {
+  $('.modal')
+      .prop('class', 'modal fade') // revert to default
+      .addClass( $(this).data('direction') );
+  $('.modal').modal('show');
+});

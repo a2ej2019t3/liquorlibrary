@@ -142,7 +142,7 @@ ul.dropdown-menu {
   /* height: 200px; */
 }
 .modal-content{
- position: absolute;
+ /* position: absolute; */
  top: 45px;
  /* height: 100px!important; */
  text-align: center;

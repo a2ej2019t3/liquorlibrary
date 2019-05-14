@@ -63,19 +63,59 @@ include_once ('connection.php');
   
   <li><a class="maintype" href="#services">Brand</a></li>
   <li><a class="maintype" href="#clients">On Sale</a></li>
-  <a data-toggle="sidebar" data-target="#pricelist" class="dropdown-btn collapsible-header maintype">Price <i class="fas fa-caret-down"></i></a>
+  <a data-toggle="sidebar" data-target="#pricelist" class="dropdown-btn collapsible-header maintype" id="pricebutton">Price <i class="fas fa-caret-down"></i></a>
         <div  class="dropdown-container" id="pricelist">
                     <ul>
                     <li class="childlink" >
-                    <form  method="POST" action="categorysearch.php">
-                        <input type="hidden" name="searchstart" class="startnumber" value="0"></input>
-                        <input type="hidden" name="searchend" class="endnumber" value="10"></input>
-                    <button class="pricetrigger" type="submit" data-target="pricesearch" onclick="priceselect()">-NZ$10</button>
+                    <form  method="POST" action="pricesearch.php" data-target="pricesearch">
+                        <input type="hidden" name="searchstart" value="0">
+                        <input type="hidden" name="searchend" value="10">
+                        <a class="childprice"> <button class="pricetrigger" type="submit" >-NZ$10</button></a>
                     </form>
-                </li>
-                    <li class="childlink"><a href="#">NZ$10-NZ$15</a></li>
-                    <li class="childlink"><a href="#">NZ$15-NZ$20</a></li>
-                    <li class="childlink"><a href="#">NZ$20-</a></li>
+
+                    <li class="childlink">  
+                     <form  method="POST" action="pricesearch.php" data-target="pricesearch">
+                        <input type="hidden" name="searchstart" value="10">
+                        <input type="hidden" name="searchend" value="15">
+                        <a class="childprice"><button class="pricetrigger" type="submit" >NZ$10-NZ$15</button></a>
+                     </form>      
+                    </li>
+                    <li class="childlink">
+                    <form  method="POST" action="pricesearch.php" data-target="pricesearch">
+                        <input type="hidden" name="searchstart" value="15">
+                        <input type="hidden" name="searchend" value="20">
+                        <a class="childprice"><button class="pricetrigger" type="submit" >NZ$15-NZ$20</button></a>
+                     </form>    
+
+                    </li>
+                    <li class="childlink">
+                    <form  method="POST" action="pricesearch.php" data-target="pricesearch">
+                        <input type="hidden" name="searchstart" value="20">
+                        <input type="hidden" name="searchend" value="25">
+                        <a class="childprice"><button class="pricetrigger" type="submit" >NZ$20-NZ$25</button></a>
+                     </form>    
+                    </li>
+                    <li class="childlink">
+                    <form  method="POST" action="pricesearch.php" data-target="pricesearch">
+                        <input type="hidden" name="searchstart" value="25">
+                        <input type="hidden" name="searchend" value="30">
+                        <a class="childprice"><button class="pricetrigger" type="submit" >NZ$25-NS$30</button></a>
+                     </form>    
+                    </li>
+                    <li class="childlink">
+                    <form  method="POST" action="pricesearch.php" data-target="pricesearch">
+                        <input type="hidden" name="searchstart" value="30">
+                        <input type="hidden" name="searchend" value="35">
+                        <a class="childprice"><button class="pricetrigger" type="submit" >NZ$30-NZ$35</button></a>
+                     </form>    
+                    </li>
+                    <li class="childlink">
+                    <form  method="POST" action="pricesearch.php" data-target="pricesearch">
+                        <input type="hidden" name="searchstart" value="35">
+                        <input type="hidden" name="searchend" value="5000">
+                        <a class="childprice"> <button class="pricetrigger" type="submit" >NZ$35-</button></a>
+                     </form>    
+                    </li>
                   </ul>
             </div>
 
@@ -122,6 +162,7 @@ body {
   line-height:0.5;
 
 }
+
 .childlink a{
   font-size: 15px!important;
   color: black;
@@ -132,9 +173,17 @@ body {
   text-align:center;
   margin:0;
 }
-.sidenav a:hover {
+.sidenav a:hover ,.sidenav a:focus{
   color: #064579;
   background-color: #eee;
+}
+.maintype:active{
+  color: #064579;
+  background-color: #eee!important;
+}
+.maintype:focus{
+  color: #064579;
+  background-color: #eee!important;
 }
 li{
     list-style-type: none;
@@ -151,7 +200,18 @@ li{
 li button:hover{
     color: #8B0000;
 }
-
+button.pricetrigger{
+    background-color: transparent;
+    border: none;
+    text-align: left;
+    font-size: 14px;
+    /* margin-left: 20%; */
+    font-weight: 600;
+}
+button.pricetrigger:hover ,button.pricetrigger:focus{
+    color: #064579;
+    background-color: #eee;
+}
 
 @media screen and (max-height: 600px) {
   .sidenav {
