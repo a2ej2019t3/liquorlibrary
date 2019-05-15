@@ -3,16 +3,16 @@
 <head>
 <title>Sign Up</title>
 <?php
-    include_once ("../partials/head.php");
-    include ("../connection.php");
+    include_once ("partials/head.php");
+    include ("connection.php");
   ?>
-  <link rel="stylesheet" href="../css/index.css">
+  <link rel="stylesheet" href="css/index.css">
 </head>
 </head>
 <body>
 <section>
 <?php
-    include ("../partials/header2.php");
+    include ("partials/header.php");
 ?>
 </section>
 <section>
@@ -21,10 +21,10 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-md-12 col-lg-12">
-                <div class="mySlides"> <img src="../images/liquor5.jpg" style="width:100%; max-height:520px;"/> 
+                <div class="mySlides"> <img src="images/liquor5.jpg" style="width:100%; max-height:520px;"/> 
                 <div class="content">Join us NOW</div>
             </div>
-                <div class="mySlides"> <img src="../images/liquor15.jpg" style="width:100%; max-height:520px;"/> 
+                <div class="mySlides"> <img src="images/liquor15.jpg" style="width:100%; max-height:520px;"/> 
                 <div class="content2">And enjoy <br> the benefits! </div>
             </div>
             </div>
@@ -130,9 +130,9 @@
  </form> 
 </section>
 <?php
-    include_once ("../partials/foot.php");
+    include_once ("partials/foot.php");
   ?>
-    <script type="text/javascript" src="../js/main.js"></script>
-    <script type="text/javascript" src="../js/search.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/search.js"></script>
 </body>
 </html>
