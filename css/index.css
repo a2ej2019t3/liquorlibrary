@@ -623,6 +623,7 @@ transform: translateX(-7px);
     font-family: 'Montserrat', sans-serif;
   }
   .product-grid.product-grid--flexbox .product-grid__wrapper {
+    
     display: flex;
     flex-wrap: wrap;
     text-align: center;
@@ -630,10 +631,12 @@ transform: translateX(-7px);
   .product-grid.product-grid--flexbox .product-grid__title {
     height: auto;
     text-align: center;
+    width: 100%;
   }
   .product-grid.product-grid--flexbox .product-grid__title:after {
     display: none;
     text-align: center;
+     width: 100%;
   }
   .product-grid__wrapper {
     margin-left: -1rem;
