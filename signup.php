@@ -1,11 +1,15 @@
+<?php
+    session_start();
+    $_SESSION['location'] = 'signup';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <title>Sign Up</title>
-<?php
-    include_once ("partials/head.php");
-    include ("connection.php");
-  ?>
+    <?php
+        include_once ("partials/head.php");
+        include ("connection.php");
+    ?>
   <link rel="stylesheet" href="css/index.css">
 </head>
 </head>
