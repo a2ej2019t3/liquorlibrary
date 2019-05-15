@@ -112,6 +112,7 @@
   <?php
     include_once ("partials/foot.php");
   ?>
+  <script type="text/javascript" src="js/subcategory.js"></script>
   <script type="text/javascript" src="js/main.js"></script>
   <script type="text/javascript" src="js/search.js"></script>
 </body>

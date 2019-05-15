@@ -7,21 +7,21 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="post">
+                    <form>
                         <div class="form-group">
                           <i class="fa fa-user"></i>
-                          <input type="text" class="form-control" placeholder="Username" required="required">
+                          <input type="text" name="email" class="form-control" placeholder="Username" required="required">
                         </div>
                         <div class="form-group">
                           <i class="fa fa-lock"></i>
-                          <input type="password" class="form-control" placeholder="Password" required="required">					
+                          <input type="password" name="password" class="form-control" placeholder="Password" required="required">					
                         </div>
                         <div class="form-group small clearfix">
                             <label class="checkbox-inline"><input type="checkbox"> Remember me</label>
                             <a href="#" class="forgot-link">Forgot Password?</a>
                         </div>
                         <div class="form-group">
-                            <input type="submit" class="btn btn-primary btn-block btn-lg" value="Sign in">
+                            <input type="button" id="loginSubmit" class="btn btn-primary btn-block btn-lg" value="Sign in">
                         </div>
                     </form>
                 </div>
