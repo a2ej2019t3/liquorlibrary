@@ -21,10 +21,15 @@
                                      <img src='.$imgpath.$searchCategory_arr[$b][1].' style="width: 120px; max-height: 170px;margin: 0 auto;">
                              </div><br>
                             <div class="product-grid__title" style="font-size: 1.2rem;font-weight: 600;"><span>'.$searchCategory_arr[$b][2].'</span></div><br>';
-                            if($searchCategory_arr[$b][3] !=0 )
-                      echo      '<div class="product-grid__price"><span style="font-size:1.4rem;">NZ$'.$searchCategory_arr[$b][3].'</span> <span style="text-decoration: line-through; color:rgba(48, 43, 41,1); font-size:1rem;"> $'.$searchCategory_arr[$b][4].'</span></div>
+                            if($searchCategory_arr[$b][3] !==null ){
+                                echo      '<div class="product-grid__price"><span style="font-size:1.4rem;">NZ$'.$searchCategory_arr[$b][3].'</span> <span style="text-decoration: line-through; color:rgba(48, 43, 41,1); font-size:1rem;"> $'.$searchCategory_arr[$b][4].'</span></div>';
+                            }
+                            else {
+                                echo      '<div class="product-grid__price"><span style="font-size:1.4rem;">NZ$'.$searchCategory_arr[$b][4].'</span> </div>';
+
+                            }
                             
-                                    <div class="product-grid__extend" style="width:100%;">
+                       echo         '<div class="product-grid__extend" style="width:100%;">
                                      <div class="row">
                                         <div class="col-sm-6 col-md-6" style="padding:0!important;"><span class="product-grid__botton product-grid__add-to-cart"><i class="fa fa-cart-arrow-down"></i><br> Add to cart</span></div>
                                         <div class="col-sm-6 col-md-6" style="padding:0!important;"><span class="product-grid__botton product-grid__view"><i class="fa fa-eye"></i><br>View more</span></div>
