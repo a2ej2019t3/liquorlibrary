@@ -30,7 +30,7 @@
 
 
     if ($searchcontent != "") {
-            $imgpath = 'img/';
+            $imgpath = 'images/';
 
     // product result below
     

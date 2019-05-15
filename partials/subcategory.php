@@ -1,0 +1,84 @@
+<!-- sub Category modal ----------------------------------------------------------------------------------------->
+<?php
+  include ('connection.php');
+    $parentCategory_sql="SELECT `categoryID`, `categoryName` FROM `category` WHERE `parentCategoryID` IS NULL";
+    $parentCategory_res = mysqli_query($conn, $parentCategory_sql);
+    if ($parentCategory_res != "") {
+        $parentCategory_arr = mysqli_fetch_all($parentCategory_res);
+    } else {
+        alert(" parent category result empty");
+    }
+
+        echo'
+            <div class="modal" id="subnav" tabindex="-1" data-trigger="hover" data-backdrop="false">
+                <div class="modal-dialog modal-center style="max-width: 700px!important; max-height: 360px!important;">
+                    <div class="container">
+                        <div class="row">
+                        <div class="modal-content">
+                            <div class="modal-body" id="modalcard">';
+         echo                  '<div class="tab col-3">';
+                
+                        if (count($parentCategory_arr) != 0) { 
+                            echo '
+                              <button id="buttonIndex_0" type="button" class="tablinks" onclick="openCity(this.id)" value="'.$parentCategory_arr[0][1].'"><span>'.$parentCategory_arr[0][1].'</span></button>
+                            ';
+                            for ($a = 1; $a < count($parentCategory_arr); $a++) {
+                                // parent category list showing
+                                $cityName= $parentCategory_arr[$a][1];
+                                echo '
+                                <button type="button" id="buttonIndex_'.$a.'" class="tablinks" onclick="openCity(this.id)" value="'.$cityName.'"><span>'.$cityName.'</span></button>
+                                ';
+                               
+                            }
+                
+                        } else {
+                        
+                        };
+         echo
+                        '</div>';
+        
+                        if (count($parentCategory_arr) != 0) { 
+                            for ($a = 0; $a < count($parentCategory_arr); $a++) {
+                                // change form action to desired php file 
+                                echo '
+                                <div id="'.$parentCategory_arr[$a][1].'" class="tabcontent col-9">
+                                <h5 style="color:  #8B0000;">'.$parentCategory_arr[$a][1].'</h5> <hr style="margin: 10px auto!important;">';
+                            echo '<div class="row">';
+                                $subCategory_sql="SELECT `categoryID`, `categoryName` FROM `category` WHERE `parentCategoryID` =".$parentCategory_arr[$a][0]."";
+                                $subCategory_res = mysqli_query($conn, $subCategory_sql);
+                                if ($subCategory_res != "") {
+                                    $subCategory_arr = mysqli_fetch_all($subCategory_res);
+                                } else {
+                                    alert("sub category result empty");
+                                }
+                                for ($b = 0; $b < count($subCategory_arr); $b++) {
+                                    echo '<div class="column">
+                                        <form  method="POST" action="categorysearch.php">';
+                                    echo '<input type="hidden" name="searchcategoryID" value="'.$subCategory_arr[$b][0].'"></input>
+                                           <input type="hidden" name="searchcategoryName" value="'.$subCategory_arr[$b][1].'"></input>
+                                    ';
+
+                                    echo '<button type="submit"> '.$subCategory_arr[$b][1].'</button> <br>';
+                                   
+                                    echo '</form>
+                                        </div>';
+                                };
+                            echo '</div>';
+
+         echo                  
+                             '</div>';  
+                            } 
+                
+                        } else {
+                        
+                        };
+            
+                echo '   <br>  <button type="button" class="close" data-dismiss="modal" id="tabclose"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                        </div>  
+                   </div>     
+                </div>
+            </div>
+        </div>
+    </div>';
+    ?>
+ 

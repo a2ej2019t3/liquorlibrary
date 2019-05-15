@@ -139,7 +139,7 @@ ul.dropdown-menu {
 /* header modal CSS */
 /* serch modal css */
   /* modal */
-  .modal {
+ .modal {
     position: absolute;
 }
 .modal-lg{
@@ -148,7 +148,7 @@ ul.dropdown-menu {
   /* height: 200px; */
 }
 .modal-content{
- position: absolute;
+ /* position: absolute; */
  top: 45px;
  /* height: 100px!important; */
  text-align: center;
@@ -240,6 +240,93 @@ ul.dropdown-menu {
   margin: 10px 10px;
 }
 
+
+/* Test CSS for subnavbar ---------------------------------------------------------------------------------------------*/
+
+.tab {
+  float: left;
+  border: 1px solid #ccc;
+  background-color: rgba(217, 221, 146, 1);
+  width: 30%;
+  height: 95%;
+  text-align: center;
+  display: flex;        /* Flex layout so items have equal height  */
+  flex-flow: row wrap;
+  padding: 0!important;
+}
+/* Style the buttons inside the tab */
+.tab button {
+  /* display: block; */
+  background-color: inherit;
+  color: black;
+  width: 100%;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 15px;
+  display: flex;        /* Lay out each item using flex layout */
+  flex-flow: column;
+  line-height:40px;  
+}
+.tab button span{
+  margin-left: 30px;
+  font-family: 'Roboto', sans-serif;
+  /* color: white; */
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: rgba(244, 232, 117, 1);
+}
+
+/* Create an active/current "tab button" class */
+.tab button.active {
+  background-color: rgba(244, 232, 117, 1);
+}
+
+/* Style the tab content */
+.tabcontent {
+  float: left;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  width: 70%;
+  border-left: none;
+  height: 95%;
+  font-family: 'Roboto', sans-serif;  
+}
+/* .modal-lg{
+  max-width: 700px!important;
+  max-height: 360px!important;
+} */
+#modalcard{
+height: 300px;
+}
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+  text-align: left;
+}
+.column:hover{
+  background-color:rgba(244, 232, 117, 1);
+}
+.column button{
+  background-color: transparent;
+  border: none;
+  color: black!important;
+}
+.column button a{
+  color: black!important;
+  font-size: 15px;
+}
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* test ends ----------------------------------------------------------------------------------------------------------*/
 /* ---Indexpage CSS-------------------------------------------------------------------------------------------------------------------------------------- */
 #mainscreen{
     background-image: url("../images/liquor10.jpg");
@@ -525,4 +612,145 @@ transform: translateX(-7px);
   
   };
   
+  /* ---------test product list */
+
+
+
+  .product-grid {
+    text-align: center;
+    width: 50em;
+    margin: 2rem auto;
+    font-family: 'Montserrat', sans-serif;
+  }
+  .product-grid.product-grid--flexbox .product-grid__wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+  }
+  .product-grid.product-grid--flexbox .product-grid__title {
+    height: auto;
+    text-align: center;
+  }
+  .product-grid.product-grid--flexbox .product-grid__title:after {
+    display: none;
+    text-align: center;
+  }
+  .product-grid__wrapper {
+    margin-left: -1rem;
+    margin-right: -1rem;
+    text-align: center;
+  }
+  .product-grid__product-wrapper {
+    padding: 1rem;
+    /* float: left;
+    width: 33.33333%; */
+    text-align: center;
+  }
+  .product-grid__product {
+    padding: 1rem;
+    position: relative;
+    cursor: pointer;
+    background: #fff;
+    border-radius: 4px;
+    text-align: center!important;
+  }
+  .product-grid__product:hover {
+    box-shadow: 0px 0px 0px 1px #eee;
+    z-index: 50;
+  }
+  .product-grid__product:hover .product-grid__extend {
+    display: block;
+    text-align: center;
+  }
+  .product-grid__img-wrapper {
+    width: 100%;
+    text-align: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    text-align: center;
+  }
+  .product-grid__img {
+    text-align: center;
+  }
+  .product-grid__title {
+    margin-top: .875rem;
+    display: block;
+    font-size: 1.3em;
+    color: #222;
+    height: 3em;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+  }
+  .product-grid__title:after {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 2.4em;
+    height: 1.5em;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), white 50%);
+  }
+  .product-grid__price {
+    color: #E91E63;
+    font-weight: bold;
+    letter-spacing: .4px;
+    text-align: center;
+    font-size: 1.3em;
+  }
+
+  .product-grid__extend {
+    display: none;
+    position: absolute;
+    padding: 0 1rem 1rem 1rem;
+    margin: .4375rem -1rem 0;
+    box-shadow: 0px 0px 0px 1px #eee;
+    background: #fff;
+    border-radius: 0 0 4px 4px;
+    width: 100%;
+   }
+  .product-grid__extend:before {
+    content: "";
+    height: .875rem;
+    width: 100%;
+    position: absolute;
+    top: -.4375rem;
+    left: 0;
+    background: #fff;
+    text-align: center;
+  }
+
+  .product-grid__botton {
+    display: inline-block;
+    height: 50px;
+    margin-top: .875rem;
+    margin-right: .425rem;
+    margin-left: .425rem;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 16px;
+    width: 100%;
+  }
+  .product-grid__botton i.fa {
+    margin-right: .3125rem;
+  }
+  .product-grid__add-to-cart {
+    color: #fff;
+    background: #E91E63;
+    font-weight: 600;
+  }
+  .product-grid__add-to-cart:hover {
+    background: #ee4c83;
+  }
+  .product-grid__view {
+    color: rgb(92, 75, 64);;
+    background: #eee;
+    font-weight: 600;
+    
+  }
+  .product-grid__view:hover {
+    background: white;
+  }
   
+  /* ------------------- */
