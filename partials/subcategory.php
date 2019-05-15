@@ -2,7 +2,7 @@
 <?php
   include ('connection.php');
     $parentCategory_sql="SELECT `categoryID`, `categoryName` FROM `category` WHERE `parentCategoryID` IS NULL";
-    $parentCategory_res = mysqli_query($conn, $parentCategory_sql);
+    $parentCategory_res = mysqli_query($connection, $parentCategory_sql);
     if ($parentCategory_res != "") {
         $parentCategory_arr = mysqli_fetch_all($parentCategory_res);
     } else {
@@ -45,7 +45,7 @@
                                 <h5 style="color:  #8B0000;">'.$parentCategory_arr[$a][1].'</h5> <hr style="margin: 10px auto!important;">';
                             echo '<div class="row">';
                                 $subCategory_sql="SELECT `categoryID`, `categoryName` FROM `category` WHERE `parentCategoryID` =".$parentCategory_arr[$a][0]."";
-                                $subCategory_res = mysqli_query($conn, $subCategory_sql);
+                                $subCategory_res = mysqli_query($connection, $subCategory_sql);
                                 if ($subCategory_res != "") {
                                     $subCategory_arr = mysqli_fetch_all($subCategory_res);
                                 } else {

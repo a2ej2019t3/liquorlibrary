@@ -1,7 +1,7 @@
 <?php
 include_once ('connection.php');
     $parentCategory_sql="SELECT `categoryID`, `categoryName` FROM `category` WHERE `parentCategoryID` IS NULL";
-    $parentCategory_res = mysqli_query($conn, $parentCategory_sql);
+    $parentCategory_res = mysqli_query($connection, $parentCategory_sql);
     if ($parentCategory_res != "") {
         $parentCategory_arr = mysqli_fetch_all($parentCategory_res);
     } else {
@@ -25,7 +25,7 @@ include_once ('connection.php');
                                 <a href="#" class="dropdown-btn collapsible-header childlink" data-toggle="sidebar" data-target=".subcategorylist'. $identifier.'">'.$parentCategory_arr[$a][1].'<i class="fas fa-caret-down"></i></a>
                                 ';
                                 $subCategory_sql="SELECT `categoryID`, `categoryName` FROM `category` WHERE `parentCategoryID` =".$parentCategory_arr[$a][0]."";
-                                $subCategory_res = mysqli_query($conn, $subCategory_sql);
+                                $subCategory_res = mysqli_query($connection, $subCategory_sql);
                                 if ($subCategory_res != "") {
                                     $subCategory_arr = mysqli_fetch_all($subCategory_res);
                                 } else {

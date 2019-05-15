@@ -4,7 +4,7 @@
     $searchcontent = $_POST['searchcategoryID'];
     $category= $_POST['searchcategoryName'];
     $searchCategory_sql = "SELECT p.productID, p.img, p.productName, p.discountprice, p.price,p.categoryID, b.brandName, c.categoryName,c.categoryID FROM product AS p, brand AS b, category AS c WHERE p.brandID=b.brandID and p.categoryID=c.categoryID and c.categoryID =$searchcontent";
-    $searchCategory_res = mysqli_query($conn, $searchCategory_sql);
+    $searchCategory_res = mysqli_query($connection, $searchCategory_sql);
     
     if ($searchCategory_res != "") {
         $searchCategory_arr = mysqli_fetch_all($searchCategory_res);

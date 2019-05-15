@@ -4,7 +4,7 @@
     $searchstart = $_POST['searchstart'];
     $searchend = $_POST['searchend'];
     $searchPrice_sql ="SELECT p.productID, p.img, p.productName, p.discountprice, p.price,p.categoryID, b.brandName, c.categoryName,c.categoryID FROM product AS p, brand AS b, category AS c WHERE p.brandID=b.brandID and p.categoryID=c.categoryID and discountprice BETWEEN $searchstart AND $searchend";
-    $searchPrice_res = mysqli_query($conn, $searchPrice_sql);
+    $searchPrice_res = mysqli_query($connection, $searchPrice_sql);
     
     if ($searchPrice_res != "") {
         $searchPrice_arr = mysqli_fetch_all($searchPrice_res);
