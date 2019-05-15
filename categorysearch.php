@@ -18,9 +18,6 @@
     } else {
         alert("result empty");
     }
-
-    
-
  ?>
 
 
