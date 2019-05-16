@@ -1,6 +1,9 @@
 <?php
     session_start();
     $_SESSION['location'] = 'productlist';
+    if (isset($_SESSION['user'])) {
+      $user = $_SESSION['user'];
+    }
     include ('connection.php');
     // category search 
 
@@ -14,31 +17,31 @@
     
     if ($searchCategory_res != "") {
         $searchCategory_arr = mysqli_fetch_all($searchCategory_res);
-        $resultcount=count($searchCategory_arr);
+        $resultcount = count($searchCategory_arr);
     } else {
         alert("result empty");
     }
- ?>
+?>
 
 
- <!DOCTYPE html>
- <html lang="en">
- <head>
- <?php
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <?php
     include_once ("partials/head.php");
   ?>
- 
+
 <title>Product_listbyCategory</title>
- </head>
- <body>
-     <section>
+  </head>
+  <body>
+    <section>
         <?php
-            include_once ("partials/header.php");
+          include_once ("partials/header.php");
         ?>        
-     </section>
-     <br><br>
+    </section>
+    <br><br>
 <?php
- include ("partials/stickycart.php");
+include ("Cart/stickycart.php");
 ?>
 <div class="container_fluid">
     <div class="row">
@@ -52,45 +55,46 @@
 
         <div class="productresult col-md-9 col-xs-12 content-right">
             <!-- product list results -->
-               <article id="content">
+              <article id="content">
                 <?php
                 include_once ("typesearch.php");
                 ?>
                 </article>
-        
         </div>
 
     </div>
 
 </div>
 
- </body>
- <script>
-   $(document).ready(function(){
-     // Set trigger and container variables
-     var trigger = $('.pricetrigger'),
-         container = $('#content');
-     
-     // Fire on click
-     trigger.on('click', function(){
-       // Set $this for re-use. Set target from data attribute
-       var $this = $(this),
-         target = $this.find(':submitted').data('target');       
-       
-       // Load target page into container
-       container.load(target + '.php');
-       
-       // Stop normal link behavior
-       return false;
-     });
-   });
- </script>
+</body>
+<script>
+  $(document).ready(function(){
+    // Set trigger and container variables
+    var trigger = $('.pricetrigger'),
+        container = $('#content');
+    
+    // Fire on click
+    trigger.on('click', function(){
+      // Set $this for re-use. Set target from data attribute
+      var $this = $(this),
+        target = $this.find(':submitted').data('target');       
+      
+      // Load target page into container
+      container.load(target + '.php');
+      
+      // Stop normal link behavior
+      return false;
+    });
+  });
+</script>
 
- <?php
+<?php
     include_once ("partials/foot.php");
   ?>  
-  <script type="text/javascript" src="js/subcategory.js"></script>
+  <script type="text/javascript" src="js/sub.js"></script>
   <script type="text/javascript" src="js/main.js"></script>
   <script type="text/javascript" src="js/search.js"></script>
+  <script type="text/javascript" src="js/getcartitems.js"></script>
+
   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> -->
- </html>
+</html>

@@ -1,10 +1,15 @@
+<!-- 0 = not login; 1 = item exist; 2 = item added -->
 <?php
-
-session_start();
 require_once('connection.php'); 
+session_start();
+if (isset($_SESSION['user'])) {
+	$user = $_SESSION['user'];
+} else {
+	echo 0;
+}
 
-if (isset($_POST['productID']) && $_POST['productID']!=""){
-$productID = $_POST['productID'];
+if (isset($_REQUEST['productID']) && $_REQUEST['productID']!=""){
+$productID = $_REQUEST['productID'];
 $result = mysqli_query($connection,"SELECT p.productID, p.img, p.productName, p.discountprice, p.price,p.categoryID, b.brandName, c.categoryName,c.categoryID FROM product AS p, brand AS b, category AS c WHERE p.brandID=b.brandID and p.categoryID=c.categoryID and p.productID = ".$productID.";");
 $result_arr = mysqli_fetch_assoc($result);
 
@@ -32,21 +37,26 @@ $cartItems = array(
 		'categoryName'=>$categoryName,
 		'brandName'=>$brandName,
 		'quantity'=>1,
-		'img'=>$img
+		'img'=>$img,
+		'whID'=>1,
+		'date'=>now(),
+		'status'=>0
 		)
 );
 
-if(empty($_SESSION["shopping_cart"])) {
-	$_SESSION["shopping_cart"] = $cartItems;
-	// print_r($_SESSION["shopping_cart"]);
-	
+if(empty($_SESSION["shoppingCart"])) {
+	$_SESSION["shoppingCart"] = $cartItems;
+	// print_r($_SESSION["shoppingCart"]);
+
 } else {
-		$existedProductID = array_keys($_SESSION["shopping_cart"]);
+		$existedProductID = array_keys($_SESSION["shoppingCart"]);
 		if(in_array($productID,$existedProductID)) {
+			$_SESSION['shoppingCart'][$productID]['whID'] += 1;
+			echo 1;
 		} else {
-			$_SESSION["shopping_cart"] = array_merge($_SESSION["shopping_cart"],$cartItems);
-			$status = "<div class='box'>Product is added to your cart!</div>";
-		// print_r($_SESSION["shopping_cart"]);
-		}	
+			$_SESSION["shoppingCart"] = array_merge($_SESSION["shoppingCart"],$cartItems);
+			echo 2;
+		// print_r($_SESSION["shoppingCart"]);
+		}
 	}
 }
