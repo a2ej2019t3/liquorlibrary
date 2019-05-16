@@ -54,8 +54,8 @@
             <!-- product list results -->
                <article id="content">
                 <?php
-                // include_once ("typesearch.php");
-                include_once ("onsalesearch.php");
+                include_once ("typesearch.php");
+                
 
                 ?>
                 </article>

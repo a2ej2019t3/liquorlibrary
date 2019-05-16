@@ -56,3 +56,47 @@ document.getElementById("logoutButton").onclick = function () {
     // xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.send();
 }
+
+//  high& low price sort
+
+//  function pricesortlow() {
+//     var val = document.getElementById("lowprice").value;
+//     var val = $('#lowprice').val();
+
+//         var xmlhttp = new XMLHttpRequest();
+//         xmlhttp.onreadystatechange = function () {
+//             if (this.readyState == 4 && this.status == 200) {
+//                 console.log(xmlhttp);
+//                 if(xmlhttp.responseText == 1){
+//                     // document.location.reload(true);
+//                 }
+//             }
+//         };
+//         xmlhttp.open("GET", "./pricesort.php?sc="+val, true);
+//         xmlhttp.send();
+// };
+$(document).ready(function(){
+    // Set trigger and container variables
+    var trigger = $('.sortselect');        
+    // Fire on click
+    trigger.on('click', function(){
+      // Set $this for re-use. Set target from data attribute
+        var $this = $(this),
+        val = $this.find(':selected').val();       
+        // var val = document.getElementById("pricelow").value;
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                console.log(xmlhttp);
+                if(xmlhttp.responseText == 1){
+                    // document.location.reload(true);
+                   
+                }
+            }
+        };
+        xmlhttp.open("GET", "./pricesort.php?sc="+val, true);
+        xmlhttp.send();
+      
+      return false;
+    });
+  });

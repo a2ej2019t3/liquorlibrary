@@ -21,16 +21,15 @@
         // Set trigger and container variables
         var trigger = $('.sortselect'),
             container = $('#content');
-        
+            
         // Fire on click
         trigger.on('click', function(){
           // Set $this for re-use. Set target from data attribute
           var $this = $(this),
             target = $this.find(':selected').data('target');       
-          
+            
           // Load target page into container
-          container.load(target + '.php');
-          
+          container.load(target + '.php');  
           // Stop normal link behavior
           return false;
         });
@@ -61,10 +60,10 @@
             <!-- product list results -->
             <div style="margin-top: 100px; "><hr><span style="font-size:24px;">Sale products</span>
             <select class="sortselect" name="sortselect" id="selectsort" style="width: 300px;margin-left: 15px;">                             
-                                                <option value="onsalelist">EVERY ITEMS</option>
-                                                <option value="M" data-target="discountrate" >BY DISCOUT RATE</option>
-                                                <option value="B1" data-target="">BY LOW PRICE</option>
-                                                <option value="B1" data-target="">BY HIGH PRICE</option>
+                                                <option data-target="onsalelist">ALL ITEMS</option>
+                                                <option data-target="discountrate" >BY DISCOUNT RATE</option>
+                                                <option value="ASC"  data-target="pricesort">BY LOW PRICE</option>
+                                                <option value="DESC" data-target="pricesorthigh" onclick="pricesorthigh()">BY HIGH PRICE</option>
                                                 <button type="submit"></button>
                                                 </select>
             </div>

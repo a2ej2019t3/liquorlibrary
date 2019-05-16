@@ -17,7 +17,7 @@
                         
                          
                         <div class="product-grid__product col-sm-6 col-md-4 col-lg-3" style="text-align: center; font-family: Montserrat, sans-serif;">
-                            <div class="product-grid__img-wrapper" style="min-height: 185px; text-algin:center; ">			
+                            <div class="product-grid__img-wrapper" style="height: 185px; text-algin:center; ">			
                                      <img src='.$imgpath.$searchCategory_arr[$b][1].' style="width: 120px; max-height: 170px;margin: 0 auto;">
                              </div><br>
                             <div class="product-grid__title" style="font-size: 1.2rem;font-weight: 600;"><span>'.$searchCategory_arr[$b][2].'</span></div><br>';
