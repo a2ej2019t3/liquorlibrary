@@ -30,7 +30,7 @@
  
 <title>Product_listbyCategory</title>
  </head>
- <body>
+ <body style="height: 110%;">
      <section>
         <?php
             include_once ("partials/header.php");
