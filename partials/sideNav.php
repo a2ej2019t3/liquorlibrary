@@ -61,7 +61,7 @@ include_once ('connection.php');
 
  
   
-  <li><a class="maintype" href="#">Brand</a></li>
+  <li><a class="maintype" href="brandlist.php">Brand</a></li>
   <li><a class="maintype" name="saletag" href="onsale.php" id="onsaletrigger">On Sale</a></li>
   <a data-toggle="sidebar" data-target="#pricelist" class="dropdown-btn collapsible-header maintype" id="pricebutton">Price <i class="fas fa-caret-down"></i></a>
         <div  class="dropdown-container" id="pricelist">
