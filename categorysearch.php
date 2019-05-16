@@ -94,7 +94,7 @@ include ("Cart/stickycart.php");
   <script type="text/javascript" src="js/sub.js"></script>
   <script type="text/javascript" src="js/main.js"></script>
   <script type="text/javascript" src="js/search.js"></script>
-  <script type="text/javascript" src="js/getcartitems.js"></script>
+  <script type="text/javascript" src="js/cart.js"></script>
 
   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> -->
 </html>
