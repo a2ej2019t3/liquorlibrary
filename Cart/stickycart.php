@@ -2,15 +2,7 @@
     <ul id="stickyCartBt" class="sticky" >
             <button id="stickyCart" class="cartbutton" data-toggle="modal" data-target="#cart">
             <div><i class="fas fa-dolly"></i></div>
-            <span>
-                <?php 
-                    if (isset($_SESSION['user'])) {
-                        echo $_SESSION['cartItemNum']; 
-                    } else {
-                        echo 0;
-                    }
-                ?>
-            </span>
+            
              </button>
     </ul>
 </div>

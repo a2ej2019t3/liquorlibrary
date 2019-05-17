@@ -41,10 +41,9 @@
                 $tagForCategory = 'Category: ';
                 $tagForBrand = 'Brand: ';
                 // change form action to desired php file 
+                // <input type="hidden" name="productid" value="'.$searchProduct_arr[$a][1].'">
                 echo '
-                    <form method="post" action="productDetailPage.php">
-                    <input type="hidden" name="productid" value="'.$searchProduct_arr[$a][1].'">
-                    <button class="dropdown-item" href="#" type="submit">
+                    <button href="#" class="dropdown-item" type="submit" value="'.$searchProduct_arr[$a][1].'">
                         <div class="row">
                             <div id="posterarea" style="display:inline-block">
                                 <img src='.$imgpath.$searchProduct_arr[$a][4].' style = "width: 35px; height:auto">
@@ -58,7 +57,6 @@
                             </div>
                         </div>
                     </button>
-                    </form>
                 ';
             }
 
