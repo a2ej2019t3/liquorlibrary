@@ -52,16 +52,11 @@
                                     alert("sub category result empty");
                                 }
                                 for ($b = 0; $b < count($subCategory_arr); $b++) {
-                                    echo '<div class="column">
-                                        <form  method="POST" action="categorysearch.php">';
-                                    echo '<input type="hidden" name="searchcategoryID" value="'.$subCategory_arr[$b][0].'"></input>
-                                           <input type="hidden" name="searchcategoryName" value="'.$subCategory_arr[$b][1].'"></input>
-                                    ';
+                                    echo '<div class="column">';
 
-                                    echo '<button type="submit"> '.$subCategory_arr[$b][1].'</button> <br>';
+                                    echo '<a class="linkanchor" href="categorysearch.php?searchcategoryID='.$subCategory_arr[$b][0].'&searchcategoryName='.$subCategory_arr[$b][1].'" > '.$subCategory_arr[$b][1].'</a> <br>';
                                    
-                                    echo '</form>
-                                        </div>';
+                                    echo '</div>';
                                 };
                             echo '</div>';
 
@@ -81,4 +76,12 @@
         </div>
     </div>';
     ?>
- 
+ <style>
+  .linkanchor{
+    color: black!important;
+  }
+  .linkanchor:hover, .linkanchor:active{
+    color: black!important;
+    text-decoration: none;
+  }
+</style>

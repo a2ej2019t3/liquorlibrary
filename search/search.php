@@ -17,7 +17,7 @@
         $searchProduct_arr = mysqli_fetch_all($searchProduct_res);
     }
     //search brand
-    $searchBrand_sql = "SELECT brandID, brandName, img FROM brand WHERE brandName LIKE '%$searchcontent%'";
+    $searchBrand_sql = "SELECT brandID, brandName, img FROM brand WHERE brandName LIKE '%$searchcontent%' LIMIT 6";
     $searchBrand_res = mysqli_query($connection, $searchBrand_sql);
     if ($searchProduct_res) {
         $searchBrand_arr = mysqli_fetch_all($searchBrand_res);
@@ -31,20 +31,18 @@
 
     if ($searchcontent != "") {
             $imgpath = 'images/';
-
+            $tagForCategory = 'Category: ';
+            $tagForBrand = 'Brand: ';
     // product result below
     
-    echo '<h6 class="dropdown-header">Product</h6>';
+    echo '<div>
+        <h6 class="dropdown-header">Product</h6>';
     
         if (count($searchProduct_arr) > 0) { 
             for ($a = 0; $a < count($searchProduct_arr); $a++) {
-                $tagForCategory = 'Category: ';
-                $tagForBrand = 'Brand: ';
                 // change form action to desired php file 
-                echo '
-                    <form method="post" action="productDetailPage.php">
-                    <input type="hidden" name="productid" value="'.$searchProduct_arr[$a][1].'">
-                    <button class="dropdown-item" href="#" type="submit">
+                // class="container-fluid" method="POST" action="productlist.php"
+                echo '<a class="dropdown-item" href="productlist.php?pid='.$searchProduct_arr[$a][1].'">
                         <div class="row">
                             <div id="posterarea" style="display:inline-block">
                                 <img src='.$imgpath.$searchProduct_arr[$a][4].' style = "width: 35px; height:auto">
@@ -57,9 +55,7 @@
                                 </p>
                             </div>
                         </div>
-                    </button>
-                    </form>
-                ';
+                    </a>';
             }
 
         } else {
@@ -82,7 +78,7 @@
                     <button class="dropdown-item" href="#" type="submit">
                         <div class="row">
                             <div id="posterarea" style="display:inline-block">
-                                <img src='.$imgpath.$searchBrand_arr[$b][2].' style = "width: 35px; height:auto">
+                               
                             </div>
                             <div id="titlearea" style="display:inline-block; padding-left:5px;">
                                 <p style="color:black"><b>'.$searchBrand_arr[$b][1].'</b></p>
@@ -96,9 +92,10 @@
         } else {
             echo '<a class="dropdown-item disabled" href="#" tabindex="-1">No result</a>';
         }
-
-        
+    echo '</div>';
     } else {
-        ob_clean();
+        // ob_clean();
         echo 0;
     }
+
+    

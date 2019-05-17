@@ -35,14 +35,7 @@ include_once ('connection.php');
                                 
                                          <ul>';
                                 for ($b = 0; $b < count($subCategory_arr); $b++) {
-                                                echo '<form  method="POST" action="categorysearch.php">';
-                                                echo '<input type="hidden" name="searchcategoryID" value="'.$subCategory_arr[$b][0].'"></input>
-                                                    <input type="hidden" name="searchcategoryName" value="'.$subCategory_arr[$b][1].'"></input>
-                                                ';
-
-                                                echo '<li class="contentsli"><button type="submit">'.$subCategory_arr[$b][1].'</button></li>';
-                                            
-                                                echo '</form>';
+                                    echo '<li class="contentsli"><a class="linkanchor" href="categorysearch.php?searchcategoryID='.$subCategory_arr[$b][0].'&searchcategoryName='.$subCategory_arr[$b][1].'">'.$subCategory_arr[$b][1].'</a></li>';
                                 };
                                          echo '</ul>
                                          
@@ -189,7 +182,7 @@ li{
     list-style-type: none;
     text-align: left;
 }
-.contentsli button{
+.linkanchor{
     background-color: transparent;
     border: none;
     text-align: left;
@@ -197,8 +190,8 @@ li{
     margin-left: 40%;
     font-weight: 600;
 }
-li button:hover{
-    color: #8B0000;
+.linkanchor:hover{
+    color: #8B0000!important;
 }
 button.pricetrigger{
     background-color: transparent;
@@ -219,6 +212,15 @@ button.pricetrigger:hover ,button.pricetrigger:focus{
       margin-left: 18px;
   }
 }
+
+  .linkanchor{
+    color: black!important;
+  }
+  .linkanchor:hover, .linkanchor:active{
+    color: black!important;
+    text-decoration: none;
+  }
+
 </style>
 
 

@@ -4,8 +4,8 @@
     include ('connection.php');
     // category search 
 
-    $_SESSION['searchcategoryID'] = $_POST['searchcategoryID'];
-    $_SESSION['searchcategoryName'] = $_POST['searchcategoryName'];
+    $_SESSION['searchcategoryID'] = $_GET['searchcategoryID'];
+    $_SESSION['searchcategoryName'] = $_GET['searchcategoryName'];
 
     $searchcontent = $_SESSION['searchcategoryID'];
     $category= $_SESSION['searchcategoryName'];

@@ -758,3 +758,10 @@ transform: translateX(-7px);
   }
   
   /* ------------------- */
+  .linkanchor{
+    color: black!important;
+  }
+  .linkanchor:hover, .linkanchor:active{
+    color: black!important;
+    text-decoration: none;
+  }

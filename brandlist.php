@@ -29,25 +29,7 @@
             xmlhttp.open("GET", "brandsearch.php?brandname="+bid, true);
             xmlhttp.send();
         }
-    //   $(document).ready(function(){
-    //     // Set trigger and container variables
-    //     var trigger = $('.namebutton'),
-    //         container = $('#content');
-           
-        // Fire on click
-        // trigger.on('click', function(){
-        //   // Set $this for re-use. Set target from data attribute
-        //   var $this = $(this),
-        //     target = $this.data('target');       
-            
-        //   // Load target page into container
-        //   container.load(target + '.php',{
-        //       'brandname':  $("#brandname").val()
-        //   });  
-        //   // Stop normal link behavior
-        //   return false;
-        // });
-    //   });
+
     </script>
  </head>
  <body>
@@ -84,6 +66,7 @@
                 </span>
                 <hr>
                 <!-- Brand List Loop -->
+                
                 <section>
                     <article id="content">
                     <div class="conatiner-fluid">
@@ -111,8 +94,9 @@
                             echo '<div class="row">';
                             for ($b = 0; $b <count($searchBrandlist_arr); $b++) {
                                 echo '<div class="col-md-4 col-lg-4">';
-                                        echo '<span><form style="margin: 0; padding: 0; display: inline;">
-                                            <input type="hidden" value="'.$searchBrandlist_arr[$b][1].'" name="brandname"></input>
+                                        echo '<span>
+                                        <form style="margin: 0; padding: 0; display: inline;">
+                                       
                                             <button class="namebutton" type="button" value="'.$searchBrandlist_arr[$b][1].'" onclick="selectBrand(this.value)">'.$searchBrandlist_arr[$b][1].'</button>
                                             </form>
                                             </span>';
@@ -127,9 +111,9 @@
                     } /* foreach loop ends */
                     ?>
                     </div> <!----container ends------>
-                 </article>
+                 </article> 
                 </section>
-
+               
             
                
         </div>
