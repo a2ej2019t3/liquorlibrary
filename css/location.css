@@ -104,11 +104,12 @@ opacity: 0!important;
 
 /* ------------------------------------ */
 #background{
-    background-image: url("../images/liquor12.jpg");
+    /* background-image: url("../images/liquor12.jpg"); */
     background-size: cover;
     position: absolute;
     background-repeat: repeat;
     background-attachment: scroll;
+    background-color: #75E4B3;
     top: 0;
     left: 0;
     z-index: -4;

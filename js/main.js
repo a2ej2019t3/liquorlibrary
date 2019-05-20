@@ -113,4 +113,4 @@ document.getElementById("individualOptionLable").onclick = function () {
 function getBusinessType (id) {
     document.getElementsByName("typeID")[0].value = id;
 }
-
+// images slides in specials

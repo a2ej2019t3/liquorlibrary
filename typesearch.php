@@ -1,6 +1,6 @@
 <section>
         <div class="container" style="padding-right: 45px;">
-     <center><h4 style="margin-top: 100px;"><hr>Bottle Shop</h4></center>
+     <center><h4 style="margin-top: 100px;><hr>Bottle Shop</h4></center>
      <?php
         echo '<div style="text-align:left;"><i class="far fa-compass" style="margin: 10px 10px;"></i><a style="color: black!important; text-decoration: none!important;" href="index.php">Home / </a> <span>Category / '.$category.' / '.$resultcount.'products</span></div>';
          

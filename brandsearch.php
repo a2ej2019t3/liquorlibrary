@@ -5,7 +5,7 @@
     //  Brand list 
     
         // $_SESSION['brandnamesearch'] = $_GET['brandname'];
-        $searchcontent = $_REQUEST['brandname'];
+        $searchcontent = $_GET['brandname'];
         // echo $_GET['brandname'];
 
     // $searchcontent = $_SESSION['brandnamesearch'];
@@ -26,10 +26,9 @@
 <div class="container" style="padding-right: 45px;">
                 
                 
-                <?php
-                include_once ("onsalelist.php");
-                ?>
-                
+<?php
+        include ('partials/saleproductprint.php');
+    ?>
                
         
         </div>

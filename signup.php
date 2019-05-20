@@ -46,7 +46,7 @@
 </section>
 <br><hr>
 <section id="form">
-<form method="post" action="process_signup.php">
+<form method="post" action="signInUp/process_signup.php">
     <div class="container" style="max-width: 900px; text-align:center;">
         <div class="row">
           <div class="fieldbox col-xs-12 col-sm-12 col-md-6 col-lg-6" > 
