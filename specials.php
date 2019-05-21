@@ -17,52 +17,15 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<?php
-    include_once ("partials/head.php");
-  ?>
- 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <?php
+    include_once ("partials/head.php");
+    ?>
+    <link rel="stylesheet" href="css/special.css">
     <title>Special Deals</title>
-<style>
-    /* 
-font-family: 'Lato', sans-serif;
-font-family: 'Shadows Into Light', cursive;
-font-family: 'Cinzel', serif;
-font-family: 'Roboto', sans-serif;
-font-family: 'Open Sans', sans-serif;
-font-family: 'Montserrat', sans-serif;
-font-family: 'Playfair Display', serif;
-*/
-    .carousel-caption{
-    text-align:center;
-    margin: 10px auto;
-    position:absolute;
-    top: 30px;
-    z-index:1000;
-    font-family: 'Cinzel', serif;
-    }
-    .carousel-caption .info{
-    font-size:3rem;
-    }
-    @media(max-width: 660px){
-        .carousel-caption .info{
-        font-size:1.5rem;
-        }
-    }
-    .carousel-caption .priceinfo{
-    font-size:2rem;
-    color: #8B0000;
-    }
-    @media(max-width: 660px){
-        .carousel-caption .info{
-        font-size:0.7rem;
-        color: #8B0000;
-        }
-    }
-</style>
 </head>
 <body style="height: 110%;">
 
@@ -92,12 +55,18 @@ font-family: 'Playfair Display', serif;
             echo '<div class="carousel-item">
                          <img class="d-block w-100" src='.$imgpath.$maindeal_arr[$b][5].' alt="slide">;
                          <div class="carousel-caption d-md-block d-lg-block">';
-                       echo '<p class="info">'.$maindeal_arr[$b][4].'</p>';                       
-                            if($maindeal_arr[$b][3]!=0){
-                                echo'<div class="specialprice">Only NZ$<span class="priceinfo">'.$maindeal_arr[$b][3].'</span></div>';
-                            }
-                            else{}                                                     
-                            
+                       echo '<p class="info">'.$maindeal_arr[$b][4].'</p>';  
+                       echo '<div>';
+                       if($maindeal_arr[$b][1]!=0){
+                        echo'<span class="specialprice">'.$maindeal_arr[$b][1].'</span>';
+                        }
+                        else{}
+                       
+                        if($maindeal_arr[$b][3]!=0){
+                            echo'<span class="specialprice">Only NZ$<span class="priceinfo">'.$maindeal_arr[$b][3].'</span></span>';
+                        }
+                        else{}                                                     
+                        echo '</div>';
               echo '</div>
                   </div>';
         };
@@ -111,9 +80,19 @@ font-family: 'Playfair Display', serif;
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a>
+  <div class="adminbuttons" id="adminbtsgroup">
+  <button type="button" class="customebts btn btn-primary">
+        Delete
+  </button>
+  <button type="button" class="customebts btn btn-primary" data-toggle="modal" data-target="#newmainspecialModal">
+        New special
+  </button>
+  </div>
 </div>
 <!-- image slides end -->
-
+<?php
+include ("partials/specialsModal.php");
+?>
 </section>
 <?php
     include_once ("partials/foot.php");
@@ -125,6 +104,7 @@ font-family: 'Playfair Display', serif;
         $(document).ready(function () {
         $('#carouselExampleIndicators').find('.carousel-item').first().addClass('active');
         });
+
   </script>
 </body>
 </html>
