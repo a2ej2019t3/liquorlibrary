@@ -1,7 +1,10 @@
 <!-- 0 = not login; 1 = item exist; 2 = item added -->
 <?php
 require_once('connection.php'); 
+include ('../database/DBsql.php');
 session_start();
+
+$DBsql = new sql();
 
 // 'i' comes from cart.js
 if (isset($_REQUEST['i']) && $_REQUEST['i']!=""){
@@ -32,22 +35,24 @@ if (isset($_REQUEST['i']) && $_REQUEST['i']!=""){
 		$user = $_SESSION['user'];
 		// get user's cart and chose product id
 		$cartID = $_SESSION['cartID'];
-		$addcartToDB_sql = "INSERT INTO `orderitems`(`itemID`, `orderID`, `quantity`, `totalprice`) 
-							VALUES ($productID,$cartID,1,[value-4])";
-	
-		if (empty($_SESSION['cartItems'])) {
-			$_SESSION['cartItems'] = $cartItems;
-		} else {
-			$existedProductID = array_keys($_SESSION['cartItems']);
-			if (in_array($productID,$existedProductID)) {
-				echo 1;
-			} else {
-				$_SESSION['cartItems'] = array_merge($_SESSION['cartItems'],$cartItems);
-				echo 2;
-			}
-		}
+		$addCartToDB_res = $DBsql->insert("orderitems","","");
 		
+		$addcartToDB_sql = "INSERT INTO `orderitems`(`itemID`, `orderID`, `quantity`, `totalprice`) 
+							VALUES (?,?,?,?)";
+	
+	if (empty($_SESSION['cartItems'])) {
+		$_SESSION['cartItems'] = $cartItems;
 	} else {
+		$existedProductID = array_keys($_SESSION['cartItems']);
+		if (in_array($productID,$existedProductID)) {
+			echo 1;
+		} else {
+			$_SESSION['cartItems'] = array_merge($_SESSION['cartItems'],$cartItems);
+			echo 2;
+		}
+	}
+	
+} else {
 			echo 0;
 			setcookie('cart', $cartItems, time() + 604800, '/');
 	}

@@ -53,7 +53,7 @@
                                 }
                                 for ($b = 0; $b < count($subCategory_arr); $b++) {
                                     echo '<div class="column">
-                                        <form  method="POST" action="categorysearch.php">';
+                                        <form method="POST" action="categorysearch.php">';
                                     echo '<input type="hidden" name="searchcategoryID" value="'.$subCategory_arr[$b][0].'"></input>
                                            <input type="hidden" name="searchcategoryName" value="'.$subCategory_arr[$b][1].'"></input>
                                     ';
