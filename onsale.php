@@ -3,7 +3,7 @@
     $_SESSION['location'] = 'productlist';
     include_once ('connection.php');
     // Sale product search 
-
+    // $_SESSION['ref'] = $SERVER['QUERYSTRING'];
  ?>
 
 

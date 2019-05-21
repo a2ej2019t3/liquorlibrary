@@ -22,7 +22,7 @@ include_once ('connection.php');
                                 // $cityName= $parentCategory_arr[$a][1];
                                 $identifier=$a;
                                 echo '
-                                <a href="#" class="dropdown-btn collapsible-header childlink" data-toggle="sidebar" data-target=".subcategorylist'. $identifier.'">'.$parentCategory_arr[$a][1].'<i class="fas fa-caret-down"></i></a>
+                                <a href="#" class="dropdown-btn collapsible-header childlink" data-toggle="sidebar" data-target=".subcategorylist'. $identifier.'">'.$parentCategory_arr[$a][1].' <i class="fa fa-angle-down"></i></a>
                                 ';
                                 $subCategory_sql="SELECT `categoryID`, `categoryName` FROM `category` WHERE `parentCategoryID` =".$parentCategory_arr[$a][0]."";
                                 $subCategory_res = mysqli_query($connection, $subCategory_sql);
@@ -140,6 +140,7 @@ body {
   display: block;
   border-top: 1px solid rgba(144, 180, 148, 1);
   text-align:center;
+  background-color: rgba(224, 184, 65, 1);
 }
 
 .childlink{
@@ -177,6 +178,9 @@ body {
 .maintype:focus{
   color: #064579;
   background-color: #eee!important;
+}
+.maintype:hover{
+  text-decoration: none;
 }
 li{
     list-style-type: none;

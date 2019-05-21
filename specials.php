@@ -53,7 +53,7 @@
         for($b = 0; $b <count($maindeal_arr); $b++){
 
             echo '<div class="carousel-item">
-                         <img class="d-block w-100" src='.$imgpath.$maindeal_arr[$b][5].' alt="slide">;
+                         <img class="d-block w-100" src='.$imgpath.$maindeal_arr[$b][5].' alt="slide" style="max-height:500px; ">;
                          <div class="carousel-caption d-md-block d-lg-block">';
                        echo '<p class="info">'.$maindeal_arr[$b][4].'</p>';  
                        echo '<div>';
@@ -63,8 +63,9 @@
                         else{}
                        
                         if($maindeal_arr[$b][3]!=0){
-                            echo'<span class="specialprice">Only NZ$<span class="priceinfo">'.$maindeal_arr[$b][3].'</span></span>';
+                            echo'<span class="specialprice" style="font-size: 1.5rem;">Only NZ$<span class="priceinfo"style="font-size: 4rem;">'.$maindeal_arr[$b][3].'</span></span>';
                         }
+                        
                         else{}                                                     
                         echo '</div>';
               echo '</div>
@@ -94,6 +95,16 @@
 include ("partials/specialsModal.php");
 ?>
 </section>
+
+<!-- Special product lists -------------------------------------------------------------------------->
+<section>
+<p class="contactms" style="font-size: 4.4rem;">Grab A Deal</p>
+</section>
+<section>
+  <?php
+    include ('specialupload/speciallist.php');
+  ?>
+<section>
 <?php
     include_once ("partials/foot.php");
   ?>  
