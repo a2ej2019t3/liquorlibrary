@@ -301,7 +301,7 @@ ul.dropdown-menu {
   max-height: 360px!important;
 } */
 #modalcard{
-height: 300px;
+height: 250px!important;
 }
 .column {
   float: left;
@@ -765,3 +765,12 @@ transform: translateX(-7px);
     color: black!important;
     text-decoration: none;
   }
+  /* -------------------------------------------------------- */
+    /* ---------index special------------------------- */
+  
+  .headingforspecial{
+    font-size: 3rem;
+    font-family: 'Playfair Display', serif;
+    margin: 10px auto;
+    font-weight: 600;
+  }  

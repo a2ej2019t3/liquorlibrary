@@ -14,8 +14,8 @@
                 <div class="modal-dialog modal-center style="max-width: 700px!important; max-height: 360px!important;">
                     <div class="container">
                         <div class="row">
-                        <div class="modal-content">
-                            <div class="modal-body" id="modalcard">';
+                        <div class="modal-content" style="width:400px;">
+                            <div class="modal-body" id="modalcard" style="padding:0; width: 400px;">';
          echo                  '<div class="tab col-3">';
                 
                         if (count($parentCategory_arr) != 0) { 
@@ -61,14 +61,15 @@
                             echo '</div>';
 
          echo                  
-                             '</div>';  
+                             '</div>
+                             ';  
                             } 
-                
+                            echo ' <button type="button" class="close" data-dismiss="modal" id="tabclose" style="position: absolute; bottom: 19px; right: 30px;"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>';
                         } else {
                         
                         };
             
-                echo '   <br>  <button type="button" class="close" data-dismiss="modal" id="tabclose"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                echo '   <br>
                         </div>  
                    </div>     
                 </div>
