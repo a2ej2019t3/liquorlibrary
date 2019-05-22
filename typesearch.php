@@ -1,16 +1,27 @@
+<!-- 
+p.productID, 
+p.img, 
+p.productName, 
+p.discountprice, 
+p.price,
+p.categoryID, 
+b.brandName, 
+c.categoryName,
+c.categoryID  -->
 <section>
-        <div class="container" style="padding-right: 45px;">
-     <center><h4 style="margin-top: 100px;><hr>Bottle Shop</h4></center>
-     <?php
+    <div class="container" style="padding-right: 45px;">
+    <center><h4 style="margin-top: 100px;"><hr>Bottle Shop</h4></center>
+    <?php
         echo '<div style="text-align:left;"><i class="far fa-compass" style="margin: 10px 10px;"></i><a style="color: black!important; text-decoration: none!important;" href="index.php">Home / </a> <span>Category / '.$category.' / '.$resultcount.'products</span></div>';
          
-          if ($searchcontent != "") {
+        if ($searchcontent != "") {
             $imgpath = 'images/';
     
             if (count($searchCategory_arr) != 0) { 
-                echo '<div class="productcontent">
-                <div class="product-grid product-grid--flexbox">
-                    <div class="product-grid__wrapper">';
+                echo '
+                <div class="productcontent">
+                    <div class="product-grid product-grid--flexbox">
+                        <div class="product-grid__wrapper">';
 
                 for ($b = 0; $b <count($searchCategory_arr); $b++) {
                     echo '
@@ -41,17 +52,20 @@
                         </div>';
                 
                 }
-
-             echo '</div>
-                </div>';
+                echo '
+                                </div>
+                            </div>';
             } else {
-              
+                echo '
+                        </div>
+                    </div>
+                </div>
+                ';
             }
-    
         } else {
             ob_clean();
             echo 0;
         }
      ?>
         </div>
-     </section>
+    </section>

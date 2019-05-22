@@ -43,18 +43,18 @@ function openCity(id) {
     var cityName = document.getElementById(id).value;
     tabcontent = document.getElementsByClassName("tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
-      tabcontent[i].style.display = "none";
+        tabcontent[i].style.display = "none";
     }
     tablinks = document.getElementsByClassName("tablinks");
     for (i = 0; i < tablinks.length; i++) {
-      tablinks[i].className = tablinks[i].className.replace(" active", "");
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
     document.getElementById(cityName).style.display = "block";
     evt.currentTarget.className += " active";
-  }
+}
   
   // Get the element with id="defaultOpen" and click on it
-        document.getElementById("buttonIndex_0").click();
+    document.getElementById("buttonIndex_0").click();
 
 
 
@@ -64,31 +64,31 @@ var myIndex = 0;
 carousel();
 
 function carousel() {
-  var i;
-  var x = document.getElementsByClassName("mySlides");
-  for (i = 0; i < x.length; i++) {
-    x[i].style.display = "none";  
-  }
-  myIndex++;
-  if (myIndex > x.length) {myIndex = 1}    
-  x[myIndex-1].style.display = "block";  
-  setTimeout(carousel, 3000); // Change image every 3 seconds
+    var i;
+    var x = document.getElementsByClassName("mySlides");
+    for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";  
+    }
+    myIndex++;
+    if (myIndex > x.length) {myIndex = 1}    
+    x[myIndex-1].style.display = "block";  
+    setTimeout(carousel, 3000); // Change image every 3 seconds
 }
 
 // find us js
 function openLocation() {
     document.getElementById("myOverlay").style.display = "block";
-  }
+}
   
   function closeLocation() {
-    document.getElementById("myOverlay").style.display = "none";
+      document.getElementById("myOverlay").style.display = "none";
   }
   // page transition
   window.transitionToPage = function(href) {
-    document.querySelector('body').style.opacity = 0
-    setTimeout(function() { 
-        window.location.href = href
-    }, 500)
+      document.querySelector('body').style.opacity = 0
+      setTimeout(function() { 
+          window.location.href = href
+      }, 500)
 }
 
 document.addEventListener('DOMContentLoaded', function(event) {
@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 $( document ).ready(function() {
     $('body').show();
- });
+});
 
 
 // show register from for different user type
@@ -113,4 +113,32 @@ document.getElementById("individualOptionLable").onclick = function () {
 function getBusinessType (id) {
     document.getElementsByName("typeID")[0].value = id;
 }
-// images slides in specials
+
+// shopping cart AJAX
+document.getElementById("addToCart").onclick = function () {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(xmlhttp);
+            // <!-- 0 = not login; 1 = item exist; 2 = item added -->
+            if(xmlhttp.responseText == 0){
+              document.getElementById("myModal").modal('show');
+            } else if (xmlhttp.responseText == 1) {
+              document.getElementById("cart").modal('show');
+            } else if (xmlhttp.responseText == 2) {
+              var getItems = new XMLHttpRequest();
+              getItems.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                  console.log(getItems);
+                  
+                }
+              };
+              getItems.open("GET", "./Cart/addToCart.php", true);
+              getItems.send();
+            }
+        }
+    };
+    xmlhttp.open("GET", "./Cart/addToCart.php", true);
+    // xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send();
+}
