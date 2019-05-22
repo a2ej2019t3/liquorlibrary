@@ -1,5 +1,7 @@
 <?php
-    session_start();
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
     include 'DBconn.php';
 
     class sql {
@@ -56,7 +58,7 @@
                     if ($res->num_rows > 0) {
                         while ($arr = $res->fetch_assoc()) {
                             $row = $arr;
-                            $data[] = $row;
+                            $data[$row['productID']] = $row;
                         }
                         $_SESSION['cartItemNum'] = count($data);
                         return $data;

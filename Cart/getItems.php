@@ -1,6 +1,5 @@
 <?php
-include ('../connection.php');
-include ('../database/DBsql.php');
+include ('./database/DBsql.php');
 
 $DBsql = new sql();
 
