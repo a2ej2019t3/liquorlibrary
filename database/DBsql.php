@@ -41,8 +41,8 @@
         }
 
 // Useable functions
-        //select cart items
-        public function getCartItems($cartID) {
+        //select cart items and info
+        public function getCartItemsInfo($cartID) {
             if ($cartID != null) {
                 $sql = "";
                 $allProduct = $this->getProductInfo();
@@ -59,6 +59,32 @@
                         while ($arr = $res->fetch_assoc()) {
                             $row = $arr;
                             $data[$row['productID']] = $row;
+                        }
+                        $_SESSION['cartItemNum'] = count($data);
+                        return $data;
+                    } else {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        // select cart items without info
+        public function getCartItems($cartID) {
+            if ($cartID != null) {
+                $sql = "";
+                $consArr = array('orderID' => $cartID);
+                $sql .= $this->selectSql('orderitems', $consArr);
+
+                $res = $this->connection->query($sql);
+                if (!$res) {
+                    trigger_error('Invalid query: ' . $this->connection->error);
+                    return $sql;
+                } else {
+                    if ($res->num_rows > 0) {
+                        while ($arr = $res->fetch_assoc()) {
+                            $row = $arr;
+                            $data[$row['itemID']] = $row;
                         }
                         $_SESSION['cartItemNum'] = count($data);
                         return $data;
@@ -109,8 +135,7 @@
                     $cons = trim($cons, " AND ");
                     $sql .= $cons;
                 } else {
-                    $cons = 1;
-                    $sql .= $cons;
+                    $sql = trim($sql, " WHERE ");
                 }
                 $res = $this->connection->query($sql);
                 if ($res) {

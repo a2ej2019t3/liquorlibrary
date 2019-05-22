@@ -11,11 +11,14 @@ if (isset($_SESSION['user'])) {
     
     //if user has status 0 cart
     if ($getCart_arr) {
+        // print_r($getCart_arr);
         // cartID
         $_SESSION['cartID'] = $getCart_arr['orderID'];
         $cartID = $_SESSION['cartID'];
         $getItems_arr = $DBsql->getCartItems($cartID);
-        $_SESSION['cartItems'] = $getItems_arr;
+        if ($getItems_arr !== false) {
+            $_SESSION['cartItems'] = $getItems_arr;
+        }
     
     // if user doesn't have status 0 cart
     } else {
@@ -27,10 +30,12 @@ if (isset($_SESSION['user'])) {
 
 // if user didn't logged in
 } else {
+    $cookieName = 'tempCart';
     if (isset($_COOKIE[$cookieName])) {
         $cartArr = $_COOKIE[$cookieName];
         $_SESSION['cartItems'] = $cartArr;
     } else {
+        $_SESSION['cartItems'] = "";
         echo '<script>alert("not logged in and no cookie set.");</script>';
     }
 }

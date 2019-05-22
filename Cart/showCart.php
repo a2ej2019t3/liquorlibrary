@@ -8,6 +8,7 @@ $DBsql = new sql;
 // $getItems_arr = $DBsql->getCartItems($cartID);
 if (isset($_SESSION['cartItems'])) {
     $getItems_arr = $_SESSION["cartItems"];
+    print_r($getItems_arr);
     $tagForCategory = 'Category: ';
     $tagForBrand = 'Brand: ';
     $imgpath = 'images/';

@@ -17,6 +17,12 @@ function addToCart (id) {
         xmlhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 console.log(xmlhttp);
+                if (xmlhttp.responseText == 1) {
+                    alert('The product is already in your cart.');
+                    $('#cart').modal();
+                } else {
+                    showCart();
+                }
             }
         };
     xmlhttp.open("GET", "./Cart/addToCart.php?i="+id, true);
