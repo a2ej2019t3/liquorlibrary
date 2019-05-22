@@ -1,7 +1,8 @@
 <div class="sticky-container">
-    <ul class="sticky" >
-            <button class="cartbutton" data-toggle="modal" data-target="#cart">
+    <ul id="stickyCartBt" class="sticky" >
+            <button id="stickyCart" class="cartbutton" data-toggle="modal" data-target="#cart">
             <div><i class="fas fa-dolly"></i></div>
+            
              </button>
     </ul>
 </div>
@@ -16,9 +17,10 @@
         </button>
       </div>
       <div class="modal-body">
-        <table class="show-cart table">
-          
-        </table>
+        <!-- class="show-cart table" -->
+        <div id="showItems" class="container">
+            
+        </div>
         <div>Total price: $<span class="total-cart"></span></div>
       </div>
       <div class="modal-footer">
@@ -83,7 +85,10 @@
     color: white!important;
 }
 
-ul.sticky:hover{
+.sticky:hover{
+    margin-left:-20px;
+}
+ul.sticky:hover > span{
     margin-left:-20px;
 }
 
@@ -96,4 +101,20 @@ ul.sticky:hover{
     border: 1px solid #8B0000;
     color: #8B0000;
 }
+#stickyCart span {
+    font-size: 8px;
+    line-height: 14px;
+    background: rgb(241, 208, 22);
+    padding: 2px;
+    border: 1px solid #fff;
+    border-radius: 25%;
+    position: absolute;
+    top: -1px;
+    left: 13px;
+    color: #fff;
+    width: 14px;
+    height: 13px;
+    text-align: center;
+    }
+
     </style>

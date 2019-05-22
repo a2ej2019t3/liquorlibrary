@@ -69,10 +69,10 @@ create table orders (
     
 
 create table orderitems (
-	itemID int(20) not null primary key auto_increment,
+	itemID int(20) not null primary key,
     orderID int(20) not null,
     quantity int(20) not null,
-    price double 
+    totalprice double 
     );
 
 create table backorders (
@@ -145,6 +145,7 @@ add foreign key (itemID) references product(productID);
 
 alter table orderitems
 add foreign key (orderID) references orders(orderID);
+
 ###################################################################
 
 alter table backorders 
