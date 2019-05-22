@@ -14,7 +14,7 @@
 // unusable functions
 
         //select all product info
-        protected function getProductInfo() {
+        public function getProductInfo() {
             $sql = "(SELECT product.productID, product.productName, product.price, product.discountprice, product.img, brand.brandName, category.categoryName FROM product 
             LEFT JOIN brand ON product.brandID = brand.brandID
             LEFT JOIN category ON product.categoryID = category.categoryID) AS allproduct ";

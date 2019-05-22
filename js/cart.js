@@ -11,13 +11,13 @@ window.onload = function () {
     cl.send();
 }
 
-function addToCart (id) {
+function addToCart () {
     var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 console.log(xmlhttp);
             }
         };
-    xmlhttp.open("GET", "./Cart/addToCart.php?i="+id, true);
+    xmlhttp.open("GET", "./Cart/showCart.php", true);
     xmlhttp.send();
 }

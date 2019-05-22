@@ -34,6 +34,9 @@
 <title>Product_listbyCategory</title>
   </head>
   <body>
+    <?php
+      include_once ('Cart/getItems.php');
+    ?>
     <section>
         <?php
           include_once ("partials/header.php");
