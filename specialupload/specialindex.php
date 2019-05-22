@@ -14,7 +14,7 @@
         $searchSale_arr = mysqli_fetch_all($searchSale_res);
         $resultcount=count($searchSale_arr);
     } else {
-        alert("result empty");
+        // alert("result empty");
     }
  ?>
 <div class="row">
