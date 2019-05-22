@@ -8,6 +8,8 @@ if (session_status() == PHP_SESSION_NONE) {
 $DBsql = new sql();
 if (isset($_SESSION['cartID'])) {
 	$cartID = $_SESSION['cartID'];
+} else {
+	$cartID = "";
 }
 // 'i' comes from cart.js
 if (isset($_REQUEST['i']) && $_REQUEST['i']!=""){
