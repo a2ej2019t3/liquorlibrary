@@ -8,12 +8,11 @@ $DBsql = new sql;
 // $getItems_arr = $DBsql->getCartItems($cartID);
 if (isset($_SESSION['cartItems'])) {
     $getItems_arr = $_SESSION['cartItems'];
-    $itemsArr = count($getItems_arr);
     // print_r($getItems_arr);
     $tagForCategory = 'Category: ';
     $tagForBrand = 'Brand: ';
     $imgpath = 'images/';
-    if ($itemsArr > 0) {
+    if ($getItems_arr != "") {
         foreach ($getItems_arr as $key => $value) {
             $idArr = array('productID' => $key);
             $itemInfo_arr = $DBsql->select($DBsql->getProductInfo(), $idArr);
