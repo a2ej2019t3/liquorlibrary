@@ -44,22 +44,14 @@ if (isset($_REQUEST['i']) && $_REQUEST['i']!=""){
 		if (in_array($productID,$existedProductID)) {
 			echo 1;
 		} else {
-			$_SESSION['cartItems'] = array_merge($_SESSION['cartItems'],$cartItems);
+			$_SESSION['cartItems'] = array_replace($_SESSION['cartItems'],$cartItems);
 			// print_r($_SESSION['cartItems']);
 			echo 2;
 			// check if user login
 			// logged in (we need productid cartid & quantity in this case)
 			if (isset($_SESSION['user'])) {
 				$user = $_SESSION['user'];
-				// get user's cart and chosen product id
-				$cartID = $_SESSION['cartID'];
-					foreach ($_SESSION['cartItems'] as $key => $value) {
-						$itemArr = array('itemID' => $key, 
-										 'orderID' => $cartID,
-										 'quantity' => 1,
-										 'totalprice' => "");
-						$addCartToDB_res = $DBsql->insert("orderitems","",$itemArr);
-					}
+						$addCartToDB_res = $DBsql->insert("orderitems","",$cartItems[$productID]);
 				echo 3;
 		
 			// not logged in (we dont need cartID in this case)

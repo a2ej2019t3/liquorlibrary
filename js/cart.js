@@ -17,6 +17,7 @@ function addToCart (id) {
         xmlhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 console.log(xmlhttp);
+                alert(xmlhttp.responseText);
                 if (xmlhttp.responseText == 1) {
                     alert('The product is already in your cart.');
                     $('#cart').modal();

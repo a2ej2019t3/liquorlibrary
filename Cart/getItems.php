@@ -18,6 +18,7 @@ if (isset($_SESSION['user'])) {
         $getItems_arr = $DBsql->getCartItems($cartID);
         if ($getItems_arr !== false) {
             $_SESSION['cartItems'] = $getItems_arr;
+            print_r($_SESSION['cartItems']); #check the format of data got from DBsql.php
         }
     
     // if user doesn't have status 0 cart
