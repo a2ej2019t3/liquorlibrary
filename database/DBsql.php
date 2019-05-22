@@ -159,7 +159,7 @@
                 $whID = 0;
                 $date = date('Y-m-d H:i:s');
                 $status = 0;
-                $sql->bind_param("ssss", $userID, $whID, $date, 0);
+                $sql->bind_param("ssss", $userID, $whID, $date, $status);
                 if ($sql->execute()) {
                     $last_id = $this->connection->insert_id;
                     return $last_id;
