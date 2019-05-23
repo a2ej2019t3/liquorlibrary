@@ -105,7 +105,7 @@
                     return $sql;
                 } else {
                     if ($res->num_rows > 0) {
-                        $arr[] = $res->fetch_assoc();
+                        $arr = $res->fetch_assoc();
                         return $arr;
                     }
                 }
@@ -154,11 +154,7 @@
                 }
                 $cols = trim($cols, ",");
                 $vals = trim($vals, ", ");
-
-                $selectExist = $this->select($table, $vals);
-
-
-                $sql .= $cols.") VALUES (".$vals.") ";
+                $sql .= $cols.") VALUES (".$vals.") ON DUPLICATE KEY UPDATE quantity = quantity + 1";
                 $res = $this->connection->query($sql);
                 if ($res) {
                     return true;
@@ -190,7 +186,6 @@
                 }
             }
         }
-
 
         // insert into cart
 
