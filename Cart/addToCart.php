@@ -14,8 +14,6 @@ if (isset($_SESSION['cartID'])) {
 // 'i' comes from cart.js
 if (isset($_REQUEST['i']) && $_REQUEST['i']!=""){
 	$productID = $_REQUEST['i'];
-	// $itemArr = $DBsql->select($DBsql->getProductInfo(),array('productID' => $productID));
-	// print_r($itemArr);
 
 	$cartItems = array(
 		$productID => array(
@@ -35,9 +33,8 @@ if (isset($_REQUEST['i']) && $_REQUEST['i']!=""){
 			// 'status'=>0
 			)
 	);
-	// print_r($cartItems);
 
-	// merge cartItems array into session['cartItems'] to update cart session
+// merge cartItems array into session['cartItems'] to update cart session
 	if (empty($_SESSION['cartItems'])) {
 		$_SESSION['cartItems'] = $cartItems;
 	} else {

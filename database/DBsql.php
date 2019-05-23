@@ -79,7 +79,7 @@
                 $res = $this->connection->query($sql);
                 if (!$res) {
                     trigger_error('Invalid query: ' . $this->connection->error);
-                    return $sql;
+                    return false;
                 } else {
                     if ($res->num_rows > 0) {
                         while ($arr = $res->fetch_assoc()) {
@@ -114,33 +114,6 @@
             }
         }
 
-        // common insert
-        public function insert ($table, $valArr) {
-            if ($table != null && $valArr != null) {
-                $sql = "INSERT INTO $table (";
-                $cols = "";
-                $vals = "";
-                $cons = "";
-                foreach ($valArr as $key => $value) {
-                    $cols .= $key.",";
-                    $vals .= "'".$value."', ";
-                }
-                $cols = trim($cols, ",");
-                $vals = trim($vals, ", ");
-                $sql .= $cols.") VALUES (".$vals.")";
-                $res = $this->connection->query($sql);
-                if ($res) {
-                    return true;
-                } else {
-                    trigger_error("error: " . $this->connection->error);
-                    return false;
-                }
-            } else {
-                trigger_error("empty parameter");
-                return false;
-            }
-        }
-
         // insert into orderitems
         public function insertItems ($table, $valArr) {
             if ($table != null && $valArr != null) {
@@ -154,7 +127,7 @@
                 }
                 $cols = trim($cols, ",");
                 $vals = trim($vals, ", ");
-                $sql .= $cols.") VALUES (".$vals.") ON DUPLICATE KEY UPDATE quantity = quantity + 1";
+                $sql .= $cols.") VALUES (".$vals.") ";
                 $res = $this->connection->query($sql);
                 if ($res) {
                     return true;
@@ -183,6 +156,19 @@
                     return $last_id;
                 } else {
                     trigger_error('Invalid query: ' . $this->connection->error);
+                }
+            }
+        }
+
+        public function updateCart ($itemID, $userID, $quantity) {
+            if ($itemID != null && $userID != null && $quantity != null) {
+                $newvals = "'quantity' = $quantity ";
+                $cons = "'userID' = ".$_SESSION['user']['userID'];
+                $sql = "UPDATE `orderitems` SET $newvals WHERE $cons";
+                if ($this->connection->query($sql)) {
+                    return true;
+                } else {
+                    return false;
                 }
             }
         }

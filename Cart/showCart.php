@@ -12,7 +12,7 @@ if (isset($_SESSION['cartItems'])) {
     $tagForCategory = 'Category: ';
     $tagForBrand = 'Brand: ';
     $imgpath = 'images/';
-    if ($getItems_arr != "") {
+    if ($getItems_arr != array()) {
         foreach ($getItems_arr as $key => $value) {
             $idArr = array('productID' => $key);
             $itemInfo_arr = $DBsql->select($DBsql->getProductInfo(), $idArr);
