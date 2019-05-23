@@ -26,7 +26,7 @@
 </section>
 <div class="row">
     <div class="col-sm-6 col-md-6 col-6">
-        <div class="container">
+        <div class="container" >
            <img src="images/banner5.jpg" alt="indeximg" style="width:100%; height:100%; padding:0;"> 
            <div class="overlay"></div>
            <div class="hovermsg">
