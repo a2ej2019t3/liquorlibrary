@@ -19,8 +19,14 @@
  ?>
 <div class="row">
     <div class="col-sm-6 col-md-6 col-6">
-        <div class="imgwrap">
-           <img src="images/banner5.jpg" alt="indeximg" style="width:100%; height:100%;"> 
+        <div class="container">
+           <img src="images/banner5.jpg" alt="indeximg" style="width:100%; height:100%; padding:0;"> 
+           <div class="overlay"></div>
+           <div class="hovermsg">
+             <div class="dealheading">Exclusive special deal</div><br>
+             <button class="Gocheck" onClick="window.location='specials.php';">FIND MORE</button>
+           </div>
+
         </div>
     </div>
     <div class="col-sm-6 col-md-6 col-6">
@@ -163,6 +169,70 @@ font-family: 'Playfair Display', serif;
     color: black!important;
     text-decoration: none!important;
 }
+.container {
+  position: relative;
+  /* margin-top: 50px;
+  width: 500px;
+  height: 300px; */
+  padding:0;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0);
+  transition: background 0.5s ease;
+  padding:0;
+}
+.container:hover .overlay {
+  display: block;
+  background: rgba(0, 0, 0, .6);
+  
+}
+.Gocheck {
+  width: 150px;
+  font-size:1.5rem;
+  height:100%;
+  border: 1px solid white;
+  color: white;
+  background-color: transparent;
+  transition: opacity .35s ease;
+  font-family: 'Roboto', sans-serif;
+}
+.Gocheck:hover{
+    background-color: white;
+    color: rgba(48, 43, 41,1);
+}
+.dealheading{
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  text-align:center;
+  font-size:2rem;
+}
+.container:hover .hovermsg {
+  opacity: 1;
+}
+.hovermsg{
+  position: absolute;
+  width:100%;
+  /* left:45%; */
+  top: 45%;
+  text-align: center;
+  opacity: 0;
+  transition: opacity .35s ease;
+}
+/* 
+.Gocheck a {
+  width: 200px;
+  padding: 12px 48px;
+  text-align: center;
+  color: white;
+  border: solid 2px white;
+  z-index: 1;
+} */
   </style>
 <?php
     include_once ("partials/foot.php");

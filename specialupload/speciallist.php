@@ -34,15 +34,15 @@
                     echo '
                         
                          
-                        <div class="productcard col-sm-12 col-md-12 col-lg-6" style="text-align: center; font-family: Montserrat, sans-serif;">
-                        <div class="overlay">        
+                        <div class="col-sm-12 col-md-12 col-lg-6">
+                        <div class="overlaycontainer">        
                         <img class="backgroundimg" src="images/productcardbackground.png" style="height: 300px; width:100%; border-radius: 25px;">
                         </div> 
                         <span class="brandlog">Liquor Library</span> <span class="industrylog">THE NEW INDUSTRY STANDARD</span>
                                 
                                 <div class="specialimgwrapper" style="">			
                                      <img class="specialimg" src='.$imgpath.$searchSale_arr[$b][5].' style="min-width: 165px; height: 234px;margin: 0 auto;">
-                                 
+                                     <div class="overlay"></div>
                                         <div class="buttongroup">
                                         
                                             <button type="button" class="btn btn-secondary btn-sm" id="checkbutton">
@@ -88,6 +88,11 @@ font-family: 'Kaushan Script', cursive;
 .productcard{
     margin-top: 15px;
     margin-bottom: 75px;
+    
+}
+.specialimgwrapper{
+    padding:0;
+    margin:0;
 }
 .specialimg{
     position: absolute;
@@ -178,5 +183,29 @@ font-family: 'Kaushan Script', cursive;
 .specialimgwrapper:hover > .buttongroup{
     display: block;
     z-index: 1000;
+}
+.container{
+    padding:0;
+    border-radius: 25px;
+    
+}
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* margin:auto;
+  padding:auto; */
+  width: 100%;
+  height: 100%;
+  display:inline-block;
+  background: rgba(0, 0, 0, 0);
+  transition: background 0.5s ease;
+  border-radius: 25px;
+  
+}
+.specialimgwrapper:hover > .overlay{
+  display: block;
+  background: rgba(0, 0, 0, .5);
+  
 }
 </style>
