@@ -54,7 +54,8 @@
                     ?>
                 </div>
 
-                <div class="specialcollection"style="margin-top: 80px;"><span>Grab a everyday selection just for you!</span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi voluptatum illum praesentium architecto quas corrupti suscipit quibusdam officiis odio, dolorem numquam dolores quasi sunt a earum! Non voluptates et ipsa?lorem. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perspiciatis eligendi aut tempore praesentium dicta! Vel, pariatur id architecto est expedita porro alias quo amet sed incidunt nulla accusamus odio iste!Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi voluptatum illum praesentium architecto quas corrupti suscipit quibusdam officiis odio, dolorem numquam dolores quasi sunt a earum! Non voluptates et ipsa?lorem. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perspiciatis eligendi aut tempore praesentium dicta! Vel, pariatur id architecto est expedita porro alias quo amet sed incidunt nulla accusamus odio iste!Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi voluptatum illum praesentium architecto quas corrupti suscipit quibusdam officiis odio, dolorem numquam dolores quasi sunt a earum!t consectetur adipisicing elit. Perspiciatis eligendi aut tempore praesentium dicta! Vel, pariatur id architecto est expedita poo iste!</div>
+                <div class="specialcollection"style="margin-top: 80px;"><span>Grab a everyday selection just for you!</span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi voluptatum illum praesentium architecto quas corrupti suscipit quibusdam officiis odio, dolorem numquam dolores quasi sunt a earum! Non voluptates et ipsa?lorem. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perspiciatis eligendi aut tempore praesentium dicta! Vel, pariatur id architecto est expedita porro alias quo amet sed incidunt nulla accusamus odio iste!Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi voluptatum illum praesentium architecto quas corrupti suscipit quibusdam officiis odio, dolorem numquam dolores quasi sunt a earum! Non voluptates et ipsa?lorem. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perspiciatis eligendi aut tempore praesentium dicta! Vel, pariatur id architecto est expedita porro alias quo amet sed incidunt nulla accusamus odio iste!Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi voluptatum illum praesentium architecto quas corrupti suscipit quibusdam officiis odio, dolorem numquam dolores quasi sunt a earum!t consectetur adipisicing elit. Perspiciatis eligendi aut tempore praesentium dicta! Vel, pariatur id architecto est expedita po
+                o iste!</div>
          </div>
     </div>
 </section>
@@ -77,7 +78,7 @@
         });
 
         $(document).ready(function() {
-  jQuery.fn.carousel.Constructor.TRANSITION_DURATION = 2000  // 2 seconds
+  jQuery.fn.carousel.Constructor.TRANSITION_DURATION = 1000  // 2 seconds
 });
   </script>
 <style>
