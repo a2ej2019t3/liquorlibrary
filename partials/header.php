@@ -45,8 +45,9 @@
                     <li class="col"><a class="<?php echo $className; ?>" id="ourdrinks" data-toggle="modal" data-target="#subnav" href="#" style="color: white; font-size: 1rem; font-family: 'Roboto', sans-serif;">Our Drinks</a></li> 
                     <li class="col"><a class="<?php echo $className; ?>" href="#" style="color: white; font-size: 1rem; font-family: 'Roboto', sans-serif;">Specials</a></li> 
                     <li class="col"><a class="<?php echo $className; ?>" href="#" style="color: white; font-size: 1rem; font-family: 'Roboto', sans-serif;">Cart</a></li>
-                    <li class="col"><a class="<?php echo $className; ?>" href="#" style="color: white; font-size: 1rem; font-family: 'Roboto', sans-serif;">My orders</a></li>
+                    <li class="col"><a class="<?php echo $className; ?>" href="customerorder.php" style="color: white; font-size: 1rem; font-family: 'Roboto', sans-serif;">My orders</a></li>
                     <li class="col"><a class="<?php echo $className; ?>" href="contact.php" style="color: white; font-size: 1rem; font-family: 'Roboto', sans-serif;">Contact</a></li> 
+                    <li class="col"><a class="<?php echo $className; ?>" href="admin_area/login.php" style="color: white; font-size: 1rem; font-family: 'Roboto', sans-serif;">Admin</a></li> 
                     <li class="col"> 
                         <!-- modal button -->
                         <button type="button" class="btn btn-primary btn-lg pull-right" style="background-color: transparent; border:none;" data-toggle="modal" data-target="#modal2">
