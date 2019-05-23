@@ -14,11 +14,13 @@
                                         <!-- dropdown menu end --> 
                                     </div>  
                                 </div>
-                                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                    <button id="submit" type="submit" class="btn btn-primary" style="width:100%; height:60px; background-color: rgba(48, 43, 41,1)!important; ">Submit</button>
-                                </div>                                          
+                                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                        <button id="submit" type="button" class="btn btn-primary" style="width:100%; height:60px; background-color: rgba(48, 43, 41,1)!important; ">Submit</button>
+                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+    
+                                    </div>                                          
                             </div>
-                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                         </form> 
                     </div>  
                 </div>

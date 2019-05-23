@@ -23,7 +23,15 @@
         </div>
     </section>
     <br><br><br><br>
-    <section id="aboutus">
+    <section id="specialindex" style="margin-top:150px;">
+      <div class="container">
+            <?php
+              include ('specialupload/specialindex.php');
+            ?>
+      </div>
+    </section>
+
+    <section id="aboutus" style="margin-top:200px;">
       <div class="container-fluid">
             <div class="container-fluid">
               <div class="aboutmain container-fluid"><p class="fourth-text">DEDICATED FOR 15 YEARS</p></div>
@@ -39,7 +47,7 @@
   <?php
     include_once ("partials/foot.php");
   ?>
-  <script type="text/javascript" src="js/subcategory.js"></script>
+  <script type="text/javascript" src="js/sub.js"></script>
   <script type="text/javascript" src="js/search.js"></script>
   <script type="text/javascript" src="js/main.js"></script>
 

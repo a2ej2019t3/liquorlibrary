@@ -8,11 +8,11 @@ document.getElementById("searchbox").onkeyup = function () {
                     console.log(xmlhttp);
                     var res = xmlhttp.response;
                     var resText = xmlhttp.responseText;
-                    document.getElementById("dropdownarea").innerHTML = res;
+                    document.getElementById("dropdownarea").innerHTML = resText;
                 if (resText == 0) {
                     document.getElementById("dropdownarea").style.display = "none";
                 } else {
-                    document.getElementById("dropdownarea").style.display = "block";
+                    document.getElementById("dropdownarea").style.display = "inline-block";
                 }
             }
         };
@@ -56,3 +56,38 @@ document.getElementById("logoutButton").onclick = function () {
     // xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.send();
 }
+
+$(document).ready(function(){
+    // Set trigger and container variables
+    var trigger = $('.sortselect');        
+    // Fire on click
+    trigger.on('click', function(){
+      // Set $this for re-use. Set target from data attribute
+        var $this = $(this),
+        val = $this.find(':selected').val();       
+        // var val = document.getElementById("pricelow").value;
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                console.log(xmlhttp);
+                if(xmlhttp.responseText == 1){
+                    // document.location.reload(true);
+                   
+                }
+            }
+        };
+        xmlhttp.open("GET", "./pricesort.php?sc="+val, true);
+        xmlhttp.send();
+      
+      return false;
+    });
+  });
+
+//   function selectItem (pid) {
+//     // var trigger = $('.namebutton'),        
+//        var itemId= pid;
+//       // Set $this for re-use. Set target from data attribute
+//         var $this = $(this),
+//         val = $this.find(':selected').val();    
+//         $.   
+// }

@@ -22,7 +22,7 @@ include_once ('connection.php');
                                 // $cityName= $parentCategory_arr[$a][1];
                                 $identifier=$a;
                                 echo '
-                                <a href="#" class="dropdown-btn collapsible-header childlink" data-toggle="sidebar" data-target=".subcategorylist'. $identifier.'">'.$parentCategory_arr[$a][1].'<i class="fas fa-caret-down"></i></a>
+                                <a href="#" class="dropdown-btn collapsible-header childlink" data-toggle="sidebar" data-target=".subcategorylist'. $identifier.'">'.$parentCategory_arr[$a][1].' <i class="fa fa-angle-down"></i></a>
                                 ';
                                 $subCategory_sql="SELECT `categoryID`, `categoryName` FROM `category` WHERE `parentCategoryID` =".$parentCategory_arr[$a][0]."";
                                 $subCategory_res = mysqli_query($connection, $subCategory_sql);
@@ -35,14 +35,7 @@ include_once ('connection.php');
                                 
                                          <ul>';
                                 for ($b = 0; $b < count($subCategory_arr); $b++) {
-                                                echo '<form  method="POST" action="categorysearch.php">';
-                                                echo '<input type="hidden" name="searchcategoryID" value="'.$subCategory_arr[$b][0].'"></input>
-                                                    <input type="hidden" name="searchcategoryName" value="'.$subCategory_arr[$b][1].'"></input>
-                                                ';
-
-                                                echo '<li class="contentsli"><button type="submit">'.$subCategory_arr[$b][1].'</button></li>';
-                                            
-                                                echo '</form>';
+                                    echo '<li class="contentsli"><a class="linkanchor" href="categorysearch.php?searchcategoryID='.$subCategory_arr[$b][0].'&searchcategoryName='.$subCategory_arr[$b][1].'">'.$subCategory_arr[$b][1].'</a></li>';
                                 };
                                          echo '</ul>
                                          
@@ -61,8 +54,8 @@ include_once ('connection.php');
 
  
   
-  <li><a class="maintype" href="#services">Brand</a></li>
-  <li><a class="maintype" href="#clients">On Sale</a></li>
+  <li><a class="maintype" href="brandlist.php">Brand</a></li>
+  <li><a class="maintype" name="saletag" href="onsale.php" id="onsaletrigger">On Sale</a></li>
   <a data-toggle="sidebar" data-target="#pricelist" class="dropdown-btn collapsible-header maintype" id="pricebutton">Price <i class="fas fa-caret-down"></i></a>
         <div  class="dropdown-container" id="pricelist">
                     <ul>
@@ -147,6 +140,7 @@ body {
   display: block;
   border-top: 1px solid rgba(144, 180, 148, 1);
   text-align:center;
+  background-color: rgba(224, 184, 65, 1);
 }
 
 .childlink{
@@ -185,11 +179,14 @@ body {
   color: #064579;
   background-color: #eee!important;
 }
+.maintype:hover{
+  text-decoration: none;
+}
 li{
     list-style-type: none;
     text-align: left;
 }
-.contentsli button{
+.linkanchor{
     background-color: transparent;
     border: none;
     text-align: left;
@@ -197,8 +194,8 @@ li{
     margin-left: 40%;
     font-weight: 600;
 }
-li button:hover{
-    color: #8B0000;
+.linkanchor:hover{
+    color: #8B0000!important;
 }
 button.pricetrigger{
     background-color: transparent;
@@ -219,6 +216,15 @@ button.pricetrigger:hover ,button.pricetrigger:focus{
       margin-left: 18px;
   }
 }
+
+  .linkanchor{
+    color: black!important;
+  }
+  .linkanchor:hover, .linkanchor:active{
+    color: black!important;
+    text-decoration: none;
+  }
+
 </style>
 
 
@@ -238,4 +244,5 @@ for (i = 0; i < dropdown.length; i++) {
   }
   });
 }
+
 </script>

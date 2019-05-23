@@ -1,6 +1,6 @@
 <?php
     session_start();
-    unset($_SESSION['user']);
+    session_unset();
 
     if (isset($_SESSION['user'])) {
         echo 0;

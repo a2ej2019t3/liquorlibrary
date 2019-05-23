@@ -1,4 +1,6 @@
 <?php
+    session_start();
+    $_SESSION['location'] = 'productlist';
     include ('connection.php');
 
     $searchstart = $_POST['searchstart'];
@@ -12,8 +14,6 @@
     } else {
         
     }
-
-    
 ?>
 
 
@@ -29,12 +29,12 @@
  <body>
      <section>
         <?php
-            include_once ("partials/header2.php");
+            include_once ("partials/header.php");
         ?>        
      </section>
      <br><br>
     <?php
-    include ("partials/stickycart.php");
+    include ("Cart/stickycart.php");
     ?>
 <div class="container_fluid">
     <div class="row">
@@ -65,7 +65,7 @@
     include_once ("partials/foot.php");
   ?>
   
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  
     <script>
         //
         $( document ).ready(function() {
@@ -92,4 +92,7 @@
         });
       });
     </script>
+  <script type="text/javascript" src="js/subcategory.js"></script>
+  <script type="text/javascript" src="js/main.js"></script>
+  <script type="text/javascript" src="js/search.js"></script>
  </html>

@@ -14,8 +14,8 @@
                 <div class="modal-dialog modal-center style="max-width: 700px!important; max-height: 360px!important;">
                     <div class="container">
                         <div class="row">
-                        <div class="modal-content">
-                            <div class="modal-body" id="modalcard">';
+                        <div class="modal-content" style="width:400px;">
+                            <div class="modal-body" id="modalcard" style="padding:0; width: 400px;">';
          echo                  '<div class="tab col-3">';
                 
                         if (count($parentCategory_arr) != 0) { 
@@ -52,28 +52,24 @@
                                     alert("sub category result empty");
                                 }
                                 for ($b = 0; $b < count($subCategory_arr); $b++) {
-                                    echo '<div class="column">
-                                        <form  method="POST" action="categorysearch.php">';
-                                    echo '<input type="hidden" name="searchcategoryID" value="'.$subCategory_arr[$b][0].'"></input>
-                                           <input type="hidden" name="searchcategoryName" value="'.$subCategory_arr[$b][1].'"></input>
-                                    ';
+                                    echo '<div class="column">';
 
-                                    echo '<button type="submit"> '.$subCategory_arr[$b][1].'</button> <br>';
+                                    echo '<a class="linkanchor" href="categorysearch.php?searchcategoryID='.$subCategory_arr[$b][0].'&searchcategoryName='.$subCategory_arr[$b][1].'" > '.$subCategory_arr[$b][1].'</a> <br>';
                                    
-                                    echo '</form>
-                                        </div>';
+                                    echo '</div>';
                                 };
                             echo '</div>';
 
          echo                  
-                             '</div>';  
+                             '</div>
+                             ';  
                             } 
-                
+                            echo ' <button type="button" class="close" data-dismiss="modal" id="tabclose" style="position: absolute; bottom: 19px; right: 30px;"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>';
                         } else {
                         
                         };
             
-                echo '   <br>  <button type="button" class="close" data-dismiss="modal" id="tabclose"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                echo '   <br>
                         </div>  
                    </div>     
                 </div>
@@ -81,4 +77,12 @@
         </div>
     </div>';
     ?>
- 
+ <style>
+  .linkanchor{
+    color: black!important;
+  }
+  .linkanchor:hover, .linkanchor:active{
+    color: black!important;
+    text-decoration: none;
+  }
+</style>
