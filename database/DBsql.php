@@ -105,7 +105,7 @@
                     return $sql;
                 } else {
                     if ($res->num_rows > 0) {
-                        $arr = $res->fetch_assoc();
+                        $arr[] = $res->fetch_assoc();
                         return $arr;
                     }
                 }
@@ -114,8 +114,8 @@
             }
         }
 
-        // insert
-        public function insert ($table, $consArr, $valArr) {
+        // common insert
+        public function insert ($table, $valArr) {
             if ($table != null && $valArr != null) {
                 $sql = "INSERT INTO $table (";
                 $cols = "";
@@ -127,16 +127,38 @@
                 }
                 $cols = trim($cols, ",");
                 $vals = trim($vals, ", ");
-                $sql .= $cols.") VALUES (".$vals.") WHERE ";
-                if ($consArr != null) {
-                    foreach ($consArr as $key => $value) {
-                        $cons .= $key." = '".$value."' AND ";
-                    }
-                    $cons = trim($cons, " AND ");
-                    $sql .= $cons;
+                $sql .= $cols.") VALUES (".$vals.")";
+                $res = $this->connection->query($sql);
+                if ($res) {
+                    return true;
                 } else {
-                    $sql = trim($sql, " WHERE ");
+                    trigger_error("error: " . $this->connection->error);
+                    return false;
                 }
+            } else {
+                trigger_error("empty parameter");
+                return false;
+            }
+        }
+
+        // insert into orderitems
+        public function insertItems ($table, $valArr) {
+            if ($table != null && $valArr != null) {
+                $sql = "INSERT INTO $table (";
+                $cols = "";
+                $vals = "";
+                $cons = "";
+                foreach ($valArr as $key => $value) {
+                    $cols .= $key.",";
+                    $vals .= "'".$value."', ";
+                }
+                $cols = trim($cols, ",");
+                $vals = trim($vals, ", ");
+
+                $selectExist = $this->select($table, $vals);
+
+
+                $sql .= $cols.") VALUES (".$vals.") ";
                 $res = $this->connection->query($sql);
                 if ($res) {
                     return true;
@@ -168,6 +190,7 @@
                 }
             }
         }
+
 
         // insert into cart
 
