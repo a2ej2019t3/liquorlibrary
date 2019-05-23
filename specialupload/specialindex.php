@@ -17,6 +17,13 @@
         // alert("result empty");
     }
  ?>
+ <section class="container p-t-3">
+<div class="row" id="slider-text">
+    <div class="col-md-6" >
+      <h2 style="font-family: 'Josefin Sans', sans-serif;">SPECIAL COLLECTION</h2>
+    </div>
+  </div>
+</section>
 <div class="row">
     <div class="col-sm-6 col-md-6 col-6">
         <div class="container">
@@ -92,6 +99,7 @@ font-family: 'Roboto', sans-serif;
 font-family: 'Open Sans', sans-serif;
 font-family: 'Montserrat', sans-serif;
 font-family: 'Playfair Display', serif;
+font-family: 'Josefin Sans', sans-serif;
 */ -->
 <style>
 .headingforspecial{

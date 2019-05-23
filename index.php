@@ -30,7 +30,15 @@
             ?>
       </div>
     </section>
+    <br><br><br><br><hr>
+    <section style="margin-top:150px;">
 
+            <?php
+              include ('partials/productindex.php');
+            ?>
+     
+    </section>
+    <hr>
     <section id="aboutus" style="margin-top:200px;">
       <div class="container-fluid">
             <div class="container-fluid">
