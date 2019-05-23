@@ -49,16 +49,17 @@ if (isset($_REQUEST['i']) && $_REQUEST['i']!=""){
 			$_SESSION['cartItems'] = array_replace($_SESSION['cartItems'],$cartItems);
 			// print_r($_SESSION['cartItems']);
 			echo 2;
+
 			// check if user login
 			// logged in (we need productid cartid & quantity in this case)
 			if (isset($_SESSION['user'])) {
 				$user = $_SESSION['user'];
-						$addCartToDB_res = $DBsql->insert("orderitems","",$cartItems[$productID]);
+						$addCartToDB_res = $DBsql->insertItems("orderitems",$cartItems[$productID]);
 				echo 3;
 		
 			// not logged in (we dont need cartID in this case)
 			} else {
-				setcookie('cart', $_SESSION['cartItems'], time() + (86400 * 30), '/');
+				setcookie('tempCart', json_encode($_SESSION['cartItems']), time() + (86400 * 30), '/');
 				echo 0;
 			}
 		}
