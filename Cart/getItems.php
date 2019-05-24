@@ -104,5 +104,5 @@ if (isset($_SESSION['user'])) {
     }
 }
 
-echo var_dump($_SESSION);
-echo var_dump($_COOKIE);
+// echo var_dump($_SESSION);
+// echo var_dump($_COOKIE);
