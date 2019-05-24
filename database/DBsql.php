@@ -89,7 +89,7 @@
                         $_SESSION['cartItemNum'] = count($data);
                         return $data;
                     } else {
-                        return false;
+                        return null;
                     }
                 }
             }
@@ -160,15 +160,17 @@
             }
         }
 
-        public function updateCart ($itemID, $userID, $quantity) {
-            if ($itemID != null && $userID != null && $quantity != null) {
-                $newvals = "'quantity' = $quantity ";
-                $cons = "'userID' = ".$_SESSION['user']['userID'];
+        public function updateCart ($itemID, $orderID, $quantity) {
+            if ($itemID != null && $orderID != null && $quantity != null) {
+                $newvals = "`quantity` = $quantity ";
+                $cons = "`orderID` = ".$orderID;
                 $sql = "UPDATE `orderitems` SET $newvals WHERE $cons";
-                if ($this->connection->query($sql)) {
+                $res = $this->connection->query($sql);
+                if ($res) {
                     return true;
                 } else {
                     return false;
+                    trigger_error('Invalid query: ' . $this->connection->error);
                 }
             }
         }

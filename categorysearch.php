@@ -6,7 +6,6 @@
     }
     include ('connection.php');
     // category search 
-
     $_SESSION['searchcategoryID'] = $_GET['searchcategoryID'];
     $_SESSION['searchcategoryName'] = $_GET['searchcategoryName'];
 
@@ -34,15 +33,13 @@
 <title>Product_listbyCategory</title>
  </head>
  <body style="height: 110%;">
-    <?php
-      include_once ('Cart/getItems.php');
-    ?>
     <section>
         <?php
           include_once ("partials/header.php");
         ?>        
     </section>
     <br><br>
+    <span id="debug"></span>
 <?php
 include ("Cart/stickycart.php");
 ?>
