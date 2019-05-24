@@ -53,14 +53,14 @@
 
                                       </div>';
 
-                          
-                    echo   '<div class="cardbox">                           
-                                          <span class="dealname">'.$searchSale_arr[$b][1].'</span><br>
-                                <span class="specialprice">$<span style="font-size:1.4rem;" class="numberprice">'.$searchSale_arr[$b][3].'</span> <i class="fas fa-star" style="color:rgba(224, 184, 65, 1); margin-left:20px;"></i><i class="fas fa-star" style="color:rgba(224, 184, 65, 1);"></i><i class="fas fa-star" style="color:rgba(224, 184, 65, 1);"></i><i class="fas fa-star" style="color:rgba(224, 184, 65, 1);" ></i><i class="fas fa-star" style="color:rgba(224, 184, 65, 1);"></i></span><br>                                       
-                               <br>
-                                <span class="dealinformation">'.$searchSale_arr[$b][4].'</span>   
-                                 
-                             </div><br>
+                                    
+                                echo   '<div class="cardbox">                           
+                                                    <span class="dealname">'.$searchSale_arr[$b][1].'</span><br>
+                                            <span class="specialprice">$<span style="font-size:1.4rem;" class="numberprice">'.$searchSale_arr[$b][3].'</span> <i class="fas fa-star" style="color:rgba(224, 184, 65, 1); margin-left:20px;"></i><i class="fas fa-star" style="color:rgba(224, 184, 65, 1);"></i><i class="fas fa-star" style="color:rgba(224, 184, 65, 1);"></i><i class="fas fa-star" style="color:rgba(224, 184, 65, 1);" ></i><i class="fas fa-star" style="color:rgba(224, 184, 65, 1);"></i></span><br>                                       
+                                        <br>
+                                            <span class="dealinformation">'.$searchSale_arr[$b][4].'</span>   
+                                            
+                                        </div><br>
                           </div>
                         </div>';
                 
@@ -193,17 +193,16 @@ font-family: 'Kaushan Script', cursive;
     
 }
 .overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  /* margin:auto;
-  padding:auto; */
-  width: 100%;
-  height: 100%;
-  display:inline-block;
-  background: rgba(0, 0, 0, 0);
-  transition: background 0.5s ease;
-  border-radius: 25px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 94%;
+    height: 93%;
+    display: inline-block;
+    background: rgba(0, 0, 0, 0);
+    transition: background 0.5s ease;
+    border-radius: 25px;
+    margin: 0 15px;
   
 }
 .specialimgwrapper:hover > .overlay{

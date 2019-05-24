@@ -42,7 +42,7 @@ c.categoryID  -->
                             
                        echo         '<div class="product-grid__extend" style="width:100%;">
                                      <div class="row">
-                                        <div class="col-sm-6 col-md-6" style="padding:0!important;><button value="'.$searchCategory_arr[$b][0].'" onclick="addToCart(this.value)"><span class="product-grid__botton product-grid__add-to-cart"><i class="fa fa-cart-arrow-down"></i><br> Add to cart</span></button></div>
+                                        <div class="col-sm-6 col-md-6" style="padding:0!important;"><button value="'.$searchCategory_arr[$b][0].'" onclick="addToCart(this.value)"><span class="product-grid__botton product-grid__add-to-cart"><i class="fa fa-cart-arrow-down"></i><br> Add to cart</span></button></div>
                                         <div class="col-sm-6 col-md-6" style="padding:0!important;"><a href="productlist.php?pid='.$searchCategory_arr[$b][0].'"><span class="product-grid__botton product-grid__view"><i class="fa fa-eye"></i><br>View more</span></a></div>
 
                                     </div>
@@ -50,6 +50,7 @@ c.categoryID  -->
                               
                           
                         </div>';
+                        // var_dump($searchCategory_arr[$b][0]);
                 
                 }
                 echo '
