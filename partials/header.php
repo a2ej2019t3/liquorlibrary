@@ -5,7 +5,7 @@
         $className = 'header2li';
     }
 ?>
-<header>
+<header id="topsection">
     <nav class="navbar navbar-expand-lg navbar-inverse fixed-top opaque-navbar">
         <div class="container">
     <!-- login button -->
@@ -42,7 +42,7 @@
                 <ul class="nav navbar-nav ml-auto">
                     <li class="col" id="firstcol"><a class="<?php echo $className; ?>" href="#aboutus" style="color: white; font-size: 1rem; font-family: 'Roboto', sans-serif;">About Us</a></li>
                     <li class="col"><a class="<?php echo $className; ?>" href="findlocation/findus.php" style="color: white; font-size: 1rem; font-family: 'Roboto', sans-serif;">Find Us</a></li>
-                    <li class="col"><a class="<?php echo $className; ?>" id="ourdrinks" data-toggle="modal" data-target="#subnav" href="#" style="color: white; font-size: 1rem; font-family: 'Roboto', sans-serif;">Our Drinks</a></li> 
+                    <li class="col"><a class="<?php echo $className; ?> js-open-modal" id="ourdrinks" data-toggle="modal" data-target="#subnav" href="#" style="color: white; font-size: 1rem; font-family: 'Roboto', sans-serif;">Our Drinks</a></li> 
                     <li class="col"><a class="<?php echo $className; ?>" href="specials.php" style="color: white; font-size: 1rem; font-family: 'Roboto', sans-serif;">Specials</a></li> 
                     <li class="col"><a class="<?php echo $className; ?>" href="#" style="color: white; font-size: 1rem; font-family: 'Roboto', sans-serif;">Cart</a></li>
                     <li class="col"><a class="<?php echo $className; ?>" href="#" style="color: white; font-size: 1rem; font-family: 'Roboto', sans-serif;">My orders</a></li>

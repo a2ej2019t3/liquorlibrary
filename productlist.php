@@ -37,7 +37,7 @@
      </section>
      <br><br>
 <?php
- include ("partials/stickycart.php");
+ include ("Cart/stickycart.php");
 ?>
 <div class="container_fluid">
     <div class="row">
@@ -88,13 +88,12 @@
                        echo         '<div class="product-grid__extend" style="width:100%;">
                                      <div class="row">
                                         <div class="col-sm-3 col-md-3" style="padding:0!important;"></div>
-                                        <div class="col-sm-3 col-md-3" style="padding:0!important;"><span class="product-grid__botton product-grid__add-to-cart"><i class="fa fa-cart-arrow-down"></i><br> Add to cart</span></div>
+                                        <div class="col-sm-3 col-md-3" style="padding:0!important;"><button value="'.$searchItem_arr[$b][0].'" onclick="addToCart(this.value)" style="background-color: transparent; border:none; width:100%;"><span class="product-grid__botton product-grid__add-to-cart"><i class="fa fa-cart-arrow-down"></i><br> Add to cart</span></button></div>
                                         <div class="col-sm-3 col-md-3" style="padding:0!important;"><a href="productlist.php?pid='.$searchItem_arr[$b][0].'"><span class="product-grid__botton product-grid__view"><i class="fa fa-eye"></i><br>View more</span></a></div>
                                         <div class="col-sm-3 col-md-3" style="padding:0!important;"></div>
 
                                     </div>
                                     </div>
-                              
                           
                         </div>';
                 

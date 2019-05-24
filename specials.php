@@ -47,13 +47,13 @@
          }
      ?>
   </ol>
-  <div class="carousel-inner" style="height: 470px; margin-top: 80px;">;
+  <div class="carousel-inner" style="height: 470px; margin-top: 60px;">;
 
     <?php
         for($b = 0; $b <count($maindeal_arr); $b++){
 
             echo '<div class="carousel-item">
-                         <img class="d-block w-100" src='.$imgpath.$maindeal_arr[$b][5].' alt="slide" style="max-height:500px; ">;
+                         <img class="d-block w-100" src='.$imgpath.$maindeal_arr[$b][5].' alt="slide" style="max-height:700px; ">;
                          <div class="carousel-caption d-md-block d-lg-block">';
                        echo '<p class="info">'.$maindeal_arr[$b][4].'</p>';  
                        echo '<div>';
@@ -105,6 +105,9 @@ include ("partials/specialsModal.php");
     include ('specialupload/speciallist.php');
   ?>
 <section>
+<?php
+    include_once ("partials/indicatorUp.php");
+  ?>
 <?php
     include_once ("partials/foot.php");
   ?>  

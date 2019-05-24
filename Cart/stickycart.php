@@ -7,7 +7,7 @@
     </ul>
 </div>
 <!-- modal cart ---------------------------------------------------------------------------------------->
-<div class="modal fade" id="cart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="false">
+<div class="modal fade"  id="cart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="false">
   <div class="modal-dialog modal-md" role="document" style="position: absolute; top: 300px; right: 80px; width:400px;">
     <div class="modal-content"style="background-color: rgba(215, 232, 186, 1);">
       <div class="modal-header">
