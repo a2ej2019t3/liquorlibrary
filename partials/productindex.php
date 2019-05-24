@@ -19,7 +19,7 @@
 <section class="container p-t-3">
 <div class="row" id="slider-text">
     <div class="col-md-6" >
-      <h2 style="font-family: 'Josefin Sans', sans-serif;">SALE COLLECTION</h2>
+      <span style="font-family: 'Josefin Sans', sans-serif; font-size:2rem;" >SALE COLLECTION</span>
     </div>
   </div>
 </section>
@@ -28,7 +28,7 @@
     <div class="top-content">
         <div class="container">
             <div class="carousel slide" data-ride="carousel" id="postsCarousel">
-            <span class="bottonbox">
+            <span class="bottonbox col-md-12">
                 <a class="btn btn-outline-secondary prev" href="" title="go back"><i class="fa fa-lg fa-chevron-left"></i></a>
                 <a class="btn btn-outline-secondary next" href="" title="more"><i class="fa fa-lg fa-chevron-right"></i></a>
             </span>
@@ -40,21 +40,22 @@
                         <div class="imgwrap">
                        
                         <div class="hoverm">
-                        <div class="dealhead">'.$searchSale_arr[$b][2].'</div>
-                        <div class="dealhead">Only <span style="color: red;">$'.$searchSale_arr[$b][3].'<span></div>
+                        <div class="dealhead" style="margin-top:50px;">'.$searchSale_arr[$b][2].'</div>
+                        <div class="dealhead"><span style="font-size: 20px; text-decoration: line-through;">$'.$searchSale_arr[$b][4].'</span><span style="color: red;"> $'.$searchSale_arr[$b][3].'<span></div>
                         <button class="Go" onClick="window.location=;">FIND MORE</button>
                   
                     
                       </div> 
-                        <img src='.$imgpath.$searchSale_arr[$b][1].' class="img-fluid cardimage mx-auto d-block" alt="img1">
+                        <img src='.$imgpath.$searchSale_arr[$b][1].' class="cardimage" alt="img1">
                        </div>
+                    
                     </div>'; 
             
                          }                 
                     ?>
                 </div>
 
-                <div class="specialcollection"style="margin-top: 80px;"><span>Grab a everyday selection just for you!</span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi voluptatum illum praesentium architecto quas corrupti suscipit quibusdam officiis odio, dolorem numquam dolores quasi sunt a earum! Non voluptates et ipsa?lorem. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perspiciatis eligendi aut tempore praesentium dicta! Vel, pariatur id architecto est expedita porro alias quo amet sed incidunt nulla accusamus odio iste!Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi voluptatum illum praesentium architecto quas corrupti suscipit quibusdam officiis odio, dolorem numquam dolores quasi sunt a earum! Non voluptates et ipsa?lorem. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perspiciatis eligendi aut tempore praesentium dicta! Vel, pariatur id architecto est expedita porro alias quo amet sed incidunt nulla accusamus odio iste!Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi voluptatum illum praesentium architecto quas corrupti suscipit quibusdam officiis odio, dolorem numquam dolores quasi sunt a earum!t consectetur adipisicing elit. Perspiciatis eligendi aut tempore praesentium dicta! Vel, pariatur id architecto est expedita po
+                <div class="specialcollection col-md-12"style="margin-top: 80px;"><span>Grab a everyday selection just for you!</span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi voluptatum illum praesentium architecto quas corrupti suscipit quibusdam officiis odio, dolorem numquam dolores quasi sunt a earum! Non voluptates et ipsa?lorem. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perspiciatis eligendi aut tempore praesentium dicta! Vel, pariatur id architecto est expedita porro alias quo amet sed incidunt nulla accusamus odio iste!Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi voluptatum illum praesentium architecto quas corrupti suscipit quibusdam officiis odio, dolorem numquam dolores quasi sunt a earum! Non voluptates et ipsa?lorem. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perspiciatis eligendi aut tempore praesentium dicta! Vel, pariatur id architecto est expedita porro alias quo amet sed incidunt nulla accusamus odio iste!Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi voluptatum illum praesentium architecto quas corrupti suscipit quibusdam officiis odio, dolorem numquam dolores quasi sunt a earum!t consectetur adipisicing elit. Perspiciatis eligendi aut tempore praesentium dicta! Vel, pariatur id architecto est expedita po
                 o iste!</div>
          </div>
     </div>
@@ -105,21 +106,35 @@
   font-family: 'Roboto', sans-serif;
   text-align:center;
   font-size:2rem;
+  width:100%;
+  
 }
 .imgwrap:hover .hoverm {
   opacity: 1;
   background: rgba(0, 0, 0, .6);
 }
+.imgwrap .dealhead{
+    width:100%;
+}
+.dealhead .hoverm{
+    width:100%;
+}
+
 .hoverm{
   position: absolute;
-  width:300px;
+  left:0;
+  right:0;
+  /* max-width:254px; */
   /* left:45%; */
-  top: 30%;
+  z-index: 1000;
+  /* top: 30%; */
   padding-top:10px;
-  height: 160px;
+  height: 100%;
+  border-radius: 25px;
   text-align: center;
   opacity: 0;
   transition: opacity .35s ease;
+  vertical-align: middle
 }
 /*  */
 .carousel-inner .carousel-item {
@@ -137,11 +152,7 @@
 }
 
 /* ensure equal card height inside carousel */
-.carousel-inner>.carousel-item.active, 
-.carousel-inner>.carousel-item.next, 
-.carousel-inner>.carousel-item.prev {
-    display: flex;
-}
+
 
 /* prevent flicker during transition */
 .carousel-inner>.carousel-item.active.left, 
@@ -157,11 +168,16 @@
     overflow:hidden;
 }
 .bottonbox {
-    position: absolute;
-    left: 40%;
-    top: -50px;
-    z-index: 100;
+margin-left:20%;
 }
+/* @media(max-width:1100px;){
+    .bottonbox{
+        position: absolute;
+        right: 20px;
+
+        z-index: 100;
+    }
+} */
 @media (min-width: 768px) and (max-width: 991px) {
     /* Show 4th slide on md if col-md-4*/
     .carousel-inner .active.col-md-4.carousel-item + .carousel-item + .carousel-item + .carousel-item {

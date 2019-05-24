@@ -166,6 +166,9 @@ font-family: 'Kaushan Script', cursive;
       border: 1px solid #8B0000;
       color: #8B0000;
   }
+  #checkbutton:hover a{
+    color: #8B0000!important;  
+  }
 .productcard:hover{
    
     -webkit-transition: opacity .5s;
