@@ -1,6 +1,6 @@
 <div id="btContainer">
-<!-- <button id="stickyCart" class="cartbutton sticky" data-toggle="modal" data-target="#cart"> -->
-<button class="openbtn sticky" onclick="openNav()">Toggle Sidebar</button>
+<button id="stickyCart" class="cartbutton sticky" data-toggle="modal" data-target="#cart">
+<!-- <button class="openbtn sticky" onclick="openNav()">Toggle Sidebar</button> -->
 <div>
     <div>
       <i class="fas fa-dolly"></i>
