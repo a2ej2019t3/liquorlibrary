@@ -15,35 +15,40 @@ include_once ('connection.php');
         <div  class="dropdown-container" id="categorylist" style="display: block;">
             <ul>
                 <?php
-                             if (count($parentCategory_arr) != 0) { 
-                        
-                            for ($a = 0; $a < count($parentCategory_arr); $a++) {
-                                // parent category list showing
-                                // $cityName= $parentCategory_arr[$a][1];
-                                $identifier=$a;
-                                echo '
-                                <a href="#" class="dropdown-btn collapsible-header childlink" data-toggle="sidebar" data-target=".subcategorylist'. $identifier.'">'.$parentCategory_arr[$a][1].' <i class="fa fa-angle-down"></i></a>
-                                ';
-                                $subCategory_sql="SELECT `categoryID`, `categoryName` FROM `category` WHERE `parentCategoryID` =".$parentCategory_arr[$a][0]."";
-                                $subCategory_res = mysqli_query($connection, $subCategory_sql);
-                                if ($subCategory_res != "") {
-                                    $subCategory_arr = mysqli_fetch_all($subCategory_res);
-                                } else {
-                                    alert("sub category result empty");
-                                }
-                                echo '<div class="dropdown-container" class="subcategorylist'. $identifier.'">
-                                
-                                         <ul>';
-                                for ($b = 0; $b < count($subCategory_arr); $b++) {
-                                    echo '<li class="contentsli"><a class="linkanchor" href="categorysearch.php?searchcategoryID='.$subCategory_arr[$b][0].'&searchcategoryName='.$subCategory_arr[$b][1].'">'.$subCategory_arr[$b][1].'</a></li>';
-                                };
-                                         echo '</ul>
-                                         
-                                         </div>';
-                               
-                            }
-                
+                    if (count($parentCategory_arr) != 0) {
+                      for ($a = 0; $a < count($parentCategory_arr); $a++) {
+                        // parent category list showing
+                        // $cityName= $parentCategory_arr[$a][1];
+                        $identifier=$a;
+                        echo '
+                        <a href="#" class="dropdown-btn collapsible-header childlink" data-toggle="sidebar" data-target=".subcategorylist'. $identifier.'">'.$parentCategory_arr[$a][1].' <i class="fa fa-angle-down"></i></a>
+                        ';
+                        $subCategory_sql="SELECT `categoryID`, `categoryName` FROM `category` WHERE `parentCategoryID` =".$parentCategory_arr[$a][0]."";
+                        $subCategory_res = mysqli_query($connection, $subCategory_sql);
+                        if ($subCategory_res != "") {
+                            $subCategory_arr = mysqli_fetch_all($subCategory_res);
                         } else {
+                            alert("sub category result empty");
+                        }
+                        echo '<div class="dropdown-container" class="subcategorylist'. $identifier.'">
+                                 <ul>';
+                        for ($b = 0; $b < count($subCategory_arr); $b++) {
+                            $productInfo = array(
+                                            'categoryID' => $subCategory_arr[$b][0],
+                                            'categoryName' => $subCategory_arr[$b][1] 
+                                          );
+                            $productInfoJson = json_encode($productInfo);
+                            echo '<li class="contentsli">
+                                      <button type="button" class="linkanchor" value="'.$productInfoJson.'" onclick="showCategoryProduct(this.value)" >'.$subCategory_arr[$b][1].'</button>
+                                  </li>';
+                        };
+                                 echo '</ul>
+                                 
+                                 </div>';
+                      }
+                        
+                
+                    } else {
                         
                         };
 

@@ -1,25 +1,10 @@
 <?php
-    session_start();
-    $_SESSION['location'] = 'productlist';
-    if (isset($_SESSION['user'])) {
-        $user = $_SESSION['user'];
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
     }
-    include ('connection.php');
-    // category search 
-    $_SESSION['searchcategoryID'] = $_GET['searchcategoryID'];
-    $_SESSION['searchcategoryName'] = $_GET['searchcategoryName'];
-
-    $searchcontent = $_SESSION['searchcategoryID'];
-    $category= $_SESSION['searchcategoryName'];
-    $searchCategory_sql = "SELECT p.productID, p.img, p.productName, p.discountprice, p.price,p.categoryID, b.brandName, c.categoryName,c.categoryID FROM product AS p, brand AS b, category AS c WHERE p.brandID=b.brandID and p.categoryID=c.categoryID and c.categoryID = $searchcontent";
-    $searchCategory_res = mysqli_query($connection, $searchCategory_sql);
+    $_SESSION['location'] == 'productlist';
     
-    if ($searchCategory_res != "") {
-        $searchCategory_arr = mysqli_fetch_all($searchCategory_res);
-        $resultcount = count($searchCategory_arr);
-    } else {
-        alert("result empty");
-    }
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,9 +37,13 @@
 
                 <div class="productresult col-md-9 col-xs-12 content-right">
                     <!-- product list results -->
-                    <article id="content">
+                    <article id="type_content">
                         <?php
-                        include_once ("typesearch.php");
+                        if (isset($_GET['searchcategoryID']) && isset($_GET['searchcategoryName'])) {
+                            $searchcategoryID = $_GET['searchcategoryID'];
+                            $searchcategoryName = $_GET['searchcategoryName'];
+                            include_once ('typesearch.php');
+                        }
                         ?>
                     </article>
                 </div>
@@ -64,11 +53,11 @@
       <?php
           include_once ("partials/foot.php");
       ?>  
-  <script type="text/javascript" src="js/sub.js"></script>
-  <script type="text/javascript" src="js/main.js"></script>
-  <script type="text/javascript" src="js/search.js"></script>
-  <script type="text/javascript" src="js/cart.js"></script>
- </body>
+    <script type="text/javascript" src="js/sub.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/search.js"></script>
+    <script type="text/javascript" src="js/cart.js"></script>
+    <script type="text/javascript" src="js/product.js"></script>
+</body>
 
-
- </html>
+</html>

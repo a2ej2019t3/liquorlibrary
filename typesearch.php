@@ -8,11 +8,39 @@ p.categoryID,
 b.brandName, 
 c.categoryName,
 c.categoryID  -->
+<?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+    // $_SESSION['location'] = 'productlist';
+    if (isset($_SESSION['user'])) {
+        $user = $_SESSION['user'];
+    }
+    include ('connection.php');
+    // category search 
+    $_SESSION['searchcategoryID'] = $_GET['searchcategoryID'];
+    $searchcontent = $_SESSION['searchcategoryID'];
+    // $_SESSION['searchcategoryID'] = $_GET['searchcategoryID'];
+    if (isset($_GET['searchcategoryName'])) {
+        $_SESSION['searchcategoryName'] = $_GET['searchcategoryName'];
+        $category= $_SESSION['searchcategoryName'];
+    }
+    $searchCategory_sql = "SELECT p.productID, p.img, p.productName, p.discountprice, p.price,p.categoryID, b.brandName, c.categoryName,c.categoryID FROM product AS p, brand AS b, category AS c WHERE p.brandID=b.brandID and p.categoryID=c.categoryID and c.categoryID = $searchcontent";
+    $searchCategory_res = mysqli_query($connection, $searchCategory_sql);
+    
+    if ($searchCategory_res != "") {
+        $searchCategory_arr = mysqli_fetch_all($searchCategory_res);
+        $resultcount = count($searchCategory_arr);
+    } else {
+        alert("result empty");
+    }
+?>
+<?php
+    echo '
 <section>
     <div class="container" style="padding-right: 45px;">
     <center><h4 style="margin-top: 100px;"><hr>Bottle Shop</h4></center>
-    <?php
-        echo '<div style="text-align:left;"><i class="far fa-compass" style="margin: 10px 10px;"></i><a style="color: black!important; text-decoration: none!important;" href="index.php">Home / </a> <span>Category / '.$category.' / '.$resultcount.'products</span></div>';
+    <div style="text-align:left;"><i class="far fa-compass" style="margin: 10px 10px;"></i><a style="color: black!important; text-decoration: none!important;" href="index.php">Home / </a> <span>Category / '.$category.' / '.$resultcount.'products</span></div>';
          
         if ($searchcontent != "") {
             $imgpath = 'images/';
@@ -66,6 +94,8 @@ c.categoryID  -->
             ob_clean();
             echo 0;
         }
-     ?>
+        echo '
         </div>
-    </section>
+        </section>
+        ';
+?>
