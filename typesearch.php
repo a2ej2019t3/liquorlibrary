@@ -18,6 +18,9 @@ if (session_status() == PHP_SESSION_NONE) {
     }
     include ('connection.php');
     // category search 
+    $searchcategoryID = $_GET['searchcategoryID'];
+    $searchcategoryName = $_GET['searchcategoryName'];
+
     $_SESSION['searchcategoryID'] = $_GET['searchcategoryID'];
     $searchcontent = $_SESSION['searchcategoryID'];
     // $_SESSION['searchcategoryID'] = $_GET['searchcategoryID'];
@@ -32,7 +35,7 @@ if (session_status() == PHP_SESSION_NONE) {
         $searchCategory_arr = mysqli_fetch_all($searchCategory_res);
         $resultcount = count($searchCategory_arr);
     } else {
-        alert("result empty");
+        echo "result empty";
     }
 ?>
 <?php

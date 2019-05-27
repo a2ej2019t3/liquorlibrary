@@ -105,7 +105,7 @@
                     return $sql;
                 } else {
                     if ($res->num_rows > 0) {
-                        $arr = $res->fetch_assoc();
+                        $arr = $res->fetch_all();
                         return $arr;
                     }
                 }

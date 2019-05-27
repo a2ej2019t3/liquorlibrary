@@ -37,20 +37,18 @@ include_once ('connection.php');
                                             'categoryID' => $subCategory_arr[$b][0],
                                             'categoryName' => $subCategory_arr[$b][1] 
                                           );
+                            // var_dump($productInfo);
                             $productInfoJson = json_encode($productInfo);
+                            // var_dump($productInfoJson);
                             echo '<li class="contentsli">
-                                      <button type="button" class="linkanchor" value="'.$productInfoJson.'" onclick="showCategoryProduct(this.value)" >'.$subCategory_arr[$b][1].'</button>
+                                      <button type="button" class="linkanchor" value='.$productInfoJson.' onclick="showCategoryProduct(this.value)" >'.$subCategory_arr[$b][1].'</button>
                                   </li>';
                         };
                                  echo '</ul>
                                  
-                                 </div>';
+                                </div>';
                       }
-                        
-                
-                    } else {
-                        
-                        };
+                    }
 
                   ?>
 
@@ -59,9 +57,9 @@ include_once ('connection.php');
 
  
   
-  <li><a class="maintype" href="brandlist.php">Brand</a></li>
+  <li><a class="maintype" href="#" onclick="getBrandlist()">Brand</a></li>
   <li><a class="maintype" name="saletag" href="onsale.php" id="onsaletrigger">On Sale</a></li>
-  <a data-toggle="sidebar" data-target="#pricelist" class="dropdown-btn collapsible-header maintype" id="pricebutton">Price <i class="fas fa-caret-down"></i></a>
+  <a data-toggle="sidebar" href="#" data-target="#pricelist" class="dropdown-btn collapsible-header maintype" id="pricebutton">Price <i class="fas fa-caret-down"></i></a>
         <div  class="dropdown-container" id="pricelist">
                     <ul>
                     <li class="childlink" >

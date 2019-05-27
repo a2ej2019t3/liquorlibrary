@@ -11,20 +11,21 @@
 <head>
     <?php
         include_once ("partials/head.php");
-    ?>
+        // include ("database/DBsql.php");
+        ?>
 <title>Product_listbyCategory</title>
 </head>
 <body style="height: 110%;">
     <section>
         <?php
             include_once ("partials/header.php");
-        ?>        
+            ?>        
     </section>
     <br><br>
     <section id="main">
         <?php
             include ("Cart/stickycart.php");
-        ?>
+            ?>
         <div class="container_fluid">
             <div class="row">
                 <!-- content body starts -->
@@ -32,17 +33,20 @@
                     <!-- sideNave -->
                     <?php
                         include_once ("partials/sideNav.php");
-                    ?>
+                        ?>
                 </div>
 
                 <div class="productresult col-md-9 col-xs-12 content-right">
                     <!-- product list results -->
-                    <article id="type_content">
+                    <article id="productArea">
                         <?php
                         if (isset($_GET['searchcategoryID']) && isset($_GET['searchcategoryName'])) {
-                            $searchcategoryID = $_GET['searchcategoryID'];
-                            $searchcategoryName = $_GET['searchcategoryName'];
                             include_once ('typesearch.php');
+                        } else if (isset($_GET['l'])) {
+                            include_once ('brandlist.php');
+                        } else if (isset($_GET['brandname'])) {
+                            include ('connection.php');
+                            include_once ('partials/saleproductprint.php');
                         }
                         ?>
                     </article>
