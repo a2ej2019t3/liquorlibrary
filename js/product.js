@@ -77,7 +77,7 @@ function checkState () {
                 getBrandlist();
                 break;
             case 'product_brand':
-                alert('product_brand');
+                // alert('product_brand');
                 console.log(state);
                 selectBrand(state);
                 break;

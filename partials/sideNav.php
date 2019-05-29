@@ -44,9 +44,8 @@ include_once ('connection.php');
                                       <button type="button" class="linkanchor" value='.$productInfoJson.' onclick="showCategoryProduct(this.value)" >'.$subCategory_arr[$b][1].'</button>
                                   </li>';
                         };
-                                 echo '</ul>
-                                 
-                                </div>';
+                        echo '</ul>
+                            </div>';
                       }
                     }
 
