@@ -33,15 +33,15 @@ include_once ('connection.php');
                         echo '<div class="dropdown-container" class="subcategorylist'. $identifier.'">
                                  <ul>';
                         for ($b = 0; $b < count($subCategory_arr); $b++) {
-                            $productInfo = array(
-                                            'categoryID' => $subCategory_arr[$b][0],
-                                            'categoryName' => $subCategory_arr[$b][1] 
-                                          );
+                            $categoryInfo = array(
+                                                'searchPara' => "typesearch.php?searchcategoryID=".$subCategory_arr[$b][0]."&searchcategoryName=".$subCategory_arr[$b][1]."&location=category",
+                                                'location' => "category"
+                                              );
                             // var_dump($productInfo);
-                            $productInfoJson = json_encode($productInfo);
+                            $categoryInfoJson = json_encode($categoryInfo);
                             // var_dump($productInfoJson);
                             echo '<li class="contentsli">
-                                      <button type="button" class="linkanchor" value='.$productInfoJson.' onclick="showCategoryProduct(this.value)" >'.$subCategory_arr[$b][1].'</button>
+                                      <button type="button" class="linkanchor" value='.$categoryInfoJson.' onclick="showProduct(this.value)" >'.$subCategory_arr[$b][1].'</button>
                                   </li>';
                         };
                         echo '</ul>
@@ -54,9 +54,14 @@ include_once ('connection.php');
             </ul>
       </div>
 
- 
-  
-  <li><a class="maintype" href="" onclick="getBrandlist()">Brand</a></li>
+  <?php
+    $brandInfo = array(
+                      'searchPara' => '?l=brandlist',
+                      'location' => 'brandlist'
+                      );
+    $brandInfoJson = json_encode($brandInfo);
+  ?>
+  <li><a class="maintype" href="" value="<?php $brandInfoJson ?>" onclick="showProduct(this.value)">Brand</a></li>
   <li><a class="maintype" name="saletag" href="onsale.php" id="onsaletrigger">On Sale</a></li>
   <a data-toggle="sidebar" href="#" data-target="#pricelist" class="dropdown-btn collapsible-header maintype" id="pricebutton">Price <i class="fas fa-caret-down"></i></a>
         <div  class="dropdown-container" id="pricelist">

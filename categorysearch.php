@@ -37,15 +37,6 @@
                 <div class="productresult col-md-9 col-xs-12 content-right">
                     <!-- product list results -->
                     <article id="productArea">
-                        <?php
-                        if (isset($_GET['searchcategoryID']) && isset($_GET['searchcategoryName'])) {
-                            include_once ('typesearch.php');
-                        } else if (isset($_GET['l'])) {
-                            include_once ('brandlist.php');
-                        } else if (isset($_GET['brandname'])) {
-                            include_once ('partials/saleproductprint.php');
-                        }
-                        ?>
                     </article>
                 </div>
             </div>
