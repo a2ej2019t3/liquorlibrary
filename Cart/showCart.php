@@ -16,26 +16,29 @@ if (isset($_SESSION['cartItems'])) {
         foreach ($getItems_arr as $key => $value) {
             $idArr = array('productID' => $key);
             $itemInfo_arr = $DBsql->select($DBsql->getProductInfo(), $idArr);
+            var_dump($itemInfo_arr);
             if ($itemInfo_arr !== false) {
                 // print_r($itemInfo_arr);
                 // ob_clean();
                 // <form method="post" class="row" action="productDetailPage.php">
-                echo '
-                <a href="" class="dropdown-item" style="width: 100%; margin: 0;">
-                    <div class="row">
-                        <div id="posterarea" style="display:inline-block">
-                            <img src='.$imgpath.$itemInfo_arr['img'].' style = "width: 35px; height:auto">
+                for ($b = 0; $b <count($itemInfo_arr); $b++) {
+                    echo '
+                    <a href="" class="dropdown-item" style="width: 100%; margin: 0;">
+                        <div class="row">
+                            <div id="posterarea" style="display:inline-block">
+                                <img src='.$imgpath.$itemInfo_arr[$b]['img'].' style = "width: 35px; height:auto">
+                            </div>
+                            <div id="titlearea" style="display:inline-block; padding-left:5px;">
+                                <p style="color:black">
+                                    <b>'.$itemInfo_arr[$b]['productName'].'</b><br>
+                                    <i>'.$tagForCategory.$itemInfo_arr[$b]['categoryName'].'</i><br>
+                                    <i>'.$tagForBrand.$itemInfo_arr[$b]['brandName'].'</i>
+                                </p>
+                            </div>
                         </div>
-                        <div id="titlearea" style="display:inline-block; padding-left:5px;">
-                            <p style="color:black">
-                                <b>'.$itemInfo_arr['productName'].'</b><br>
-                                <i>'.$tagForCategory.$itemInfo_arr['categoryName'].'</i><br>
-                                <i>'.$tagForBrand.$itemInfo_arr['brandName'].'</i>
-                            </p>
-                        </div>
-                    </div>
-                </a>
-                    ';
+                    </a>
+                        ';
+                }
                 // </form>
             }
         }

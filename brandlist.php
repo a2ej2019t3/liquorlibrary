@@ -43,10 +43,12 @@ echo '
                                 // printing brand names in for loop
                                     echo '<div class="row">';
                                     for ($b = 0; $b <count($searchBrandlist_arr); $b++) {
+                                        $brandlistArr = array('brandName' => $searchBrandlist_arr[$b][1]);
+                                        $brandlistJson = json_encode($brandlistArr);
                                         echo '<div class="col-md-4 col-lg-4">';
                                                 echo '<span>
                                                 <form style="margin: 0; padding: 0; display: inline;">
-                                                    <button class="namebutton" type="button" value="'.$searchBrandlist_arr[$b][1].'" onclick="selectBrand(this.value)">'.$searchBrandlist_arr[$b][1].'</button>
+                                                    <button class="namebutton" type="button" value='.$brandlistJson.' onclick="selectBrand(this.value)">'.$searchBrandlist_arr[$b][1].'</button>
                                                 </form>
                                         </span>';
                                         echo '</div>'; /* col ends */

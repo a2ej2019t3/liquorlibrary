@@ -21,7 +21,8 @@ function showCategoryProduct (productInfoJson) {
         location: 'category',
         categoryID: cid,
         categoryName: cNa
-    }, null, "?searchcategoryID=" + cid + "&searchcategoryName=" + cNa);
+    }, null, "categorysearch.php?searchcategoryID=" + cid + "&searchcategoryName=" + cNa);
+    console.log(history.state);
 }
 
 function getBrandlist () {
@@ -37,9 +38,16 @@ function getBrandlist () {
     history.pushState({
         location: 'brandlist'
     }, null, "?l=brandlist");
+    console.log(history.state);
 }
 
-function selectBrand (bid) {
+function selectBrand (brandlistJson) {
+    if (typeof brandlistJson === 'object') {
+        brandlistObject = brandlistJson;
+    } else {
+        brandlistObject = JSON.parse(brandlistJson);
+    }
+    bid = brandlistObject.brandName;
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
@@ -50,8 +58,10 @@ function selectBrand (bid) {
     xmlhttp.open("GET", "partials/saleproductprint.php?brandname=" + bid, true);
     xmlhttp.send();
     history.pushState({
-        location: 'brandlist'
-    }, null, "?brandname=" + bid);
+        location: 'product_brand',
+        brandName: bid
+    }, "", "?brandname=" + bid);
+    console.log(history.state);
 }
 
 function checkState () {
@@ -65,6 +75,11 @@ function checkState () {
             case 'brandlist':
                 // alert('brandlist');
                 getBrandlist();
+                break;
+            case 'product_brand':
+                alert('product_brand');
+                console.log(state);
+                selectBrand(state);
                 break;
             default:
                 alert('something wrong with state.location');

@@ -3,8 +3,6 @@
         session_start();
     }
     $_SESSION['location'] == 'productlist';
-    
-    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +17,7 @@
     <section>
         <?php
             include_once ("partials/header.php");
-            ?>        
+            ?>
     </section>
     <br><br>
     <section id="main">
@@ -45,7 +43,6 @@
                         } else if (isset($_GET['l'])) {
                             include_once ('brandlist.php');
                         } else if (isset($_GET['brandname'])) {
-                            include ('connection.php');
                             include_once ('partials/saleproductprint.php');
                         }
                         ?>

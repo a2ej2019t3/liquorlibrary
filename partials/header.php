@@ -10,15 +10,15 @@
         <div class="container">
     <!-- login button -->
             <?php
-                    if (!isset($_SESSION['user'])) {
-                        echo '
-                            <button type="button" class="btn-warning btn-sm trigger-btn '.$className.'" href="#myModal" data-toggle="modal" style="position:absolute; right: 35px; top: 57px; color:white!important; background-color: rgba(224, 184, 65, 1)!important; border:none;">Login</button>
-                        ';
-                    } else {
-                        echo '
-                            <button type="button" id="logoutButton" class="btn-success btn-sm trigger-btn '.$className.'" style="position:absolute; right: 35px; top: 57px; color:white!important; background-color: rgba(224, 184, 65, 1)!important; border:none;">Logout</button>
-                        ';
-                    }
+                if (!isset($_SESSION['user'])) {
+                    echo '
+                        <button type="button" class="btn-warning btn-sm trigger-btn '.$className.'" href="#myModal" data-toggle="modal" style="position:absolute; right: 35px; top: 57px; color:white!important; background-color: rgba(224, 184, 65, 1)!important; border:none;">Login</button>
+                    ';
+                } else {
+                    echo '
+                        <button type="button" id="logoutButton" class="btn-success btn-sm trigger-btn '.$className.'" style="position:absolute; right: 35px; top: 57px; color:white!important; background-color: rgba(224, 184, 65, 1)!important; border:none;">Logout</button>
+                    ';
+                }
             ?>
             <br>
             <div class="navbar-header">
