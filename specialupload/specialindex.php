@@ -117,7 +117,7 @@ font-family: 'Josefin Sans', sans-serif;
   position: absolute;
   top: -20px;
   right: 29px;
-  z-index: 10000;
+  z-index: 100;
 }
 .headingforspecial{
     font-size: 3rem;

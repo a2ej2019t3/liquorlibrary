@@ -1,0 +1,127 @@
+/* 
+font-family: 'Lato', sans-serif;
+font-family: 'Shadows Into Light', cursive;
+font-family: 'Cinzel', serif;
+font-family: 'Roboto', sans-serif;
+font-family: 'Open Sans', sans-serif;
+font-family: 'Montserrat', sans-serif;
+font-family: 'Playfair Display', serif;
+*/
+
+body{
+    font-family: 'Lato', sans-serif;
+}
+.carthead{
+    margin-bottom: 50px;
+    margin-top: 60px;
+}
+.step-tab {
+	clear: both;
+	width: 80%;
+	overflow: hidden;
+	height: 100px;
+	position: relative;
+    text-align: center;
+	margin: 30px auto;
+}
+
+.step-tab ul {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	list-style: none;
+}
+
+.step-tab ul li {
+	display: block;
+	position: absolute;
+	z-index: 2;
+}
+
+.step-tab ul li a {
+	display: block;
+	width: 38px;
+	height: 38px;
+	border-radius: 20px;
+	-webkit-border-radius: 20px;
+	padding: 9px 0 0;
+	color: #bab9b9;
+	background: white;
+	border: 1px solid #bab9b9;
+	font-size: 18px;
+	font-family: "dinbold";
+	text-align: center;
+	margin: auto;
+}
+
+.step-tab ul li a:hover {
+	text-decoration: none;
+}
+
+.step-tab ul li p {
+	font-family: "Noto Sans Regular",  Tahoma;
+	font-weight: 600;
+	font-size: 14px;
+	color: #bab9b9;
+	text-transform: uppercase;
+	text-align: center;
+	padding-top: 19px;
+}
+
+.step-tab ul li:nth-child(1) p {
+	text-align: left;
+}
+
+.step-tab ul li:nth-child(1) a {
+	margin-left: 0;
+}
+
+.step-tab ul li:nth-child(2) {
+	left: 30%;
+	margin-left: -21px;
+}
+
+.step-tab ul li:nth-child(3) {
+	left: 66%;
+	margin-left: -21px;
+}
+
+/* .step-tab ul li:nth-child(4) {
+	left: 72%;
+	margin-left: -21px;
+} */
+
+.step-tab ul li:nth-child(4) {
+	right: 10px;
+}
+
+.step-tab ul li:nth-child(4) a {
+	margin-right: 0;
+}
+
+.step-tab ul li:nth-child(4) p {
+	text-align: right;
+}
+
+.step-tab ul li.selected a {
+	background: #E12726;
+	color: white;
+	border: 1px solid #E12726;
+}
+
+.step-tab ul li.selected p {
+	color: #E12726;
+}
+
+.step-tab ul:after {
+	content: "";
+	display: block;
+	position: absolute;
+	width: 95%;
+	border-bottom: 1px solid #e5e5e5;
+	top: 19px;
+	z-index: 1;
+}
+.cart-items{
+    width:100%;
+}

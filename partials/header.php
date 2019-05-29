@@ -44,7 +44,7 @@
                     <li class="col"><a class="<?php echo $className; ?>" href="findlocation/findus.php" style="color: white; font-size: 1rem; font-family: 'Roboto', sans-serif;">Find Us</a></li>
                     <li class="col"><a class="<?php echo $className; ?> js-open-modal" id="ourdrinks" data-toggle="modal" data-target="#subnav" href="#" style="color: white; font-size: 1rem; font-family: 'Roboto', sans-serif;">Our Drinks</a></li> 
                     <li class="col"><a class="<?php echo $className; ?>" href="specials.php" style="color: white; font-size: 1rem; font-family: 'Roboto', sans-serif;">Specials</a></li> 
-                    <li class="col"><a class="<?php echo $className; ?>" href="#" style="color: white; font-size: 1rem; font-family: 'Roboto', sans-serif;">Cart</a></li>
+                    <li class="col"><a class="<?php echo $className; ?>" href="paymentprocess.php" style="color: white; font-size: 1rem; font-family: 'Roboto', sans-serif;">Cart</a></li>
                     <li class="col"><a class="<?php echo $className; ?>" href="#" style="color: white; font-size: 1rem; font-family: 'Roboto', sans-serif;">My orders</a></li>
                     <li class="col"><a class="<?php echo $className; ?>" href="contact.php" style="color: white; font-size: 1rem; font-family: 'Roboto', sans-serif;">Contact</a></li> 
                     <li class="col"> 

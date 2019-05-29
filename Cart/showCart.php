@@ -8,16 +8,17 @@ $DBsql = new sql;
 // $getItems_arr = $DBsql->getCartItems($cartID);
 if (isset($_SESSION['cartItems'])) {
     $getItems_arr = $_SESSION['cartItems'];
-    var_dump($getItems_arr);
+    // var_dump($getItems_arr);
     // print_r($getItems_arr);
     $tagForCategory = 'Category: ';
     $tagForBrand = 'Brand: ';
+    $tagForPrice = 'Price: ';
     $imgpath = 'images/';
     if ($getItems_arr != array()) {
         foreach ($getItems_arr as $key => $value) {
             $idArr = array('productID' => $key);
             $itemInfo_arr = $DBsql->select($DBsql->getProductInfo(), $idArr);
-            var_dump($itemInfo_arr);
+            // var_dump($itemInfo_arr);
             if ($itemInfo_arr !== false) {
                 // print_r($itemInfo_arr);
                 // ob_clean();
@@ -33,6 +34,8 @@ if (isset($_SESSION['cartItems'])) {
                                 <b>'.$itemInfo_arr['productName'].'</b><br>
                                 <i>'.$tagForCategory.$itemInfo_arr['categoryName'].'</i><br>
                                 <i>'.$tagForBrand.$itemInfo_arr['brandName'].'</i>
+                                <i>'.$tagForPrice.$itemInfo_arr['discountprice'].'</i>
+
                             </p>
                         </div>
                     </div>

@@ -24,7 +24,8 @@
         <div>Total price: $<span class="total-cart"></span></div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" id="checkoutbutton">Check Out</button>
+        <button type="button" class="btn btn-primary" id="checkoutbutton" onclick="location.href='paymentprocess.php';">Check Out</button>
+        
       </div>
     </div>
   </div>

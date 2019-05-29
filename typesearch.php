@@ -1,13 +1,4 @@
-<!-- 
-p.productID, 
-p.img, 
-p.productName, 
-p.discountprice, 
-p.price,
-p.categoryID, 
-b.brandName, 
-c.categoryName,
-c.categoryID  -->
+
 <section>
     <div class="container" style="padding-right: 45px;">
     <center><h4 style="margin-top: 100px;"><hr>Bottle Shop</h4></center>

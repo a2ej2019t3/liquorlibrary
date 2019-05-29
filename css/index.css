@@ -331,7 +331,7 @@ height: 250px!important;
 /* ---Indexpage CSS-------------------------------------------------------------------------------------------------------------------------------------- */
 #mainscreen{
     background-image: url("../images/liquor10.jpg");
-    height: 625px;
+    height: 100vh;
     background-size: cover;
     text-align: center;
     background-attachment: scroll;
