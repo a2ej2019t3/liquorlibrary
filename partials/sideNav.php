@@ -21,7 +21,7 @@ include_once ('connection.php');
                         // $cityName= $parentCategory_arr[$a][1];
                         $identifier=$a;
                         echo '
-                        <a href="#" class="dropdown-btn collapsible-header childlink" data-toggle="sidebar" data-target=".subcategorylist'. $identifier.'">'.$parentCategory_arr[$a][1].' <i class="fa fa-angle-down"></i></a>
+                        <a class="dropdown-btn collapsible-header childlink" data-toggle="sidebar" data-target=".subcategorylist'. $identifier.'">'.$parentCategory_arr[$a][1].' <i class="fa fa-angle-down"></i></a>
                         ';
                         $subCategory_sql="SELECT `categoryID`, `categoryName` FROM `category` WHERE `parentCategoryID` =".$parentCategory_arr[$a][0]."";
                         $subCategory_res = mysqli_query($connection, $subCategory_sql);
@@ -177,6 +177,7 @@ body {
 .sidenav a:hover ,.sidenav a:focus{
   color: #064579;
   background-color: #eee;
+  cursor: pointer;
 }
 .maintype:active{
   color: #064579;
