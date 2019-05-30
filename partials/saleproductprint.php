@@ -18,9 +18,14 @@
         <div class="row">
 <!-- content body starts -->
         <div class="productresult col-md-9 col-xs-12 content-right">
-<!-- product list results -->
-        <div style="margin-top: 100px; "><hr><span style="font-size:24px;">Shop By Brand </span>
-        <hr>
+<!-- product list results -->';
+        if (isset($_GET['brandname'])) {
+            echo '
+            <div style="margin-top: 100px; "><hr><span style="font-size:24px;">Shop By Brand </span>
+            <hr>
+            ';
+        }
+        echo '
         <section>
         <div class="container" style="padding-right: 45px;">
         <div style="text-align:left;"><i class="far fa-compass" style="margin: 10px 10px;"></i><a style="color: black!important; text-decoration: none!important;" href="index.php">Home / </a> <span> Sale products / '.$resultcount.' products</span></div>';
@@ -73,8 +78,12 @@
         echo "
         </div>
         </div>
-        </section>
-        </div>
+        </section>";
+        if (isset($_GET['brandname'])) {
+            echo '
+            </div>';
+        }
+        echo"
         </div>
         </div>
         </div>
