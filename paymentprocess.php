@@ -103,6 +103,7 @@
     if (isset($_SESSION['user']['userID'])) {
       if (count($cartitem_arr) != 0) {
         $imgpath = 'images/'; 
+        $carttotal=0;
         for($b = 0; $b <count($cartitem_arr); $b++){
           echo '
           <tr class="items" id="items['.$cartitem_arr[$b][6].']" data-variant="'.$cartitem_arr[$b][6].'" data-title="'.$cartitem_arr[$b][7].' / '.$cartitem_arr[$b][11].' - '.$cartitem_arr[$b][12].'" data-url="productlist.php?pid='.$cartitem_arr[$b][6].'">
@@ -128,39 +129,35 @@
               <p class="listprice"></p>
               </td>';
             if($cartitem_arr[$b][9] !==null ){
-              echo ' <td class="cart-item-total last" id="total['.$cartitem_arr[$b][6].']">NZ$'.$cartitem_arr[$b][9].'</td>';
+              echo ' 
+              <input type="hidden" name="prevtotal['.$cartitem_arr[$b][6].']" id="prevtotal['.$cartitem_arr[$b][6].']" data-value="'.$cartitem_arr[$b][9].'">
+              <td class="cart-item-total last" id="total['.$cartitem_arr[$b][6].']" data-attribute="'.$cartitem_arr[$b][6].'" onchange="totalSum(this);">NZ$'.$cartitem_arr[$b][9].'</td>';
+              
               
             }
           else {
-            echo ' <td class="cart-item-total last" id="total['.$cartitem_arr[$b][6].']" >NZ$'.$cartitem_arr[$b][8].'</td>';          
+            echo ' 
+            <input type="hidden" name="prevtotal['.$cartitem_arr[$b][6].']" id="prevtotal['.$cartitem_arr[$b][6].']" data-value="'.$cartitem_arr[$b][8].'">
+            <td class="cart-item-total last" id="total['.$cartitem_arr[$b][6].']" data-attribute="'.$cartitem_arr[$b][6].'" onchange="totalSum(this);" >NZ$'.$cartitem_arr[$b][8].'</td>';          
           }
           echo '<td>
                   <button class="cart-item-remove" type="button">Remove</button> 
                 </td>';
             echo '</tr>';
-          if($cartitem_arr[$b][9] !==null ){
-            $totalprice=$cartitem_arr[$b][9];
+            if($cartitem_arr[$b][9] !==null){
+            $itemtotal= $cartitem_arr[$b][9];
+            $carttotal=$carttotal+$itemtotal;
+            }
+            else{
+              $itemtotal= $cartitem_arr[$b][8];
+              $carttotal=$carttotal+$itemtotal;  
+            } 
         }
-          else {
-            $totalprice=$cartitem_arr[$b][8];
-      
-          }
-          $resultprice=0;
-          $resultprice=$resultprice+$totalprice;
-          
-          // echo $totalprice
-        }
-echo $resultprice;
       }
       else{
         echo 'No item found';
       }
-    }
-    else{
-      echo '<h4 class="notloggedinmsg">Please log in for the next step</h4>';
-    }
-      ?>
-
+      echo '
       </tbody>
 
     </table>
@@ -169,15 +166,15 @@ echo $resultprice;
     
     <div class="cart-tools">
 
-      
+    <p class="cart-price">TOTAL: NZ$<span class="totalmoney">'.$carttotal.'</span></p>
       <div class="cart-instructions">        
-        <p class="note"><i class='fas fa-pencil-alt' style='font-size:24px; margin-right: 10px;'></i>Special instructions</p>      
+        <p class="note"><i class="fas fa-pencil-alt" style="font-size:24px; margin-right: 10px;"></i>Special instructions</p>      
         <textarea rows="6" name="note" placeholder="Add a note"></textarea>
       </div>
       
 
       <div class="cart-totals">
-        <p class="cart-price"><span class="money"><?php $resultprice ?></span></p>
+
         
         
         
@@ -210,6 +207,14 @@ echo $resultprice;
   </form>
     </div>
     </section>   
+';
+
+
+    }
+    else{
+      echo '<h4 class="notloggedinmsg">Please log in for the next step</h4>';
+    }
+      ?>
 
 <!-- links -->
 <?php

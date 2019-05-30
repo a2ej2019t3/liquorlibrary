@@ -262,3 +262,14 @@ td {
 	text-align: center;
 	margin-top: 30px;
 }
+.cart-price{
+	float: right;
+	margin-right: 30px;
+	font-size: 20px;
+}
+.totalmoney{
+	color: #E12726;
+	font-weight: 700;
+	font-size: 1.6rem;
+	margin-left:10px;
+}
