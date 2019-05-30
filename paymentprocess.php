@@ -47,7 +47,9 @@
 	 <link rel="stylesheet" href="css/cart.css">
     <title>Shopping Cart</title>
 </head>
+
 <body>
+
 <section>
         <?php
           include_once ("./partials/header.php");
@@ -103,7 +105,7 @@
         $imgpath = 'images/'; 
         for($b = 0; $b <count($cartitem_arr); $b++){
           echo '
-          <tr class="cart-item variant-'.$cartitem_arr[$b][6].' first " data-variant="'.$cartitem_arr[$b][6].'" data-title="'.$cartitem_arr[$b][7].' / '.$cartitem_arr[$b][11].' - '.$cartitem_arr[$b][12].'" data-url="productlist.php?pid='.$cartitem_arr[$b][6].'">
+          <tr class="items" id="items['.$cartitem_arr[$b][6].']" data-variant="'.$cartitem_arr[$b][6].'" data-title="'.$cartitem_arr[$b][7].' / '.$cartitem_arr[$b][11].' - '.$cartitem_arr[$b][12].'" data-url="productlist.php?pid='.$cartitem_arr[$b][6].'">
 			
 		 	 <td class="cart-item-product first">
               <div class="cart-image"><img class="img-fluid productimg" src="'.$imgpath.$cartitem_arr[$b][10].'" alt="'.$cartitem_arr[$b][7].'"></div>
@@ -113,22 +115,24 @@
               </div>
 			</td>';
       if($cartitem_arr[$b][9] !==null ){
-        echo      '<td class="cart-item-price"><span class="money">$'.$cartitem_arr[$b][9].'</td>';
+        echo      '<td class="cart-item-price" name="ticket_price['.$cartitem_arr[$b][6].']" id="ticket_price['.$cartitem_arr[$b][6].']" data-value="'.$cartitem_arr[$b][9].'">$'.$cartitem_arr[$b][9].'</td>';
     }
     else {
-      echo      '<td class="cart-item-price"><span class="money">$'.$cartitem_arr[$b][8].'</td>';
+      echo      '<td class="cart-item-price" name="ticket_price['.$cartitem_arr[$b][6].']" id="ticket_price['.$cartitem_arr[$b][6].']">$'.$cartitem_arr[$b][8].'</td>';
 
     }
 
       
   echo        '<td class="cart-item-quantity">
-              <input type="number" name="quantity" class="cart-item-quantity-display" id="quantity" value="1">
-            </td>';
+              <input type="number" name="quantity['.$cartitem_arr[$b][6].']" id="quantity['.$cartitem_arr[$b][6].']"  class="cart-item-quantity-display" data-attribute="'.$cartitem_arr[$b][6].'" value="1" onblur="CaclulateCostTotal(this);">
+              <p class="listprice"></p>
+              </td>';
             if($cartitem_arr[$b][9] !==null ){
-              echo ' <td class="cart-item-total last"><span class="money">NZ$'.$cartitem_arr[$b][9].'</span></td>';
-          }
+              echo ' <td class="cart-item-total last" id="total['.$cartitem_arr[$b][6].']">NZ$'.$cartitem_arr[$b][9].'</td>';
+              
+            }
           else {
-            echo ' <td class="cart-item-total last"><span class="money">NZ$'.$cartitem_arr[$b][8].'</span></td>';          
+            echo ' <td class="cart-item-total last" id="total['.$cartitem_arr[$b][6].']" >NZ$'.$cartitem_arr[$b][8].'</td>';          
           }
           echo '<td>
                   <button class="cart-item-remove" type="button">Remove</button> 
@@ -163,7 +167,7 @@
 
       
       <div class="cart-instructions">        
-        <p>Special instructions</p>      
+        <p class="note"><i class='fas fa-pencil-alt' style='font-size:24px; margin-right: 10px;'></i>Special instructions</p>      
         <textarea rows="6" name="note" placeholder="Add a note"></textarea>
       </div>
       
@@ -178,7 +182,7 @@
         <p style="float: none; text-align: right; clear: both; margin: 10px 0;">
         	<input style="float:none; vertical-align: middle;" type="checkbox" id="agree" required="">
         	<label style="display:inline; float:none" for="agree">
-          		Are you and the receiving person both at least 18 years old? <a href="/pages/terms-of-service">Terms of Service</a>.
+          		Are you and the receiving person both at least 18 years old? <a href="">Terms of Service</a>.
 			</label>
 		</p>
         
@@ -211,7 +215,8 @@
   <script type="text/javascript" src="js/main.js"></script>
   <script type="text/javascript" src="js/search.js"></script>
   <script type="text/javascript" src="js/cart.js"></script>
-  <script type="text/javascript" src="js/pay.js"></script>
+  <script type="text/javascript" src="./js/pay.js"></script>
+
 <!-- ----- -->
 </body>
 </html>

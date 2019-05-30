@@ -244,7 +244,9 @@ tr .cart-item-price, tr .cart-item-quantity, tr .cart-item-total {
 	-moz-user-select: none;
 	user-select: none;
 }
-
+th.first{
+	text-align: center;
+}
 td {
 	display: table-cell;
 	vertical-align: inherit;
@@ -252,4 +254,10 @@ td {
 .notloggedinmsg{
 	text-align: center;
 	margin: 30px auto;
+}
+.note{
+	font-size: 1.3rem;
+	font-weight: 600;
+	text-align: center;
+	margin-top: 30px;
 }
