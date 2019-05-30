@@ -10,3 +10,18 @@ function directPayment() {
     xmlhttp.open("GET", "payment/paymentprocess.php", true);
     xmlhttp.send();
 }
+// $(document).on('click', '.set-quantity', function(){
+//     var current_value = $('#quantity').val() > 0 ? $('#quantity').val() : 0
+
+//     if($(this).hasClass('increase')){
+//       var new_value = ++current_value
+//     }
+
+//     if($(this).hasClass('decrease')){
+//       var new_value = current_value == 0 ? 0 : --current_value
+//     }
+
+//     console.log(new_value)
+//     $('#quantity').val(new_value)  
+//     return false;
+// })

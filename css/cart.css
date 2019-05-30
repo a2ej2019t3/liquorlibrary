@@ -125,3 +125,131 @@ body{
 .cart-items{
     width:100%;
 }
+.cart-image{
+	width: 100px;
+	height: 100px;
+	text-align: center;
+}
+.productimg{
+	/* width: 100%;
+	height:100%; */
+	padding:0;
+	margin:0;
+	height: 100px;
+}
+.buttonarea{
+	text-align: center;
+
+}
+#checkbutton{
+	background-color: black;
+	border: 1px solid black;
+	width: 150px;
+	height: 45px;
+	font-size: 16px;
+	margin: 20px auto;
+}
+
+#checkbutton:hover{
+	background-color: white;
+	border: 1px solid black;
+	color: black;
+}
+#checkbutton:hover a{
+  color: black!important;
+}
+#checkbutton a{
+  color: white!important;
+  text-decoration: none!important;
+}
+#checkbutton a:hover{
+  color: black!important;
+  text-decoration: none!important;
+}
+.cart-image, .cart-item-product-wrap{
+	display: inline-block;
+}
+.cart-item-product-wrap{
+	margin-left: 30px;
+}
+.cart-item-product-wrap a{
+	color: black;
+	text-decoration: none;
+}
+.itemname{
+	font-size:1.2rem;
+	font-weight: 600;
+}
+.itemname:hover{
+	font-size:1.3rem;
+	margin-top: -10px;
+}
+.last{
+	color: #E12726;
+	font-weight: 700;
+}
+.cart-item-remove{
+	background-color: black;
+	color:white;
+	border: 1px solid black;
+	width: 55px;
+	height: 27px;
+	text-align:center;
+	font-size: 12px;
+	/* margin: 20px auto; */
+	border-radius: 15px;
+
+}
+.cart-item-remove:hover{
+	background-color: white;
+	color:black;
+}
+.cart-item-decrease {
+	border-radius: 5px 0 0 5px;
+}
+.cart-item-decrease, .cart-item-increase {
+	display: inline-block;
+	height: 36px;
+	line-height: 32px;
+	border: 1px solid #ede7e4;
+	padding: 0 10px;
+	cursor: pointer;
+}
+.cart-item-quantity>* {
+	font-size: 16px;
+	padding-left:10px;
+	width:50px;
+}
+.icon {
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+}
+.cart-items tr td, .cart-items tr th {
+	border-bottom: 1px solid #ede7e4;
+	border-radius: 0 !important;
+}
+
+tr .cart-item-price, tr .cart-item-quantity, tr .cart-item-total {
+	text-align: left;
+	padding-right: 20px;
+}
+.cart-item td {
+	padding: 10px 0;
+}
+.cart-item-quantity {
+	font-size: 0;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	user-select: none;
+}
+
+td {
+	display: table-cell;
+	vertical-align: inherit;
+}
+.notloggedinmsg{
+	text-align: center;
+	margin: 30px auto;
+}
