@@ -2,20 +2,20 @@
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
     }
-    $_SESSION['location'] == 'productlist';
-?>
+    $_SESSION['location'] = 'productlist';
+    ?>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <?php
+    <head>
+        <?php
         include_once ("partials/head.php");
         // include ("database/DBsql.php");
         ?>
 <title>Product_listbyCategory</title>
 </head>
 <body style="height: 110%;">
-    <section>
-        <?php
+        <section>
+            <?php
             include_once ("partials/header.php");
             ?>
     </section>
@@ -35,7 +35,19 @@
                 </div>
 
                 <div class="productresult col-md-9 col-xs-12 content-right">
-                    <!-- product list results -->
+                    <?php
+                            echo '
+                            <div id="pricesortDropdown" style="margin-top: 100px; "><hr><span style="font-size:24px;">Sale products</span>
+                                <select class="sortselect" name="sortselect" id="selectsort" style="width: 300px;margin-left: 15px;">                             
+                                    <option data-target="onsalelist">ALL ITEMS</option>
+                                    <option data-target="discountrate" >BY DISCOUNT RATE</option>
+                                    <option value="ASC"  data-target="pricesort">BY LOW PRICE</option>
+                                    <option value="DESC" data-target="pricesorthigh" onclick="pricesorthigh()">BY HIGH PRICE</option>
+                                    <button type="submit"></button>
+                                </select>
+                            </div>';
+                    ?>
+                <!-- product list results -->
                     <article id="productArea">
                     </article>
                 </div>
@@ -48,8 +60,8 @@
     <script type="text/javascript" src="js/sub.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
     <script type="text/javascript" src="js/search.js"></script>
-    <script type="text/javascript" src="js/cart.js"></script>
     <script type="text/javascript" src="js/product.js"></script>
+    <script type="text/javascript" src="js/cart.js"></script>
 </body>
 
 </html>

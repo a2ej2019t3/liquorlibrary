@@ -1,9 +1,9 @@
 
 <?php
     // session_start();
-    $_SESSION['location'] = 'productlist';
+    // $_SESSION['location'] = 'productlist';
     // $_SESSION['ref'] = $SERVER['QUERYSTRING'];
-    include ('connection.php');
+    include ('../connection.php');
     // Sale product search 
 
     $searchSale_sql = "SELECT p.productID, p.img, p.productName, p.discountprice, p.price,p.categoryID, b.brandName, c.categoryName,c.categoryID FROM product AS p, brand AS b, category AS c WHERE p.brandID=b.brandID and p.categoryID=c.categoryID and p.discountprice is not null";
@@ -17,9 +17,10 @@
     }
  ?>
 
+<?php
+echo '
  <div class="container" style="padding-right: 45px;">
-     <?php
-        echo '<div style="text-align:left;"><i class="far fa-compass" style="margin: 10px 10px;"></i><a style="color: black!important; text-decoration: none!important;" href="index.php">Home / </a> <span> Sale products / '.$resultcount.' products</span></div>';
+        <div style="text-align:left;"><i class="far fa-compass" style="margin: 10px 10px;"></i><a style="color: black!important; text-decoration: none!important;" href="index.php">Home / </a> <span> Sale products / '.$resultcount.' products</span></div>';
          
           if ($resultcount != "") {
             $imgpath = 'images/';
@@ -77,18 +78,14 @@
             ob_clean();
             echo '<p>No record found.</p>';
         }
-     ?>
+        echo '
         </div>
-<section>
-
-<!-- -------------------------------------------------------------------------------------------------------- -->
- <!-- modal2> for type2 special product -->
-       <!-- Modal -->
-
-        
-      <?php
-echo
-        '<div class="modal fade" id="specialproductadd" tabindex="-1" role="dialog" >
+        <section>
+        <!-- -------------------------------------------------------------------------------------------------------- -->
+        <!-- modal2> for type2 special product -->
+        <!-- Modal -->
+        ';
+echo '<div class="modal fade" id="specialproductadd" tabindex="-1" role="dialog" >
                 <div class="modal-dialog modal-sm" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -124,29 +121,29 @@ echo
                     </form>
                   </div>
                 </div>
-              </div>';
-?>
-    </section>
-
-        <style>
-.adminbuttons{
-position:absolute;
-right: 5px;
-top: 3px;
-display:none;
-}
-
-    
-.product-grid__img-wrapper:hover > .adminbuttons {
-    display: block;   
-}
-
-        </style>
-<script>
-$('#specialproductadd').on('show.bs.modal', function (e) {
-    var mypostNumber = $(e.relatedTarget).attr('data-id');
-    $(this).find('#postNumber').text(mypostNumber);
-    // $(this).find('#postinput').val(mypostNumber);
-    $('#postinput').val(mypostNumber);
-});
-</script>
+              </div>
+            </section>
+            
+            <style>
+                    .adminbuttons{
+                        position:absolute;
+                        right: 5px;
+                        top: 3px;
+                        display:none;
+                    }
+                    
+                    
+                    .product-grid__img-wrapper:hover > .adminbuttons {
+                        display: block;   
+                    }
+                    
+                </style>
+                <script>
+                        $("#specialproductadd").on("show.bs.modal", function (e) {
+                            var mypostNumber = $(e.relatedTarget).attr("data-id");
+                            $(this).find("#postNumber").text(mypostNumber);
+                            // $(this).find("#postinput").val(mypostNumber);
+                            $("#postinput").val(mypostNumber);
+                        });
+                        </script>
+                        ';

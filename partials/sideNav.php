@@ -56,13 +56,18 @@ include_once ('connection.php');
 
   <?php
     $brandInfo = array(
-                      'searchPara' => '?l=brandlist',
+                      'searchPara' => 'brandlist.php?location=brandlist',
                       'location' => 'brandlist'
                       );
     $brandInfoJson = json_encode($brandInfo);
+    $onSale = array(
+                    'searchPara' => 'saleproductprint.php?location=salelist',
+                    'location' => 'salelist'
+                    );
+    $onSaleJson = json_encode($onSale);
   ?>
-  <li><a class="maintype" href="" value="<?php $brandInfoJson ?>" onclick="showProduct(this.value)">Brand</a></li>
-  <li><a class="maintype" name="saletag" href="onsale.php" id="onsaletrigger">On Sale</a></li>
+  <li><button class="maintype" value='<?php echo $brandInfoJson ?>' onclick="showProduct(this.value)">Brand</button></li>
+  <li><button class="maintype" value='<?php echo $onSaleJson ?>' onclick="showProduct(this.value)">On Sale</button></li>
   <a data-toggle="sidebar" href="#" data-target="#pricelist" class="dropdown-btn collapsible-header maintype" id="pricebutton">Price <i class="fas fa-caret-down"></i></a>
         <div  class="dropdown-container" id="pricelist">
                     <ul>
@@ -139,13 +144,15 @@ body {
   padding: 8px 0;
 }
 
-.maintype{
+.maintype {
+  width: 100%;
   padding: 6px 8px 6px 16px;
   font-size: 17px;
   font-weight: 700;
   color: black;
   display: block;
   border-top: 1px solid rgba(144, 180, 148, 1);
+  border: none;
   text-align:center;
   background-color: rgba(224, 184, 65, 1);
 }
@@ -188,6 +195,8 @@ body {
   background-color: #eee!important;
 }
 .maintype:hover{
+  color: #064579;
+  background-color: #eee!important;
   text-decoration: none;
 }
 li{
