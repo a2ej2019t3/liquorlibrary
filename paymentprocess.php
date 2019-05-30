@@ -123,7 +123,7 @@
     }
 
       
-  echo        '<td class="cart-item-quantity">
+  echo        '<td class="cart-item-quantity" style="padding-top: 20px;">
               <input type="number" name="quantity['.$cartitem_arr[$b][6].']" id="quantity['.$cartitem_arr[$b][6].']"  class="cart-item-quantity-display" data-attribute="'.$cartitem_arr[$b][6].'" value="1" onblur="CaclulateCostTotal(this);">
               <p class="listprice"></p>
               </td>';
@@ -145,8 +145,12 @@
             $totalprice=$cartitem_arr[$b][8];
       
           }
-        $resultprice=+$totalprice;
+          $resultprice=0;
+          $resultprice=$resultprice+$totalprice;
+          
+          // echo $totalprice
         }
+echo $resultprice;
       }
       else{
         echo 'No item found';
