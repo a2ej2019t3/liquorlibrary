@@ -11,7 +11,7 @@ include_once ('connection.php');
 <hr style="margin-top:100px; margin-left:15px;">
 <div class="sidenav">
    
- <a href="#about" data-toggle="sidebar" data-target="#categorylist" class="dropdown-btn collapsible-header active maintype">Category <i class="fas fa-caret-down"></i></a>
+<a href="#about" data-toggle="sidebar" data-target="#categorylist" class="dropdown-btn collapsible-header active maintype">Category <i class="fas fa-caret-down"></i></a>
         <div  class="dropdown-container" id="categorylist" style="display: block;">
             <ul>
                 <?php

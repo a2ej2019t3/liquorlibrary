@@ -40,7 +40,6 @@
             } else {
                 $sql = trim($sql, "WHERE ");
             }
-
             return $sql;
         }
 

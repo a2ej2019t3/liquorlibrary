@@ -1,8 +1,11 @@
-var jsonObject = {
-    searchPara: '',
-    onloadPara: '',
-    location: ''
-}
+var pricesortDropdown = document.getElementById('pricesortDropdown'),
+    fileName = '',
+    onloadfileName = 'categorysearch.php',
+    jsonObject = {
+        searchPara: '',
+        onloadPara: '',
+        location: ''
+    }
 
 function addLoadEvent(func) {
     var oldonload = window.onload;
@@ -18,56 +21,29 @@ function addLoadEvent(func) {
     }
 }
 
-window.onpopstate = checkState;
+window.onpopstate = function () {
+    var state = history.state;
+    if (state) {
+        showProduct(state);
+    }
+};;
+
 window.onload = function () {
     // console.log(history.state);
     var search = window.location.search,
-        searchParas = new URLSearchParams(window.location.search),
+        searchParas = new URLSearchParams(search),
         locationPara = searchParas.get('location');
-    switch (locationPara) {
-        case 'category':
-            var fileName = 'typesearch.php',
-                onloadfileName = 'categorysearch.php';
-                pricesortDropdown.style.display = "none";
-            break;
-        case 'brandlist':
-            var fileName = 'brandlist.php',
-                onloadfileName = 'categorysearch.php';
-                pricesortDropdown.style.display = "none";
-            break;
-        case 'brandproduct':
-            var fileName = 'partials/saleproductprint.php',
-                onloadfileName = 'categorysearch.php';
-                pricesortDropdown.style.display = "none";
-            break;
-        case 'salelist':
-            var fileName = 'partials/onsalelist.php',
-                onloadfileName = 'categorysearch.php';
-                pricesortDropdown.style.display = "block";
-            break;
-        case 'lowprice':
-            var fileName = 'partials/saleproductprint.php',
-                onloadfileName = 'categorysearch.php';
-                pricesortDropdown.style.display = "block";
-            break;
-        default:
-            alert("can't identify the page");
-            break;
-    }
+        checkLocationPara(locationPara);
     jsonObject.searchPara = fileName + search;
     jsonObject.onloadPara = onloadfileName + search;
     jsonObject.location = locationPara;
     
     history.replaceState(jsonObject, null, jsonObject.onloadPara);
     // alert('onload function');
-    // console.log(history.state);
-    // console.log(jsonObject);
     showProduct(jsonObject);
 }
 
 function showProduct (Json) {
-    console.log(Json);
-    // console.log(history.state);
     // convert json into object
     if (typeof Json === 'object') {
         var parajsonObject = Json;
@@ -76,45 +52,15 @@ function showProduct (Json) {
     }
     // update object
     var locationPara = parajsonObject.location,
-        searchPara = parajsonObject.searchPara,
+        searchPara = parajsonOb
+        ject.searchPara,
         search = searchPara.split('.php');
         if (search.length == 1) {
             search = search[0];
         } else {
             search = search[1];
         }
-        console.log(search);
-        var pricesortDropdown = document.getElementById('pricesortDropdown')
-    switch (locationPara) {
-        case 'category':
-            var fileName = 'typesearch.php',
-                onloadfileName = 'categorysearch.php';
-                pricesortDropdown.style.display = "none";
-            break;
-        case 'brandlist':
-            var fileName = 'brandlist.php',
-                onloadfileName = 'categorysearch.php';
-                pricesortDropdown.style.display = "none";
-            break;
-        case 'brandproduct':
-            var fileName = 'partials/saleproductprint.php',
-                onloadfileName = 'categorysearch.php';
-                pricesortDropdown.style.display = "none";
-            break;
-        case 'salelist':
-            var fileName = 'partials/onsalelist.php',
-                onloadfileName = 'categorysearch.php';
-                pricesortDropdown.style.display = "block";
-            break;
-        case 'lowprice':
-            var fileName = 'partials/saleproductprint.php',
-                onloadfileName = 'categorysearch.php';
-                pricesortDropdown.style.display = "block";
-            break;
-        default:
-            alert("can't identify the page");
-            break;
-    }
+    checkLocationPara(locationPara);
     jsonObject.searchPara = fileName + search;
     jsonObject.onloadPara = onloadfileName + search;
     jsonObject.location = locationPara;
@@ -122,7 +68,6 @@ function showProduct (Json) {
     var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
-                // console.log(xmlhttp);
                 document.getElementById("productArea").innerHTML = xmlhttp.responseText;
             }
         };
@@ -149,52 +94,58 @@ function pushHistoryState () {
     }
 }
 
-function checkState () {
-    var state = history.state;
-    if (state) {
-        switch (state.location) {
-            case 'category':
-                // alert('category');
-                showProduct(state);
-                break;
-            case 'brandlist':
-                // alert('brandlist');
-                showProduct(state);
-                break;
-            case 'brandproduct':
-                // alert('product_brand');
-                // console.log(state);
-                showProduct(state);
-                break;
-            default:
-                alert('something wrong with state.location');
-                break;
-        }
-    }
+function checkLocationPara (locationPara) {
+    switch (locationPara) {
+        case 'category':
+            fileName = 'typesearch.php',
+            // onloadfileName = 'categorysearch.php';
+            pricesortDropdown.style.display = "none";
+            break;
+        case 'brandlist':
+            fileName = 'brandlist.php',
+            // onloadfileName = 'categorysearch.php';
+            pricesortDropdown.style.display = "none";
+            break;
+        case 'brandproduct':
+            fileName = 'partials/saleproductprint.php';
+            // onloadfileName = 'categorysearch.php';
+            pricesortDropdown.style.display = "none";
+            break;
+        case 'salelist':
+            if (checkIfSelected().condition)
+            fileName = 'partials/' + checkIfSelected() + '.php';
+            // onloadfileName = 'categorysearch.php';
+            pricesortDropdown.style.display = "block";
+            break;
+        default:
+            alert("can't identify the page");
+            break;
+}
 }
 
-addLoadEvent(function(){
-    // Set trigger and container variables
-    var trigger = $('.sortselect'),
-        container = $('#productArea');
-        
-    // Fire on click
-    trigger.on('click', function(){
-      // Set $this for re-use. Set target from data attribute
-    var $this = $(this),
-        target = $this.find(':selected').data('target');       
-        if (target == 'pricesort') {
-            var psObject = {
-                searchPara: '?ob=ASC&location=lowprice',
-                onloadPara: '?ob=ASC&location=lowprice',
-                location: 'lowprice'
-            }
-            showProduct(psObject);
+function checkIfSelected () {
+    var obj = document.getElementById('selectsort');
+    var targetObj = {
+        target: '',
+        condition: ''
+        };
+    if (obj.options[obj.selectedIndex].getAttribute('data-target')) {
+        targetObj.target = obj.options[obj.selectedIndex].getAttribute('data-target');
+        if (obj.options[obj.selectedIndex].getAttribute('value')) {
+            targetObj.condition = obj.options[obj.selectedIndex].getAttribute('value');
+            return targetObj;
         }
-        // Stop normal link behavior
-        return false;
-    });
-});
+        return targetObj;
+    }
+};
+
+function checkChange () {
+    var Json = {
+        searchPara: '?location=salelist',
+        location: 'salelist'
+    }
+    showProduct(Json);
+}
 
 // function getBrandlist () {
 //     var xmlhttp = new XMLHttpRequest();

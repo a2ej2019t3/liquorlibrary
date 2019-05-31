@@ -19,7 +19,7 @@
     <script>
       $(document).ready(function(){
         // Set trigger and container variables
-        var trigger = $('.sortselect'),
+        var trigger = $('.sortselect option'),
             container = $('#content');
             
         // Fire on click
@@ -35,9 +35,9 @@
         });
       });
     </script>
- </head>
- <body>
-     <section>
+</head>
+<body>
+    <section>
         <?php
             include_once ("partials/header.php");
         ?>        
