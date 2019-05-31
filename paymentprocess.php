@@ -21,13 +21,6 @@
     echo '<script type="text/javascript">';                
     echo 'alert("Please log in to proceed")';
     echo '</script>';
-
-    // echo "<script type='text/javascript'>
-    // $(document).ready(function(){
-    // $('#myModal').modal('show');
-    // });
-    // </script>";
-    // include ('partials/loginmodal.php');
   }
 
   
@@ -61,22 +54,22 @@
     <!-- step element ends -->
     <div class="step-tab">
         <ul>
-            <li class="selected">
+            <li id="step1" class="selected">
                 <a href="" shape="rect">1</a>
 
                 <p>Cart</p>
             </li>
-            <li>
+            <li id="step2">
                 <a href="javascript:void(0);" shape="rect">2</a>
 
                 <p>Confirm Detail</p>
             </li>
-            <li>
+            <li id="step3">
                 <a href="javascript:void(0);" shape="rect">3</a>
 
                 <p>Payment</p>
             </li>
-            <li>
+            <li id="step4">
                 <a href="javascript:void(0);" shape="rect">4</a>
 
                 <p>Invoice</p>
@@ -216,8 +209,7 @@
 
     </div>
   </div> 
-  /*content ends*/
-  // </form>
+  </form>
     </div>
     </section>   
 ';

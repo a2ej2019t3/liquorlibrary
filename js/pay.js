@@ -1,3 +1,5 @@
+
+
 var CaclulateCostTotal = function(data) {
     // var $this = $(this);
     var id= $(data).data('attribute');
@@ -75,6 +77,23 @@ function quantityUpdate(data){
 
 var confirmorderdetail = function() {
    var ordertotalcost= document.getElementById('cartTotalPrice').value; 
+   var ordertotalquantity= document.getElementById('cartTotalQuantity').value; 
+   var note= document.getElementById('notetext').value; 
 
-
-}
+   ordertotalcost = parseFloat(ordertotalcost);
+   ordertotalquantity = parseInt(ordertotalquantity,10);
+   
+   var xmlhttp = new XMLHttpRequest();
+   xmlhttp.onreadystatechange = function () {
+       if (this.readyState == 4 && this.status == 200) {
+           console.log(xmlhttp);
+           document.getElementById("content").innerHTML = xmlhttp.responseText;
+       }
+   };
+xmlhttp.open("GET", "./payment/confirmdetail.php?ordertotalcost="+ordertotalcost+"&ordertotalquantity="+ordertotalquantity+"&note="+note, true);
+xmlhttp.send();
+$('#second').ready(function(){
+    $('#step1').removeClass('selected');
+    $('#step2').addClass('selected');
+   });
+};
