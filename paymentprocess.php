@@ -117,28 +117,27 @@
 			</td>';
       if($cartitem_arr[$b][9] !==null ){
         echo      '<td class="cart-item-price" name="ticket_price['.$cartitem_arr[$b][6].']" id="ticket_price['.$cartitem_arr[$b][6].']" data-value="'.$cartitem_arr[$b][9].'">$'.$cartitem_arr[$b][9].'</td>';
-    }
+        echo        '<td class="cart-item-quantity" style="padding-top: 20px;">
+        <input type="number" name="quantity['.$cartitem_arr[$b][6].']" id="quantity['.$cartitem_arr[$b][6].']"  class="cart-item-quantity-display" data-attribute="'.$cartitem_arr[$b][6].'" value="1" onblur="CaclulateCostTotal(this);">
+        <p class="listprice"></p>
+        </td>';
+      }
     else {
       echo      '<td class="cart-item-price" name="ticket_price['.$cartitem_arr[$b][6].']" id="ticket_price['.$cartitem_arr[$b][6].']">$'.$cartitem_arr[$b][8].'</td>';
-
+      echo        '<td class="cart-item-quantity" style="padding-top: 20px;">
+      <input type="number" name="quantity['.$cartitem_arr[$b][6].']" id="quantity['.$cartitem_arr[$b][6].']"  class="cart-item-quantity-display" data-attribute="'.$cartitem_arr[$b][6].'" value="1" onblur="CaclulateCostTotal(this);">
+      <p class="listprice"></p>
+      </td>';
     }
-
-      
-  echo        '<td class="cart-item-quantity" style="padding-top: 20px;">
-              <input type="number" name="quantity['.$cartitem_arr[$b][6].']" id="quantity['.$cartitem_arr[$b][6].']"  class="cart-item-quantity-display" data-attribute="'.$cartitem_arr[$b][6].'" value="1" onblur="CaclulateCostTotal(this);">
-              <p class="listprice"></p>
-              </td>';
             if($cartitem_arr[$b][9] !==null ){
-              echo ' 
-              <input type="hidden" name="prevtotal['.$cartitem_arr[$b][6].']" id="prevtotal['.$cartitem_arr[$b][6].']" data-value="'.$cartitem_arr[$b][9].'">
-              <td class="cart-item-total last" id="total['.$cartitem_arr[$b][6].']" data-attribute="'.$cartitem_arr[$b][6].'" onchange="totalSum(this);">NZ$'.$cartitem_arr[$b][9].'</td>';
+              echo '  
+              <td class="cart-item-total last asdfa" id="total['.$cartitem_arr[$b][6].']" value="'.$cartitem_arr[$b][9].'" data-attribute="'.$cartitem_arr[$b][6].'">NZ$'.$cartitem_arr[$b][9].'</td>';
               
               
             }
           else {
             echo ' 
-            <input type="hidden" name="prevtotal['.$cartitem_arr[$b][6].']" id="prevtotal['.$cartitem_arr[$b][6].']" data-value="'.$cartitem_arr[$b][8].'">
-            <td class="cart-item-total last" id="total['.$cartitem_arr[$b][6].']" data-attribute="'.$cartitem_arr[$b][6].'" onchange="totalSum(this);" >NZ$'.$cartitem_arr[$b][8].'</td>';          
+            <td class="cart-item-total last asdfa" id="total['.$cartitem_arr[$b][6].']" value="'.$cartitem_arr[$b][8].'" data-attribute="'.$cartitem_arr[$b][6].'">NZ$'.$cartitem_arr[$b][8].'</td>';          
           }
           echo '<td>
                   <button class="cart-item-remove" type="button">Remove</button> 
@@ -166,7 +165,7 @@
     
     <div class="cart-tools">
 
-    <p class="cart-price">TOTAL: NZ$<span class="totalmoney">'.$carttotal.'</span></p>
+    <p class="cart-price">TOTAL: NZ$<span class="totalmoney" id="cartTotalPrice">'.$carttotal.'</span></p>
       <div class="cart-instructions">        
         <p class="note"><i class="fas fa-pencil-alt" style="font-size:24px; margin-right: 10px;"></i>Special instructions</p>      
         <textarea rows="6" name="note" placeholder="Add a note"></textarea>
