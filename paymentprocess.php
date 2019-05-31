@@ -6,7 +6,7 @@
   // Cart items > in case of order status=0 
   if(isset($_SESSION['user']['userID'])){
   $userID=$_SESSION['user']['userID'];
-  $cartitem_sql = "SELECT o.orderID, o.buyerId, o.whID, o.status, oi.itemID, oi.quantity, p.productID, p.productName, p.price, p.discountprice, p.img, b.brandName, c.categoryName FROM orders AS o, orderitems AS oi, product AS p, brand AS b, category AS c WHERE o.orderID=oi.orderID and oi.itemID=p.productID and p.brandID=b.brandID and p.categoryID= c.categoryID and o.status=0 and o.buyerID='$userID';";
+  $cartitem_sql = "SELECT o.orderID, o.buyerId, o.whID, o.status, oi.itemID, oi.quantity, p.productID, p.productName, p.price, p.discountprice, p.img, b.brandName, c.categoryName, oi.totalprice FROM orders AS o, orderitems AS oi, product AS p, brand AS b, category AS c WHERE o.orderID=oi.orderID and oi.itemID=p.productID and p.brandID=b.brandID and p.categoryID= c.categoryID and o.status=0 and o.buyerID='$userID';";
   
   $cartitem_res = mysqli_query($connection, $cartitem_sql);
   
@@ -84,8 +84,10 @@
 
         </ul>
     </div> 
+
+    <div id="content">
 	<!-- step element ends -->
-	<form action="/cart" method="post">
+	<!-- <form action="/cart" method="post"> -->
     
 
     <table class="cart-items clean">
@@ -104,8 +106,10 @@
       if (count($cartitem_arr) != 0) {
         $imgpath = 'images/'; 
         $carttotal=0;
+        $carttotalquantity=0;
         for($b = 0; $b <count($cartitem_arr); $b++){
           echo '
+          <input type="hidden" value="'.$cartitem_arr[$b][0].'" id="order'.$cartitem_arr[$b][6].'">
           <tr class="items" id="items['.$cartitem_arr[$b][6].']" data-variant="'.$cartitem_arr[$b][6].'" data-title="'.$cartitem_arr[$b][7].' / '.$cartitem_arr[$b][11].' - '.$cartitem_arr[$b][12].'" data-url="productlist.php?pid='.$cartitem_arr[$b][6].'">
 			
 		 	 <td class="cart-item-product first">
@@ -118,39 +122,40 @@
       if($cartitem_arr[$b][9] !==null ){
         echo      '<td class="cart-item-price" name="ticket_price['.$cartitem_arr[$b][6].']" id="ticket_price['.$cartitem_arr[$b][6].']" data-value="'.$cartitem_arr[$b][9].'">$'.$cartitem_arr[$b][9].'</td>';
         echo        '<td class="cart-item-quantity" style="padding-top: 20px;">
-        <input type="number" name="quantity['.$cartitem_arr[$b][6].']" id="quantity['.$cartitem_arr[$b][6].']"  class="cart-item-quantity-display" data-attribute="'.$cartitem_arr[$b][6].'" value="1" onblur="CaclulateCostTotal(this);">
-        <p class="listprice"></p>
+        <input type="number" min="1" name="quantity['.$cartitem_arr[$b][6].']" id="quantity['.$cartitem_arr[$b][6].']"  class="cart-item-quantity-display" data-attribute="'.$cartitem_arr[$b][6].'" value="'.$cartitem_arr[$b][5].'" onblur="CaclulateCostTotal(this); quantityUpdate(this);">
         </td>';
       }
     else {
       echo      '<td class="cart-item-price" name="ticket_price['.$cartitem_arr[$b][6].']" id="ticket_price['.$cartitem_arr[$b][6].']">$'.$cartitem_arr[$b][8].'</td>';
       echo        '<td class="cart-item-quantity" style="padding-top: 20px;">
-      <input type="number" name="quantity['.$cartitem_arr[$b][6].']" id="quantity['.$cartitem_arr[$b][6].']"  class="cart-item-quantity-display" data-attribute="'.$cartitem_arr[$b][6].'" value="1" onblur="CaclulateCostTotal(this);">
+      <input type="number" name="quantity['.$cartitem_arr[$b][6].']" id="quantity['.$cartitem_arr[$b][6].']"  class="cart-item-quantity-display" data-attribute="'.$cartitem_arr[$b][6].'" value="'.$cartitem_arr[$b][5].'" onblur="CaclulateCostTotal(this); quantityUpdate(this);">
       <p class="listprice"></p>
       </td>';
     }
             if($cartitem_arr[$b][9] !==null ){
               echo '  
-              <td class="cart-item-total last asdfa" id="total['.$cartitem_arr[$b][6].']" value="'.$cartitem_arr[$b][9].'" data-attribute="'.$cartitem_arr[$b][6].'">NZ$'.$cartitem_arr[$b][9].'</td>';
+              <td class="cart-item-total last asdfa" id="total['.$cartitem_arr[$b][6].']" value="'.$cartitem_arr[$b][13].'" data-attribute="'.$cartitem_arr[$b][6].'">NZ$'.$cartitem_arr[$b][13].'</td>';
               
               
             }
           else {
             echo ' 
-            <td class="cart-item-total last asdfa" id="total['.$cartitem_arr[$b][6].']" value="'.$cartitem_arr[$b][8].'" data-attribute="'.$cartitem_arr[$b][6].'">NZ$'.$cartitem_arr[$b][8].'</td>';          
+            <td class="cart-item-total last asdfa" id="total['.$cartitem_arr[$b][6].']" value="'.$cartitem_arr[$b][13].'" data-attribute="'.$cartitem_arr[$b][6].'">NZ$'.$cartitem_arr[$b][13].'</td>';          
           }
           echo '<td>
                   <button class="cart-item-remove" type="button">Remove</button> 
                 </td>';
             echo '</tr>';
-            if($cartitem_arr[$b][9] !==null){
-            $itemtotal= $cartitem_arr[$b][9];
+            // if($cartitem_arr[$b][9] !==null){
+            $itemtotal= $cartitem_arr[$b][13];
             $carttotal=$carttotal+$itemtotal;
-            }
-            else{
-              $itemtotal= $cartitem_arr[$b][8];
-              $carttotal=$carttotal+$itemtotal;  
-            } 
+            // }
+            // else{
+            //   $itemtotal= $cartitem_arr[$b][8];
+            //   $carttotal=$carttotal+$itemtotal;  
+            // } 
+            $itemquantity=$cartitem_arr[$b][5];
+            $carttotalquantity=$carttotalquantity+$itemquantity;
         }
       }
       else{
@@ -164,11 +169,19 @@
   
     
     <div class="cart-tools">
+    <p class="cart-quantity" id="cartTotalQuantity" style="
+    text-align: right;
+    margin-right: 30px;
+    margin-bottom: 0;
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: 700;
+">'.$carttotalquantity.'items</p>
 
     <p class="cart-price">TOTAL: NZ$<span class="totalmoney" id="cartTotalPrice">'.$carttotal.'</span></p>
       <div class="cart-instructions">        
         <p class="note"><i class="fas fa-pencil-alt" style="font-size:24px; margin-right: 10px;"></i>Special instructions</p>      
-        <textarea rows="6" name="note" placeholder="Add a note"></textarea>
+        <textarea rows="6" name="note" id="notetext" placeholder="Add a note"></textarea>
       </div>
       
 
@@ -192,7 +205,7 @@
  
         
         <div class="buttonarea">
-          <button type="submit" class="btn btn-secondary btn-sm" id="checkbutton">
+          <button type="button" class="btn btn-secondary btn-sm" id="checkbutton" onclick="confirmorderdetail();">
               PROCEED
               </a>
           </button>        
@@ -202,8 +215,9 @@
       </div>
 
     </div>
-
-  </form>
+  </div> 
+  /*content ends*/
+  // </form>
     </div>
     </section>   
 ';

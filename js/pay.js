@@ -8,12 +8,14 @@ var CaclulateCostTotal = function(data) {
             total = c * q || 0;
         //select the total item sum
         var resulttoal= document.getElementById('total['+id+']');
+        var hiddentotal= document.getElementById('hiddentotal['+id+']');
         //display it 
         resulttoal.innerHTML = 'NZ $'+total+'';
         //set
         resulttoal.setAttribute('value',''+total+''); 
         // 
         finalPrice();
+       
 };
 
 function finalPrice(params) {
@@ -26,21 +28,53 @@ function finalPrice(params) {
    }
    document.getElementById('cartTotalPrice').innerHTML = finalprice;
    document.getElementById('cartTotalPrice').setAttribute('value',''+finalprice+''); 
+   finalquantity();
+};
+function finalquantity(params){
+    var quantity =document.getElementsByClassName('cart-item-quantity-display');
+    var finalquantity = 0;
+    for(i=0; i< quantity.length; i++){
+        finalquantity+=parseInt(quantity[i].value);
+        // console.log(finalprice);
+        // alert(finalquantity);
+   }
+   document.getElementById('cartTotalQuantity').innerHTML = ''+finalquantity+' items';
+   document.getElementById('cartTotalQuantity').setAttribute('value',''+finalquantity+''); 
+
+};
+function quantityUpdate(data){
+    
+    //itemID
+    var itemid= $(data).data('attribute');
+   
+    // orderId
+    var orderid=document.getElementById('order'+itemid+'').value;
+    updateorderid = parseInt(orderid, 10);
+
+    var quant= document.getElementById('quantity['+itemid+']').value;
+    updatequantity = parseInt(quant, 10);
+
+    var totalitem= document.getElementById('total['+itemid+']').getAttribute('value');
+    updatetotal = parseFloat(totalitem);
+    // alert(itemid);
+    // alert(updateorderid);
+    // alert(updatequantity);
+    // alert(updatetotal);
+
+    
+    var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                console.log(xmlhttp);
+                // document.getElementById("content").innerHTML = xmlhttp.responseText;
+            }
+        };
+    xmlhttp.open("GET", "./payment/confirmpay.php?orderid="+updateorderid+"&itemid="+itemid+"&quantity="+updatequantity+"&updatetotal="+updatetotal, true);
+    xmlhttp.send();
+;}
+
+var confirmorderdetail = function() {
+   var ordertotalcost= document.getElementById('cartTotalPrice').value; 
+
 
 }
-
-var totalSum =function(data) {
-    var id= $(data).data('attribute');
-    $('tr.items').each(function( ) {    
-        
-        var previousval =document.getElementById('prevtotal['+id+']').value;
-        var changedvalue =document.getElementById('initialtotal['+id+']').value;
-        
-        previousval = parseFloat(previousval),
-        changedvalue = parseFloat(newtochangedvaluetal),
-        change = changedvalue - previousval || 0;
-        alert(change);
-
-
-});
-};
