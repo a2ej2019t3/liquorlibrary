@@ -1,15 +1,3 @@
-// show shopping cart AJAX
-// window.onload = function () {
-//     var cl = new XMLHttpRequest();
-//         cl.onreadystatechange = function () {
-//             if (this.readyState == 4 && this.status == 200) {
-//               console.log(cl);
-//               document.getElementById("showItems").innerHTML = cl.responseText;
-//             }
-//         };
-//     cl.open("GET", "./Cart/getItems.php", true);
-//     cl.send();
-// }
 function addLoadEvent(func) {
     var oldonload = window.onload;
     if (typeof window.onload != 'function') {
@@ -62,9 +50,20 @@ function getItems () {
             if (this.readyState == 4 && this.status == 200) {
                 console.log(xmlhttp);
                 showCart();
-                document.getElementById("debug").innerHTML = xmlhttp.responseText;
+                // document.getElementById("debug").innerHTML = xmlhttp.responseText;
             }
         };
     xmlhttp.open("GET", "Cart/getItems.php", true);
     xmlhttp.send();
 }
+
+function openNav() {
+    document.getElementById("mySidebar").style.width = "250px";
+    document.getElementById("main").style.marginLeft = "250px";
+  }
+  
+  /* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
+  function closeNav() {
+    document.getElementById("mySidebar").style.width = "0";
+    document.getElementById("main").style.marginLeft = "0";
+  }

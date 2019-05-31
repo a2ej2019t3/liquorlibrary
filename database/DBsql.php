@@ -17,7 +17,7 @@
 
         //select all product info
         public function getProductInfo() {
-            $sql = "(SELECT product.productID, product.productName, product.price, product.discountprice, product.img, brand.brandName, category.categoryName FROM product 
+            $sql = "(SELECT product.productID, product.productName, product.price, product.discountprice, product.img, brand.brandName, category.categoryName, category.categoryID FROM product 
             LEFT JOIN brand ON product.brandID = brand.brandID
             LEFT JOIN category ON product.categoryID = category.categoryID) AS allproduct ";
             
@@ -29,14 +29,17 @@
             $sql = "SELECT * FROM $table WHERE ";
             if ($consArr != null) {
                 foreach ($consArr as $key => $value) {
-                    $constrant .= "$key = $value AND ";
+                    if ($key != 'spec') {
+                        $constrant .= "$key = $value AND ";
+                    } else {
+                        $constrant .= "$value AND ";
+                    }
                 }
                 $sql .= $constrant;
                 $sql = trim($sql, "AND ");
             } else {
                 $sql = trim($sql, "WHERE ");
             }
-
             return $sql;
         }
 
@@ -102,10 +105,11 @@
                 $res = $this->connection->query($sql);
                 if (!$res) {
                     trigger_error('Invalid query: ' . $this->connection->error);
+                    trigger_error('query: ' . $sql);
                     return $sql;
                 } else {
                     if ($res->num_rows > 0) {
-                        $arr = $res->fetch_assoc();
+                        $arr = $res->fetch_all(MYSQLI_ASSOC);
                         return $arr;
                     }
                 }

@@ -11,52 +11,64 @@ include_once ('connection.php');
 <hr style="margin-top:100px; margin-left:15px;">
 <div class="sidenav">
    
- <a href="#about" data-toggle="sidebar" data-target="#categorylist" class="dropdown-btn collapsible-header active maintype">Category <i class="fas fa-caret-down"></i></a>
+<a href="#about" data-toggle="sidebar" data-target="#categorylist" class="dropdown-btn collapsible-header active maintype">Category <i class="fas fa-caret-down"></i></a>
         <div  class="dropdown-container" id="categorylist" style="display: block;">
             <ul>
                 <?php
-                             if (count($parentCategory_arr) != 0) { 
-                        
-                            for ($a = 0; $a < count($parentCategory_arr); $a++) {
-                                // parent category list showing
-                                // $cityName= $parentCategory_arr[$a][1];
-                                $identifier=$a;
-                                echo '
-                                <a href="#" class="dropdown-btn collapsible-header childlink" data-toggle="sidebar" data-target=".subcategorylist'. $identifier.'">'.$parentCategory_arr[$a][1].' <i class="fa fa-angle-down"></i></a>
-                                ';
-                                $subCategory_sql="SELECT `categoryID`, `categoryName` FROM `category` WHERE `parentCategoryID` =".$parentCategory_arr[$a][0]."";
-                                $subCategory_res = mysqli_query($connection, $subCategory_sql);
-                                if ($subCategory_res != "") {
-                                    $subCategory_arr = mysqli_fetch_all($subCategory_res);
-                                } else {
-                                    alert("sub category result empty");
-                                }
-                                echo '<div class="dropdown-container" class="subcategorylist'. $identifier.'">
-                                
-                                         <ul>';
-                                for ($b = 0; $b < count($subCategory_arr); $b++) {
-                                    echo '<li class="contentsli"><a class="linkanchor" href="categorysearch.php?searchcategoryID='.$subCategory_arr[$b][0].'&searchcategoryName='.$subCategory_arr[$b][1].'">'.$subCategory_arr[$b][1].'</a></li>';
-                                };
-                                         echo '</ul>
-                                         
-                                         </div>';
-                               
-                            }
-                
+                    if (count($parentCategory_arr) != 0) {
+                      for ($a = 0; $a < count($parentCategory_arr); $a++) {
+                        // parent category list showing
+                        // $cityName= $parentCategory_arr[$a][1];
+                        $identifier=$a;
+                        echo '
+                        <a class="dropdown-btn collapsible-header childlink" data-toggle="sidebar" data-target=".subcategorylist'. $identifier.'">'.$parentCategory_arr[$a][1].' <i class="fa fa-angle-down"></i></a>
+                        ';
+                        $subCategory_sql="SELECT `categoryID`, `categoryName` FROM `category` WHERE `parentCategoryID` =".$parentCategory_arr[$a][0]."";
+                        $subCategory_res = mysqli_query($connection, $subCategory_sql);
+                        if ($subCategory_res != "") {
+                            $subCategory_arr = mysqli_fetch_all($subCategory_res);
                         } else {
-                        
+                            alert("sub category result empty");
+                        }
+                        echo '<div class="dropdown-container" class="subcategorylist'. $identifier.'">
+                                 <ul>';
+                        for ($b = 0; $b < count($subCategory_arr); $b++) {
+                            $categoryInfo = array(
+                                                'searchPara' => "typesearch.php?searchcategoryID=".$subCategory_arr[$b][0]."&searchcategoryName=".$subCategory_arr[$b][1]."&location=category",
+                                                'location' => "category"
+                                              );
+                            // var_dump($productInfo);
+                            $categoryInfoJson = json_encode($categoryInfo);
+                            // var_dump($productInfoJson);
+                            echo '<li class="contentsli">
+                                      <button type="button" class="linkanchor" value='.$categoryInfoJson.' onclick="showProduct(this.value)" >'.$subCategory_arr[$b][1].'</button>
+                                  </li>';
                         };
+                        echo '</ul>
+                            </div>';
+                      }
+                    }
 
                   ?>
 
             </ul>
       </div>
 
- 
-  
-  <li><a class="maintype" href="brandlist.php">Brand</a></li>
-  <li><a class="maintype" name="saletag" href="onsale.php" id="onsaletrigger">On Sale</a></li>
-  <a data-toggle="sidebar" data-target="#pricelist" class="dropdown-btn collapsible-header maintype" id="pricebutton">Price <i class="fas fa-caret-down"></i></a>
+  <?php
+    $brandInfo = array(
+                      'searchPara' => 'brandlist.php?location=brandlist',
+                      'location' => 'brandlist'
+                      );
+    $brandInfoJson = json_encode($brandInfo);
+    $onSale = array(
+                    'searchPara' => 'saleproductprint.php?location=salelist',
+                    'location' => 'salelist'
+                    );
+    $onSaleJson = json_encode($onSale);
+  ?>
+  <li><button class="maintype" value='<?php echo $brandInfoJson ?>' onclick="showProduct(this.value)">Brand</button></li>
+  <li><button class="maintype" value='<?php echo $onSaleJson ?>' onclick="showProduct(this.value)">On Sale</button></li>
+  <a data-toggle="sidebar" href="#" data-target="#pricelist" class="dropdown-btn collapsible-header maintype" id="pricebutton">Price <i class="fas fa-caret-down"></i></a>
         <div  class="dropdown-container" id="pricelist">
                     <ul>
                     <li class="childlink" >
@@ -132,13 +144,15 @@ body {
   padding: 8px 0;
 }
 
-.maintype{
+.maintype {
+  width: 100%;
   padding: 6px 8px 6px 16px;
   font-size: 17px;
   font-weight: 700;
   color: black;
   display: block;
   border-top: 1px solid rgba(144, 180, 148, 1);
+  border: none;
   text-align:center;
   background-color: rgba(224, 184, 65, 1);
 }
@@ -170,6 +184,7 @@ body {
 .sidenav a:hover ,.sidenav a:focus{
   color: #064579;
   background-color: #eee;
+  cursor: pointer;
 }
 .maintype:active{
   color: #064579;
@@ -180,6 +195,8 @@ body {
   background-color: #eee!important;
 }
 .maintype:hover{
+  color: #064579;
+  background-color: #eee!important;
   text-decoration: none;
 }
 li{
