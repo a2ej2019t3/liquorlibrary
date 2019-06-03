@@ -76,13 +76,16 @@ function quantityUpdate(data){
 ;}
 
 var confirmorderdetail = function() {
-   var ordertotalcost= document.getElementById('cartTotalPrice').value; 
-   var ordertotalquantity= document.getElementById('cartTotalQuantity').value; 
+   var ordertotalcost= document.getElementById('cartTotalPrice').getAttribute('value');
+   var ordertotalquantity= document.getElementById('cartTotalQuantity').getAttribute('value');
    var note= document.getElementById('notetext').value; 
 
-   ordertotalcost = parseFloat(ordertotalcost);
-   ordertotalquantity = parseInt(ordertotalquantity,10);
    
+var totalcost = parseFloat(ordertotalcost);
+var totalquantity = parseInt(ordertotalquantity, 10);
+   
+//    alert(totalcost);
+//    alert(ordertotalquantity);
    var xmlhttp = new XMLHttpRequest();
    xmlhttp.onreadystatechange = function () {
        if (this.readyState == 4 && this.status == 200) {
@@ -90,10 +93,38 @@ var confirmorderdetail = function() {
            document.getElementById("content").innerHTML = xmlhttp.responseText;
        }
    };
-xmlhttp.open("GET", "./payment/confirmdetail.php?ordertotalcost="+ordertotalcost+"&ordertotalquantity="+ordertotalquantity+"&note="+note, true);
+xmlhttp.open("GET", "./payment/confirmdetail.php?ordertotalcost="+totalcost+"&ordertotalquantity="+totalquantity+"&note="+note, true);
 xmlhttp.send();
 $('#second').ready(function(){
     $('#step1').removeClass('selected');
     $('#step2').addClass('selected');
    });
 };
+var detailname =function(){
+    var username= document.getElementById('usernamebox').value;
+    // alert(companyname);
+    namebox= document.getElementById('namebox');
+    namebox.innerHTML= username;
+    namebox.setAttribute('value',username);
+}
+var detailcompany =function(){
+    var companyname= document.getElementById('comname').value;
+    // alert(companyname);
+    companydetailbox= document.getElementById('companybox');
+    companydetailbox.innerHTML= "Company:   "+ companyname
+    companydetailbox.setAttribute('value',companyname);
+}
+var detailemailupdate =function(){
+    var emailaddress= document.getElementById('emailadd').value;
+    // alert(companyname);
+    emailbox= document.getElementById('emailbox');
+    emailbox.innerHTML= emailaddress;
+    emailbox.setAttribute('value',emailaddress);
+}
+var detailaddressupdate =function(){
+    var address= document.getElementById('addressadd').value;
+    // alert(companyname);
+    addressbox= document.getElementById('addresschangearea');
+    addressbox.innerHTML= address;
+    addressbox.setAttribute('value',address);
+}

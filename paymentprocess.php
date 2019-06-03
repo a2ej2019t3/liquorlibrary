@@ -162,7 +162,7 @@
   
     
     <div class="cart-tools">
-    <p class="cart-quantity" id="cartTotalQuantity" style="
+    <p class="cart-quantity" name="cartTotalQuantity" id="cartTotalQuantity" value="'.$carttotalquantity.'" style="
     text-align: right;
     margin-right: 30px;
     margin-bottom: 0;
@@ -171,7 +171,7 @@
     font-weight: 700;
 ">'.$carttotalquantity.'items</p>
 
-    <p class="cart-price">TOTAL: NZ$<span class="totalmoney" id="cartTotalPrice">'.$carttotal.'</span></p>
+    <p class="cart-price">TOTAL: NZ$<span class="totalmoney" name="cartTotalPrice" id="cartTotalPrice" value="'.$carttotal.'">'.$carttotal.'</span></p>
       <div class="cart-instructions">        
         <p class="note"><i class="fas fa-pencil-alt" style="font-size:24px; margin-right: 10px;"></i>Special instructions</p>      
         <textarea rows="6" name="note" id="notetext" placeholder="Add a note"></textarea>
@@ -209,7 +209,6 @@
 
     </div>
   </div> 
-  </form>
     </div>
     </section>   
 ';
