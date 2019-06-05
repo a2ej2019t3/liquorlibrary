@@ -1,7 +1,8 @@
 
     <?php
       session_start();
-      include ('../connection.php');
+      require_once "config.php";
+      include ('connection.php');
       if(isset($_SESSION['user']['userID'])){
         $userID=$_SESSION['user']['userID'];
         $user_sql = "SELECT u.userID, u.typeID, u.firstName, u.lastName, u.companyName, u.email, u.phone, u.address, ut.typeID, ut.typeName FROM `users` AS u, usertype AS ut WHERE u.typeID=ut.typeID and u.userID='$userID'";
@@ -26,7 +27,7 @@
           echo 'alert("Please log in to proceed")';
           echo '</script>';
         }
-    include_once ("../partials/head.php");
+    include_once ("partials/head.php");
     $_SESSION['ordertotalcost']= $_GET['ordertotalcost'];
     $ordertotalcost= $_SESSION['ordertotalcost'];
     $_SESSION['ordertotalquantity']= $_GET['ordertotalquantity'];
@@ -97,12 +98,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-12 buttonarea">
-          <button type="button" class="btn btn-secondary btn-sm" id="checkbutton">
-          CONTINUE
-              </a>
-          </button>        
-        </div>
+        
     </div>  
 </div>
 

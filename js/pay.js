@@ -30,6 +30,8 @@ function finalPrice(params) {
    }
    document.getElementById('cartTotalPrice').innerHTML = finalprice;
    document.getElementById('cartTotalPrice').setAttribute('value',''+finalprice+''); 
+   document.getElementById('paybutton').setAttribute('data-amount',''+finalprice+''); 
+
    finalquantity();
 };
 function finalquantity(params){
@@ -93,7 +95,7 @@ var totalquantity = parseInt(ordertotalquantity, 10);
            document.getElementById("content").innerHTML = xmlhttp.responseText;
        }
    };
-xmlhttp.open("GET", "./payment/confirmdetail.php?ordertotalcost="+totalcost+"&ordertotalquantity="+totalquantity+"&note="+note, true);
+xmlhttp.open("GET", "./confirmdetail.php?ordertotalcost="+totalcost+"&ordertotalquantity="+totalquantity+"&note="+note, true);
 xmlhttp.send();
 $('#second').ready(function(){
     $('#step1').removeClass('selected');

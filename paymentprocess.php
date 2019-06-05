@@ -2,17 +2,18 @@
 <?php
   session_start();
   $_SESSION['location'] = 'paymentprocess';
+  // require_once "config.php";
   include ('connection.php');
   // Cart items > in case of order status=0 
   if(isset($_SESSION['user']['userID'])){
   $userID=$_SESSION['user']['userID'];
   $cartitem_sql = "SELECT o.orderID, o.buyerId, o.whID, o.status, oi.itemID, oi.quantity, p.productID, p.productName, p.price, p.discountprice, p.img, b.brandName, c.categoryName, oi.totalprice FROM orders AS o, orderitems AS oi, product AS p, brand AS b, category AS c WHERE o.orderID=oi.orderID and oi.itemID=p.productID and p.brandID=b.brandID and p.categoryID= c.categoryID and o.status=0 and o.buyerID='$userID';";
-  
   $cartitem_res = mysqli_query($connection, $cartitem_sql);
   
   if ($cartitem_res != "") {
       $cartitem_arr = mysqli_fetch_all($cartitem_res);
       $resultcount=count($cartitem_arr);
+      $orderID=$cartitem_arr[0][0];
     } else {
       alert("result empty");
     }
@@ -149,7 +150,9 @@
             // } 
             $itemquantity=$cartitem_arr[$b][5];
             $carttotalquantity=$carttotalquantity+$itemquantity;
+
         }
+
       }
       else{
         echo 'No item found';
@@ -171,8 +174,9 @@
     font-weight: 700;
 ">'.$carttotalquantity.'items</p>
 
-    <p class="cart-price">TOTAL: NZ$<span class="totalmoney" name="cartTotalPrice" id="cartTotalPrice" value="'.$carttotal.'">'.$carttotal.'</span></p>
-      <div class="cart-instructions">        
+    <p class="cart-price">TOTAL: NZ$<span class="totalmoney" name="cartTotalPrice" id="cartTotalPrice" value="'.$carttotal.'">'.$carttotal.'</span></p>';
+    $carttotalcost= ($carttotal*100); 
+    echo '<div class="cart-instructions">        
         <p class="note"><i class="fas fa-pencil-alt" style="font-size:24px; margin-right: 10px;"></i>Special instructions</p>      
         <textarea rows="6" name="note" id="notetext" placeholder="Add a note"></textarea>
       </div>
@@ -209,6 +213,23 @@
 
     </div>
   </div> 
+  <div class="col-12 buttonarea">
+        <form action="stripeIPN.php?id='.$userID.'&totalquantity='.$carttotalquantity.'&totalcost='.$carttotal.'&orderID
+        ='.$orderID.'" method="POST">
+            <script id="paybutton" 
+                src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                data-key="pk_test_LzVFBvv6py0EeG7ifdYNnfJv00dEJ5eiyo"
+                data-amount="'.$carttotalcost.'"
+                data-name="Order ID Number: '.$orderID.'"
+                data-description="This payment includes total total '.$carttotalquantity.'items '.$carttotal.'NZD"
+                data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                data-locale="auto"
+                data-currency="nzd"
+                data-zip-code="true">
+
+            </script>
+            </form>
+        </div>
     </div>
     </section>   
 ';
