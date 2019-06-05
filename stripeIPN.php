@@ -11,7 +11,7 @@
 
 
 	if (!isset($_POST['stripeToken']) || !isset($userID)) {
-		// header("Location: index.php");
+		header("Location: index.php");
 		exit();
 	}
 

@@ -39,12 +39,12 @@
  	?>
 	 <link rel="stylesheet" href="css/cart.css">
 <article id="second">
+<form method="POST" action="confirmpay.php">
 <div class="container">
     <div class="row">
-
         <!-- info confirmation -->
         <div class="col-sm-12 col-lg-8">
-            <form>
+           
                 <div class="contactinformation">
                     <div class="contacthead">Contact Information</div>
                         <div class="row">
@@ -66,7 +66,7 @@
                         
                             <div class="col-12 contactnumberbox contactinformationbox">
                                 <label for="lable">Contact Number</label><br>
-                                <input name="contactnumber" class="contactnumber" placeholder="<?php echo $phone?>" type="text" id="numberadd" onchange="detailnumberupdate();" required>   
+                                <input name="contactnumber" class="contactnumber" placeholder="<?php echo $phone?>" value="<?php echo $phone?>" type="text" id="numberadd" onchange="detailnumberupdate();" required>   
                             </div>                        
                     <div class="contacthead">Shipping Information</div>    
                           <div class="col-12 addressbox contactinformationbox">
@@ -75,38 +75,42 @@
                             </div>                        
                         </div>
                 </div> 
-            </form> 
+            
         </div>
         <!-- item confirmation -->
         <div class="col-sm-12 col-lg-4">
             <div class="sidecart">
+            
                 <div class="detailwrapper">
-                    <input type="hidden" value="<?php $note ?>" id="notecontext">
+                    <input type="hidden" value="<?php $note ?>" name="notecontext">
                   <div class="contacthead" style="text-align:center; margin-bottom: 20px;">Order Details</div>
                     <div class="iconwrapper"><img src="images/deliverytruck.png" alt="truckicon" style="width: 55px;"></div>
-                    <div class="labelindex">Total cost: <span class="costquantity" id="costbox" value="<?php  $ordertotalcost ?>"> $<?php  echo $ordertotalcost ?> </span></div>
-                    <div class="labelindex">Total amount: <span class="costquantity" id="costquantitybox" value="<?php  $ordertotalquantity ?>"> <?php echo $ordertotalquantity?> items</span></div>
-                    <div class="labelindex">Name: <span class="costquantity" id="namebox"><?php echo $username?> </span> <span class="costquantity" id="companybox">  </span></div>
-                    <div class="labelindex">Contact Email: <br><span class="costquantity" id="emailbox"> <?php echo $emailaddress?> </span></div>
-                    <div class="labelindex">Delivery Address: <br><span class="costquantity" id="addresschangearea" value="<?php  $address ?>" > <?php echo $address?> </span></div>
-                    <div>
+                    <div class="labelindex">Total cost: <span class="costquantity" value="<?php  $ordertotalcost ?>"> $<?php  echo $ordertotalcost ?> </span></div>
+                    <input type="hidden" name="costbox" value="<?php $ordertotalcost ?>">
+                    <div class="labelindex">Total amount: <span class="costquantity" name="costquantitybox" value="<?php  $ordertotalquantity ?>"> <?php echo $ordertotalquantity?> items</span></div>
+                    <div class="labelindex">Name: <span class="costquantity" name="namebox"><?php echo $username?> </span> <span class="costquantity" name="companybox">  </span></div>
+                    <div class="labelindex">Contact Email: <br><span class="costquantity" name="emailbox"> <?php echo $emailaddress?> </span></div>
+                    <div class="labelindex">Delivery Address: <br><span class="costquantity" name="addresschangearea" value="<?php  $address ?>" > <?php echo $address?> </span></div>
+                 <div>
                     <button type="button" class="btn btn-secondary btn-sm" id="checkbutton">
                         BACK TO CART
                         </a>
                     </button> 
                     </div>
+
                 </div>
             </div>
         </div>
         <div class="buttonarea">
-          <button type="button" class="btn btn-secondary btn-sm" id="checkbutton" onclick="confirmpay();">
+          <button type="submit" class="btn btn-secondary btn-sm" id="checkbutton">
               <a> PROCEED
               </a>
           </button>        
- </div>   
+        </div>   
+   
     </div>  
 </div>
-
+  </form>
 </article>
 <style>
 .contacthead{

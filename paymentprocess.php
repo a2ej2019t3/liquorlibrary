@@ -208,8 +208,7 @@
     
   </div>     
 
-        <form action="stripeIPN.php?id='.$userID.'&totalquantity='.$carttotalquantity.'&totalcost='.$carttotalcost.'&orderID
-        ='.$orderID.'" method="POST">
+        <form action="stripeIPN.php?id='.$userID.'&totalquantity='.$carttotalquantity.'&totalcost='.$carttotalcost.' method="POST">
         <button class="btn btn-primary btn-lg" id="stripe-button">
         Checkout <span class="glyphicon glyphicon-shopping-cart"></span>
       </button>

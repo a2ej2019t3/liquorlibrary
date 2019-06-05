@@ -79,7 +79,7 @@ function quantityUpdate(data){
 var confirmorderdetail = function() {
    var ordertotalcost= document.getElementById('cartTotalPrice').getAttribute('value');
    var ordertotalquantity= document.getElementById('cartTotalQuantity').getAttribute('value');
-   var note= document.getElementById('notetext').value; 
+   var note= document.getElementById('notetext').getAttribute('value'); 
 
    
 var totalcost = parseFloat(ordertotalcost);
