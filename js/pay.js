@@ -30,7 +30,6 @@ function finalPrice(params) {
    }
    document.getElementById('cartTotalPrice').innerHTML = finalprice;
    document.getElementById('cartTotalPrice').setAttribute('value',''+finalprice+''); 
-   document.getElementById('paybutton').setAttribute('data-amount',''+finalprice+''); 
 
    finalquantity();
 };
@@ -130,3 +129,53 @@ var detailaddressupdate =function(){
     addressbox.innerHTML= address;
     addressbox.setAttribute('value',address);
 }
+
+$('#stripe-button').click(function(){
+  var token = function(res){
+    var $id = $('<input type=hidden name=stripeToken />').val(res.id);
+    var $email = $('<input type=hidden name=stripeEmail />').val(res.email);
+    $('form').append($id).append($email).submit();
+    //  finalprice();
+  };
+  var pricevalue= document.getElementById('cartTotalPrice');
+  var amount= pricevalue.getAttribute('value'); 
+  var finalamount= amount*100;
+  StripeCheckout.open({
+    key:         'pk_test_LzVFBvv6py0EeG7ifdYNnfJv00dEJ5eiyo',
+    amount:      finalamount,
+    name:        'LIQUOR LIBRARY',
+    image:       'images/brandlogo.jpg',
+    description: "Please input the valid information",
+    panelLabel:  'CHECK OUT',
+    currency: 'nzd',
+    token:       token
+  });
+ 
+  return false;
+});
+
+var confirmpay = function() {
+    var ordertotalcost= document.getElementById('costbox').getAttribute('value');
+    var ordertotalquantity= document.getElementById('costquantitybox').value;
+    var note= document.getElementById('notecontext').value; 
+    var address=document.getElementById('addresschangearea').value;
+    
+ var totalcost = parseFloat(ordertotalcost);
+ var totalquantity = parseInt(ordertotalquantity, 10);
+    
+ //    alert(totalcost);
+ //    alert(ordertotalquantity);
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(xmlhttp);
+            document.getElementById("content").innerHTML = xmlhttp.responseText;
+        }
+    };
+ xmlhttp.open("GET", "./confirmpay.php?ordertotalcost="+totalcost+"&ordertotalquantity="+totalquantity+"&note="+note+ "&address="+address, true);
+ xmlhttp.send();
+ $('#third').ready(function(){
+     $('#step2').removeClass('selected');
+     $('#step3').addClass('selected');
+    });
+ };

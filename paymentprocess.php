@@ -35,6 +35,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://checkout.stripe.com/checkout.js"></script>
+
     <?php
     include_once ("./partials/head.php");
  	?>
@@ -195,41 +197,23 @@
           		Are you and the receiving person both at least 18 years old? <a href="">Terms of Service</a>.
 			</label>
 		</p>
-        
-
-
-
- 
-        
-        <div class="buttonarea">
+          </div>
+  <div class="buttonarea">
           <button type="button" class="btn btn-secondary btn-sm" id="checkbutton" onclick="confirmorderdetail();">
               PROCEED
               </a>
           </button>        
-        </div>
-
-        
-      </div>
-
+ </div>
     </div>
-  </div> 
-  <div class="col-12 buttonarea">
-        <form action="stripeIPN.php?id='.$userID.'&totalquantity='.$carttotalquantity.'&totalcost='.$carttotal.'&orderID
-        ='.$orderID.'" method="POST">
-            <script id="paybutton" 
-                src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                data-key="pk_test_LzVFBvv6py0EeG7ifdYNnfJv00dEJ5eiyo"
-                data-amount="'.$carttotalcost.'"
-                data-name="Order ID Number: '.$orderID.'"
-                data-description="This payment includes total total '.$carttotalquantity.'items '.$carttotal.'NZD"
-                data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
-                data-locale="auto"
-                data-currency="nzd"
-                data-zip-code="true">
+    
+  </div>     
 
-            </script>
-            </form>
-        </div>
+        <form action="stripeIPN.php?id='.$userID.'&totalquantity='.$carttotalquantity.'&totalcost='.$carttotalcost.'&orderID
+        ='.$orderID.'" method="POST">
+        <button class="btn btn-primary btn-lg" id="stripe-button">
+        Checkout <span class="glyphicon glyphicon-shopping-cart"></span>
+      </button>
+        </form>  
     </div>
     </section>   
 ';
@@ -250,7 +234,31 @@
   <script type="text/javascript" src="js/search.js"></script>
   <script type="text/javascript" src="js/cart.js"></script>
   <script type="text/javascript" src="./js/pay.js"></script>
-
+  <script>
+        $('#stripe-button').click(function(){
+          var token = function(res){
+            var $id = $('<input type=hidden name=stripeToken />').val(res.id);
+            var $email = $('<input type=hidden name=stripeEmail />').val(res.email);
+            $('form').append($id).append($email).submit();
+            //  finalprice();
+          };
+          var pricevalue= document.getElementById('cartTotalPrice');
+          var amount= pricevalue.getAttribute('value'); 
+          var finalamount= amount*100;
+          StripeCheckout.open({
+            key:         'pk_test_LzVFBvv6py0EeG7ifdYNnfJv00dEJ5eiyo',
+            amount:      finalamount,
+            name:        'LIQUOR LIBRARY',
+            image:       'images/brandlogo.jpg',
+            description: "Please input the valid information",
+            panelLabel:  'CHECK OUT',
+            currency: 'nzd',
+            token:       token
+          });
+         
+          return false;
+        });
+      </script>
 <!-- ----- -->
 </body>
 </html>

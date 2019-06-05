@@ -81,14 +81,14 @@
         <div class="col-sm-12 col-lg-4">
             <div class="sidecart">
                 <div class="detailwrapper">
-                    
+                    <input type="hidden" value="<?php $note ?>" id="notecontext">
                   <div class="contacthead" style="text-align:center; margin-bottom: 20px;">Order Details</div>
                     <div class="iconwrapper"><img src="images/deliverytruck.png" alt="truckicon" style="width: 55px;"></div>
-                    <div class="labelindex">Total cost: <span class="costquantity"> $<?php  echo $ordertotalcost ?> </span></div>
-                    <div class="labelindex">Total amount: <span class="costquantity"> <?php echo $ordertotalquantity?> items</span></div>
+                    <div class="labelindex">Total cost: <span class="costquantity" id="costbox" value="<?php  $ordertotalcost ?>"> $<?php  echo $ordertotalcost ?> </span></div>
+                    <div class="labelindex">Total amount: <span class="costquantity" id="costquantitybox" value="<?php  $ordertotalquantity ?>"> <?php echo $ordertotalquantity?> items</span></div>
                     <div class="labelindex">Name: <span class="costquantity" id="namebox"><?php echo $username?> </span> <span class="costquantity" id="companybox">  </span></div>
                     <div class="labelindex">Contact Email: <br><span class="costquantity" id="emailbox"> <?php echo $emailaddress?> </span></div>
-                    <div class="labelindex">Delivery Address: <br><span class="costquantity" id="addresschangearea"> <?php echo $address?> </span></div>
+                    <div class="labelindex">Delivery Address: <br><span class="costquantity" id="addresschangearea" value="<?php  $address ?>" > <?php echo $address?> </span></div>
                     <div>
                     <button type="button" class="btn btn-secondary btn-sm" id="checkbutton">
                         BACK TO CART
@@ -98,7 +98,12 @@
                 </div>
             </div>
         </div>
-        
+        <div class="buttonarea">
+          <button type="button" class="btn btn-secondary btn-sm" id="checkbutton" onclick="confirmpay();">
+              <a> PROCEED
+              </a>
+          </button>        
+ </div>   
     </div>  
 </div>
 

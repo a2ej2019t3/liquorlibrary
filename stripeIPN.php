@@ -8,25 +8,26 @@
 	$userID = $_GET['id'];
     $totalcost= $_GET['totalcost'];
     $totalquantity= $_GET['totalquantity'];
-    $orderID =$_GET['orderID'];
+
 
 	if (!isset($_POST['stripeToken']) || !isset($userID)) {
-		header("Location: index.php");
+		// header("Location: index.php");
 		exit();
 	}
 
 	$token = $_POST['stripeToken'];
 	$email = $_POST["stripeEmail"];
-
+	$totalfinalcost= $totalcost*100;
 	// Charge the user's card:
 	$charge = \Stripe\Charge::create(array(
-		"amount" => $totalcost,
+
+		"amount" => $totalfinalcost,
 		"currency" => "NZD",
-		"description" => $orderID.'order payment:'.$totalquantity.': in total',
+		"description" =>'order payment:'.$totalquantity.': : in total',
 		"source" => $token,
 	));
 
 	//send an email
 	//store information to the database
-	echo 'Success! You have been charged $' . $totalquantity .$totalcost;
+	echo 'Success! You have been charged ' . $totalquantity .'items , $' .$totalcost. 'in total';
 ?>
