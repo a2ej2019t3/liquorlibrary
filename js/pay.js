@@ -96,7 +96,7 @@ var confirmorderdetail = function() {
    var ordertotalcost= document.getElementById('cartTotalPrice').getAttribute('value');
    var ordertotalquantity= document.getElementById('cartTotalQuantity').getAttribute('value');
    var note= document.getElementById('notetext').value; 
-
+   var orderId=document.getElementById('orderidbox').value; 
    
 var totalcost = parseFloat(ordertotalcost);
 var totalquantity = parseInt(ordertotalquantity, 10);
@@ -110,7 +110,7 @@ var totalquantity = parseInt(ordertotalquantity, 10);
            document.getElementById("content").innerHTML = xmlhttp.responseText;
        }
    };
-xmlhttp.open("GET", "./confirmdetail.php?ordertotalcost="+totalcost+"&ordertotalquantity="+totalquantity+"&note="+note, true);
+xmlhttp.open("GET", "./confirmdetail.php?ordertotalcost="+totalcost+"&ordertotalquantity="+totalquantity+"&note="+note+"&orderId="+orderId, true);
 xmlhttp.send();
 $('#second').ready(function(){
     $('#step1').removeClass('selected');
@@ -149,6 +149,9 @@ var detailemailupdate =function(){
     emailbox.setAttribute('value',emailaddress);
     emailmodalbox =document.getElementById('emailmodal');
     emailmodalbox.setAttribute('value',emailaddress);
+    emailreceipt =document.getElementById('emailcontext');
+    emailreceipt.setAttribute('value',emailaddress);
+
 }
 var detailaddressupdate =function(){
     var address= document.getElementById('addressadd').value;
@@ -156,6 +159,8 @@ var detailaddressupdate =function(){
     addressbox= document.getElementById('addresschangearea');
     addressbox.innerHTML= address;
     addressbox.setAttribute('value',address);
+    addressmodalbox= document.getElementById('addressmodal');
+    addressmodalbox.setAttribute('value',address);
 }
 
 function paymentModal() {
@@ -210,6 +215,7 @@ function paymentModal() {
           owner: {
             name: document.querySelector('input[name="name"]').value,
             email: document.querySelector('input[name="email"]').value,
+            address: document.querySelector('input[name="address"]').value,
           },
           mandate: {
             // Automatically send a mandate notification email to your customer

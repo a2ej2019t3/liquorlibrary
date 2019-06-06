@@ -10,6 +10,7 @@
         $ultimatePrice = $_GET['ordertotalcost'];
         $ultimateQuantity = $_GET['ordertotalquantity'];
         $note= $_GET['note'];
+        $orderID=$_GET['orderId'];
 
         if ($user_res != "") {
             $user_arr = mysqli_fetch_all($user_res);
@@ -100,7 +101,7 @@ echo '
         <hr>
         <div class="buttonarea">
             <button type="submit" class="btn btn-secondary btn-sm" id="checkbutton">
-                <a> BACK TO CART
+                <a href="paymentprocess.php"> BACK TO CART
                 </a>
             </button>
             <button type="button" class="btn btn-secondary btn-sm" onclick="paymentModal()" id="ckbtn" data-toggle="modal" data-target="#payModal">
@@ -122,6 +123,9 @@ echo '
                     <input type="hidden" name="finalprice" value="'.$ultimatePrice.'"></input>
                     <input type="hidden" name="finalquantity" value="'.$ultimateQuantity.'"></input>
                     <input type="hidden" value="'.$note.'" name="notecontext">
+                    <input type="hidden" value="'.$emailaddress.'" id="emailcontext" name="emailcontext">
+                    <input type="hidden" value="'.$orderID.'" id="idcontext" name="idcontext">
+  
                     <div class="form-row">
                         <div class="col-sm-12 col-md-4">
                                 <div class="imgwrapper" style="width:100%;">
@@ -131,23 +135,31 @@ echo '
                         <div class="col-sm-12 col-md-8">
                                 <div class="form-row inline">
                                 <div class="col">
-                                <label for="name">
+                                <label class="modallablebox" for="name">
                                     Name
                                 </label>
-                                <input id="namemodal" name="name" placeholder="'.$username.'" readonly>
+                                <input class="modalinput" id="namemodal" name="name" value="'.$username.'" placeholder="'.$username.'" readonly>
                                 </div>
                                 <div class="col">
-                                <label for="email">
+                                <label class="modallablebox" for="email">
                                     Email Address
                                 </label>
-                                <input id="emailmodal" name="email" type="email" placeholder="'.$emailaddress.'" readonly>
+                                <input class="modalinput" id="emailmodal" name="email" value="'.$emailaddress.'" type="email" placeholder="'.$emailaddress.'" readonly>
                                 </div>
                             </div>
-                                <label for="card-element">
+                            <label class="modallablebox" for="address">
+                            Shipping Address
+                            </label>
+                            <input class="modalinput" id="addressmodal" name="address" value="'.$address.'" type="address" placeholder="'.$address.'" readonly>
+                                <label class="modallablebox" for="card-element">
                                 Credit or debit card
                                 </label>
                                 <div id="card-element">
                                     <!-- A Stripe Element will be inserted here. -->
+                                </div>
+                                <hr>
+                                <div>
+                                <div style="font-weight:700; font-size: 15px; text-align:right; margin-right: 15px;">TOTAL: $ <span style="font-size: 25px; font-weight:700; ">'.$ultimatePrice.'</span> <div>
                                 </div>
                                         
                         </div>

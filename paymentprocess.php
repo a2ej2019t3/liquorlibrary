@@ -104,6 +104,7 @@
         $carttotalquantity=0;
         for($b = 0; $b <count($cartitem_arr); $b++){
           echo '
+          <input type="hidden" value="'.$orderID.'" id="orderidbox" name="orderidbox">
           <input type="hidden" value="'.$cartitem_arr[$b][0].'" id="order'.$cartitem_arr[$b][6].'">
           <tr class="items" id="items['.$cartitem_arr[$b][6].']" data-variant="'.$cartitem_arr[$b][6].'" data-title="'.$cartitem_arr[$b][7].' / '.$cartitem_arr[$b][11].' - '.$cartitem_arr[$b][12].'" data-url="productlist.php?pid='.$cartitem_arr[$b][6].'">
           
@@ -185,7 +186,7 @@
           <div class="cart-totals">
 
           <p style="float: none; text-align: right; clear: both; margin: 10px 0;">
-        	<input style="float:none; vertical-align: middle;" type="checkbox" id="agree" required="">
+        	<input style="float:none;vertical-align: -webkit-baseline-middle;width: 20px!important;height: 20px;margin-top: -10px;" type="checkbox" id="agree" required="">
         	<label style="display:inline; float:none" for="agree">
           Are you and the receiving person both at least 18 years old? <a href="">Terms of Service</a>.
           </label>
@@ -240,7 +241,7 @@
   .StripeElement--webkit-autofill {
     background-color: #fefde5 !important;
   }
-  input,
+  .modalinput,
 .StripeElement {
   height: 40px;
   padding: 10px 12px;
@@ -254,7 +255,12 @@
   -webkit-transition: box-shadow 150ms ease;
   transition: box-shadow 150ms ease;
 }
-
+.modallablebox{
+  margin-top: 15px;
+  font-weight: 700;
+  text-align: left;
+  font-size: 17px;
+}
 
 
 
