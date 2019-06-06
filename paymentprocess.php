@@ -35,11 +35,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://checkout.stripe.com/checkout.js"></script>
 
     <?php
     include_once ("./partials/head.php");
- 	?>
+    ?>
 	 <link rel="stylesheet" href="css/cart.css">
     <title>Shopping Cart</title>
 </head>
@@ -49,7 +48,7 @@
 <section>
         <?php
           include_once ("./partials/header.php");
-        ?>        
+          ?>        
 </section>
 <section>
     <div class="container" style="margin-top: 150px;" >
@@ -107,139 +106,135 @@
           echo '
           <input type="hidden" value="'.$cartitem_arr[$b][0].'" id="order'.$cartitem_arr[$b][6].'">
           <tr class="items" id="items['.$cartitem_arr[$b][6].']" data-variant="'.$cartitem_arr[$b][6].'" data-title="'.$cartitem_arr[$b][7].' / '.$cartitem_arr[$b][11].' - '.$cartitem_arr[$b][12].'" data-url="productlist.php?pid='.$cartitem_arr[$b][6].'">
-			
-		 	 <td class="cart-item-product first">
-              <div class="cart-image"><img class="img-fluid productimg" src="'.$imgpath.$cartitem_arr[$b][10].'" alt="'.$cartitem_arr[$b][7].'"></div>
-              <div class="cart-item-product-wrap">
-                  <span class="cart-title"><a href="productlist.php?pid='.$cartitem_arr[$b][6].'"><span class="itemname">'.$cartitem_arr[$b][7].'</span> / '.$cartitem_arr[$b][11].' - '.$cartitem_arr[$b][12].'</a></span>                
-                                
-              </div>
-			</td>';
-      if($cartitem_arr[$b][9] !==null ){
-        echo      '<td class="cart-item-price" name="ticket_price['.$cartitem_arr[$b][6].']" id="ticket_price['.$cartitem_arr[$b][6].']" data-value="'.$cartitem_arr[$b][9].'">$'.$cartitem_arr[$b][9].'</td>';
-        echo        '<td class="cart-item-quantity" style="padding-top: 20px;">
-        <input type="number" min="1" name="quantity['.$cartitem_arr[$b][6].']" id="quantity['.$cartitem_arr[$b][6].']"  class="cart-item-quantity-display" data-attribute="'.$cartitem_arr[$b][6].'" value="'.$cartitem_arr[$b][5].'" onblur="CaclulateCostTotal(this); quantityUpdate(this);">
-        </td>';
-      }
-    else {
-      echo      '<td class="cart-item-price" name="ticket_price['.$cartitem_arr[$b][6].']" id="ticket_price['.$cartitem_arr[$b][6].']">$'.$cartitem_arr[$b][8].'</td>';
-      echo        '<td class="cart-item-quantity" style="padding-top: 20px;">
-      <input type="number" name="quantity['.$cartitem_arr[$b][6].']" id="quantity['.$cartitem_arr[$b][6].']"  class="cart-item-quantity-display" data-attribute="'.$cartitem_arr[$b][6].'" value="'.$cartitem_arr[$b][5].'" onblur="CaclulateCostTotal(this); quantityUpdate(this);">
-      <p class="listprice"></p>
-      </td>';
-    }
-            if($cartitem_arr[$b][9] !==null ){
-              echo '  
-              <td class="cart-item-total last asdfa" id="total['.$cartitem_arr[$b][6].']" value="'.$cartitem_arr[$b][13].'" data-attribute="'.$cartitem_arr[$b][6].'">NZ$'.$cartitem_arr[$b][13].'</td>';
-              
-              
-            }
+          
+          <td class="cart-item-product first">
+          <div class="cart-image"><img class="img-fluid productimg" src="'.$imgpath.$cartitem_arr[$b][10].'" alt="'.$cartitem_arr[$b][7].'"></div>
+          <div class="cart-item-product-wrap">
+          <span class="cart-title"><a href="productlist.php?pid='.$cartitem_arr[$b][6].'"><span class="itemname">'.$cartitem_arr[$b][7].'</span> / '.$cartitem_arr[$b][11].' - '.$cartitem_arr[$b][12].'</a></span>                
+          
+          </div>
+          </td>';
+          if($cartitem_arr[$b][9] !==null ){
+            echo      '<td class="cart-item-price" name="ticket_price['.$cartitem_arr[$b][6].']" id="ticket_price['.$cartitem_arr[$b][6].']" data-value="'.$cartitem_arr[$b][9].'">$'.$cartitem_arr[$b][9].'</td>';
+            echo        '<td class="cart-item-quantity" style="padding-top: 20px;">
+            <input type="number" min="1" name="quantity['.$cartitem_arr[$b][6].']" id="quantity['.$cartitem_arr[$b][6].']"  class="cart-item-quantity-display" data-attribute="'.$cartitem_arr[$b][6].'" value="'.$cartitem_arr[$b][5].'" onblur="CaclulateCostTotal(this); quantityUpdate(this);">
+            </td>';
+          }
+          else {
+            echo      '<td class="cart-item-price" name="ticket_price['.$cartitem_arr[$b][6].']" id="ticket_price['.$cartitem_arr[$b][6].']">$'.$cartitem_arr[$b][8].'</td>';
+            echo        '<td class="cart-item-quantity" style="padding-top: 20px;">
+            <input type="number" name="quantity['.$cartitem_arr[$b][6].']" id="quantity['.$cartitem_arr[$b][6].']"  class="cart-item-quantity-display" data-attribute="'.$cartitem_arr[$b][6].'" value="'.$cartitem_arr[$b][5].'" onblur="CaclulateCostTotal(this); quantityUpdate(this);">
+            <p class="listprice"></p>
+            </td>';
+          }
+          if($cartitem_arr[$b][9] !==null ){
+            echo '  
+            <td class="cart-item-total last asdfa" id="total['.$cartitem_arr[$b][6].']" value="'.$cartitem_arr[$b][13].'" data-attribute="'.$cartitem_arr[$b][6].'">NZ$'.$cartitem_arr[$b][13].'</td>';
+            
+          }
           else {
             echo ' 
             <td class="cart-item-total last asdfa" id="total['.$cartitem_arr[$b][6].']" value="'.$cartitem_arr[$b][13].'" data-attribute="'.$cartitem_arr[$b][6].'">NZ$'.$cartitem_arr[$b][13].'</td>';          
           }
           echo '<td>
-                  <button class="cart-item-remove" type="button">Remove</button> 
-                </td>';
-            echo '</tr>';
-            // if($cartitem_arr[$b][9] !==null){
-            $itemtotal= $cartitem_arr[$b][13];
-            $carttotal=$carttotal+$itemtotal;
-            // }
-            // else{
-            //   $itemtotal= $cartitem_arr[$b][8];
-            //   $carttotal=$carttotal+$itemtotal;  
-            // } 
-            $itemquantity=$cartitem_arr[$b][5];
-            $carttotalquantity=$carttotalquantity+$itemquantity;
-
-        }
-
-      }
-      else{
-        echo 'No item found';
-      }
-      echo '
-      </tbody>
-
-    </table>
-
-  
-    
-    <div class="cart-tools">
-    <p class="cart-quantity" name="cartTotalQuantity" id="cartTotalQuantity" value="'.$carttotalquantity.'" style="
-    text-align: right;
-    margin-right: 30px;
-    margin-bottom: 0;
-    margin-top: 20px;
-    font-size: 20px;
-    font-weight: 700;
-">'.$carttotalquantity.'items</p>
-
-    <p class="cart-price">TOTAL: NZ$<span class="totalmoney" name="cartTotalPrice" id="cartTotalPrice" value="'.$carttotal.'">'.$carttotal.'</span></p>';
-    $carttotalcost= ($carttotal*100); 
-    echo '<div class="cart-instructions">        
-        <p class="note"><i class="fas fa-pencil-alt" style="font-size:24px; margin-right: 10px;"></i>Special instructions</p>      
-        <textarea rows="6" name="note" id="notetext" placeholder="Add a note"></textarea>
-      </div>
-      
-
-      <div class="cart-totals">
-
-        
-        
-        
-
-       
-        <p style="float: none; text-align: right; clear: both; margin: 10px 0;">
+          <button class="cart-item-remove" type="button">Remove</button> 
+          </td>';
+          echo '</tr>';
+          // if($cartitem_arr[$b][9] !==null){
+            // $itemtotal= $cartitem_arr[$b][13];
+            // $carttotal=$carttotal+$itemtotal;
+            // // }
+            // // else{
+            //   //   $itemtotal= $cartitem_arr[$b][8];
+            //   //   $carttotal=$carttotal+$itemtotal;  
+            //   // } 
+            //   $itemquantity=$cartitem_arr[$b][5];
+            //   $carttotalquantity=$carttotalquantity+$itemquantity;
+              
+            }
+            
+          }
+          else{
+            echo 'No item found';
+          }
+          echo '
+          </tbody>
+          
+          </table>
+          
+          
+          
+          <div class="cart-tools">
+          <p class="cart-quantity" name="cartTotalQuantity" id="cartTotalQuantity" value="'.$carttotalquantity.'" style="
+          text-align: right;
+          margin-right: 30px;
+          margin-bottom: 0;
+          margin-top: 20px;
+          font-size: 20px;
+          font-weight: 700;
+          ">'.$carttotalquantity.'items</p>
+          
+          <p class="cart-price">TOTAL: NZ$<span class="totalmoney" name="cartTotalPrice" id="cartTotalPrice" value="'.$carttotal.'">'.$carttotal.'</span></p>';
+          $carttotalcost= ($carttotal*100); 
+          echo '<div class="cart-instructions">        
+          <p class="note"><i class="fas fa-pencil-alt" style="font-size:24px; margin-right: 10px;"></i>Special instructions</p>      
+          <textarea rows="6" name="note" id="notetext" placeholder="Add a note"></textarea>
+          </div>
+          
+          
+          <div class="cart-totals">
+          
+          
+          
+          
+          
+          
+          <p style="float: none; text-align: right; clear: both; margin: 10px 0;">
         	<input style="float:none; vertical-align: middle;" type="checkbox" id="agree" required="">
         	<label style="display:inline; float:none" for="agree">
-          		Are you and the receiving person both at least 18 years old? <a href="">Terms of Service</a>.
-			</label>
-		</p>
+          Are you and the receiving person both at least 18 years old? <a href="">Terms of Service</a>.
+          </label>
+          </p>
           </div>
-  <div class="buttonarea">
+          <div class="buttonarea">
           <button type="button" class="btn btn-secondary btn-sm" id="checkbutton" onclick="confirmorderdetail();">
-              PROCEED
-              </a>
+          PROCEED
+          </a>
           </button>        
- </div>
-    </div>
-    
-  </div>     
+          </div>
+          </div>
+          
+          </div>  
 
-        <form action="stripeIPN.php?id='.$userID.'&totalquantity='.$carttotalquantity.'&totalcost='.$carttotalcost.' method="POST">
-        <button class="btn btn-primary btn-lg" id="stripe-button">
-        Checkout <span class="glyphicon glyphicon-shopping-cart"></span>
-      </button>
-        </form>  
-    </div>
-    </section>   
-';
+          </div>
+          </section>   
+          ';
 
-
-    }
-    else{
-      echo '<h4 class="notloggedinmsg">Please log in for the next step</h4>';
-    }
-      ?>
+          
+        }
+        else{
+          echo '<h4 class="notloggedinmsg">Please log in for the next step</h4>';
+        }
+        ?>
 
 <!-- links -->
 <?php
     include_once ("partials/foot.php");
-  ?>  
+    ?>  
   <script type="text/javascript" src="js/sub.js"></script>
   <script type="text/javascript" src="js/main.js"></script>
   <script type="text/javascript" src="js/search.js"></script>
   <script type="text/javascript" src="js/cart.js"></script>
-  <script type="text/javascript" src="./js/pay.js"></script>
-  <script>
+  <script type="text/javascript" src="js/pay.js"></script>
+  <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
+
+  <!-- <script>
         $('#stripe-button').click(function(){
           var token = function(res){
             var $id = $('<input type=hidden name=stripeToken />').val(res.id);
             var $email = $('<input type=hidden name=stripeEmail />').val(res.email);
             $('form').append($id).append($email).submit();
-            //  finalprice();
+            
           };
           var pricevalue= document.getElementById('cartTotalPrice');
           var amount= pricevalue.getAttribute('value'); 
@@ -254,11 +249,47 @@
             currency: 'nzd',
             token:       token
           });
-         
+          // document.getElementById("content").innerHTML = xmlhttp.responseText;
+          
+          xmlhttp.open("GET", "./stripeIPN.php?&id=".$userID."&totalquantity=".$carttotalquantity."&totalcost=".$carttotalcost."&finalprice="+finalamount, true);
+          xmlhttp.send();
+          
           return false;
         });
-      </script>
+        </script> -->
 <!-- ----- -->
 </body>
 </html>
 
+<style>
+.StripeElement {
+    box-sizing: border-box;
+    width: 100%!important;
+    height: 40px;
+  
+    padding: 10px 12px;
+  
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background-color: white;
+  
+    box-shadow: 0 1px 3px 0 #e6ebf1;
+    -webkit-transition: box-shadow 150ms ease;
+    transition: box-shadow 150ms ease;
+  }
+  
+  .StripeElement--focus {
+    box-shadow: 0 1px 3px 0 #cfd7df;
+  }
+  
+  .StripeElement--invalid {
+    border-color: #fa755a;
+  }
+  
+  .StripeElement--webkit-autofill {
+    background-color: #fefde5 !important;
+  }
+.StripeElement StripeElement--empty{
+  width: 100%!important;
+}
+  </style>

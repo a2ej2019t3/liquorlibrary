@@ -1,5 +1,4 @@
-
-    <?php
+<?php
       session_start();
       require_once "config.php";
       include ('connection.php');
@@ -8,7 +7,8 @@
         $user_sql = "SELECT u.userID, u.typeID, u.firstName, u.lastName, u.companyName, u.email, u.phone, u.address, ut.typeID, ut.typeName FROM `users` AS u, usertype AS ut WHERE u.typeID=ut.typeID and u.userID='$userID'";
         
         $user_res = mysqli_query($connection, $user_sql);
-        
+        $ultimatePrice = $_GET['ordertotalcost'];
+        $ultimateQuantity = $_GET['ordertotalquantity'];
         if ($user_res != "") {
             $user_arr = mysqli_fetch_all($user_res);
             $usertype= $user_arr[0][1];
@@ -28,18 +28,18 @@
           echo '</script>';
         }
     include_once ("partials/head.php");
-    $_SESSION['ordertotalcost']= $_GET['ordertotalcost'];
+    $_SESSION['ordertotalcost']= $_POST['ordertotalcost'];
     $ordertotalcost= $_SESSION['ordertotalcost'];
-    $_SESSION['ordertotalquantity']= $_GET['ordertotalquantity'];
+    $_SESSION['ordertotalquantity']= $_POST['ordertotalquantity'];
     $ordertotalquantity= $_SESSION['ordertotalquantity'];
-    $note= $_GET['note'];
+    $note= $_POST['note'];
     // echo $ordertotalcost;
     // echo $ordertotalquantity;
     // echo $note;
- 	?>
-	 <link rel="stylesheet" href="css/cart.css">
+echo '
+     <link rel="stylesheet" href="css/cart.css">
+ 
 <article id="second">
-<form method="POST" action="confirmpay.php">
 <div class="container">
     <div class="row">
         <!-- info confirmation -->
@@ -50,28 +50,28 @@
                         <div class="row">
                             <div class="col-6 usernamebox contactinformationbox">
                             <label for="lable">Your Name </label><br>
-                            <input name="username" class="username" type="text" placeholder="<?php echo $username?>" value="<?php echo $username?>" id="usernamebox" onchange="detailname();" required>   
+                            <input name="username" class="username" type="text" placeholder="'.$username.'" value="'.$username.'" id="usernamebox" onchange="detailname();" required>   
                             </div>
                             <div class="col-6 companynamebox contactinformationbox">
                             <label for="lable">Company Name </label><br>
-                            <input name="companyname" class="companyname" placeholder="<?php echo $companyname?>" type="text" value="<?php echo $companyname?>" id="comname" onchange="detailcompany();" >   
+                            <input name="companyname" class="companyname" placeholder="'.$companyname.'" type="text" value="'.$companyname.'" id="comname" onchange="detailcompany();" >   
                             </div>                            
                         </div>
 
                         <div class="row">
                              <div class="col-12 emailaddressbox contactinformationbox">
                                 <label for="lable">Contact Email </label><br>
-                                <input name="emailaddress" class="emailaddress" placeholder="<?php echo $emailaddress?>" type="email" value="<?php echo $emailaddress?>" id="emailadd" onchange="detailemailupdate();"required>   
+                                <input name="emailaddress" class="emailaddress" placeholder="'.$emailaddress.'" type="email" value="'.$emailaddress.'" id="emailadd" onchange="detailemailupdate();"required>   
                             </div>                        
                         
                             <div class="col-12 contactnumberbox contactinformationbox">
                                 <label for="lable">Contact Number</label><br>
-                                <input name="contactnumber" class="contactnumber" placeholder="<?php echo $phone?>" value="<?php echo $phone?>" type="text" id="numberadd" onchange="detailnumberupdate();" required>   
+                                <input name="contactnumber" class="contactnumber" placeholder="'.$phone.'" value="'.$phone.'" type="text" id="numberadd" onchange="detailnumberupdate();" required>   
                             </div>                        
                     <div class="contacthead">Shipping Information</div>    
                           <div class="col-12 addressbox contactinformationbox">
                                 <label for="lable">Delivery Address</label><br>
-                                <input name="address" class="address" placeholder="<?php echo $address?>" type="text" value="<?php echo $emailaddress?>" id="addressadd" onchange="detailaddressupdate();" required>   
+                                <input name="address" class="address" placeholder="'.$address.'" type="text" value="'.$emailaddress.'" id="addressadd" onchange="detailaddressupdate();" required>   
                             </div>                        
                         </div>
                 </div> 
@@ -82,15 +82,15 @@
             <div class="sidecart">
             
                 <div class="detailwrapper">
-                    <input type="hidden" value="<?php $note ?>" name="notecontext">
+                    <input type="hidden" value="'.$note.'" name="notecontext">
                   <div class="contacthead" style="text-align:center; margin-bottom: 20px;">Order Details</div>
                     <div class="iconwrapper"><img src="images/deliverytruck.png" alt="truckicon" style="width: 55px;"></div>
-                    <div class="labelindex">Total cost: <span class="costquantity" value="<?php  $ordertotalcost ?>"> $<?php  echo $ordertotalcost ?> </span></div>
-                    <input type="hidden" name="costbox" value="<?php $ordertotalcost ?>">
-                    <div class="labelindex">Total amount: <span class="costquantity" name="costquantitybox" value="<?php  $ordertotalquantity ?>"> <?php echo $ordertotalquantity?> items</span></div>
-                    <div class="labelindex">Name: <span class="costquantity" name="namebox"><?php echo $username?> </span> <span class="costquantity" name="companybox">  </span></div>
-                    <div class="labelindex">Contact Email: <br><span class="costquantity" name="emailbox"> <?php echo $emailaddress?> </span></div>
-                    <div class="labelindex">Delivery Address: <br><span class="costquantity" name="addresschangearea" value="<?php  $address ?>" > <?php echo $address?> </span></div>
+                    <div class="labelindex">Total cost: <span class="costquantity" value="'.$ordertotalcost.'"> $'.$ordertotalcost.' </span></div>
+                    <input type="hidden" name="costbox" value="'.$ordertotalcost.'">
+                    <div class="labelindex">Total amount: <span class="costquantity" name="costquantitybox" value="'.$ordertotalquantity.'"> '.$ordertotalquantity.' items</span></div>
+                    <div class="labelindex">Name: <span class="costquantity" name="namebox">'.$username.' </span> <span class="costquantity" name="companybox">  </span></div>
+                    <div class="labelindex">Contact Email: <br><span class="costquantity" name="emailbox"> '.$emailaddress.' </span></div>
+                    <div class="labelindex">Delivery Address: <br><span class="costquantity" name="addresschangearea" value="'.$address.'" > '.$address.' </span></div>
                  <div>
                     <button type="button" class="btn btn-secondary btn-sm" id="checkbutton">
                         BACK TO CART
@@ -102,20 +102,61 @@
             </div>
         </div>
         <div class="buttonarea">
-          <button type="submit" class="btn btn-secondary btn-sm" id="checkbutton">
-              <a> PROCEED
-              </a>
-          </button>        
-        </div>   
-   
-    </div>  
-</div>
-  </form>
-</article>
-<style>
+            <button type="submit" class="btn btn-secondary btn-sm" id="checkbutton">
+                <a> PROCEED
+                </a>
+            </button>
+            <button type="button" onclick="paymentModal()" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            Launch demo modal
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                <form action="stripeIPN.php" method="post" id="payment-form">
+                    <input type="hidden" name="finalprice" value="'.$ultimatePrice.'"></input>
+                    <input type="hidden" name="finalquantity" value="'.$ordertotalquantity.'"></input>
+                    <div class="form-row">
+                    <label for="card-element">
+                    Credit or debit card
+                    </label>
+                    <div id="card-element">
+                        <!-- A Stripe Element will be inserted here. -->
+                    </div>
+                
+                <!-- Used to display form errors. -->
+                    <div id="card-errors" role="alert"></div>
+                    </div>
+                
+                    <button>Submit Payment</button>
+                </form>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+                </div>
+                </div>
+                </div>
+                
+                </div>   
+                
+                </div>  
+                </div>
+                </article>
+
+                <style>
 .contacthead{
     font-size: 1.4rem;
-    font-family: 'Lato', sans-serif;
+    font-family: "Lato", sans-serif;
     font-weight: 600;
     text-align:left;
     margin-bottom:10px;
@@ -131,11 +172,11 @@
       min-height: 40px;
       width: 100%;
       font-size: 15px;
-      font-family: 'Montserrat', sans-serif;
+      font-family:"Montserrat", sans-serif;
       padding-right: 15px;
 }
 .contactinformationbox label{
-    font-family: 'Lato', sans-serif;
+    font-family: "Lato", sans-serif;
     color: #333333;
     font-size: 1rem;
     float:left;
@@ -170,4 +211,6 @@
     
 }
 
+
 </style>
+';
