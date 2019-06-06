@@ -9,6 +9,8 @@
         $user_res = mysqli_query($connection, $user_sql);
         $ultimatePrice = $_GET['ordertotalcost'];
         $ultimateQuantity = $_GET['ordertotalquantity'];
+        $note= $_GET['note'];
+
         if ($user_res != "") {
             $user_arr = mysqli_fetch_all($user_res);
             $usertype= $user_arr[0][1];
@@ -28,14 +30,14 @@
           echo '</script>';
         }
     include_once ("partials/head.php");
-    $_SESSION['ordertotalcost']= $_POST['ordertotalcost'];
-    $ordertotalcost= $_SESSION['ordertotalcost'];
-    $_SESSION['ordertotalquantity']= $_POST['ordertotalquantity'];
-    $ordertotalquantity= $_SESSION['ordertotalquantity'];
-    $note= $_POST['note'];
+    // $_SESSION['ordertotalcost']= $_POST['ordertotalcost'];
+    // $ordertotalcost= $_SESSION['ordertotalcost'];
+    // $_SESSION['ordertotalquantity']= $_POST['ordertotalquantity'];
+    // $ordertotalquantity= $_SESSION['ordertotalquantity'];
+    // $note= $_POST['note'];
     // echo $ordertotalcost;
     // echo $ordertotalquantity;
-    // echo $note;
+    echo $note;
 echo '
      <link rel="stylesheet" href="css/cart.css">
  
@@ -71,7 +73,7 @@ echo '
                     <div class="contacthead">Shipping Information</div>    
                           <div class="col-12 addressbox contactinformationbox">
                                 <label for="lable">Delivery Address</label><br>
-                                <input name="address" class="address" placeholder="'.$address.'" type="text" value="'.$emailaddress.'" id="addressadd" onchange="detailaddressupdate();" required>   
+                                <input name="address" class="address" placeholder="'.$address.'" type="text" value="'.$address.'" id="addressadd" onchange="detailaddressupdate();" required>   
                             </div>                        
                         </div>
                 </div> 
@@ -82,40 +84,35 @@ echo '
             <div class="sidecart">
             
                 <div class="detailwrapper">
-                    <input type="hidden" value="'.$note.'" name="notecontext">
+                    
                   <div class="contacthead" style="text-align:center; margin-bottom: 20px;">Order Details</div>
                     <div class="iconwrapper"><img src="images/deliverytruck.png" alt="truckicon" style="width: 55px;"></div>
-                    <div class="labelindex">Total cost: <span class="costquantity" value="'.$ordertotalcost.'"> $'.$ordertotalcost.' </span></div>
-                    <input type="hidden" name="costbox" value="'.$ordertotalcost.'">
-                    <div class="labelindex">Total amount: <span class="costquantity" name="costquantitybox" value="'.$ordertotalquantity.'"> '.$ordertotalquantity.' items</span></div>
-                    <div class="labelindex">Name: <span class="costquantity" name="namebox">'.$username.' </span> <span class="costquantity" name="companybox">  </span></div>
-                    <div class="labelindex">Contact Email: <br><span class="costquantity" name="emailbox"> '.$emailaddress.' </span></div>
-                    <div class="labelindex">Delivery Address: <br><span class="costquantity" name="addresschangearea" value="'.$address.'" > '.$address.' </span></div>
-                 <div>
-                    <button type="button" class="btn btn-secondary btn-sm" id="checkbutton">
-                        BACK TO CART
-                        </a>
-                    </button> 
-                    </div>
+                    <div class="labelindex">Total cost: <span class="costquantity" value="'.$ultimatePrice.'"> $'.$ultimatePrice.' </span></div>
+                    <div class="labelindex">Total amount: <span class="costquantity" name="costquantitybox" value="'.$ultimateQuantity.'"> '.$ultimateQuantity.' items</span></div>
+                    <div class="labelindex">Name: <span class="costquantity" id="namebox">'.$username.' </span> <span class="costquantity" id="companybox">  </span></div>
+                    <div class="labelindex">Contact Number: <br><span class="costquantity" id="numberbox"> '.$phone.' </span></div>
+                    <div class="labelindex">Contact Email: <br><span class="costquantity" id="emailbox"> '.$emailaddress.' </span></div>
+                    <div class="labelindex">Delivery Address: <br><span class="costquantity" id="addresschangearea" value="'.$address.'" > '.$address.' </span></div>
 
                 </div>
             </div>
         </div>
+        <hr>
         <div class="buttonarea">
             <button type="submit" class="btn btn-secondary btn-sm" id="checkbutton">
-                <a> PROCEED
+                <a> BACK TO CART
                 </a>
             </button>
-            <button type="button" onclick="paymentModal()" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-            Launch demo modal
+            <button type="button" class="btn btn-secondary btn-sm" onclick="paymentModal()" id="ckbtn" data-toggle="modal" data-target="#payModal">
+            CEHCK OUT
             </button>
-
+</div>
             <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
+            <div class="modal fade" id="payModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document" style="width: 700px; height: 400px;">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">LIQUOR LIBRARY</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
@@ -123,33 +120,55 @@ echo '
                 <div class="modal-body">
                 <form action="stripeIPN.php" method="post" id="payment-form">
                     <input type="hidden" name="finalprice" value="'.$ultimatePrice.'"></input>
-                    <input type="hidden" name="finalquantity" value="'.$ordertotalquantity.'"></input>
+                    <input type="hidden" name="finalquantity" value="'.$ultimateQuantity.'"></input>
+                    <input type="hidden" value="'.$note.'" name="notecontext">
                     <div class="form-row">
-                    <label for="card-element">
-                    Credit or debit card
-                    </label>
-                    <div id="card-element">
-                        <!-- A Stripe Element will be inserted here. -->
-                    </div>
-                
+                        <div class="col-sm-12 col-md-4">
+                                <div class="imgwrapper" style="width:100%;">
+                                <img class="img-fluid" src="images/liquor18.jpg">
+                                </div>
+                        </div>
+                        <div class="col-sm-12 col-md-8">
+                                <div class="form-row inline">
+                                <div class="col">
+                                <label for="name">
+                                    Name
+                                </label>
+                                <input id="namemodal" name="name" placeholder="'.$username.'" readonly>
+                                </div>
+                                <div class="col">
+                                <label for="email">
+                                    Email Address
+                                </label>
+                                <input id="emailmodal" name="email" type="email" placeholder="'.$emailaddress.'" readonly>
+                                </div>
+                            </div>
+                                <label for="card-element">
+                                Credit or debit card
+                                </label>
+                                <div id="card-element">
+                                    <!-- A Stripe Element will be inserted here. -->
+                                </div>
+                                        
+                        </div>
+
                 <!-- Used to display form errors. -->
                     <div id="card-errors" role="alert"></div>
                     </div>
                 
-                    <button>Submit Payment</button>
+                    <button id="paysubmitbtn">PAY NOW</button>
+                    <button id="dismissbtn" data-dismiss="modal">Close</button>
+
                 </form>
                 </div>
-                <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
+
                 </div>
                 </div>
                 </div>
                 
                 </div>   
                 
-                </div>  
+                
                 </div>
                 </article>
 
@@ -210,7 +229,46 @@ echo '
     color: #8B0000;
     
 }
-
-
+#paysubmitbtn{
+	background-color: rgba(244, 232, 117, 1);
+	width: 150px;
+	height: 45px;
+	font-size: 20px;
+    color: white;
+    margin: 20px auto;
+    border:none;
+}
+#paysubmitbtn:hover{
+    background-color: rgba(224, 184, 65, 1);
+}
+#dismissbtn{
+    background-color: rgba(124, 99, 84, 1);
+	width: 150px;
+	height: 45px;
+	font-size: 20px;
+    color: white;
+    margin: 20px auto;
+    border:none;
+}
+#dismissbtn:hover{
+    background-color: rgba(48, 43, 41,1);
+}
+#ckbtn{
+    background-color: #E12726;
+	width: 150px;
+	height: 45px;
+	font-size: 20px;
+    color: white;
+    margin: 20px auto;
+    border:none;
+}
+#ckbtn:hover{
+    border: 1px solid #E12726;
+    background-color: transparent;
+    color: #E12726;
+}
+.buttonarea{
+    margin: 15px auto;
+}
 </style>
 ';

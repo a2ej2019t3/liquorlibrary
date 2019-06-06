@@ -9,6 +9,7 @@
     // $totalquantity= $_GET['totalquantity'];
 	$fianlprice= $_POST['finalprice'];
 	$finalquantity = $_POST['finalquantity'];
+	$note= $_POST['notecontext'];
 	// || !isset($userID)
 	if (!isset($_POST['stripeToken'])) {
 		header("Location: index.php");
@@ -30,4 +31,6 @@
 	//send an email
 	//store information to the database
 	echo 'Success! You have been charged ' . $finalquantity .'items , $' .$fianlprice. 'in total';
+	echo $finalquantity;
+	echo $note;
 ?>

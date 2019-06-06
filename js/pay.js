@@ -95,7 +95,7 @@ function quantityUpdate(data){
 var confirmorderdetail = function() {
    var ordertotalcost= document.getElementById('cartTotalPrice').getAttribute('value');
    var ordertotalquantity= document.getElementById('cartTotalQuantity').getAttribute('value');
-   var note= document.getElementById('notetext').getAttribute('value'); 
+   var note= document.getElementById('notetext').value; 
 
    
 var totalcost = parseFloat(ordertotalcost);
@@ -123,6 +123,16 @@ var detailname =function(){
     namebox= document.getElementById('namebox');
     namebox.innerHTML= username;
     namebox.setAttribute('value',username);
+    namemodalbox =document.getElementById('namemodal');
+    namemodalbox.setAttribute('value',username);
+}
+var detailnumberupdate=function(){
+    var phone= document.getElementById('numberadd').value;
+    // alert(companyname);
+    namebox= document.getElementById('numberbox');
+    namebox.innerHTML= phone;
+    namebox.setAttribute('value',phone);
+
 }
 var detailcompany =function(){
     var companyname= document.getElementById('comname').value;
@@ -137,6 +147,8 @@ var detailemailupdate =function(){
     emailbox= document.getElementById('emailbox');
     emailbox.innerHTML= emailaddress;
     emailbox.setAttribute('value',emailaddress);
+    emailmodalbox =document.getElementById('emailmodal');
+    emailmodalbox.setAttribute('value',emailaddress);
 }
 var detailaddressupdate =function(){
     var address= document.getElementById('addressadd').value;
@@ -192,7 +204,20 @@ function paymentModal() {
     form.addEventListener('submit', function(event) {
       event.preventDefault();
     
-      stripe.createToken(card).then(function(result) {
+        var sourceData = {
+          type: 'sepa_debit',
+          currency: 'nzd',
+          owner: {
+            name: document.querySelector('input[name="name"]').value,
+            email: document.querySelector('input[name="email"]').value,
+          },
+          mandate: {
+            // Automatically send a mandate notification email to your customer
+            // once the source is charged.
+            notification_method: 'email',
+          }
+        };
+      stripe.createToken(card, sourceData).then(function(result) {
         if (result.error) {
           // Inform the user if there was an error.
           var errorElement = document.getElementById('card-errors');
@@ -247,28 +272,3 @@ function paymentModal() {
 
 // });
 
-var confirmpay = function() {
-    var ordertotalcost= document.getElementById('costbox').getAttribute('value');
-    var ordertotalquantity= document.getElementById('costquantitybox').value;
-    var note= document.getElementById('notecontext').value; 
-    var address=document.getElementById('addresschangearea').value;
-    
- var totalcost = parseFloat(ordertotalcost);
- var totalquantity = parseInt(ordertotalquantity, 10);
-    
- //    alert(totalcost);
- //    alert(ordertotalquantity);
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            console.log(xmlhttp);
-            document.getElementById("content").innerHTML = xmlhttp.responseText;
-        }
-    };
- xmlhttp.open("GET", "./confirmpay.php?ordertotalcost="+totalcost+"&ordertotalquantity="+totalquantity+"&note="+note+ "&address="+address, true);
- xmlhttp.send();
- $('#third').ready(function(){
-     $('#step2').removeClass('selected');
-     $('#step3').addClass('selected');
-    });
- };

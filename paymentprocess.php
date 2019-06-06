@@ -183,12 +183,7 @@
           
           
           <div class="cart-totals">
-          
-          
-          
-          
-          
-          
+
           <p style="float: none; text-align: right; clear: both; margin: 10px 0;">
         	<input style="float:none; vertical-align: middle;" type="checkbox" id="agree" required="">
         	<label style="display:inline; float:none" for="agree">
@@ -228,55 +223,11 @@
   <script type="text/javascript" src="js/pay.js"></script>
   <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
 
-  <!-- <script>
-        $('#stripe-button').click(function(){
-          var token = function(res){
-            var $id = $('<input type=hidden name=stripeToken />').val(res.id);
-            var $email = $('<input type=hidden name=stripeEmail />').val(res.email);
-            $('form').append($id).append($email).submit();
-            
-          };
-          var pricevalue= document.getElementById('cartTotalPrice');
-          var amount= pricevalue.getAttribute('value'); 
-          var finalamount= amount*100;
-          StripeCheckout.open({
-            key:         'pk_test_LzVFBvv6py0EeG7ifdYNnfJv00dEJ5eiyo',
-            amount:      finalamount,
-            name:        'LIQUOR LIBRARY',
-            image:       'images/brandlogo.jpg',
-            description: "Please input the valid information",
-            panelLabel:  'CHECK OUT',
-            currency: 'nzd',
-            token:       token
-          });
-          // document.getElementById("content").innerHTML = xmlhttp.responseText;
-          
-          xmlhttp.open("GET", "./stripeIPN.php?&id=".$userID."&totalquantity=".$carttotalquantity."&totalcost=".$carttotalcost."&finalprice="+finalamount, true);
-          xmlhttp.send();
-          
-          return false;
-        });
-        </script> -->
-<!-- ----- -->
 </body>
 </html>
 
 <style>
-.StripeElement {
-    box-sizing: border-box;
-    width: 100%!important;
-    height: 40px;
-  
-    padding: 10px 12px;
-  
-    border: 1px solid transparent;
-    border-radius: 4px;
-    background-color: white;
-  
-    box-shadow: 0 1px 3px 0 #e6ebf1;
-    -webkit-transition: box-shadow 150ms ease;
-    transition: box-shadow 150ms ease;
-  }
+
   
   .StripeElement--focus {
     box-shadow: 0 1px 3px 0 #cfd7df;
@@ -289,7 +240,23 @@
   .StripeElement--webkit-autofill {
     background-color: #fefde5 !important;
   }
-.StripeElement StripeElement--empty{
+  input,
+.StripeElement {
+  height: 40px;
+  padding: 10px 12px;
   width: 100%!important;
+  color: #32325d;
+  background-color: white;
+  border: 1px solid transparent;
+  border-radius: 4px;
+
+  box-shadow: 0 1px 3px 0 #e6ebf1;
+  -webkit-transition: box-shadow 150ms ease;
+  transition: box-shadow 150ms ease;
 }
+
+
+
+
+
   </style>
