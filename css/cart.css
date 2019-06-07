@@ -6,6 +6,7 @@ font-family: 'Roboto', sans-serif;
 font-family: 'Open Sans', sans-serif;
 font-family: 'Montserrat', sans-serif;
 font-family: 'Playfair Display', serif;
+font-family: 'Josefin Sans', sans-serif;
 */
 
 body{
@@ -272,4 +273,62 @@ td {
 	font-weight: 700;
 	font-size: 1.6rem;
 	margin-left:10px;
+}
+/* 
+ */
+ .contacthead{
+	font-size: 1.4rem;
+	font-family: 'Lato', sans-serif;
+	font-weight: 600;
+	text-align:left;
+	margin-bottom:10px;
+	margin-top: 15px;
+}
+.contactinformationbox input{
+		
+	border: 1.6px solid #d9d9d9;
+		border-radius: 5px;
+		transition: all 1.5s cubic-bezier(.19,1,.22,1);
+		font: 12px/1 effra;
+		color: #333333;
+		min-height: 40px;
+		width: 100%;
+		font-size: 15px;
+		font-family: 'Montserrat', sans-serif;
+		padding-right: 15px;
+}
+.contactinformationbox label{
+	font-family: 'Lato', sans-serif;
+	color: #333333;
+	font-size: 1rem;
+	float:left;
+	margin-bottom: 0;
+}
+.contactinformationbox{
+	margin: 10px auto;
+}
+.sidecart{
+	background-color: rgba(217, 221, 146, 1);
+	border-radius: 5px;
+	width:100%;
+	height: 100%;
+	padding-top: 10px;
+}
+.labelindex{
+font-size: 1rem;
+	font-weight: 600;
+	text-align: left;
+	margin-left: 15px;
+	margin-top: 15px;
+
+}
+.costquantity{
+	margin-left: 10px;
+	color: rgba(48, 43, 41,1);
+	font-size: 1rem;
+	font-weight: 500;
+}
+.costquantity:hover{
+	color: #8B0000;
+	
 }

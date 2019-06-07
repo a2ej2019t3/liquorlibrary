@@ -2,17 +2,22 @@
 <?php
   session_start();
   $_SESSION['location'] = 'paymentprocess';
+  // require_once "config.php";
   include ('connection.php');
   // Cart items > in case of order status=0 
   if(isset($_SESSION['user']['userID'])){
   $userID=$_SESSION['user']['userID'];
-  $cartitem_sql = "SELECT o.orderID, o.buyerId, o.whID, o.status, oi.itemID, oi.quantity, p.productID, p.productName, p.price, p.discountprice, p.img, b.brandName, c.categoryName FROM orders AS o, orderitems AS oi, product AS p, brand AS b, category AS c WHERE o.orderID=oi.orderID and oi.itemID=p.productID and p.brandID=b.brandID and p.categoryID= c.categoryID and o.status=0 and o.buyerID='$userID';";
-  
+  $cartitem_sql = "SELECT o.orderID, o.buyerId, o.whID, o.status, oi.itemID, oi.quantity, p.productID, p.productName, p.price, p.discountprice, p.img, b.brandName, c.categoryName, oi.totalprice FROM orders AS o, orderitems AS oi, product AS p, brand AS b, category AS c WHERE o.orderID=oi.orderID and oi.itemID=p.productID and p.brandID=b.brandID and p.categoryID= c.categoryID and o.status=0 and o.buyerID='$userID';";
   $cartitem_res = mysqli_query($connection, $cartitem_sql);
   
   if ($cartitem_res != "") {
       $cartitem_arr = mysqli_fetch_all($cartitem_res);
+      // var_dump($cartitem_arr);
       $resultcount=count($cartitem_arr);
+      if($resultcount!==0){
+       $orderID=$cartitem_arr[0][0];  
+      }
+     
     } else {
       alert("result empty");
     }
@@ -21,13 +26,6 @@
     echo '<script type="text/javascript">';                
     echo 'alert("Please log in to proceed")';
     echo '</script>';
-
-    // echo "<script type='text/javascript'>
-    // $(document).ready(function(){
-    // $('#myModal').modal('show');
-    // });
-    // </script>";
-    // include ('partials/loginmodal.php');
   }
 
   
@@ -41,9 +39,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
     <?php
     include_once ("./partials/head.php");
- 	?>
+    ?>
 	 <link rel="stylesheet" href="css/cart.css">
     <title>Shopping Cart</title>
 </head>
@@ -53,7 +52,7 @@
 <section>
         <?php
           include_once ("./partials/header.php");
-        ?>        
+          ?>        
 </section>
 <section>
     <div class="container" style="margin-top: 150px;" >
@@ -61,22 +60,22 @@
     <!-- step element ends -->
     <div class="step-tab">
         <ul>
-            <li class="selected">
+            <li id="step1" class="selected">
                 <a href="" shape="rect">1</a>
 
                 <p>Cart</p>
             </li>
-            <li>
+            <li id="step2">
                 <a href="javascript:void(0);" shape="rect">2</a>
 
                 <p>Confirm Detail</p>
             </li>
-            <li>
+            <li id="step3">
                 <a href="javascript:void(0);" shape="rect">3</a>
 
                 <p>Payment</p>
             </li>
-            <li>
+            <li id="step4">
                 <a href="javascript:void(0);" shape="rect">4</a>
 
                 <p>Invoice</p>
@@ -84,8 +83,10 @@
 
         </ul>
     </div> 
+
+    <div id="content">
 	<!-- step element ends -->
-	<form action="/cart" method="post">
+	<!-- <form action="/cart" method="post"> -->
     
 
     <table class="cart-items clean">
@@ -104,128 +105,173 @@
       if (count($cartitem_arr) != 0) {
         $imgpath = 'images/'; 
         $carttotal=0;
+        $carttotalquantity=0;
         for($b = 0; $b <count($cartitem_arr); $b++){
           echo '
+          <input type="hidden" value="'.$orderID.'" id="orderidbox" name="orderidbox">
+          <input type="hidden" value="'.$cartitem_arr[$b][0].'" id="order'.$cartitem_arr[$b][6].'">
           <tr class="items" id="items['.$cartitem_arr[$b][6].']" data-variant="'.$cartitem_arr[$b][6].'" data-title="'.$cartitem_arr[$b][7].' / '.$cartitem_arr[$b][11].' - '.$cartitem_arr[$b][12].'" data-url="productlist.php?pid='.$cartitem_arr[$b][6].'">
-			
-		 	 <td class="cart-item-product first">
-              <div class="cart-image"><img class="img-fluid productimg" src="'.$imgpath.$cartitem_arr[$b][10].'" alt="'.$cartitem_arr[$b][7].'"></div>
-              <div class="cart-item-product-wrap">
-                  <span class="cart-title"><a href="productlist.php?pid='.$cartitem_arr[$b][6].'"><span class="itemname">'.$cartitem_arr[$b][7].'</span> / '.$cartitem_arr[$b][11].' - '.$cartitem_arr[$b][12].'</a></span>                
-                                
-              </div>
-			</td>';
-      if($cartitem_arr[$b][9] !==null ){
-        echo      '<td class="cart-item-price" name="ticket_price['.$cartitem_arr[$b][6].']" id="ticket_price['.$cartitem_arr[$b][6].']" data-value="'.$cartitem_arr[$b][9].'">$'.$cartitem_arr[$b][9].'</td>';
-        echo        '<td class="cart-item-quantity" style="padding-top: 20px;">
-        <input type="number" name="quantity['.$cartitem_arr[$b][6].']" id="quantity['.$cartitem_arr[$b][6].']"  class="cart-item-quantity-display" data-attribute="'.$cartitem_arr[$b][6].'" value="1" onblur="CaclulateCostTotal(this);">
-        <p class="listprice"></p>
-        </td>';
-      }
-    else {
-      echo      '<td class="cart-item-price" name="ticket_price['.$cartitem_arr[$b][6].']" id="ticket_price['.$cartitem_arr[$b][6].']">$'.$cartitem_arr[$b][8].'</td>';
-      echo        '<td class="cart-item-quantity" style="padding-top: 20px;">
-      <input type="number" name="quantity['.$cartitem_arr[$b][6].']" id="quantity['.$cartitem_arr[$b][6].']"  class="cart-item-quantity-display" data-attribute="'.$cartitem_arr[$b][6].'" value="1" onblur="CaclulateCostTotal(this);">
-      <p class="listprice"></p>
-      </td>';
-    }
-            if($cartitem_arr[$b][9] !==null ){
-              echo '  
-              <td class="cart-item-total last asdfa" id="total['.$cartitem_arr[$b][6].']" value="'.$cartitem_arr[$b][9].'" data-attribute="'.$cartitem_arr[$b][6].'">NZ$'.$cartitem_arr[$b][9].'</td>';
-              
-              
-            }
+          
+          <td class="cart-item-product first">
+          <div class="cart-image"><img class="img-fluid productimg" src="'.$imgpath.$cartitem_arr[$b][10].'" alt="'.$cartitem_arr[$b][7].'"></div>
+          <div class="cart-item-product-wrap">
+          <span class="cart-title"><a href="productlist.php?pid='.$cartitem_arr[$b][6].'"><span class="itemname">'.$cartitem_arr[$b][7].'</span> / '.$cartitem_arr[$b][11].' - '.$cartitem_arr[$b][12].'</a></span>                
+          
+          </div>
+          </td>';
+          if($cartitem_arr[$b][9] !==null ){
+            echo      '<td class="cart-item-price" name="ticket_price['.$cartitem_arr[$b][6].']" id="ticket_price['.$cartitem_arr[$b][6].']" data-value="'.$cartitem_arr[$b][9].'">$'.$cartitem_arr[$b][9].'</td>';
+            echo        '<td class="cart-item-quantity" style="padding-top: 20px;">
+            <input type="number" min="1" name="quantity['.$cartitem_arr[$b][6].']" id="quantity['.$cartitem_arr[$b][6].']"  class="cart-item-quantity-display" data-attribute="'.$cartitem_arr[$b][6].'" value="'.$cartitem_arr[$b][5].'" onblur="CaclulateCostTotal(this); quantityUpdate(this);">
+            </td>';
+          }
+          else {
+            echo      '<td class="cart-item-price" name="ticket_price['.$cartitem_arr[$b][6].']" id="ticket_price['.$cartitem_arr[$b][6].']">$'.$cartitem_arr[$b][8].'</td>';
+            echo        '<td class="cart-item-quantity" style="padding-top: 20px;">
+            <input type="number" name="quantity['.$cartitem_arr[$b][6].']" id="quantity['.$cartitem_arr[$b][6].']"  class="cart-item-quantity-display" data-attribute="'.$cartitem_arr[$b][6].'" value="'.$cartitem_arr[$b][5].'" onblur="CaclulateCostTotal(this); quantityUpdate(this);">
+            <p class="listprice"></p>
+            </td>';
+          }
+          if($cartitem_arr[$b][9] !==null ){
+            echo '  
+            <td class="cart-item-total last asdfa" id="total['.$cartitem_arr[$b][6].']" value="'.$cartitem_arr[$b][13].'" data-attribute="'.$cartitem_arr[$b][6].'">NZ$'.$cartitem_arr[$b][13].'</td>';
+            
+          }
           else {
             echo ' 
-            <td class="cart-item-total last asdfa" id="total['.$cartitem_arr[$b][6].']" value="'.$cartitem_arr[$b][8].'" data-attribute="'.$cartitem_arr[$b][6].'">NZ$'.$cartitem_arr[$b][8].'</td>';          
+            <td class="cart-item-total last asdfa" id="total['.$cartitem_arr[$b][6].']" value="'.$cartitem_arr[$b][13].'" data-attribute="'.$cartitem_arr[$b][6].'">NZ$'.$cartitem_arr[$b][13].'</td>';          
           }
           echo '<td>
-                  <button class="cart-item-remove" type="button">Remove</button> 
-                </td>';
-            echo '</tr>';
-            if($cartitem_arr[$b][9] !==null){
-            $itemtotal= $cartitem_arr[$b][9];
-            $carttotal=$carttotal+$itemtotal;
+          <button class="cart-item-remove" type="button">Remove</button> 
+          </td>';
+          echo '</tr>';
             }
-            else{
-              $itemtotal= $cartitem_arr[$b][8];
-              $carttotal=$carttotal+$itemtotal;  
-            } 
-        }
-      }
-      else{
-        echo 'No item found';
-      }
-      echo '
-      </tbody>
+            
+          }
+          else{
+            echo 'No item found';
+          }
+          echo '
+          </tbody>
+          
+          </table>';
+          
+              if(count($cartitem_arr) == 0){
+                echo'
+                <div class="cart-tools">
+                <p class="cart-quantity" name="cartTotalQuantity" id="cartTotalQuantity" style="
+                text-align: right;
+                margin-right: 30px;
+                margin-bottom: 0;
+                margin-top: 20px;
+                font-size: 20px;
+                font-weight: 700;
+                ">0 items</p>
+                
+                <p class="cart-price">TOTAL: NZ$<span class="totalmoney" name="cartTotalPrice" id="cartTotalPrice">0</span></p>';
+                  
+              }
+              else{
+                echo'
+                <div class="cart-tools">
+                <p class="cart-quantity" name="cartTotalQuantity" id="cartTotalQuantity" value="'.$carttotalquantity.'" style="
+                text-align: right;
+                margin-right: 30px;
+                margin-bottom: 0;
+                margin-top: 20px;
+                font-size: 20px;
+                font-weight: 700;
+                ">'.$carttotalquantity.'items</p>
+                
+                <p class="cart-price">TOTAL: NZ$<span class="totalmoney" name="cartTotalPrice" id="cartTotalPrice" value="'.$carttotal.'">'.$carttotal.'</span></p>';
+                $carttotalcost= ($carttotal*100); 
+              }
+          echo '<div class="cart-instructions">        
+          <p class="note"><i class="fas fa-pencil-alt" style="font-size:24px; margin-right: 10px;"></i>Special instructions</p>      
+          <textarea rows="6" name="note" id="notetext" placeholder="Add a note"></textarea>
+          </div>
+          
+          
+          <div class="cart-totals">
 
-    </table>
-
-  
-    
-    <div class="cart-tools">
-
-    <p class="cart-price">TOTAL: NZ$<span class="totalmoney" id="cartTotalPrice">'.$carttotal.'</span></p>
-      <div class="cart-instructions">        
-        <p class="note"><i class="fas fa-pencil-alt" style="font-size:24px; margin-right: 10px;"></i>Special instructions</p>      
-        <textarea rows="6" name="note" placeholder="Add a note"></textarea>
-      </div>
-      
-
-      <div class="cart-totals">
-
-        
-        
-        
-
-       
-        <p style="float: none; text-align: right; clear: both; margin: 10px 0;">
-        	<input style="float:none; vertical-align: middle;" type="checkbox" id="agree" required="">
+          <p style="float: none; text-align: right; clear: both; margin: 10px 0;">
+        	<input style="float:none;vertical-align: -webkit-baseline-middle;width: 20px!important;height: 20px;margin-top: -10px;" type="checkbox" id="agree" required="">
         	<label style="display:inline; float:none" for="agree">
-          		Are you and the receiving person both at least 18 years old? <a href="">Terms of Service</a>.
-			</label>
-		</p>
-        
-
-
-
- 
-        
-        <div class="buttonarea">
-          <button type="submit" class="btn btn-secondary btn-sm" id="checkbutton">
-              PROCEED
-              </a>
+          Are you and the receiving person both at least 18 years old? <a href="">Terms of Service</a>.
+          </label>
+          </p>
+          </div>
+          <div class="buttonarea">
+          <button type="button" class="btn btn-secondary btn-sm" id="checkbutton" onclick="confirmorderdetail();">
+          PROCEED
+          </a>
           </button>        
-        </div>
+          </div>
+          </div>
+          
+          </div>  
 
-        
-      </div>
+          </div>
+          </section>   
+          ';
 
-    </div>
-
-  </form>
-    </div>
-    </section>   
-';
-
-
-    }
-    else{
-      echo '<h4 class="notloggedinmsg">Please log in for the next step</h4>';
-    }
-      ?>
+          
+        }
+      else{
+        echo '<h4 class="notloggedinmsg">Please log in for the next step</h4>';
+      }
+        ?>
 
 <!-- links -->
 <?php
     include_once ("partials/foot.php");
-  ?>  
+    ?>  
   <script type="text/javascript" src="js/sub.js"></script>
   <script type="text/javascript" src="js/main.js"></script>
   <script type="text/javascript" src="js/search.js"></script>
   <script type="text/javascript" src="js/cart.js"></script>
-  <script type="text/javascript" src="./js/pay.js"></script>
+  <script type="text/javascript" src="js/pay.js"></script>
+  <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
 
-<!-- ----- -->
 </body>
 </html>
 
+<style>
+
+  
+  .StripeElement--focus {
+    box-shadow: 0 1px 3px 0 #cfd7df;
+  }
+  
+  .StripeElement--invalid {
+    border-color: #fa755a;
+  }
+  
+  .StripeElement--webkit-autofill {
+    background-color: #fefde5 !important;
+  }
+  .modalinput,
+.StripeElement {
+  height: 40px;
+  padding: 10px 12px;
+  width: 100%!important;
+  color: #32325d;
+  background-color: white;
+  border: 1px solid transparent;
+  border-radius: 4px;
+
+  box-shadow: 0 1px 3px 0 #e6ebf1;
+  -webkit-transition: box-shadow 150ms ease;
+  transition: box-shadow 150ms ease;
+}
+.modallablebox{
+  margin-top: 15px;
+  font-weight: 700;
+  text-align: left;
+  font-size: 17px;
+}
+
+
+
+
+  </style>
