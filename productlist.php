@@ -37,7 +37,7 @@
      </section>
      <br><br>
 <?php
- include ("partials/stickycart.php");
+ include ("Cart/stickycart.php");
 ?>
 <div class="container_fluid">
     <div class="row">

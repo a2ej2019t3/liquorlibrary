@@ -1,5 +1,5 @@
 <?php
-  session_start();
+  //session_start();
 $_SESSION['location'] = 'customerorder';
 ?>
 <!DOCTYPE html>
@@ -40,7 +40,7 @@ $_SESSION['location'] = 'customerorder';
 												<table>
 													<tr><td>OrderID</td><td><b><?php echo $row["orderID"]; ?></b> </td></tr>
 													<tr><td>BuyerID</td><td><b><?php echo $row["buyerID"]; ?></b></td></tr>
-													<tr><td>WhareHouseID</td><td><b><?php echo $row["whID"]; ?></b></td></tr>
+													<tr><td>WareHouseID</td><td><b><?php echo $row["whID"]; ?></b></td></tr>
 													<tr><td>Date</td><td><b><?php echo $row["date"]; ?></b></td></tr>
 											        <tr><td>Status</td><td><b><?php echo $row["status"]; ?></b></td></tr>
 												</table>
@@ -48,7 +48,7 @@ $_SESSION['location'] = 'customerorder';
                                         </div>
                                         <p>
   <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-    See More
+    show
   </a>
   <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
     See Less
@@ -60,8 +60,8 @@ $_SESSION['location'] = 'customerorder';
   include_once("connection.php");
   if(isset($_SESSION['user'])){
       $user = $_SESSION['user'];
-      //$orders_list = "SELECT orders.orderID,orders.buyerID,orders.whID,orders.date,orders.status,product.productID,product.productName,product.price,orderitems.orderID FROM orders orders,product product, orderitems orderitems Where orders.orderID = '".$user['userID']."'";
-      $orders_list = "SELECT *   from orderitems oi where oi.orderID = '".$user['userID']."'";
+     //$orders_list = "SELECT product.productID,product.productName,product.price,orderitems.orderID,orderitems.quantity,orderitems.totalprice FROM product product, orderitems orderitems, orders orders Where orderitems.ItemID = product.productID and orders.orderID = orderitems.orderID '".$user['userID']."'";
+     $orders_list = "SELECT *   from orderitems oi where oi.orderID = '".$user['userID']."'";
       $query = mysqli_query($connection,$orders_list);
 							if (mysqli_num_rows($query) > 0) 
 							{
@@ -70,12 +70,30 @@ $_SESSION['location'] = 'customerorder';
 										<div class="row">
 								
 											<div class="col-md-6">
-												<table>
-													<tr><td>ItemID</td><td><b><?php echo $row["itemID"]; ?></b> </td></tr>
-													<tr><td>OrderID</td><td><b><?php echo $row["orderID"]; ?></b></td></tr>
-													<tr><td>Quantity</td><td><b><?php echo $row["quantity"]; ?></b></td></tr>
-													<tr><td>TotalPrice</td><td><b><?php echo"$" .$row["totalprice"]; ?></b></td></tr>
-											        </table>
+                      <div class="table-filter">
+				<div class="row">
+												
+                              <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        
+                        <th>CustomerID</th>
+                      	<th>OrderId</th>
+						            <th>Quantity</th>						
+                      	<th>Net Amount</th>
+					   </tr>
+                </thead>
+                <tbody>
+                          <tr>
+                            <td><?php echo $row["itemID"]; ?></td>
+                            <td><?php echo $row["orderID"]; ?></td>
+                        <td><?php echo $row["quantity"]; ?></td> 
+                        <td><?php echo"$" .$row["totalprice"]; ?></td>                       
+                        
+                         
+                          </tr>
+                        </tbody>
+                
 											</div>
                                         </div>
                                         <?php
@@ -86,29 +104,7 @@ $_SESSION['location'] = 'customerorder';
   
   </div>
 </div>
-<div class="accordion" id="accordionExample">
-  <div class="card">
-    <div class="card-header" id="headingOne">
-      <h2 class="mb-0">
-        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-          Collapsible Group Item #1
-        </button>
-      </h2>
-    </div>
-
-    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-      <div class="card-body">
-      <table>
-													<tr><td>OrderID</td><td><b><?php echo $row["orderID"]; ?></b> </td></tr>
-													<tr><td>BuyerID</td><td><b><?php echo $row["buyerID"]; ?></b></td></tr>
-													<tr><td>WhareHouseID</td><td><b><?php echo $row["whID"]; ?></b></td></tr>
-													<tr><td>Date</td><td><b><?php echo $row["date"]; ?></b></td></tr>
-											        <tr><td>Status</td><td><b><?php echo $row["status"]; ?></b></td></tr>
-												</table>
-      </div>
-    </div>
-  </div>
-  <div class="card">                                  
+                                 
 									<?php 
 								}
                             }

@@ -42,31 +42,42 @@
 
 // Useable functions
         //select cart items and info
-        public function getCartItemsInfo($cartID) {
-            if ($cartID != null) {
+        public function getCartItemsInfo($cartID, $userID) {
+            if ($cartID != null && $userID == null) {
+                $consArr = array('orderID' => $cartID);
+            } else if ($cartID == null && $userID != null) {
+                $consArr = array('buyerID' => $userID);
+            } else if ($cartID != null && $userID != null) {
+                $consArr = array('buyerID' => $userID, 'orders.orderID' => $cartID);
+            } else {
+                return false;
+                trigger_error('Invalid params');
+            }
                 $sql = "";
                 $allProduct = $this->getProductInfo();
-                $allProduct .= "RIGHT JOIN orderitems ON allproduct.productID = orderitems.itemID ";
-                $consArr = array('orderID' => $cartID);
+                $allProduct .= "RIGHT JOIN orderitems ON allproduct.productID = orderitems.itemID 
+                LEFT JOIN orders ON orderitems.orderID = orders.orderID";
                 $sql .= $this->selectSql($allProduct, $consArr);
 
                 $res = $this->connection->query($sql);
                 if (!$res) {
-                    trigger_error('Invalid query: ' . $this->connection->error);
+                    trigger_error('Invalid query: ' . $sql);
                     return $sql;
                 } else {
                     if ($res->num_rows > 0) {
-                        while ($arr = $res->fetch_assoc()) {
-                            $row = $arr;
-                            $data[$row['productID']] = $row;
-                        }
+                        $data = $res->fetch_all(MYSQLI_ASSOC);
+                        // while ($arr = $res->fetch_assoc()) {
+                        //     $row = $arr;
+                        //     $i = 0;
+                        //     $data[$i] = $row;
+                        //     $i++;
+                        // }
                         $_SESSION['cartItemNum'] = count($data);
                         return $data;
                     } else {
                         return false;
                     }
                 }
-            }
         }
 
         // select cart items without info

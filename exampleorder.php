@@ -44,7 +44,7 @@
      </section>
      <br><br>
 <?php
- include ("Cart/stickycart.php");
+ //include ("Cart/stickycart.php");
 ?>
 <div class="container_fluid">
     <div class="row">
@@ -52,24 +52,25 @@
         <div class="sidenavbar col-md-3 col-xs-12 content-left" style="text-align:center;">
             <!-- sideNave -->
                 <?php
-                    include_once ("partials/sideNav.php");
+                   // include_once ("partials/sideNav.php");
                 ?>
         </div>
 
         <div class="productresult col-md-9 col-xs-12 content-right">
             <!-- product list results -->
-            <div style="margin-top: 100px; "><hr><span style="font-size:24px;">Sale products</span>
-            <select class="sortselect" name="sortselect" id="selectsort" style="width: 300px;margin-left: 15px;">                             
-                                                <option data-target="onsalelist">ALL ITEMS</option>
-                                                <option data-target="contact" >BY DISCOUNT RATE</option>
-                                                <option value="ASC"  data-target="pricesort">BY LOW PRICE</option>
-                                                <option value="DESC" data-target="pricesorthigh" onclick="pricesorthigh()">BY HIGH PRICE</option>
+            <div style="margin-top: 100px; "><hr><span style="font-size:24px;">Status</span>
+            <select class="sortselect" name="sortselect" id="selectsort" style="width: 300px;margin-left: 15px;"> 
+                                                <option data-target=""></option>                            
+                                                <option data-target="example2">pending</option>
+                                                <option data-target="example2" >Delivered</option>
+                                                <option  data-target="example2">Processing</option>
+                                                <option  data-target="example2">Cancelled</option>
                                                 <button type="submit"></button>
                                                 </select>
             </div>
                <article id="content">
                 <?php
-                include_once ("onsalelist.php");
+                //include_once ("onsalelist.php");
                 ?>
                 </article>
         
