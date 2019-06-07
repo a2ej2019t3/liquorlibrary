@@ -1,7 +1,7 @@
 <?php
     // session_start();
     $_SESSION['location'] = 'productlist';
-    include_once ('connection.php');
+    include_once ('../connection.php');
     // Sale product search 
 
     $searchDiscount_sql = "SELECT p.productID, p.img, p.productName, p.discountprice, p.price,p.categoryID, b.brandName, c.categoryName,c.categoryID,  COALESCE((100-p.discountprice) * p.price / 100, 0) AS salepercentage FROM product AS p, brand AS b, category AS c WHERE p.brandID=b.brandID and p.categoryID=c.categoryID and p.discountprice is not null ORDER BY salepercentage DESC;";
@@ -13,11 +13,10 @@
     } else {
         alert("result empty");
     }
- ?>
+    echo '
 <section>
         <div class="container" style="padding-right: 45px;">
-     <?php
-        echo '<div style="text-align:left;"><i class="far fa-compass" style="margin: 10px 10px;"></i><a style="color: black!important; text-decoration: none!important;" href="index.php">Home / </a> <span> Sale Products / Discount Rate / '.$resultcount.' products</span></div>';
+        <div style="text-align:left;"><i class="far fa-compass" style="margin: 10px 10px;"></i><a style="color: black!important; text-decoration: none!important;" href="index.php">Home / </a> <span> Sale Products / Discount Rate / '.$resultcount.' products</span></div>';
          
           if ($resultcount != "") {
             $imgpath = 'images/';
@@ -55,7 +54,7 @@
                     }
                             
                             
-                       echo         '<div class="product-grid__extend" style="width:100%;">
+                        echo    '<div class="product-grid__extend" style="width:100%;">
                                      <div class="row">
                                         <div class="col-sm-6 col-md-6" style="padding:0!important;"><span class="product-grid__botton product-grid__add-to-cart"><i class="fa fa-cart-arrow-down"></i><br> Add to cart</span></div>
                                         <div class="col-sm-6 col-md-6" style="padding:0!important;"><a href="productlist.php?pid='.$searchDiscount_arr[$b][0].'"><span class="product-grid__botton product-grid__view"><i class="fa fa-eye"></i><br>View more</span></a></div>
@@ -78,12 +77,11 @@
             ob_clean();
             echo 0;
         }
-     ?>
-        </div>
-     </section>
-     <style>
+    echo "
+    </div>
+ </section>
 
-
+ <style>
 /* ------------------------------------------------------------------------------------------------- */
 /* .button */
 .offer-form{
@@ -207,4 +205,5 @@
     -o-transition-delay: 0s;
     transition-delay: 0s;
 }
-     </style>
+    </style>
+    ";

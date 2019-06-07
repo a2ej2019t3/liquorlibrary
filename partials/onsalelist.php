@@ -32,8 +32,6 @@ echo '
 
                 for ($b = 0; $b <count($searchSale_arr); $b++) {
                     echo '
-                        
-                         
                         <div class="product-grid__product col-sm-6 col-md-4 col-lg-3" style="text-align: center; font-family: Montserrat, sans-serif;">
                             <div class="product-grid__img-wrapper" style="height: 185px; text-algin:center; ">			
                                      <img src='.$imgpath.$searchSale_arr[$b][1].' style="width: 120px; max-height: 170px;margin: 0 auto;">
@@ -55,7 +53,7 @@ echo '
                             
                        echo         '<div class="product-grid__extend" style="width:100%;">
                                      <div class="row">
-                                     <div class="col-sm-6 col-md-6" style="padding:0!important;><button value="'.$searchSale_arr[$b][0].'" onclick="addToCart(this.value)"><span class="product-grid__botton product-grid__add-to-cart"><i class="fa fa-cart-arrow-down"></i><br> Add to cart</span></button></div>
+                                     <div class="col-sm-6 col-md-6" style="padding:0!important;><button value='.$searchSale_arr[$b][0].' onclick="addToCart(this.value)"><span class="product-grid__botton product-grid__add-to-cart"><i class="fa fa-cart-arrow-down"></i><br> Add to cart</span></button></div>
                                      <div class="col-sm-6 col-md-6" style="padding:0!important;"><a href="productlist.php?pid='.$searchSale_arr[$b][0].'"><span class="product-grid__botton product-grid__view"><i class="fa fa-eye"></i><br>View more</span></a></div>
 
                                     </div>
