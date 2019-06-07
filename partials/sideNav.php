@@ -61,7 +61,7 @@ include_once ('connection.php');
                       );
     $brandInfoJson = json_encode($brandInfo);
     $onSale = array(
-                    'searchPara' => 'saleproductprint.php?location=salelist',
+                    'searchPara' => 'onsalelist.php?location=salelist',
                     'location' => 'salelist'
                     );
     $onSaleJson = json_encode($onSale);
@@ -70,61 +70,36 @@ include_once ('connection.php');
   <li><button class="maintype" value='<?php echo $onSaleJson ?>' onclick="showProduct(this.value)">On Sale</button></li>
   <a data-toggle="sidebar" href="#" data-target="#pricelist" class="dropdown-btn collapsible-header maintype" id="pricebutton">Price <i class="fas fa-caret-down"></i></a>
         <div  class="dropdown-container" id="pricelist">
-                    <ul>
-                    <li class="childlink" >
-                    <form  method="POST" action="pricesearch.php" data-target="pricesearch">
-                        <input type="hidden" name="searchstart" value="0">
-                        <input type="hidden" name="searchend" value="10">
-                        <a class="childprice"> <button class="pricetrigger" type="submit" >-NZ$10</button></a>
-                    </form>
-
-                    <li class="childlink">  
-                     <form  method="POST" action="pricesearch.php" data-target="pricesearch">
-                        <input type="hidden" name="searchstart" value="10">
-                        <input type="hidden" name="searchend" value="15">
-                        <a class="childprice"><button class="pricetrigger" type="submit" >NZ$10-NZ$15</button></a>
-                     </form>      
-                    </li>
-                    <li class="childlink">
-                    <form  method="POST" action="pricesearch.php" data-target="pricesearch">
-                        <input type="hidden" name="searchstart" value="15">
-                        <input type="hidden" name="searchend" value="20">
-                        <a class="childprice"><button class="pricetrigger" type="submit" >NZ$15-NZ$20</button></a>
-                     </form>    
-
-                    </li>
-                    <li class="childlink">
-                    <form  method="POST" action="pricesearch.php" data-target="pricesearch">
-                        <input type="hidden" name="searchstart" value="20">
-                        <input type="hidden" name="searchend" value="25">
-                        <a class="childprice"><button class="pricetrigger" type="submit" >NZ$20-NZ$25</button></a>
-                     </form>    
-                    </li>
-                    <li class="childlink">
-                    <form  method="POST" action="pricesearch.php" data-target="pricesearch">
-                        <input type="hidden" name="searchstart" value="25">
-                        <input type="hidden" name="searchend" value="30">
-                        <a class="childprice"><button class="pricetrigger" type="submit" >NZ$25-NS$30</button></a>
-                     </form>    
-                    </li>
-                    <li class="childlink">
-                    <form  method="POST" action="pricesearch.php" data-target="pricesearch">
-                        <input type="hidden" name="searchstart" value="30">
-                        <input type="hidden" name="searchend" value="35">
-                        <a class="childprice"><button class="pricetrigger" type="submit" >NZ$30-NZ$35</button></a>
-                     </form>    
-                    </li>
-                    <li class="childlink">
-                    <form  method="POST" action="pricesearch.php" data-target="pricesearch">
-                        <input type="hidden" name="searchstart" value="35">
-                        <input type="hidden" name="searchend" value="5000">
-                        <a class="childprice"> <button class="pricetrigger" type="submit" >NZ$35-</button></a>
-                     </form>    
-                    </li>
-                  </ul>
-            </div>
-
-    
+            <ul>
+                <?php
+                  $i = 0;
+                  while ($i <= 35) {
+                    // var_dump($i);
+                    $priceJson = array(
+                      'searchPara' => '',
+                      'location' => 'priceRange'
+                    );
+                    echo '
+                      <li class="childlink">';
+                    if ($i == 35) {
+                      $priceJson['searchPara'] = 'partials'.DIRECTORY_SEPARATOR.'priceresult.php?searchstart='.$i.'&location=priceRange';
+                      echo '
+                          <a class="childprice"><button value='.json_encode($priceJson).' class="pricetrigger" type="button" onclick="showProductAjax(this.value)">NZ$'.$i.'-</button></a>
+                      </li>
+                      ';
+                    } else {
+                      $priceJson['searchPara'] = 'partials'.DIRECTORY_SEPARATOR.'priceresult.php?searchstart='.$i.'&searchend='.($i+5).'&location=priceRange';
+                      echo '
+                          <a class="childprice"><button value='.json_encode($priceJson).' class="pricetrigger" type="button" onclick="showProductAjax(this.value)">NZ$'.$i.'-NZ$'.($i+5).'</button></a>
+                      </li>
+                      ';
+                    }
+                    $i = ($i + 5);
+                    // var_dump($i);
+                  }
+                ?>
+            </ul>
+        </div>
 </div>
 
 <style>
