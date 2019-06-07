@@ -119,13 +119,14 @@ echo '
                     </button>
                 </div>
                 <div class="modal-body">
-                <form action="stripeIPN.php" method="post" id="payment-form">
-                    <input type="hidden" name="finalprice" value="'.$ultimatePrice.'"></input>
-                    <input type="hidden" name="finalquantity" value="'.$ultimateQuantity.'"></input>
-                    <input type="hidden" value="'.$note.'" name="notecontext">
+                <form id="payment-form">
+                    <input type="hidden" name="finalprice" id="finalprice" value="'.$ultimatePrice.'"></input>
+                    <input type="hidden" id="finalquantity" name="finalquantity" value="'.$ultimateQuantity.'"></input>
+                    <input type="hidden" value="'.$note.'" id="notecontext" name="notecontext">
                     <input type="hidden" value="'.$emailaddress.'" id="emailcontext" name="emailcontext">
                     <input type="hidden" value="'.$orderID.'" id="idcontext" name="idcontext">
-  
+                    <input type="hidden" value="'.$username.'" id="usernamecontext" name="usernamecontext">
+
                     <div class="form-row">
                         <div class="col-sm-12 col-md-4">
                                 <div class="imgwrapper" style="width:100%;">
@@ -168,6 +169,7 @@ echo '
                     <div id="card-errors" role="alert"></div>
                     </div>
                 
+        
                     <button id="paysubmitbtn">PAY NOW</button>
                     <button id="dismissbtn" data-dismiss="modal">Close</button>
 

@@ -12,8 +12,12 @@
   
   if ($cartitem_res != "") {
       $cartitem_arr = mysqli_fetch_all($cartitem_res);
+      // var_dump($cartitem_arr);
       $resultcount=count($cartitem_arr);
-      $orderID=$cartitem_arr[0][0];
+      if($resultcount!==0){
+       $orderID=$cartitem_arr[0][0];  
+      }
+     
     } else {
       alert("result empty");
     }
@@ -141,17 +145,6 @@
           <button class="cart-item-remove" type="button">Remove</button> 
           </td>';
           echo '</tr>';
-          // if($cartitem_arr[$b][9] !==null){
-            // $itemtotal= $cartitem_arr[$b][13];
-            // $carttotal=$carttotal+$itemtotal;
-            // // }
-            // // else{
-            //   //   $itemtotal= $cartitem_arr[$b][8];
-            //   //   $carttotal=$carttotal+$itemtotal;  
-            //   // } 
-            //   $itemquantity=$cartitem_arr[$b][5];
-            //   $carttotalquantity=$carttotalquantity+$itemquantity;
-              
             }
             
           }
@@ -161,22 +154,38 @@
           echo '
           </tbody>
           
-          </table>
+          </table>';
           
-          
-          
-          <div class="cart-tools">
-          <p class="cart-quantity" name="cartTotalQuantity" id="cartTotalQuantity" value="'.$carttotalquantity.'" style="
-          text-align: right;
-          margin-right: 30px;
-          margin-bottom: 0;
-          margin-top: 20px;
-          font-size: 20px;
-          font-weight: 700;
-          ">'.$carttotalquantity.'items</p>
-          
-          <p class="cart-price">TOTAL: NZ$<span class="totalmoney" name="cartTotalPrice" id="cartTotalPrice" value="'.$carttotal.'">'.$carttotal.'</span></p>';
-          $carttotalcost= ($carttotal*100); 
+              if(count($cartitem_arr) == 0){
+                echo'
+                <div class="cart-tools">
+                <p class="cart-quantity" name="cartTotalQuantity" id="cartTotalQuantity" style="
+                text-align: right;
+                margin-right: 30px;
+                margin-bottom: 0;
+                margin-top: 20px;
+                font-size: 20px;
+                font-weight: 700;
+                ">0 items</p>
+                
+                <p class="cart-price">TOTAL: NZ$<span class="totalmoney" name="cartTotalPrice" id="cartTotalPrice">0</span></p>';
+                  
+              }
+              else{
+                echo'
+                <div class="cart-tools">
+                <p class="cart-quantity" name="cartTotalQuantity" id="cartTotalQuantity" value="'.$carttotalquantity.'" style="
+                text-align: right;
+                margin-right: 30px;
+                margin-bottom: 0;
+                margin-top: 20px;
+                font-size: 20px;
+                font-weight: 700;
+                ">'.$carttotalquantity.'items</p>
+                
+                <p class="cart-price">TOTAL: NZ$<span class="totalmoney" name="cartTotalPrice" id="cartTotalPrice" value="'.$carttotal.'">'.$carttotal.'</span></p>';
+                $carttotalcost= ($carttotal*100); 
+              }
           echo '<div class="cart-instructions">        
           <p class="note"><i class="fas fa-pencil-alt" style="font-size:24px; margin-right: 10px;"></i>Special instructions</p>      
           <textarea rows="6" name="note" id="notetext" placeholder="Add a note"></textarea>
@@ -208,9 +217,9 @@
 
           
         }
-        else{
-          echo '<h4 class="notloggedinmsg">Please log in for the next step</h4>';
-        }
+      else{
+        echo '<h4 class="notloggedinmsg">Please log in for the next step</h4>';
+      }
         ?>
 
 <!-- links -->

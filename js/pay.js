@@ -125,6 +125,8 @@ var detailname =function(){
     namebox.setAttribute('value',username);
     namemodalbox =document.getElementById('namemodal');
     namemodalbox.setAttribute('value',username);
+    usernamecontext =document.getElementById('usernamecontext');
+    usernamecontext.setAttribute('value',username);
 }
 var detailnumberupdate=function(){
     var phone= document.getElementById('numberadd').value;
@@ -239,15 +241,64 @@ function paymentModal() {
     function stripeTokenHandler(token) {
       // Insert the token ID into the form so it gets submitted to the server
       var form = document.getElementById('payment-form');
-      var hiddenInput = document.createElement('input');
-      hiddenInput.setAttribute('type', 'hidden');
-      hiddenInput.setAttribute('name', 'stripeToken');
-      hiddenInput.setAttribute('value', token.id);
-      form.appendChild(hiddenInput);
-    
+      // var hiddenInput = document.createElement('input');
+      // var hiddenInput2 = document.createElement('input');
+      // hiddenInput.setAttribute('type', 'hidden');
+      // hiddenInput.setAttribute('name', 'stripeToken');
+      // hiddenInput.setAttribute('value', token.id);
+      // hiddenInput2.setAttribute('type', 'hidden');
+      // hiddenInput2.setAttribute('name', 'stripeEmail');
+      // hiddenInput2.setAttribute('value', token.email);      
+      // form.appendChild(hiddenInput,hiddenInput2);
+     var finalprice=document.getElementById('finalprice').value;
+     var finalquantity=document.getElementById('finalquantity').value;
+     var note=document.getElementById('notecontext').value;
+     var email=document.getElementById('emailcontext').value;
+     var orderId=document.getElementById('idcontext').value;
+     var username=document.getElementById('usernamecontext').value;
+
       // Submit the form
-      form.submit();
+      var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                console.log(xmlhttp);
+                // alert(xmlhttp.responseText);
+                if (xmlhttp.responseText == 3) {
+                    alert('result empty');                 
+                } else if(xmlhttp.responseText == 2) {
+                  alert('email sending failed');                 
+                }
+                else if(xmlhttp.responseText == 1){
+                  alert('Success!!!!')
+                 
+                  $("#payModal .close").click()
+                  invoicedirect();
+                }
+            }
+        };
+    xmlhttp.open("GET", "stripeIPN.php?stripeToken="+token.id+"&email="+token.email+"&finalprice="+finalprice+"&finalquantity="+finalquantity+"&notecontext="+note+"&emailcontext="+email+"&usernamecontext="+username+"&idcontext="+orderId, true);
+    xmlhttp.send();
     }
+}
+
+function invoicedirect(params) {
+
+var xmlhttp = new XMLHttpRequest();
+var orderId=document.getElementById('idcontext').value;
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                console.log(xmlhttp);
+                document.getElementById("content").innerHTML = xmlhttp.responseText;
+                
+            }
+        };
+    xmlhttp.open("GET", "payment/invoice.php?id="+orderId, true);
+    xmlhttp.send();  
+
+    $('#fourth').ready(function(){
+      $('#step2').removeClass('selected');
+      $('#step4').addClass('selected');
+     });
 }
 
 
