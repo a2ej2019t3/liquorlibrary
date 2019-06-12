@@ -5,7 +5,7 @@ var pricesortDropdown = document.getElementById('pricesortDropdown'),
         searchPara: '',
         onloadPara: '',
         location: ''
-};
+    };
 
 function addLoadEvent(func) {
     var oldonload = window.onload;
@@ -96,7 +96,7 @@ function showProduct (Json) {
 }
 
 function pushHistoryState () {
-    console.log(history.state);
+    // console.log(history.state);
     if (history.state.searchPara) {
         var historyState = history.state.onloadPara;
     } else {
@@ -108,13 +108,13 @@ function pushHistoryState () {
     } else {
         // alert('pushState did not execute');
     }
-    console.log(history.state);
+    // console.log(history.state);
 }
 
 function checkLocationPara (locationPara) {
     switch (locationPara) {
         case 'category':
-            fileName = 'typesearch.php',
+            fileName = 'partials/discountrate.php',
             // onloadfileName = 'categorysearch.php';
             pricesortDropdown.style.display = "none";
             break;
@@ -124,7 +124,7 @@ function checkLocationPara (locationPara) {
             pricesortDropdown.style.display = "none";
             break;
         case 'brandproduct':
-            fileName = 'partials/saleproductprint.php';
+            fileName = 'partials/discountrate.php';
             // onloadfileName = 'categorysearch.php';
             pricesortDropdown.style.display = "none";
             break;
@@ -149,8 +149,10 @@ function checkIfSelected () {
         }
     } else {
         var filename = obj.options[obj.selectedIndex].getAttribute('data-target');
-        var Json = {
-            searchPara: 'partials/' + filename + '?location=salelist'
+        if (filename == 'discountrate') {
+            var Json = {
+                searchPara: 'partials/' + filename + '?location=salelist&p=dc'
+            }
         }
     }
     showProductAjax(Json);

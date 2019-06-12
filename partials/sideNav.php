@@ -34,7 +34,7 @@ include_once ('connection.php');
                                  <ul>';
                         for ($b = 0; $b < count($subCategory_arr); $b++) {
                             $categoryInfo = array(
-                                                'searchPara' => "typesearch.php?searchcategoryID=".$subCategory_arr[$b][0]."&searchcategoryName=".$subCategory_arr[$b][1]."&location=category",
+                                                'searchPara' => "?searchcategoryID=".$subCategory_arr[$b][0]."&searchcategoryName=".$subCategory_arr[$b][1]."&location=category",
                                                 'location' => "category"
                                               );
                             // var_dump($productInfo);

@@ -1,5 +1,7 @@
 <?php
 include ('connection.php');
+include(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'liquorlibrary' . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 'DBsql.php');
+$DBsql = new sql;
 echo '
 <div class="container_fluid">
     <div class="row">
@@ -28,30 +30,27 @@ echo '
                                 echo '<div class="alphabetbox">';
                                 echo '<span class ="alphatitle" id="'.$char.'">'.$char.'</span><hr style="margin-top:0!important;">
                                     </div>';
-                                    
-                                $searchBrandlist_sql = "SELECT brandID, brandName FROM brand WHERE LEFT(brandName ,1)='$char'";
                                 
-                                $searchBrandlist_res = mysqli_query($connection, $searchBrandlist_sql);
-                                
-                                if ($searchBrandlist_res != "") {
-                                    $searchBrandlist_arr = mysqli_fetch_all($searchBrandlist_res);
-                                    
-                                } else {
-                                    // alert("result empty");
+                                $searchBrandlist_arr = $DBsql->select('brand', array('spec' => "LEFT(brandName ,1)='$char'"));
+                                // $searchBrandlist_sql = "SELECT brandID, brandName FROM brand WHERE LEFT(brandName ,1)='$char'";
+                                // $searchBrandlist_res = mysqli_query($connection, $searchBrandlist_sql);
+                                // var_dump($searchBrandlist_arr);
+                                if ($searchBrandlist_arr === null) {
+                                    $searchBrandlist_arr = array();
                                 }
                                 echo '<div class="namebox">'; 
                                 // printing brand names in for loop
                                     echo '<div class="row">';
                                     for ($b = 0; $b <count($searchBrandlist_arr); $b++) {
                                         $brandlistArr = array(
-                                                            'searchPara' => "?brandname=".$searchBrandlist_arr[$b][1]."&location=brandproduct",
+                                                            'searchPara' => "?brandname=".$searchBrandlist_arr[$b]['brandName']."&location=brandproduct",
                                                             'location' => "brandproduct"
                                                             );
                                         $brandlistJson = json_encode($brandlistArr);
                                         echo '<div class="col-md-4 col-lg-4">';
                                                 echo '<span>
                                                 <form style="margin: 0; padding: 0; display: inline;">
-                                                    <button class="namebutton" type="button" value='.$brandlistJson.' onclick="showProduct(this.value)">'.$searchBrandlist_arr[$b][1].'</button>
+                                                    <button class="namebutton" type="button" value='.$brandlistJson.' onclick="showProduct(this.value)">'.$searchBrandlist_arr[$b]['brandName'].'</button>
                                                 </form>
                                         </span>';
                                         echo '</div>'; /* col ends */

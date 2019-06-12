@@ -19,7 +19,7 @@
                 include_once ("partials/header.php");
             ?>
     </section>
-    <br><br>
+    <br>
     <section id="main">
         <?php
             include ("Cart/stickycart.php");

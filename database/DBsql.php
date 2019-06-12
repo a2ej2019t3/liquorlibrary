@@ -17,7 +17,7 @@
 
         //select all product info
         public function getProductInfo() {
-            $sql = "(SELECT product.productID, product.productName, product.price, product.discountprice, product.img, brand.brandName, category.categoryName, category.categoryID FROM product 
+            $sql = "(SELECT product.productID, product.productName, product.price, product.discountprice, product.img, brand.brandName, category.categoryName, category.categoryID, COALESCE((100-product.discountprice) * product.price / 100, 0) AS discountRate FROM product 
             LEFT JOIN brand ON product.brandID = brand.brandID
             LEFT JOIN category ON product.categoryID = category.categoryID) AS allproduct ";
             

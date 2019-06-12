@@ -17,11 +17,11 @@ $DBsql = new sql();
 if (isset($_REQUEST['i']) && $_REQUEST['i']!=""){
 	$productID = $_REQUEST['i'];
 	$chosenProductArr = $DBsql->select($DBsql->getProductInfo(), array('productID' => $productID));
-	var_dump($chosenProductArr);
-	if ($chosenProductArr['discountprice']) {
-		$pricePerUnit = $chosenProductArr['discountprice'];
+	// var_dump($chosenProductArr);
+	if ($chosenProductArr[0]['discountprice']) {
+		$pricePerUnit = $chosenProductArr[0]['discountprice'];
 	} else {
-		$pricePerUnit = $chosenProductArr['price'];
+		$pricePerUnit = $chosenProductArr[0]['price'];
 	}
 	if (isset($_SESSION['user'])) {
 		$cartID = $_SESSION['cartID'];
