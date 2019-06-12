@@ -100,7 +100,7 @@
 
         // common select
         public function select ($table, $consArr) {
-            if ($table != null && $consArr != null) {
+            if ($table !== null && $consArr !== null) {
                 $sql = $this->selectSql($table, $consArr);
                 $res = $this->connection->query($sql);
                 if (!$res) {
