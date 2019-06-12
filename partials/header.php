@@ -49,7 +49,7 @@
                     <li class="col"><a class="<?php echo $className; ?>" href="contact.php" style="color: white; font-size: 1rem; font-family: 'Roboto', sans-serif;">Contact</a></li> 
                     <li class="col"><a class="<?php echo $className; ?>" href="admin_area/login.php" style="color: white; font-size: 1rem; font-family: 'Roboto', sans-serif;">Admin</a></li> 
                     <li class="col"> 
-                        <!-- modal button -->
+<!-- modal button                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               -->
                         <button type="button" class="btn btn-primary btn-lg pull-right" style="background-color: transparent; border:none;" data-toggle="modal" data-target="#modal2">
                             <span class="<?php echo $className; ?>" style="color: white; font-size: 20px; margin-top:10px;" id="b2"><i class="fas fa-search"></i></span> 
                         </button>

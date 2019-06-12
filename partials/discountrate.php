@@ -6,14 +6,18 @@
     $DBsql = new sql;
     // Sale product search 
 
-    // discountrate
-    if (isset($_GET['p']) && $_GET['p'] == 'dc') {
-        $product_arr = $DBsql->select($DBsql->getProductInfo(), array('spec' => 'discountprice is not null ORDER BY discountRate DESC'));
+    // onsalelist
+    if (isset($_GET['location']) && $_GET['location'] == 'salelist') {
+        if (isset($_GET['opt']) && $_GET['opt'] == 'all') {
+            $product_arr = $DBsql->select($DBsql->getProductInfo(), array('spec' => 'discountprice is not null'));
+        } else if (isset($_GET['opt']) && $_GET['opt'] == 'dr') {
+            $product_arr = $DBsql->select($DBsql->getProductInfo(), array('spec' => 'discountprice is not null ORDER BY discountRate DESC'));
+        }else if ($_GET['condition'] == 'ASC' || $_GET['condition'] == 'DESC') {
+            $product_arr = $DBsql->select($DBsql->getProductInfo(), array('spec' => 'discountprice is not null ORDER BY discountprice '.$_GET['condition']));
+        }
     }
-    // // onsalelist
-    //     $searchSale_arr = $DBsql->select($DBsql->getProductInfo(), array('spec' => 'discountprice is not null'));
     // typesearch
-    if (isset($_GET['searchcategoryID']) && isset($_GET['searchcategoryName'])) {
+    else if (isset($_GET['searchcategoryID']) && isset($_GET['searchcategoryName'])) {
         $searchcategoryID = $_GET['searchcategoryID'];
         $searchcategoryName = $_GET['searchcategoryName'];
     
@@ -21,27 +25,32 @@
         // var_dump($searchcontent);
         $category= $searchcategoryName;
         $product_arr = $DBsql->select($DBsql->getProductInfo(), array('categoryID' => $searchcontent));
-        $resultcount = count($product_arr);
     }
     // saleproductprint
-    if (isset($_GET['location']) && $_GET['location'] == 'brandproduct') {
+    else if (isset($_GET['location']) && $_GET['location'] == 'brandproduct') {
         //  Brand list 
         if (isset($_GET['brandname'])) {
             $searchcontent = "'".$_GET['brandname']."'";
             $product_arr = $DBsql->select($DBsql->getProductInfo(), array('brandName' => $searchcontent));
-            $resultcount = count($product_arr);
-        } else if ($_GET['condition'] == 'ASC' || $_GET['condition'] == 'DESC') {
-            $product_arr = $DBsql->select($DBsql->getProductInfo(), array('spec' => 'discountprice is not null ORDER BY discountprice '.$_GET['condition']));
-            $resultcount = count($product_arr);
+        } 
+    }
+    else if (isset($_GET['location']) && $_GET['location'] == 'priceRange') {
+        $searchstart = $_GET['searchstart'];
+        if (isset($_GET['searchend'])) {
+            $searchend = $_GET['searchend'];
+            $product_arr = $DBsql->select($DBsql->getProductInfo(), array('spec' => 'discountprice >= '.$searchstart.' AND discountprice <= '.$searchend));
+            // var_dump($product_arr);
+        } else {
+            $searchend = '';
+            $product_arr = $DBsql->select($DBsql->getProductInfo(), array('spec' => 'discountprice >='.$searchstart));
+            // var_dump($product_arr);
         }
     }
-    
-
 
     if ($product_arr != "") {
         $resultcount=count($product_arr);
     } else {
-        alert("result empty");
+        // echo 'No result';
     }
     echo '
     <hr style="margin-top:100px; margin-left:15px;">
@@ -62,9 +71,9 @@
         <div class="container" style="padding-right: 45px;">
             <div style="text-align:left;"><i class="far fa-compass" style="margin: 10px 10px;"></i><a style="color: black!important; text-decoration: none!important;" href="index.php">Home / </a> <span> Sale Products / Discount Rate / '.$resultcount.' products</span>
             </div>';
-          if ($resultcount != "") {
+          if ($resultcount != 0) {
             $imgpath = 'images/';
-            if (count($product_arr) != 0) { 
+            if (count($product_arr) != 0) {
     echo '
             <div class="productcontent">
                 <div class="product-grid product-grid--flexbox">
@@ -89,7 +98,7 @@
                                     </div>';
                                 }
                 echo '
-                                    <img src='.$imgpath.$product_arr[$b]['img'].' style="width: 120px; max-height: 170px;margin: 0 auto;">';
+                                    <img src='.$imgpath.$product_arr[$b]['img'].' style="width: 120px; max-height: 170px;margin-top: -30px;">';
                  
                 echo '
                             </div>
@@ -111,7 +120,10 @@
                 echo '
                             <div class="product-grid__extend" style="width:100%;">
                                 <div class="row">
-                                    <div class="col-sm-6 col-md-6" style="padding:0!important;"><span class="product-grid__botton product-grid__add-to-cart"><i class="fa fa-cart-arrow-down"></i><br> Add to cart</span>
+                                    <div class="col-sm-6 col-md-6" style="padding:0!important;">
+                                        <span class="product-grid__botton product-grid__add-to-cart" data-productID="'.$product_arr[$b]['productID'].'" onclick="addToCart(this)">
+                                            <i class="fa fa-cart-arrow-down"></i><br> Add to cart
+                                        </span>
                                     </div>
                                     <div class="col-sm-6 col-md-6" style="padding:0!important;"><a href="productlist.php?pid='.$product_arr[$b]['productID'].'"><span class="product-grid__botton product-grid__view"><i class="fa fa-eye"></i><br>View more</span></a>
                                     </div>
@@ -127,7 +139,9 @@
             }
         } else {
             ob_clean();
-            echo 0;
+            echo '
+            <hr style="margin-top:100px; margin-left:15px;">
+            No result';
         }
     echo "
         </div>

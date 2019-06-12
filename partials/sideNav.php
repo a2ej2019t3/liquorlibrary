@@ -56,12 +56,12 @@ include_once ('connection.php');
 
   <?php
     $brandInfo = array(
-                      'searchPara' => 'brandlist.php?location=brandlist',
+                      'searchPara' => '?location=brandlist',
                       'location' => 'brandlist'
                       );
     $brandInfoJson = json_encode($brandInfo);
     $onSale = array(
-                    'searchPara' => 'onsalelist.php?location=salelist',
+                    'searchPara' => '?location=salelist&opt=all',
                     'location' => 'salelist'
                     );
     $onSaleJson = json_encode($onSale);
@@ -82,13 +82,13 @@ include_once ('connection.php');
                     echo '
                       <li class="childlink">';
                     if ($i == 35) {
-                      $priceJson['searchPara'] = 'partials'.DIRECTORY_SEPARATOR.'priceresult.php?searchstart='.$i.'&location=priceRange';
+                      $priceJson['searchPara'] = 'partials'.DIRECTORY_SEPARATOR.'discountrate.php?searchstart='.$i.'&location=priceRange';
                       echo '
                           <a class="childprice"><button value='.json_encode($priceJson).' class="pricetrigger" type="button" onclick="showProductAjax(this.value)">NZ$'.$i.'-</button></a>
                       </li>
                       ';
                     } else {
-                      $priceJson['searchPara'] = 'partials'.DIRECTORY_SEPARATOR.'priceresult.php?searchstart='.$i.'&searchend='.($i+5).'&location=priceRange';
+                      $priceJson['searchPara'] = 'partials'.DIRECTORY_SEPARATOR.'discountrate.php?searchstart='.$i.'&searchend='.($i+5).'&location=priceRange';
                       echo '
                           <a class="childprice"><button value='.json_encode($priceJson).' class="pricetrigger" type="button" onclick="showProductAjax(this.value)">NZ$'.$i.'-NZ$'.($i+5).'</button></a>
                       </li>

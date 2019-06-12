@@ -14,7 +14,8 @@ function addLoadEvent(func) {
 
 addLoadEvent(getItems);
 
-function addToCart (id) {
+function addToCart (obj) {
+    var id = obj.getAttribute('data-productID');
     var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {

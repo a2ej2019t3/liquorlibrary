@@ -87,9 +87,6 @@ function showProduct (Json) {
 
     // update jsonObject
     updateObj(search, locationPara);
-    // jsonObject.searchPara = fileName + search;
-    // jsonObject.onloadPara = onloadfileName + search;
-    // jsonObject.location = locationPara;
 
     showProductAjax(jsonObject);
     pushHistoryState();
@@ -130,7 +127,7 @@ function checkLocationPara (locationPara) {
             break;
         case 'salelist':
             document.getElementById('selectsort').selectedIndex = 0;
-            fileName = 'partials/onsalelist.php';
+            fileName = 'partials/discountrate.php';
             // onloadfileName = 'categorysearch.php';
             pricesortDropdown.style.display = "block";
             break;
@@ -145,13 +142,17 @@ function checkIfSelected () {
     var condition;
     if (condition = obj.options[obj.selectedIndex].getAttribute('value')) {
         var Json = {
-            searchPara: 'partials/saleproductprint.php?condition=' + condition + '&location=salelist'
+            searchPara: 'partials/discountrate.php?condition=' + condition + '&location=salelist'
         }
     } else {
         var filename = obj.options[obj.selectedIndex].getAttribute('data-target');
         if (filename == 'discountrate') {
             var Json = {
-                searchPara: 'partials/' + filename + '?location=salelist&p=dc'
+                searchPara: 'partials/discountrate.php?location=salelist&opt=dr'
+            }
+        } else if (filename == 'onsalelist') {
+            var Json = {
+                searchPara: 'partials/discountrate.php?location=salelist&opt=all'
             }
         }
     }
