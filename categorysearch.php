@@ -19,7 +19,7 @@
                 include_once ("partials/header.php");
             ?>
     </section>
-    <br><br>
+    <br>
     <section id="main">
         <?php
             include ("Cart/stickycart.php");
@@ -35,11 +35,11 @@
                 </div>
                 <div class="productresult col-md-9 col-xs-12 content-right">
                     <div id="pricesortDropdown" style="margin-top: 100px; "><hr><span style="font-size:24px;">Sale products</span>
-                        <select onchange="checkChange(this)" class="sortselect" name="sortselect" id="selectsort" style="width: 300px;margin-left: 15px;">                             
-                            <option data-target="onsalelist" selected="true" >ALL ITEMS</option>
-                            <option data-target="discountrate" >BY DISCOUNT RATE</option>
-                            <option data-target="saleproductprint" value="ASC">BY LOW PRICE</option>
-                            <option data-target="saleproductprint" value="DESC" onclick="pricesorthigh()">BY HIGH PRICE</option>
+                        <select onchange="checkIfSelected()" class="sortselect" name="sortselect" id="selectsort" style="width: 300px;margin-left: 15px;">                                
+                            <option id="Op0" data-target="onsalelist" selected="true" >ALL ITEMS</option>
+                            <option id="Op1" data-target="discountrate" >BY DISCOUNT RATE</option>
+                            <option id="Op2" data-target="saleproductprint" value="ASC">BY LOW PRICE</option>
+                            <option id="Op3" data-target="saleproductprint" value="DESC">BY HIGH PRICE</option>
                             <button type="submit"></button>
                         </select>
                     </div>

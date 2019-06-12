@@ -17,13 +17,13 @@
 ?>
 
 
- <!DOCTYPE html>
- <html lang="en">
- <head>
- <?php
-    include_once ("partials/head.php");
-  ?>
- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<?php
+  include_once ("partials/head.php");
+?>
+
 <title>Product_listbyCategory</title>
  </head>
  <body>

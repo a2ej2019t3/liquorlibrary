@@ -28,9 +28,7 @@
                                 echo '
                                 <button type="button" id="buttonIndex_'.$a.'" class="tablinks" onclick="openCity(this.id)" value="'.$cityName.'"><span>'.$cityName.'</span></button>
                                 ';
-                               
                             }
-                
                         } else {
                         
                         };

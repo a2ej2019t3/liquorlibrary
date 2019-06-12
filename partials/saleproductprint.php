@@ -9,8 +9,8 @@
         $searchcontent = "'".$_GET['brandname']."'";
         $resArr = $DBsql->select($DBsql->getProductInfo(), array('brandName' => $searchcontent));
         $resultcount = count($resArr);
-    } else if ($_GET['location'] == 'lowprice') {
-        $resArr = $DBsql->select($DBsql->getProductInfo(), array('spec' => 'discountprice is not null ORDER BY discountprice ASC'));
+    } else if ($_GET['condition'] == 'ASC' || $_GET['condition'] == 'DESC') {
+        $resArr = $DBsql->select($DBsql->getProductInfo(), array('spec' => 'discountprice is not null ORDER BY discountprice '.$_GET['condition']));
         $resultcount = count($resArr);
     }
         echo '

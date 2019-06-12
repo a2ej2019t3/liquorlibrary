@@ -4,13 +4,15 @@
     // $_SESSION['location'] = 'productlist';
     // $_SESSION['ref'] = $SERVER['QUERYSTRING'];
     include ('../connection.php');
+    include(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 'DBsql.php');
+    $DBsql = new sql;
     // Sale product search 
 
-    $searchSale_sql = "SELECT p.productID, p.img, p.productName, p.discountprice, p.price,p.categoryID, b.brandName, c.categoryName,c.categoryID FROM product AS p, brand AS b, category AS c WHERE p.brandID=b.brandID and p.categoryID=c.categoryID and p.discountprice is not null";
-    $searchSale_res = mysqli_query($connection, $searchSale_sql);
-    
-    if ($searchSale_res != "") {
-        $searchSale_arr = mysqli_fetch_all($searchSale_res);
+    $searchSale_arr = $DBsql->select($DBsql->getProductInfo(), array('spec' => 'discountprice is not null'));
+    // $searchSale_sql = "SELECT p.productID, p.img, p.productName, p.discountprice, p.price,p.categoryID, b.brandName, c.categoryName,c.categoryID FROM product AS p, brand AS b, category AS c WHERE p.brandID=b.brandID and p.categoryID=c.categoryID and p.discountprice is not null";
+    // $searchSale_res = mysqli_query($connection, $searchSale_sql);
+    // var_dump($searchSale_arr);
+    if ($searchSale_arr != "") {
         $resultcount=count($searchSale_arr);
     } else {
         alert("result empty");
@@ -32,31 +34,28 @@ echo '
 
                 for ($b = 0; $b <count($searchSale_arr); $b++) {
                     echo '
-                        
-                         
                         <div class="product-grid__product col-sm-6 col-md-4 col-lg-3" style="text-align: center; font-family: Montserrat, sans-serif;">
                             <div class="product-grid__img-wrapper" style="height: 185px; text-algin:center; ">			
-                                     <img src='.$imgpath.$searchSale_arr[$b][1].' style="width: 120px; max-height: 170px;margin: 0 auto;">
+                                     <img src='.$imgpath.$searchSale_arr[$b]['img'].' style="width: 120px; max-height: 170px;margin: 0 auto;">
                                  
                                         <div class="adminbuttons" id="adminbtsgroup">
-                                       
-                                            <button type="button" data-id='.$searchSale_arr[$b][0].' class="customebts btn btn-secondary btn-sm" data-toggle="modal" data-target="#specialproductadd" style="color: rgba(48, 43, 41,1); background-color: transparent; border:none;">
+                                            <button type="button" data-id='.$searchSale_arr[$b]['productID'].' class="customebts btn btn-secondary btn-sm" data-toggle="modal" data-target="#specialproductadd" style="color: rgba(48, 43, 41,1); background-color: transparent; border:none;">
                                             <i class="fas fa-thumbtack"></i>
                                             Specials
                                             </button>
-                                      </div>
+                                        </div>
                                    
                                    
                              </div><br>
-                            <div class="product-grid__title" style="font-size: 1.2rem;font-weight: 600;"><span>'.$searchSale_arr[$b][2].'</span></div><br>';
-                    echo   '<div class="product-grid__price"><span style="font-size:1.4rem;">NZ$'.$searchSale_arr[$b][3].'</span> <span style="text-decoration: line-through; color:rgba(48, 43, 41,1); font-size:1rem;"> $'.$searchSale_arr[$b][4].'</span></div>';
+                            <div class="product-grid__title" style="font-size: 1.2rem;font-weight: 600;"><span>'.$searchSale_arr[$b]['productName'].'</span></div><br>';
+                    echo   '<div class="product-grid__price"><span style="font-size:1.4rem;">NZ$'.$searchSale_arr[$b]['discountprice'].'</span> <span style="text-decoration: line-through; color:rgba(48, 43, 41,1); font-size:1rem;"> $'.$searchSale_arr[$b]['price'].'</span></div>';
                             
                             
                             
                        echo         '<div class="product-grid__extend" style="width:100%;">
                                      <div class="row">
-                                     <div class="col-sm-6 col-md-6" style="padding:0!important;><button value="'.$searchSale_arr[$b][0].'" onclick="addToCart(this.value)"><span class="product-grid__botton product-grid__add-to-cart"><i class="fa fa-cart-arrow-down"></i><br> Add to cart</span></button></div>
-                                     <div class="col-sm-6 col-md-6" style="padding:0!important;"><a href="productlist.php?pid='.$searchSale_arr[$b][0].'"><span class="product-grid__botton product-grid__view"><i class="fa fa-eye"></i><br>View more</span></a></div>
+                                     <div class="col-sm-6 col-md-6" style="padding:0!important;><button value='.$searchSale_arr[$b]['productID'].' onclick="addToCart(this.value)"><span class="product-grid__botton product-grid__add-to-cart"><i class="fa fa-cart-arrow-down"></i><br> Add to cart</span></button></div>
+                                     <div class="col-sm-6 col-md-6" style="padding:0!important;"><a href="productlist.php?pid='.$searchSale_arr[$b]['productID'].'"><span class="product-grid__botton product-grid__view"><i class="fa fa-eye"></i><br>View more</span></a></div>
 
                                     </div>
                                     </div>
