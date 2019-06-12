@@ -34,6 +34,7 @@ document.getElementById("loginSubmit").onclick = function () {
                 alert("Wrong password");
             } else if (xmlhttp.responseText == 3){
                 document.location.reload(true);
+                sessionStorage.setItem('status','loggedIn'); 
             }
         }
     };
