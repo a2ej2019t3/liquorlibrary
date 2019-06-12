@@ -51,6 +51,10 @@ if (sessionStorage.getItem('status') != null){
   //show validation message
  alert("Please log in to proceed");
  $("#cart .close").click();
+//  jQuery.noConflict(); 
+//   $('#myModal').modal('show');
+$('#myModal').modal();
+  exit();
 
  }
 }

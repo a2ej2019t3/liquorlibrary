@@ -45,8 +45,8 @@
 	
 	include ('connection.php');
 	// Cart items > in case of order status=0 
-
-	$updateorder_sql = "UPDATE `orders` SET `status`=1 , note='$note' WHERE orderID='$orderId'";
+	$date = date('Y-m-d H:i:s');
+	$updateorder_sql = "UPDATE `orders` SET `status`=1 , note='$note', `date`= '$date' WHERE orderID='$orderId'";
 	$updateorder_res = mysqli_query($connection, $updateorder_sql);
 	
 	if ($updateorder_res != "") {

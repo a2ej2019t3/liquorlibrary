@@ -84,11 +84,3 @@ $(document).ready(function(){
     });
   });
 
-//   function selectItem (pid) {
-//     // var trigger = $('.namebutton'),        
-//        var itemId= pid;
-//       // Set $this for re-use. Set target from data attribute
-//         var $this = $(this),
-//         val = $this.find(':selected').val();    
-//         $.   
-// }

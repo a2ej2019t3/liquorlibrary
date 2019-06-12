@@ -11,7 +11,8 @@
         $ultimateQuantity = $_GET['ordertotalquantity'];
         $note= $_GET['note'];
         $orderID=$_GET['orderId'];
-
+        // echo $userID;
+        
         if ($user_res != "") {
             $user_arr = mysqli_fetch_all($user_res);
             $usertype= $user_arr[0][1];
@@ -20,7 +21,7 @@
             $emailaddress=$user_arr[0][5];
             $phone=$user_arr[0][6];
             $address=$user_arr[0][7];
-
+            // echo $username;
           } else {
             alert("result empty");
           }
