@@ -173,8 +173,25 @@
                 if ($res) {
                     return true;
                 } else {
-                    return false;
                     trigger_error('Invalid query: ' . $this->connection->error);
+                    return false;
+                }
+            }
+        }
+
+        public function deleteItem ($itemID, $orderID) {
+            if (isset($itemID) && isset($orderID)) {
+                $sql = "DELETE FROM `orderitems` WHERE `itemID` = ? AND `orderID` = ?";
+                $sql = $this->connection->prepare($sql);
+                $itemid = $itemID;
+                $orderid = $orderID;
+                $sql->bind_param("ii", $itemid, $orderid);
+                if ($sql->execute($sql)) {
+                    return true;
+                } else {
+                    trigger_error('Invalid query: ' . $this->connection->error);
+                    trigger_error('Invalid query: ' . $sql);
+                    return false;
                 }
             }
         }
