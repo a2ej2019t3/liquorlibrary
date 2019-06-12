@@ -1,7 +1,7 @@
           <!-- Login modal -->
           <div id="myModal" class="modal fade" data-backdrop="false">
             <div class="modal-dialog modal-login">
-              <div class="modal-content" style="height: 370px!important;">
+              <div class="modal-content" style="height: 370px!important; border: 1px solid rgba(124, 99, 84, 1);">
                 <div class="modal-header">				
                     <h4 class="modal-title">Sign in</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -14,7 +14,7 @@
                         </div>
                         <div class="form-group">
                           <i class="fa fa-lock"></i>
-                          <input type="password" name="password" class="form-control" placeholder="Password" required="required">					
+                          <input type="password" id="psw" name="password" class="form-control" placeholder="Password" required="required">					
                         </div>
                         <div class="form-group small clearfix">
                             <label class="checkbox-inline"><input type="checkbox"> Remember me</label>
@@ -29,3 +29,16 @@
             </div>
         </div>
     </div>
+    <script>
+(function() {
+    var psw = document.getElementById('psw');
+    psw.addEventListener('keypress', function(event) {
+        if (event.keyCode == 13) {
+            event.preventDefault();
+            document.getElementById('loginSubmit').click();
+        }
+    });
+}());
+
+
+      </script>

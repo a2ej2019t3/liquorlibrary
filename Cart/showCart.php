@@ -37,7 +37,9 @@ if (isset($_SESSION['cartItems'])) {
                                     <i>'.$tagForBrand.$itemInfo_arr[$b]['brandName'].'</i>
                                 </p>
                             </div>
+                          <hr>
                         </div>
+                        <hr>
                     </a>
                         ';
                 }

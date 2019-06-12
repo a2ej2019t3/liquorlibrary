@@ -142,3 +142,4 @@ document.getElementById("addToCart").onclick = function () {
     // xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.send();
 }
+
