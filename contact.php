@@ -41,19 +41,19 @@
 <!-- form section--------------------------------------------------------------------------------------------
 ------------------ -->
 <section id="form">
-    <form>
+    <form action="Emailsending/contact_email.php" method="POST">
   <div class="container" style="max-width: 900px; text-align:center;">
   
         <div class="row">
           <div class="fieldbox col-xs-12 col-sm-12 col-md-6 col-lg-6" > 
             <label for="lable">*What is your question about?</label><br>
-            <select name="select" id="questiontopic">
-            <option value="volvo">Please select one</option>
-            <option value="volvo">Product</option>
-            <option value="saab">delivery</option>
-            <option value="opel">Branch</option>
-            <option value="audi">Specials</option>
-            <option value="audi">Others</option>
+            <select name="questiontopic" id="questiontopic">
+            <option value="general">Please select one</option>
+            <option value="Product">Product</option>
+            <option value="delivery">delivery</option>
+            <option value="Branch">Branch</option>
+            <option value="Specials">Specials</option>
+            <option value="Others">Others</option>
             </select>
           </div>
         </div>
@@ -61,45 +61,45 @@
         <div class="row">
             <div class="fieldbox col-xs-12 col-sm-12 col-md-6 col-lg-6">
             <label for="lable">*First Name </label><br>
-            <input class="input2" type="text">
+            <input class="input2" type="text" name="firstname">
             </div>
             <div class="fieldbox col-xs-12 col-sm-12 col-md-6 col-lg-6">
             <label for="lable">*Last Name </label><br>
-            <input class="input2" type="text">
+            <input class="input2" type="text" name="lastname">
             </div>
         </div>
         <!-- third row -->
         <div class="row">
             <div class="fieldbox col-xs-12 col-sm-12 col-md-6 col-lg-6">
-            <label for="lable">*Your company Name </label><br>
-            <input class="input2" type="text">
+            <label for="lable">Your company Name </label><br>
+            <input class="input2" type="text" name="companyname">
             </div>
         </div>
         <!-- fourth row-->
         <div class="row">
             <div class="fieldbox col-xs-12 col-sm-12 col-md-6 col-lg-6">
             <label for="lable">*Phone number </label><br>
-            <input class="input2" type="text">
+            <input class="input2" type="text" name="contactnumber">
             </div>
             <div class="fieldbox col-xs-12 col-sm-12 col-md-6 col-lg-6">
             <label for="lable">*Email address </label><br>
-            <input class="input2" type="text">
+            <input class="input2" type="text" name="emailaddress">
             </div>
         </div>
         <!-- text area row -->
         <div class="fieldbox col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <label for="lable">*Comment:  </label><br>
-            <textarea name="comment" id="comment" cols="30" rows="5"></textarea>
+            <textarea name="comment" id="comment" cols="30" rows="5" name="comment"></textarea>
         </div>
         <!-- button row -->
          
         <div class="row">
           <br><br><br>
               <div class="fieldbox col-xs-12 col-sm-12 col-md-6 col-lg-6">
-              <button id="resetbutton" type="submit" class="btn btn-primary">Reset</button>
+              <button id="resetbutton" type="reset" class="btn btn-primary">Reset</button>
               </div>
               <div class="fieldbox col-xs-12 col-sm-12 col-md-6 col-lg-6">
-              <button id="submitbutton" type="submit" class="btn btn-primary">Submit</button>
+              <button id="submitbutton" type="submit" class="btn btn-primary" name="contactform">Submit</button>
               </div>
         </div>
         <br><br><br>

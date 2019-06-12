@@ -52,7 +52,7 @@ if ($result = mysqli_query($connection, $selectQuery))
         $val5 = $typeID;
         $val6 = $password;
         $val7 = $contact_number;
-
+        $username= $first_name. $last_name;
 
         if (mysqli_stmt_execute($stmt)) 
         {
@@ -63,6 +63,12 @@ if ($result = mysqli_query($connection, $selectQuery))
             $result = mysqli_query($connection, $selectQuery);
             $result_arr = mysqli_fetch_assoc($result);
             $_SESSION['user'] = $result_arr;
+            
+            //sending confirm email
+
+            require '../Emailsending/mail_config.php';
+            require '../Emailsending/successfulsignup_email.php';
+
 
             // go to index pages
             header("Location:../index.php");
