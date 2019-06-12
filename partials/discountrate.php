@@ -73,25 +73,24 @@
                 echo '
                         <div class="product-grid__product col-sm-6 col-md-4 col-lg-3" style="text-align: center; font-family: Montserrat, sans-serif;">
                             <div class="product-grid__img-wrapper" style="height: 185px; text-algin:center; ">';		
-                                if($product_arr[$b]['discountRate']>20){
+                                if ($product_arr[$b]['discountRate']>20) {
                 echo '
                                     <img src="images/specials.png" class="ribbon" style="width:75px; height: 60px; position:absolute; top: 0; left:0;">';
-                                }
-                echo '
-                                    <img src='.$imgpath.$product_arr[$b]['img'].' style="width: 120px; max-height: 170px;margin: 0 auto;">';
-                                if (isset($_GET['p']) && $_GET['p'] == 'dc') {
                 echo '
                                     <div class="offer-form">                             
                                         <button type="button" data-hover="'.round($product_arr[$b]['discountRate']).'%" class="discountbutton" data-active="ACTIVE"><span style="margin-left: -2px;">OFFER</span></button>
                                     </div>';
                 echo '
                                     <div class="adminbuttons" id="adminbtsgroup">
-                                        <button type="button" data-id='.$product_arr [$b]['productID'].' class="customebts btn btn-secondary btn-sm" data-toggle="modal" data-target="#specialproductadd" style="color: rgba(48, 43, 41,1); background-color: transparent; border:none;">
+                                        <button type="button" data-id='.$product_arr[$b]['productID'].' class="customebts btn btn-secondary btn-sm" data-toggle="modal" data-target="#specialproductadd" style="color: rgba(48, 43, 41,1); background-color: transparent; border:none;">
                                             <i class="fas fa-thumbtack"></i>
                                                 Specials
                                         </button>
                                     </div>';
                                 }
+                echo '
+                                    <img src='.$imgpath.$product_arr[$b]['img'].' style="width: 120px; max-height: 170px;margin: 0 auto;">';
+                 
                 echo '
                             </div>
                             <br>
