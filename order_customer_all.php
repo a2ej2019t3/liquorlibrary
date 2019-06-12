@@ -106,7 +106,7 @@ include_once('database/DBsql.php');
 							for ($i = 0; $i < count($orderRow); $i++) {
 								$DBsql = new sql;
 								$rows = $DBsql->getCartItemsInfo($orderRow[$i]["orderID"], $user['userID']);
-								var_dump($rows);
+								//var_dump($rows);
 
 								for ($j = 0; $j < count($rows); $j++) {
 									echo '
