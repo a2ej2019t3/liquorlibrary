@@ -47,9 +47,15 @@
                                         
                                             <button type="button" class="btn btn-secondary btn-sm" id="checkbutton">
                                             <a href="productlist.php?pid='.$searchSale_arr[$b][8].'">
-                                            CHECK NOW
+                                            CHECK NOW 
                                             </a>
                                             </button>
+                                            
+                                            <a href="delete_special.php?specialId='.$searchSale_arr[$b][0].'">
+                                            Delete 
+                                            </a>
+                                           
+                                            
 
                                       </div>';
 

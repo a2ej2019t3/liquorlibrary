@@ -57,6 +57,12 @@
                          <div class="carousel-caption d-md-block d-lg-block">';
                        echo '<p class="info">'.$maindeal_arr[$b][4].'</p>';  
                        echo '<div>';
+                       echo '
+                      
+                       <a href="delete_special.php?specialId='.$maindeal_arr[$b][0].'">
+                       Delete 
+                       </a>
+                      ';
                        if($maindeal_arr[$b][1]!=0){
                         echo'<span class="specialprice">'.$maindeal_arr[$b][1].'</span>';
                         }
@@ -82,9 +88,12 @@
     <span class="sr-only">Next</span>
   </a>
   <div class="adminbuttons" id="adminbtsgroup">
-  <button type="button" class="customebts btn btn-primary">
-        Delete
+  <!-- <button type="button" class="customebts btn btn-primary">  -->
+  <!-- <a href="delete_special.php?specailId='.$maindeal_arr[$b][0].'"> -->
+        <!-- Delete -->
+        </a>
   </button>
+  
   <button type="button" class="customebts btn btn-primary" data-toggle="modal" data-target="#newmainspecialModal">
         New special
   </button>
