@@ -52,8 +52,7 @@ function showProduct (Json) {
     }
     // update object
     var locationPara = parajsonObject.location,
-        searchPara = parajsonOb
-        ject.searchPara,
+        searchPara = parajsonObject.searchPara,
         search = searchPara.split('.php');
         if (search.length == 1) {
             search = search[0];
