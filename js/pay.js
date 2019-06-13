@@ -14,6 +14,7 @@ function addLoadEvent(func) {
 };
 
 addLoadEvent(finalPrice);
+// addLoadEvent(warehouseidentify);
 // addLoadEvent(finalquantity);
 
 var CaclulateCostTotal = function(data) {
@@ -108,6 +109,7 @@ var totalquantity = parseInt(ordertotalquantity, 10);
        if (this.readyState == 4 && this.status == 200) {
            console.log(xmlhttp);
            document.getElementById("content").innerHTML = xmlhttp.responseText;
+
        }
    };
 xmlhttp.open("GET", "./confirmdetail.php?ordertotalcost="+totalcost+"&ordertotalquantity="+totalquantity+"&note="+note+"&orderId="+orderId, true);
@@ -165,7 +167,115 @@ var detailaddressupdate =function(){
     addressmodalbox.setAttribute('value',address);
 }
 
+// delivery method js
+function warehouseidentify(){
+  var logintype=document.getElementById('usertypecontext').getAttribute('value');
+  if(logintype==1){
+    $('button[name=ckbtn]').hide();
+    $('button[name=ckbtn2]').show();
+    $('#extrainfo').css("display") == "none";
+  }
+
+}
+
+// --------------------------------------
+function deliveryinput() {
+
+  var sel = $('#deliverymothod :selected').val();
+  var deliveryhidden =document.getElementById('delivercontext');
+
+  if (sel == 'pickup') 
+  {
+    $('select[name=paymentmothod]').show();
+    $('select[name=locationselect]').show();
+    var deliveryoptionbox=document.getElementById('deliveryoption');
+    deliveryoptionbox.innerHTML=sel;
+    deliveryoptionbox.setAttribute('value',sel);
+    
+    deliveryhidden.setAttribute('value',sel);
+  }
+  else if(sel=='delivery')
+  {
+    $('select[name=paymentmothod]').hide();
+    $('select[name=locationselect]').hide();
+    var deliveryoptionbox=document.getElementById('deliveryoption');
+    deliveryoptionbox.innerHTML=sel;
+    deliveryoptionbox.setAttribute('value',sel);
+
+    var paymentbox=document.getElementById('paymentoption');
+    paymentbox.innerHTML='card';
+    paymentbox.setAttribute('value',1);
+    deliveryhidden.setAttribute('value',sel);
+
+  }
+};
+
+function paymentinput(){
+  var sel = $('#paymentmothod :selected').val();
+  var paymenthidden =document.getElementById('paymentcontext');
+
+  if (sel == 1) 
+  {
+    var paymentoptionbox=document.getElementById('paymentoption');
+    paymentoptionbox.innerHTML= 'card';
+    paymentoptionbox.setAttribute('value',1);
+    paymenthidden.setAttribute('value',1);
+    $('button[name=ckbtn2]').hide();
+    $('button[name=ckbtn]').show();
+  }
+  else if(sel == 2)
+  {
+       var paymentoptionbox=document.getElementById('paymentoption');
+    paymentoptionbox.innerHTML='cash';
+    paymentoptionbox.setAttribute('value',2); 
+    paymenthidden.setAttribute('value',2);
+    $('button[name=ckbtn]').hide();
+    $('button[name=ckbtn2]').show();
+
+  }
+};
+
+function locationinput(){
+  var sel = $('#locationselect :selected').val();
+  var selname = $('#locationselect :selected').text();
+  var locationhidden =document.getElementById('pickupcontext');
+
+  var locationbox=document.getElementById('pickuparea');
+  locationbox.innerHTML=selname;
+  locationbox.setAttribute('value',sel); 
+  locationhidden.setAttribute('value',sel);
+
+}
+// ---------------------------------------
+function payproceed(){
+ 
+  var logintype=document.getElementById('usertypecontext').getAttribute('value');
+  if(logintype==1){
+    alert('warehouse order');
+  }
+  else if(logintype==3){
+    var paymentpath=$('#paymentmothod :selected').val();
+      if(paymentpath==2){
+      alert('individualcash order');
+      }
+      else{
+        paymentModal();
+      }
+  }
+  else if(logintype==2){
+    var paymentpath=$('#paymentmothod :selected').val();
+      if(paymentpath==2){
+      alert('businesspartner cash order');
+      }
+      else{
+        paymentModal();
+      }
+  }
+
+};
+
 function paymentModal() {
+    
     // Create a Stripe client.
     var stripe = Stripe('pk_test_LzVFBvv6py0EeG7ifdYNnfJv00dEJ5eiyo');
     
@@ -241,15 +351,7 @@ function paymentModal() {
     function stripeTokenHandler(token) {
       // Insert the token ID into the form so it gets submitted to the server
       var form = document.getElementById('payment-form');
-      // var hiddenInput = document.createElement('input');
-      // var hiddenInput2 = document.createElement('input');
-      // hiddenInput.setAttribute('type', 'hidden');
-      // hiddenInput.setAttribute('name', 'stripeToken');
-      // hiddenInput.setAttribute('value', token.id);
-      // hiddenInput2.setAttribute('type', 'hidden');
-      // hiddenInput2.setAttribute('name', 'stripeEmail');
-      // hiddenInput2.setAttribute('value', token.email);      
-      // form.appendChild(hiddenInput,hiddenInput2);
+
      var finalprice=document.getElementById('finalprice').value;
      var finalquantity=document.getElementById('finalquantity').value;
      var note=document.getElementById('notecontext').value;
@@ -263,13 +365,19 @@ function paymentModal() {
             if (this.readyState == 4 && this.status == 200) {
                 console.log(xmlhttp);
                 // alert(xmlhttp.responseText);
+                // if (xmlhttp.response !== null) {
+                //   var response = JSON.parse(xmlhttp.response);
+                // } else {
+                //   console.log(xmlhttp.response);
+                // }
                 if (xmlhttp.responseText == 3) {
                     alert('result empty');                 
                 } else if(xmlhttp.responseText == 2) {
                   alert('email sending failed');                 
                 }
                 else if(xmlhttp.responseText == 1){
-                  alert('Success!!!!')
+                  // alert(response.id);
+                  alert('Success!!!!');
                  
                   $("#payModal .close").click()
                   invoicedirect();

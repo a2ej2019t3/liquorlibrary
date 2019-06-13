@@ -5,7 +5,7 @@
       if(isset($_SESSION['user']['userID'])){
         $userID=$_SESSION['user']['userID'];
         $user_sql = "SELECT u.userID, u.typeID, u.firstName, u.lastName, u.companyName, u.email, u.phone, u.address, ut.typeID, ut.typeName FROM `users` AS u, usertype AS ut WHERE u.typeID=ut.typeID and u.userID='$userID'";
-        
+        $usertype=$_SESSION['user']['typeID'];
         $user_res = mysqli_query($connection, $user_sql);
         $ultimatePrice = $_GET['ordertotalcost'];
         $ultimateQuantity = $_GET['ordertotalquantity'];
@@ -15,7 +15,6 @@
         
         if ($user_res != "") {
             $user_arr = mysqli_fetch_all($user_res);
-            $usertype= $user_arr[0][1];
             $username= $user_arr[0][2]. $user_arr[0][3];
             $companyname=$user_arr[0][4];
             $emailaddress=$user_arr[0][5];
@@ -32,14 +31,20 @@
           echo '</script>';
         }
     include_once ("partials/head.php");
-    // $_SESSION['ordertotalcost']= $_POST['ordertotalcost'];
-    // $ordertotalcost= $_SESSION['ordertotalcost'];
-    // $_SESSION['ordertotalquantity']= $_POST['ordertotalquantity'];
-    // $ordertotalquantity= $_SESSION['ordertotalquantity'];
-    // $note= $_POST['note'];
-    // echo $ordertotalcost;
-    // echo $ordertotalquantity;
     echo $note;
+
+// getting warehouse information
+$warehouse_sql = "SELECT * from warehouse";
+$warehouse_res = mysqli_query($connection, $warehouse_sql);
+    if($warehouse_res != ""){
+        $warehouse_arr = mysqli_fetch_all($warehouse_res);
+
+    }
+    else{
+        alert("warehouse result empty");
+    }
+
+
 echo '
      <link rel="stylesheet" href="css/cart.css">
  
@@ -63,24 +68,74 @@ echo '
                         </div>
 
                         <div class="row">
-                             <div class="col-12 emailaddressbox contactinformationbox">
+                             <div class="col-6 emailaddressbox contactinformationbox">
                                 <label for="lable">Contact Email </label><br>
                                 <input name="emailaddress" class="emailaddress" placeholder="'.$emailaddress.'" type="email" value="'.$emailaddress.'" id="emailadd" onchange="detailemailupdate();"required>   
                             </div>                        
                         
-                            <div class="col-12 contactnumberbox contactinformationbox">
+                            <div class="col-6 contactnumberbox contactinformationbox">
                                 <label for="lable">Contact Number</label><br>
                                 <input name="contactnumber" class="contactnumber" placeholder="'.$phone.'" value="'.$phone.'" type="text" id="numberadd" onchange="detailnumberupdate();" required>   
-                            </div>                        
-                    <div class="contacthead">Shipping Information</div>    
-                          <div class="col-12 addressbox contactinformationbox">
-                                <label for="lable">Delivery Address</label><br>
-                                <input name="address" class="address" placeholder="'.$address.'" type="text" value="'.$address.'" id="addressadd" onchange="detailaddressupdate();" required>   
-                            </div>                        
-                        </div>
-                </div> 
-            
-        </div>
+                            </div>   
+                         </div>';
+                         if($usertype==1){
+
+                         }
+                         else{
+                             echo'<div class="extrainfo" id="extrainfo">
+                             <div class="contacthead">Shipping & Payment Information</div>
+                          <div class="row">                       
+                             
+                                  <div class="col-6 addressbox contactinformationbox">
+                                  <label for="lable">Delivery Method</label><br>
+                                  <select class="deliverymothod" name="deliverymothod" id="deliverymothod" required onchange="deliveryinput();"> 
+                                      <option value="">Select</option>
+                                      <option value="delivery">Delivery</option>
+                                      <option value="pickup">Pick up</option>
+                                  </select>
+                              </div>
+                                  
+                              <div class="col-6 addressbox contactinformationbox">
+                                      <label for="lable">Delivery Address</label><br>
+                                      <input name="address" class="address" placeholder="'.$address.'" type="text" value="'.$address.'" id="addressadd" onchange="detailaddressupdate();" required>   
+                                  </div> 
+                                  </div>
+                                  </div>   
+                         
+                           
+                     
+                    <div class="row">                       
+                           
+                    <div class="col-6 addressbox contactinformationbox">
+                    <label for="lable">Payment Method</label><br>
+                                <select class="paymentmothod" name="paymentmothod" id="paymentmothod" style="display:none" onchange="paymentinput();"> 
+                                    
+                                    <option value="1">Pay with Card</option>
+                                    <option value="2">Pay with Cash</option>
+                                </select>
+                    </div>
+                    
+                    <div class="col-6 addressbox contactinformationbox">
+                                <label for="lable">Pick Up Location</label><br>
+                                <select class="locationselect" name="locationselect" id="locationselect" style="display:none" onchange="locationinput();">                             
+                                <option value="">Select</option>';
+
+                                for($a = 0; $a < count($warehouse_arr); $a++){
+                                        $warehouseID=$warehouse_arr[$a][0];
+                                        $warehousename=$warehouse_arr[$a][2];
+                                        $warehouseaddress=$warehouse_arr[$a][3];     
+                                 echo '<option value='.$warehouseID.'>'.$warehouseaddress.' </option>';
+                                }
+
+                               echo' </select>
+                                             
+                    </div>
+                    </div>
+                  ';
+                }
+                          
+         echo   '</div>
+         </div>
         <!-- item confirmation -->
         <div class="col-sm-12 col-lg-4">
             <div class="sidecart">
@@ -89,14 +144,14 @@ echo '
                     
                   <div class="contacthead" style="text-align:center; margin-bottom: 20px;">Order Details</div>
                     <div class="iconwrapper"><img src="images/deliverytruck.png" alt="truckicon" style="width: 55px;"></div>
-                    <div class="labelindex">Total cost: <span class="costquantity" value="'.$ultimatePrice.'"> $'.$ultimatePrice.' </span></div>
-                    <div class="labelindex">Total amount: <span class="costquantity" name="costquantitybox" value="'.$ultimateQuantity.'"> '.$ultimateQuantity.' items</span></div>
+                    <div class="labelindex">Total cost: <span class="costquantity" value="'.$ultimatePrice.'" style="margin-right: 10px;"> $'.$ultimatePrice.' </span>Total amount: <span class="costquantity" name="costquantitybox" value="'.$ultimateQuantity.'"> '.$ultimateQuantity.' items</span></div>
                     <div class="labelindex">Name: <span class="costquantity" id="namebox">'.$username.' </span> <span class="costquantity" id="companybox">  </span></div>
-                    <div class="labelindex">Contact Number: <br><span class="costquantity" id="numberbox"> '.$phone.' </span></div>
-                    <div class="labelindex">Contact Email: <br><span class="costquantity" id="emailbox"> '.$emailaddress.' </span></div>
+                    <div class="labelindex">Contact Number: <span class="costquantity" id="numberbox" style="margin-right: 10px;"> '.$phone.' </span></div>
+                    <div class="labelindex">Contact Email: <span class="costquantity" id="emailbox" style="margin-right: 10px;"> '.$emailaddress.' </span></div>
                     <div class="labelindex">Delivery Address: <br><span class="costquantity" id="addresschangearea" value="'.$address.'" > '.$address.' </span></div>
-
-                </div>
+                    <div class="labelindex">Delivery: <span class="costquantity" id="deliveryoption" style="margin-right: 10px;"> </span>Paymemt: <span class="costquantity" id="paymentoption"> </span></div>
+                    <div class="labelindex">Pick Up Address: <span class="costquantity" id="pickuparea" > </span></div>
+                 </div>
             </div>
         </div>
         <hr>
@@ -104,10 +159,17 @@ echo '
             <button type="submit" class="btn btn-secondary btn-sm" id="checkbutton">
                 <a href="paymentprocess.php"> BACK TO CART
                 </a>
-            </button>
-            <button type="button" class="btn btn-secondary btn-sm" onclick="paymentModal()" id="ckbtn" data-toggle="modal" data-target="#payModal">
+            </button>';
+            if($usertype==1){
+        echo    '<button type="button" class="btn btn-secondary btn-sm" onclick="payproceed()" id="ckbtn2" name="ckbtn2"> CEHCK OUT</button>';
+            }
+            else{
+         echo  ' <button type="button" class="btn btn-secondary btn-sm" onclick="payproceed()" id="ckbtn2" name="ckbtn2" style="display:none;"> CEHCK OUT</button>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="paymentModal()" id="ckbtn" name="ckbtn" data-toggle="modal" data-target="#payModal">
             CEHCK OUT
-            </button>
+            </button>   ';             
+            }
+echo '
 </div>
             <!-- Modal -->
             <div class="modal fade" id="payModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -127,6 +189,10 @@ echo '
                     <input type="hidden" value="'.$emailaddress.'" id="emailcontext" name="emailcontext">
                     <input type="hidden" value="'.$orderID.'" id="idcontext" name="idcontext">
                     <input type="hidden" value="'.$username.'" id="usernamecontext" name="usernamecontext">
+                    <input type="hidden" id="delivercontext" name="delivercontext">
+                    <input type="hidden" id="paymentcontext" name="paymentcontext">
+                    <input type="hidden" value="" id="pickupcontext" name="pickupcontext">
+                    <input type="hidden" value="'.$usertype.'" id="usertypecontext" name="usertypecontext">
 
                     <div class="form-row">
                         <div class="col-sm-12 col-md-4">
@@ -186,6 +252,7 @@ echo '
                 
                 </div>
                 </article>
+
 
                 <style>
 .contacthead{
@@ -282,8 +349,46 @@ echo '
     background-color: transparent;
     color: #E12726;
 }
+#ckbtn2{
+    background-color: yellow;
+	width: 150px;
+	height: 45px;
+	font-size: 20px;
+    color: white;
+    margin: 20px auto;
+    border:none;
+}
+#ckbtn2:hover{
+    border: 1px solid #E12726;
+    background-color: transparent;
+    color: #E12726;
+}
 .buttonarea{
     margin: 15px auto;
 }
 </style>
 ';
+?>
+<!-- <script>
+function deliveryinput() {
+
+    var sel = $(this).val();
+    if (sel == '2') $('select[name=paymentmothod]').show();
+
+
+$('input[name=btn_submit]').click(function() {
+    var sel = $('#deliverymothod').val();
+    if (sel == 'delivery') {
+        if ($('input[name=address]').val() == '') {
+            alert('Please input your delivery address');
+            return false; //prevent submit from submitting
+        }else{
+            // alert('Your entry was submitted');
+        }
+    }else{
+        //Model is NOT 2 or 3 so don't check
+        alert('please select your delivery method');
+    }
+});
+};
+</script> -->

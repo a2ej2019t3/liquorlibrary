@@ -1,4 +1,3 @@
-
 <?php
 if(!class_exists('PHPMailer')) {
     require('phpmailer/class.phpmailer.php');
@@ -53,10 +52,9 @@ $mail->IsHTML(true);
 
 if(!$mail->Send()) {
     $error_message = 'Problem in Sending Email';
-    echo  $error_message;
+    return  $error_message;
 } else {
-    $success_message = 1;
-    echo $success_message;
+    // $success_message = 1;
+    // echo $success_message;
+    return 1;
 }
-
-?>
