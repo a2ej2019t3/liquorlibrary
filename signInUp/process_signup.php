@@ -12,6 +12,7 @@ $email = $_POST['email'];
 $company_name = $_POST['company_name'];
 $contact_number = $_POST['contact_number'];
 $typeID = $_POST['typeID'];
+//var_dump($typeID);
 
 // $first_name = 'j';
 // $last_name = 'z';
@@ -43,8 +44,8 @@ if ($result = mysqli_query($connection, $selectQuery))
 
         $stmt = mysqli_prepare($connection, $insertStatement);
 
-        mysqli_stmt_bind_param($stmt, "sssssss", $val1, $val2, $val3, $val4, $val5, $val6, $val7);
-
+        mysqli_stmt_bind_param($stmt, "ssssiss", $val1, $val2, $val3, $val4, $val5, $val6, $val7);
+        var_dump($val5);
         $val1 = $first_name;
         $val2 = $last_name;
         $val3 = $company_name;
