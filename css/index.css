@@ -150,7 +150,7 @@ ul.dropdown-menu {
 }
 .modal-content{
  /* position: absolute; */
- top: 45px;
+ top: 85px;
  /* height: 100px!important; */
  text-align: center;
 }
@@ -167,7 +167,7 @@ ul.dropdown-menu {
 
 .modal-login {
   color: #636363;
-  width: 350px;
+  width: 400px;
 }
 .modal-login .modal-content {
   padding: 20px;
@@ -199,6 +199,7 @@ ul.dropdown-menu {
   border-color: rgba(48, 43, 41,1);
 
 }
+
 .modal-login .form-control, .modal-login .btn {
   min-height: 40px;
   border-radius: 3px; 

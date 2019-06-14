@@ -25,22 +25,41 @@
       </div>
       <div class="modal-footer" style="text-align:center; margin: 0 auto;">
         <button type="button" class="btn btn-primary" id="checkoutbutton" >EMPTY CART</button>
-        <button type="button" class="btn btn-primary" id="checkoutbutton" onclick="location.href='paymentprocess.php';">CHECKOUT</button>
+        <!-- <button type="button" class="btn btn-primary" id="checkoutbutton" onclick="location.href='paymentprocess.php';">CHECKOUT</button> -->
+        <button type="button" class="btn btn-primary" id="checkoutbutton" onclick="checkgetitem();">CHECKOUT</button>
+
       </div>
     </div>
   </div>
 </div> 
 <!--  cart modal ends-------------------------------------------------------------------------------- -->
 
-<!-- collapse sidebar -->
+<!-- collapse sidebar
 <div id="mySidebar" class="sidebar">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <a href="#">About</a>
   <a href="#">Services</a>
   <a href="#">Clients</a>
   <a href="#">Contact</a>
-</div>
+</div> -->
+<script>
+function checkgetitem(){
+if (sessionStorage.getItem('status') != null){
+  location.href='paymentprocess.php';
+ }
+ else{
+  //show validation message
+ alert("Please log in to proceed");
+ $("#cart .close").click();
+//  jQuery.noConflict(); 
+//   $('#myModal').modal('show');
+$('#myModal').modal();
+  exit();
 
+ }
+}
+
+</script>
 
 <style>
 .sidebar {

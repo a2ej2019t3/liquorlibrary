@@ -7,6 +7,7 @@
   // Cart items > in case of order status=0 
   if(isset($_SESSION['user']['userID'])){
   $userID=$_SESSION['user']['userID'];
+  // $usertype=$_SESSION['user']['typeID'];
   $cartitem_sql = "SELECT o.orderID, o.buyerId, o.whID, o.status, oi.itemID, oi.quantity, p.productID, p.productName, p.price, p.discountprice, p.img, b.brandName, c.categoryName, oi.totalprice FROM orders AS o, orderitems AS oi, product AS p, brand AS b, category AS c WHERE o.orderID=oi.orderID and oi.itemID=p.productID and p.brandID=b.brandID and p.categoryID= c.categoryID and o.status=0 and o.buyerID='$userID';";
   $cartitem_res = mysqli_query($connection, $cartitem_sql);
   
@@ -82,6 +83,7 @@
             </li>
 
         </ul>
+
     </div> 
 
     <div id="content">
