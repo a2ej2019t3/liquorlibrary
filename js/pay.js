@@ -204,7 +204,7 @@ function deliveryinput() {
 
     var paymentbox=document.getElementById('paymentoption');
     paymentbox.innerHTML='card';
-    paymentbox.setAttribute('value',1);
+    paymentbox.setAttribute('value','card');
     deliveryhidden.setAttribute('value',sel);
 
   }
@@ -218,8 +218,8 @@ function paymentinput(){
   {
     var paymentoptionbox=document.getElementById('paymentoption');
     paymentoptionbox.innerHTML= 'card';
-    paymentoptionbox.setAttribute('value',1);
-    paymenthidden.setAttribute('value',1);
+    paymentoptionbox.setAttribute('value','card');
+    paymenthidden.setAttribute('value','card');
     $('button[name=ckbtn2]').hide();
     $('button[name=ckbtn]').show();
   }
@@ -227,8 +227,8 @@ function paymentinput(){
   {
        var paymentoptionbox=document.getElementById('paymentoption');
     paymentoptionbox.innerHTML='cash';
-    paymentoptionbox.setAttribute('value',2); 
-    paymenthidden.setAttribute('value',2);
+    paymentoptionbox.setAttribute('value','cash'); 
+    paymenthidden.setAttribute('value','cash');
     $('button[name=ckbtn]').hide();
     $('button[name=ckbtn2]').show();
 
@@ -236,41 +236,61 @@ function paymentinput(){
 };
 
 function locationinput(){
+  // location warehous ID
   var sel = $('#locationselect :selected').val();
+  // location name
   var selname = $('#locationselect :selected').text();
   var locationhidden =document.getElementById('pickupcontext');
 
   var locationbox=document.getElementById('pickuparea');
+  var locationname=document.getElementById('locationbox');
+
   locationbox.innerHTML=selname;
   locationbox.setAttribute('value',sel); 
   locationhidden.setAttribute('value',sel);
-
+  locationname.setAttribute('value',selname);
 }
 // ---------------------------------------
 function payproceed(){
- 
-  var logintype=document.getElementById('usertypecontext').getAttribute('value');
-  if(logintype==1){
-    alert('warehouse order');
+  // warehouse validation
+  var username_val=$('#usernamebox').val();
+  var email_val =$('#emailadd').val();
+  var number_val=$('#numberadd').val();
+
+  if( username_val!=="" && email_val!=="" && number_val!=="" ){
+    
+    var logintype=document.getElementById('usertypecontext').getAttribute('value');
+    if(logintype==1){
+              // alert('warehouse order');
+              loader5();
+              setTimeout(function(){ invoicedirect(); }, 1000);       
+              
+              
+    }
+    else if(logintype==3 || logintype==2 ){
+      var paymentpath=$('#paymentmothod :selected').val();
+        if(paymentpath==2){
+          var deliverymothod=$('#deliverymothod :selected').val();  
+            if(deliverymothod=='pickup'){
+              var locationselect=$('#locationselect :selected').val();
+              if(locationselect== ""){
+                alert('please select the pick up location')
+              }
+              else{
+                // alert('individual or partner cash order');
+                loader5();
+                setTimeout(function(){ invoicedirect(); }, 2000);    
+              }     
+            }
+          }
+        else{
+          paymentModal();
+        }
+    }
   }
-  else if(logintype==3){
-    var paymentpath=$('#paymentmothod :selected').val();
-      if(paymentpath==2){
-      alert('individualcash order');
-      }
-      else{
-        paymentModal();
-      }
-  }
-  else if(logintype==2){
-    var paymentpath=$('#paymentmothod :selected').val();
-      if(paymentpath==2){
-      alert('businesspartner cash order');
-      }
-      else{
-        paymentModal();
-      }
-  }
+ else{
+   alert('please check the empty input to proceed.');
+ }
 
 };
 
@@ -358,7 +378,9 @@ function paymentModal() {
      var email=document.getElementById('emailcontext').value;
      var orderId=document.getElementById('idcontext').value;
      var username=document.getElementById('usernamecontext').value;
-
+     var paymentmethod=document.getElementById('paymentoption').getAttribute('value');
+     var deliverymethod=document.getElementById('delivercontext').getAttribute('value');
+     var pickupwarehouseId=document.getElementById('pickuparea').getAttribute('value');
       // Submit the form
       var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function () {
@@ -384,7 +406,7 @@ function paymentModal() {
                 }
             }
         };
-    xmlhttp.open("GET", "stripeIPN.php?stripeToken="+token.id+"&email="+token.email+"&finalprice="+finalprice+"&finalquantity="+finalquantity+"&notecontext="+note+"&emailcontext="+email+"&usernamecontext="+username+"&idcontext="+orderId, true);
+    xmlhttp.open("GET", "stripeIPN.php?stripeToken="+token.id+"&finalprice="+finalprice+"&finalquantity="+finalquantity+"&notecontext="+note+"&emailcontext="+email+"&usernamecontext="+username+"&idcontext="+orderId+"&paymentmethod="+paymentmethod+"&deliverymethod="+deliverymethod+"&pickupwarehouseId="+pickupwarehouseId, true);
     xmlhttp.send();
     }
 }
@@ -392,7 +414,28 @@ function paymentModal() {
 function invoicedirect(params) {
 
 var xmlhttp = new XMLHttpRequest();
+// login type
+var logintype=document.getElementById('usertypecontext').getAttribute('value');
+// warehouse
 var orderId=document.getElementById('idcontext').value;
+var username=document.getElementById('usernamebox').value;
+var email=$('#emailadd').val();
+// var email=document.getElementById('emailadd').value;
+var contactnumber=document.getElementById('numberadd').getAttribute('value');
+
+// for individual &business partner
+var address=document.getElementById('addresschangearea').getAttribute('value');
+var note=document.getElementById('notebox').getAttribute('value');
+var paymentmethod=document.getElementById('paymentoption').getAttribute('value');
+var deliverymethod=document.getElementById('deliveryoption').getAttribute('value');
+var pickupwarehouseId=document.getElementById('pickuparea').getAttribute('value');
+var pickuplocation=document.getElementById('locationbox').getAttribute('value');
+
+// order info
+var cost=document.getElementById('totalcostbox').getAttribute('value');
+var quantity=document.getElementById('totalquantbox').getAttribute('value');
+
+
         xmlhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 console.log(xmlhttp);
@@ -400,7 +443,7 @@ var orderId=document.getElementById('idcontext').value;
                 
             }
         };
-    xmlhttp.open("GET", "payment/invoice.php?id="+orderId, true);
+    xmlhttp.open("GET", "payment/invoice.php?id="+orderId+"&username="+username+"&address="+address+"&email="+email+"&contactnumber="+contactnumber+"&paymentmethod="+paymentmethod+"&deliverymothod="+deliverymethod+"&pickuplocation="+pickuplocation+"&cost="+cost+"&quantity="+quantity+"&logintype="+logintype+"&pickupwarehouseId="+pickupwarehouseId+"&note="+note, true);
     xmlhttp.send();  
 
     $('#fourth').ready(function(){
@@ -410,30 +453,18 @@ var orderId=document.getElementById('idcontext').value;
 }
 
 
-// $('#stripe-button').click(function(){
-//   var pricevalue= document.getElementById('cartTotalPrice');
-//   var amount= pricevalue.getAttribute('value'); 
-//   var finalamount= amount*100;
-//   StripeCheckout.open({
-//     key:         'pk_test_LzVFBvv6py0EeG7ifdYNnfJv00dEJ5eiyo',
-//     amount:      finalamount,
-//     name:        'LIQUOR LIBRARY',
-//     image:       'images/brandlogo.jpg',
-//     description: "Please input the valid information",
-//     panelLabel:  'CHECK OUT',
-//     currency: 'nzd',
-//     token:       function(res){
-//         var id = $('<input type=hidden name=stripeToken />').val(res.id);
-//         var email = $('<input type=hidden name=stripeEmail />').val(res.email);
-//         var finalamount = $('<input type=hidden name=finalprice />').val(finalamount);
-//         // var finalamount = $('<input type=hidden name=totalquantity />').val(finalamount);
-//         // var finalamount = $('<input type=hidden name=id />').val(finalamount);
+function loader5(){
+  // $("#loader5").css(display: block;).fadeIn('slow').delay(5000).fadeOut('slow');
+  // jQuery(loader5).fadeIn('slow').css("display","block");
+  jQuery("#loader5").show();
+  // jQuery("#loader5").delay(4000).hide();
+  setTimeout( "$('#loader5').hide();", 8000);
+}
 
-        
-//         $('#payment_form').append(id).append(email).append(finalamount).submit();
-//         //  finalprice();
-//       }
-//   });
-
-// });
-
+function loader10(){
+  // $("#loader5").css(display: block;).fadeIn('slow').delay(5000).fadeOut('slow');
+  // jQuery(loader5).fadeIn('slow').css("display","block");
+  jQuery("#loader10").show();
+  // jQuery("#loader5").delay(4000).hide();
+  setTimeout( "$('#loader5').hide();", 10000);
+}

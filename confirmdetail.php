@@ -49,6 +49,8 @@ echo '
      <link rel="stylesheet" href="css/cart.css">
  
 <article id="second">
+<div id="loader5" class="lds-hourglass"> <span class="processmsg">Processing your order</span></div>
+
 <div class="container">
     <div class="row">
         <!-- info confirmation -->
@@ -59,23 +61,23 @@ echo '
                         <div class="row">
                             <div class="col-6 usernamebox contactinformationbox">
                             <label for="lable">Your Name </label><br>
-                            <input name="username" class="username" type="text" placeholder="'.$username.'" value="'.$username.'" id="usernamebox" onchange="detailname();" required>   
+                            <input name="username" class="username" type="text" value="'.$username.'" id="usernamebox" onchange="detailname();" required>   
                             </div>
                             <div class="col-6 companynamebox contactinformationbox">
                             <label for="lable">Company Name </label><br>
-                            <input name="companyname" class="companyname" placeholder="'.$companyname.'" type="text" value="'.$companyname.'" id="comname" onchange="detailcompany();" >   
+                            <input name="companyname" class="companyname" type="text" value="'.$companyname.'" id="comname" onchange="detailcompany();" >   
                             </div>                            
                         </div>
 
                         <div class="row">
                              <div class="col-6 emailaddressbox contactinformationbox">
                                 <label for="lable">Contact Email </label><br>
-                                <input name="emailaddress" class="emailaddress" placeholder="'.$emailaddress.'" type="email" value="'.$emailaddress.'" id="emailadd" onchange="detailemailupdate();"required>   
+                                <input name="emailaddress" class="emailaddress"type="email" value="'.$emailaddress.'" id="emailadd" onchange="detailemailupdate();"required>   
                             </div>                        
                         
                             <div class="col-6 contactnumberbox contactinformationbox">
                                 <label for="lable">Contact Number</label><br>
-                                <input name="contactnumber" class="contactnumber" placeholder="'.$phone.'" value="'.$phone.'" type="text" id="numberadd" onchange="detailnumberupdate();" required>   
+                                <input name="contactnumber" class="contactnumber" value="'.$phone.'" type="text" id="numberadd" onchange="detailnumberupdate();" required>   
                             </div>   
                          </div>';
                          if($usertype==1){
@@ -144,14 +146,16 @@ echo '
                     
                   <div class="contacthead" style="text-align:center; margin-bottom: 20px;">Order Details</div>
                     <div class="iconwrapper"><img src="images/deliverytruck.png" alt="truckicon" style="width: 55px;"></div>
-                    <div class="labelindex">Total cost: <span class="costquantity" value="'.$ultimatePrice.'" style="margin-right: 10px;"> $'.$ultimatePrice.' </span>Total amount: <span class="costquantity" name="costquantitybox" value="'.$ultimateQuantity.'"> '.$ultimateQuantity.' items</span></div>
-                    <div class="labelindex">Name: <span class="costquantity" id="namebox">'.$username.' </span> <span class="costquantity" id="companybox">  </span></div>
-                    <div class="labelindex">Contact Number: <span class="costquantity" id="numberbox" style="margin-right: 10px;"> '.$phone.' </span></div>
-                    <div class="labelindex">Contact Email: <span class="costquantity" id="emailbox" style="margin-right: 10px;"> '.$emailaddress.' </span></div>
-                    <div class="labelindex">Delivery Address: <br><span class="costquantity" id="addresschangearea" value="'.$address.'" > '.$address.' </span></div>
+                    <div class="labelindex">Total cost: <span id="totalcostbox" class="costquantity" value="'.$ultimatePrice.'" style="margin-right: 10px;"> $'.$ultimatePrice.' </span>Total amount: <span class="costquantity" name="costquantitybox" value="'.$ultimateQuantity.'" id="totalquantbox"> '.$ultimateQuantity.' items</span></div>
+                    <div class="labelindex">Name: <span class="costquantity" id="namebox" value="'.$username.'">'.$username.' </span> <span class="costquantity" id="companybox">  </span></div>
+                    <div class="labelindex">Contact Number: <span class="costquantity" value="'.$phone.'" id="numberbox" style="margin-right: 10px;"> '.$phone.' </span></div>
+                    <div class="labelindex">Contact Email: <span class="costquantity" value="'.$emailaddress.'" id="emailbox" style="margin-right: 10px;"> '.$emailaddress.' </span></div>
+                    <div class="labelindex">Delivery Address: <br><span class="costquantity" value="'.$address.'" id="addresschangearea" value="'.$address.'" > '.$address.' </span></div>
                     <div class="labelindex">Delivery: <span class="costquantity" id="deliveryoption" style="margin-right: 10px;"> </span>Paymemt: <span class="costquantity" id="paymentoption"> </span></div>
                     <div class="labelindex">Pick Up Address: <span class="costquantity" id="pickuparea" > </span></div>
-                 </div>
+                    <input type="hidden" id="locationbox" >
+                    <input type="hidden" value="'.$note.'" id="notebox" >
+                    </div>
             </div>
         </div>
         <hr>
@@ -231,13 +235,14 @@ echo '
                                 </div>
                                         
                         </div>
+                        <span class="processmsg" style="background-color:rgba(124, 99, 84, 0.5);" ><div id="loader10" class="lds-hourglass" style="position: absolute; top:30%;"> Processing your order</div></span>
 
                 <!-- Used to display form errors. -->
                     <div id="card-errors" role="alert"></div>
                     </div>
                 
         
-                    <button id="paysubmitbtn">PAY NOW</button>
+                    <button id="paysubmitbtn" onclick="loader10();">PAY NOW</button>
                     <button id="dismissbtn" data-dismiss="modal">Close</button>
 
                 </form>
@@ -366,29 +371,48 @@ echo '
 .buttonarea{
     margin: 15px auto;
 }
+
+.processmsg{
+    font-size: 2rem;
+    font-weight: 700;
+}
+.lds-hourglass {
+  display: none;
+  position: relative;
+  z-index: 50;
+  top: 49%;
+  margin: 10 auto;
+  width: 100%;
+  height: 64px;
+  text-align: center;
+}
+.lds-hourglass:after {
+  content: " ";
+  display: block;
+  border-radius: 50%;
+  width: 0;
+  height: 0;
+  text-align: center;
+  margin: 10px auto!important;
+  margin: 6px;
+  box-sizing: border-box;
+  border: 26px solid #fdd;
+  border-color: #fdd transparent #fdd transparent;
+  animation: lds-hourglass 1.2s infinite;
+}
+@keyframes lds-hourglass {
+  0% {
+    transform: rotate(0);
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+  50% {
+    transform: rotate(900deg);
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  100% {
+    transform: rotate(1800deg);
+  }
+}
 </style>
 ';
 ?>
-<!-- <script>
-function deliveryinput() {
-
-    var sel = $(this).val();
-    if (sel == '2') $('select[name=paymentmothod]').show();
-
-
-$('input[name=btn_submit]').click(function() {
-    var sel = $('#deliverymothod').val();
-    if (sel == 'delivery') {
-        if ($('input[name=address]').val() == '') {
-            alert('Please input your delivery address');
-            return false; //prevent submit from submitting
-        }else{
-            // alert('Your entry was submitted');
-        }
-    }else{
-        //Model is NOT 2 or 3 so don't check
-        alert('please select your delivery method');
-    }
-});
-};
-</script> -->

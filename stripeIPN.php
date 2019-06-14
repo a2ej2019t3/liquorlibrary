@@ -14,6 +14,12 @@
 	$email= $_GET['emailcontext'];
 	$orderId=$_GET['idcontext'];
 	$username=$_GET['usernamecontext'];
+	
+	$paymentmethod=$_GET['paymentmethod'];
+	$deliverymethod=$_GET['deliverymethod'];
+	$pickupwarehouseId=$_GET['pickupwarehouseId'];
+
+
 	// || !isset($userID)
 	if (!isset($_GET['stripeToken'])) {
 		header("Location: index.php");
@@ -47,7 +53,7 @@
 	include ('connection.php');
 	// Cart items > in case of order status=0 
 	$date = date('Y-m-d H:i:s');
-	$updateorder_sql = "UPDATE `orders` SET `status`=1 , note='$note', `date`= '$date', `transactionID`='$charge->id' WHERE orderID='$orderId'";
+	$updateorder_sql = "UPDATE `orders` SET `status`=1 , note='$note', `date`= '$date', `transactionID`='$charge->id' , `whID`='$pickupwarehouseId', `paymentmethod`='$paymentmethod', `deliverymethod`='$deliverymethod'  WHERE orderID='$orderId'";
 	// var_dump($charge->failure_message);
 	if ($charge->failure_message === null) {
 		$updateorder_res = mysqli_query($connection, $updateorder_sql);
