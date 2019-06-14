@@ -355,7 +355,7 @@ echo '
     color: #E12726;
 }
 #ckbtn2{
-    background-color: yellow;
+    background-color: #E12726;
 	width: 150px;
 	height: 45px;
 	font-size: 20px;

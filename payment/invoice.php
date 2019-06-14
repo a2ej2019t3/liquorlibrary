@@ -97,7 +97,7 @@ echo'
                          </div>
                          <div class="col-3">
                          <button type="submit" class="btn btn-secondary btn-sm" id="checkbutton" style="width:100%; height:60%;">
-                        <a href="index.php"> Go BACK TO HOMEPAGE  </a>
+                        <a href="index.php"> GO BACK TO HOMEPAGE  </a>
                        
                      </button>                         
                          </div>
