@@ -50,9 +50,9 @@ document.getElementById("loginSubmit").onclick = function () {
             if (this.readyState == 4 && this.status == 200) {
                 console.log(xmlhttp);
                 if(xmlhttp.responseText == 1){
-                    alert("Invalid branch information");
+                    alert("Invalid select information");
                 } else if (xmlhttp.responseText == 0) {
-                    alert("Invalid branch information");
+                    alert("Invalid password information");
                 } else if (xmlhttp.responseText == 3){
                     document.location.reload(true);
                     sessionStorage.setItem('status','loggedIn'); 

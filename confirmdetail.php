@@ -20,7 +20,16 @@
             $emailaddress=$user_arr[0][5];
             $phone=$user_arr[0][6];
             $address=$user_arr[0][7];
-            // echo $username;
+            
+            $price_sql = "UPDATE orders SET cost='$ultimatePrice' WHERE orderID='$orderID'";
+            $price_res = mysqli_query($connection, $price_sql);
+                if($price_res !=""){
+
+                }
+                else{
+                    echo 'price update falied';
+                }
+
           } else {
             alert("result empty");
           }
