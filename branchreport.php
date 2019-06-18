@@ -2,41 +2,10 @@
     session_start();
     $_SESSION['location'] = 'branchreport';
     include ('connection.php');
-    if(isset($_SESSION['warehouse']['whID'])){
-        $whID=$_SESSION['warehouse']['whID'];
-        
-        $select_user="SELECT userID FROM staff WHERE whID='$whID'";
-        $selectuser_result=mysqli_query($connection, $select_user);
-        
-        if ( $selectuser_result != "") {
-            
-            $selectuser_arr = mysqli_fetch_assoc($selectuser_result);
-            var_dump($selectuser_arr);
-            for($a=0; $a <count( $selectuser_arr); $a++){
-                $userID=$selectuser_arr[$a]['userID'];
-                echo $userID;
-                $select_order="SELECT * FROM orders WHERE buyerID='$userID'";
-                $selectorder_result=mysqli_query($connection, $select_order);
-                $order_array[$a];
-            };
-            echo count($order_array);
-
-            
-
-          } else {
-            alert("result empty");
-          }
-        }
-        else{
-          echo '<script type="text/javascript">';                
-          echo 'alert("Please log in to proceed")';
-          echo '</script>';
-        }
-      
-      
-
-
-?>    
+?>
+<?php    
+require_once ('partials/branchquery.php')
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -75,7 +44,7 @@
 
   <!-- Nav Item - Dashboard -->
   <li class="nav-item active">
-    <a class="nav-link" href="index.html">
+    <a class="nav-link" href="branchreport.php">
       <i class="fas fa-fw fa-tachometer-alt"></i>
       <span>Dashboard</span></a>
   </li>
@@ -188,8 +157,8 @@
         <div class="card-body">
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
-              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Pending backorders (Monthly)</div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Backorders (This month)</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo count($backorder_arr)?></div>
             </div>
             <div class="col-auto">
               <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -205,11 +174,11 @@
         <div class="card-body">
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
-              <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Earnings (Annual)</div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+              <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Pending backorders</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo count($pendingbackorder_arr)?> </div>
             </div>
             <div class="col-auto">
-              <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+            <i class="fas fa-bus-alt fa-2x text-gray-300"></i>
             </div>
           </div>
         </div>
@@ -222,17 +191,9 @@
         <div class="card-body">
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
-              <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks</div>
-              <div class="row no-gutters align-items-center">
-                <div class="col-auto">
-                  <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
-                </div>
-                <div class="col">
-                  <div class="progress progress-sm mr-2">
-                    <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                </div>
-              </div>
+              <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Pickup orders(this month)</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo count($pickups_arr)?> </div>
+
             </div>
             <div class="col-auto">
               <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
@@ -248,11 +209,11 @@
         <div class="card-body">
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
-              <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Pending Requests</div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+              <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">incompleted Pickups</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo count($pendingpickups_arr)?></div>
             </div>
             <div class="col-auto">
-              <i class="fas fa-comments fa-2x text-gray-300"></i>
+            <i class="fas fa-person-booth fa-2x text-gray-300"></i>
             </div>
           </div>
         </div>
@@ -263,7 +224,42 @@
 
 
 </div> 
+<div class="container-fluid" style="width:100%;"> 
+<div class="row">
+<div class="col-xl-6 col-md-6 col-6">
+      <div class="card border-left-success shadow h-100 py-2" style="border-left: .25rem solid black!important;">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-success text-uppercase mb-1" style="color: black!important;">Backorder Cost (This month)</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">$<?php echo sprintf('%01.2f', $totalbackorder_cost);?></div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<!--  -->
+<div class="col-xl-6 col-md-6 col-6">
+      <div class="card border-left-success shadow h-100 py-2" style="border-left: .25rem solid black!important;">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-success text-uppercase mb-1" style="color: black!important;">Pickup income (This month)</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">$<?php echo sprintf('%01.2f', $totalpickup_income);?></div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
+</div>
+      </div>
 <!-- ---------------------------------------------------------------------------------------------------------- -->
 </div>
 <!-- --------------------------------------------------------------------------------------------------------- -->
