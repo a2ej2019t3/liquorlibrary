@@ -1,4 +1,5 @@
 <?php
+    
     if ($_SESSION['location'] == 'index') {
         $className = '';
     } else {
@@ -40,6 +41,58 @@
             </div>
             <div class="collapse navbar-collapse" id="navMain">
                 <ul class="nav navbar-nav ml-auto">
+                    
+                    <?php 
+                        if(isset($_SESSION['user'])){
+                            if( $_SESSION['user']['typeID']==3 || $_SESSION['user']['typeID']==2){
+                    
+                                echo ' 
+                                <li class="col" id="firstcol"><a class="'.$className.'" href="#aboutus" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">About Us</a></li>
+                                <li class="col"><a class="'.$className.'" href="findlocation/findus.php" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Find Us</a></li>
+                                <li class="col"><a class="'.$className.' js-open-modal" id="ourdrinks" data-toggle="modal" data-target="#subnav" href="#" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Our Drinks</a></li> 
+                                <li class="col"><a class="'.$className.'" href="specials.php" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Specials</a></li> 
+                                <li class="col"><a class="'.$className.'" href="paymentprocess.php" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Cart</a></li>
+                                <li class="col"><a class="'.$className.'" href="orderhistory.php" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">My orders</a></li>
+                                <li class="col"><a class="'.$className.'" href="contact.php" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Contact</a></li> 
+                                
+            ';
+                            }
+                            else if ( $_SESSION['user']['typeID']==1) {
+                                echo ' 
+                                <li class="col"><a class="'.$className.'" href="findlocation/findus.php" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Find Us</a></li>
+                                <li class="col"><a class="'.$className.' js-open-modal" id="ourdrinks" data-toggle="modal" data-target="#subnav" href="#" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Our Drinks</a></li> 
+                                <li class="col"><a class="'.$className.'" href="specials.php" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Specials</a></li> 
+                                <li class="col"><a class="'.$className.'" href="paymentprocess.php" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Cart</a></li>
+                                <li class="col"><a class="'.$className.'" href="contact.php" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Contact</a></li> 
+                                <li class="col-2"><a class="'.$className.'" href="branchreport.php" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Branch Report</a></li> 
+            ';
+                            }
+                            else if ( $_SESSION['user']['typeID']==0) {
+                                echo ' 
+                                <li class="col" id="firstcol><a class="'.$className.'" href="findlocation/findus.php" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Find Us</a></li>
+                                <li class="col"><a class="'.$className.' js-open-modal" id="ourdrinks" data-toggle="modal" data-target="#subnav" href="#" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Our Drinks</a></li> 
+                                <li class="col"><a class="'.$className.'" href="specials.php" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Specials</a></li> 
+                                <li class="col-3"><a class="'.$className.'" href="" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Admin Report</a></li> 
+            ';
+                            }
+                            else{
+        
+                            }
+                        }
+                        else{
+                            echo ' 
+                            <li class="col" id="firstcol"><a class="'.$className.'" href="#aboutus" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">About Us</a></li>
+                            <li class="col"><a class="'.$className.'" href="findlocation/findus.php" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Find Us</a></li>
+                            <li class="col"><a class="'.$className.' js-open-modal" id="ourdrinks" data-toggle="modal" data-target="#subnav" href="#" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Our Drinks</a></li> 
+                            <li class="col"><a class="'.$className.'" href="specials.php" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Specials</a></li> 
+                            <li class="col"><a class="'.$className.'" href="paymentprocess.php" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Cart</a></li>
+                            <li class="col"><a class="'.$className.'" href="contact.php" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Contact</a></li> 
+        ';
+                    }
+                        
+                     ?>
+
+<!--                     
                     <li class="col" id="firstcol"><a class="<?php echo $className; ?>" href="#aboutus" style="color: white; font-size: 1rem; font-family: 'Roboto', sans-serif;">About Us</a></li>
                     <li class="col"><a class="<?php echo $className; ?>" href="findlocation/findus.php" style="color: white; font-size: 1rem; font-family: 'Roboto', sans-serif;">Find Us</a></li>
                     <li class="col"><a class="<?php echo $className; ?> js-open-modal" id="ourdrinks" data-toggle="modal" data-target="#subnav" href="#" style="color: white; font-size: 1rem; font-family: 'Roboto', sans-serif;">Our Drinks</a></li> 
@@ -47,9 +100,9 @@
                     <li class="col"><a class="<?php echo $className; ?>" href="paymentprocess.php" style="color: white; font-size: 1rem; font-family: 'Roboto', sans-serif;">Cart</a></li>
                     <li class="col"><a class="<?php echo $className; ?>" href="orderhistory.php" style="color: white; font-size: 1rem; font-family: 'Roboto', sans-serif;">My orders</a></li>
                     <li class="col"><a class="<?php echo $className; ?>" href="contact.php" style="color: white; font-size: 1rem; font-family: 'Roboto', sans-serif;">Contact</a></li> 
-                    <li class="col"><a class="<?php echo $className; ?>" href="admin_area/login.php" style="color: white; font-size: 1rem; font-family: 'Roboto', sans-serif;">Admin</a></li> 
+                    <li class="col"><a class="<?php echo $className; ?>" href="admin_area/login.php" style="color: white; font-size: 1rem; font-family: 'Roboto', sans-serif;">Admin</a></li>  -->
                     <li class="col"> 
-<!-- modal button                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
                         <button type="button" class="btn btn-primary btn-lg pull-right" style="background-color: transparent; border:none;" data-toggle="modal" data-target="#modal2">
                             <span class="<?php echo $className; ?>" style="color: white; font-size: 20px; margin-top:10px;" id="b2"><i class="fas fa-search"></i></span> 
                         </button>

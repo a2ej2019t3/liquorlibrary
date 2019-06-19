@@ -21,7 +21,6 @@ if ($result = mysqli_query($connection, $selectQuery)) {
     if ($email == $result_arr['email']) {
         if ($password == $result_arr['password']) {
             $_SESSION['user'] = $result_arr;
-            
             echo 3;
         } else {
             echo 0;

@@ -50,3 +50,4 @@ function number_format(number, decimals, dec_point, thousands_sep) {
       e.preventDefault();
     }
   });
+  
