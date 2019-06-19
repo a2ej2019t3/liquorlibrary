@@ -19,7 +19,7 @@ if (isset($_SESSION['user'])) {
         // var_dump($cartID);
         
         // get DB cart as array
-        $getItems_arr = $DBsql->getOrderInfo($cartID);
+        $getItems_arr = $DBsql->getOrderInfo($cartID, null);
         // var_dump($getItems_arr);
         
         // merge cookie cart to DB if exists
@@ -41,8 +41,8 @@ if (isset($_SESSION['user'])) {
                     #var_dump($res);
                     setcookie('tempCart', "", time() - 3600, "/");
                 }
-                $getItems_arr = $DBsql->getOrderInfo($cartID);
-                $_SESSION['cartID'] = $getItems_arr;
+                $getItems_arr = $DBsql->getOrderInfo($cartID, null);
+                $_SESSION['cartID'] = $cartID;
                 // echo 'DBcart is empty, insert cookiecart into dbcart';
             // if DBcart is not empty
             } else {
@@ -67,7 +67,7 @@ if (isset($_SESSION['user'])) {
                         $res = $DBsql->insertItems('orderitems', $value);
                     }
                 }
-                $getItems_arr = $DBsql->getOrderInfo($cartID);
+                $getItems_arr = $DBsql->getOrderInfo($cartID, null);
                 setcookie('tempCart', "", time() - 3600, "/");
                 $_SESSION['cartItems'] = $getItems_arr;
                 // echo 'DBcart is not empty, insert cookiecart into dbcart';
@@ -93,7 +93,7 @@ if (isset($_SESSION['user'])) {
                 $value['orderID'] = $cartID;
                 $res = $DBsql->insertItems('orderitems', $value);
             }
-            $getItems_arr = $DBsql->getOrderInfo($cartID);
+            $getItems_arr = $DBsql->getOrderInfo($cartID, null);
             $_SESSION['cartItems'] = $getItems_arr;
         } else {
             $_SESSION['cartItems'] = array();
@@ -106,7 +106,23 @@ if (isset($_SESSION['user'])) {
     unset($_SESSION['cartID']);
     if (isset($_COOKIE['tempCart'])) {
         $cartArr = objectToArray(json_decode($_COOKIE['tempCart']));
-        $_SESSION['cartItems'] = $cartArr;
+        $idArr = array();
+        $outcomearr = array();
+        foreach ($cartArr as $key => $value) {
+            $data = $DBsql->select($DBsql->getProductInfo(), array('productID' => $key));
+            $dbid = $data[0]['productID'];
+            if (in_array($dbid, array_keys($cartArr))) {
+                $data[0] = array_replace($data[0], array('quantity' => $cartArr[$dbid]['quantity'], 'totalprice' => $cartArr[$dbid]['totalprice']));
+                if (in_array($dbid, array_keys($outcomearr))) {
+                    $outcomearr = array_replace($outcomearr, $data[0]);
+                } else {
+                    $outcomearr[$dbid] = $data[0];
+                }
+            }
+        }
+            // $outcomearr = array_merge($data, $incomingarr);
+        $_SESSION['cartItems'] = $outcomearr;
+        // var_dump($idArr);
     } else {
         $_SESSION['cartItems'] = array();
     }

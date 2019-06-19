@@ -25,6 +25,8 @@ function addToCart (obj) {
                     alert('The product is already in your cart.');
                     $('#cart').modal();
                 } else {
+                    // document.getElementById('productArea').innerHTML = xmlhttp.response;
+                    // alert(xmlhttp.response);
                     getItems();
                     showCart();
                 }
@@ -40,6 +42,7 @@ function showCart () {
             if (this.readyState == 4 && this.status == 200) {
                 console.log(xmlhttp);
                 document.getElementById("showItems").innerHTML = xmlhttp.responseText;
+                finalPrice();
             }
         };
     xmlhttp.open("GET", "./Cart/showCart.php", true);
@@ -59,49 +62,75 @@ function getItems () {
     xmlhttp.send();
 }
 
-function removeItem (json, opt) {
-    if (json === null && opt !== null && opt == 'all') {
-        var orderID = null,
+function removeItem (json, opt = 'spec') {
+    if (opt == 'all') {
+        if (json == 'loggedIn') {
+            var orderID = 'loggedIn',
             productID = null,
             opt = 'all';
-    } else if (json !== null) {
-        opt = null;
+        } else if (json == 'guest') {
+            var orderID = 'guest',
+            productID = null,
+            opt = 'all';
+        }
+    } else if (opt == 'spec') {
         var obj = JSON.parse(json);
-        var orderID = obj.orderID,
-            productID = obj.productID;
+        if (obj.orderID == 'guest') {
+            var orderID = 'guest',
+            productID = obj.productID,
+            opt = 'spec';
+        } else {
+            var orderID = obj.orderID,
+            productID = obj.productID,
+            opt = 'spec';
+        }
     }
-        var xmlhttp = new XMLHttpRequest();
-            xmlhttp.onreadystatechange = function () {
-                if (this.readyState == 4 && this.status == 200) {
-                    console.log(xmlhttp);
-                    if (xmlhttp.response == 1) {
-                        location.reload();
-                    } else {
-                        alert('something wrong');
-                    }
-                    // document.getElementById("debug").innerHTML = xmlhttp.responseText;
+    var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                console.log(xmlhttp);
+                if (xmlhttp.response == 1) {
+                    getItems();
+                    showCart();
                 }
-            };
-        xmlhttp.open("GET", "Cart/removeItem.php?oi=" + orderID + "&pi=" + productID + "&opt=" + opt, true);
-        xmlhttp.send();
+                // document.getElementById("debug").innerHTML = xmlhttp.responseText;
+            }
+        };
+    xmlhttp.open("GET", "Cart/removeItem.php?oi=" + orderID + "&pi=" + productID + "&opt=" + opt, true);
+    xmlhttp.send();
 }
 
 function quantityCtrl (id, obj) {
-    var quantity = parseInt(document.getElementById('quantity['+id+']').value);
-    var orderid = obj.getAttribute('data-orderid');
-    var operation = obj.getAttribute('data-operation');
-    if (operation == 'd') {
-        if (quantity > 1) {
-            quantity -= 1;
+    if (obj !== null) {
+        var quantity = parseInt(document.getElementById('quantity['+id+']').value);
+        var orderid = obj.getAttribute('data-orderid');
+        var operation = obj.getAttribute('data-operation');
+        if (operation == 'd') {
+            if (quantity > 1) {
+                quantity -= 1;
+                document.getElementById('quantity['+id+']').value = quantity;
+            }
+        } else if (operation == 'i') {
+            quantity += 1;
             document.getElementById('quantity['+id+']').value = quantity;
         }
-    } else if (operation == 'i') {
-        quantity += 1;
-        document.getElementById('quantity['+id+']').value = quantity;
+        CaclulateCostTotal(id);
+        var str = document.getElementById('total['+id+']').innerHTML;
+        var arr = str.split('$');
+        var updatetotal = parseInt(arr[1]);
+        if (orderid == 'Na') {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log(xmlhttp);
+                        // alert(xmlhttp.response);
+                    // document.getElementById("debug").innerHTML = xmlhttp.responseText;
+                }
+            };
+            xmlhttp.open("GET", "./Cart/addToCart.php?i="+id+"&q="+quantity+"&t="+updatetotal, true);
+            xmlhttp.send();
+        } else {
+            quantityUpdateToDB(id, orderid, quantity, updatetotal);
+        }
     }
-    CaclulateCostTotal(id);
-    var str = document.getElementById('total['+id+']').innerHTML;
-    var arr = str.split('$');
-    var updatetotal = parseInt(arr[1]);
-    quantityUpdateToDB(id, orderid, quantity, updatetotal);
 }
