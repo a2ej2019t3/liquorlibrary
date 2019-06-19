@@ -57,6 +57,7 @@ document.getElementById("loginSubmit").onclick = function () {
                     document.location.reload(true);
                     sessionStorage.setItem('status','loggedIn'); 
                     alert('Welcome, you are successfully logged in.');
+                  
                 }
             }
         };
