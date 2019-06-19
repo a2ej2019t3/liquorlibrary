@@ -11,108 +11,95 @@ include_once ('connection.php');
 <hr style="margin-top:100px; margin-left:15px;">
 <div class="sidenav">
    
- <a href="#about" data-toggle="sidebar" data-target="#categorylist" class="dropdown-btn collapsible-header active maintype">Category <i class="fas fa-caret-down"></i></a>
+<a href="#about" data-toggle="sidebar" data-target="#categorylist" class="dropdown-btn collapsible-header active maintype">Category <i class="fas fa-caret-down"></i></a>
         <div  class="dropdown-container" id="categorylist" style="display: block;">
             <ul>
                 <?php
-                             if (count($parentCategory_arr) != 0) { 
-                        
-                            for ($a = 0; $a < count($parentCategory_arr); $a++) {
-                                // parent category list showing
-                                // $cityName= $parentCategory_arr[$a][1];
-                                $identifier=$a;
-                                echo '
-                                <a href="#" class="dropdown-btn collapsible-header childlink" data-toggle="sidebar" data-target=".subcategorylist'. $identifier.'">'.$parentCategory_arr[$a][1].' <i class="fa fa-angle-down"></i></a>
-                                ';
-                                $subCategory_sql="SELECT `categoryID`, `categoryName` FROM `category` WHERE `parentCategoryID` =".$parentCategory_arr[$a][0]."";
-                                $subCategory_res = mysqli_query($connection, $subCategory_sql);
-                                if ($subCategory_res != "") {
-                                    $subCategory_arr = mysqli_fetch_all($subCategory_res);
-                                } else {
-                                    alert("sub category result empty");
-                                }
-                                echo '<div class="dropdown-container" class="subcategorylist'. $identifier.'">
-                                
-                                         <ul>';
-                                for ($b = 0; $b < count($subCategory_arr); $b++) {
-                                    echo '<li class="contentsli"><a class="linkanchor" href="categorysearch.php?searchcategoryID='.$subCategory_arr[$b][0].'&searchcategoryName='.$subCategory_arr[$b][1].'">'.$subCategory_arr[$b][1].'</a></li>';
-                                };
-                                         echo '</ul>
-                                         
-                                         </div>';
-                               
-                            }
-                
+                    if (count($parentCategory_arr) != 0) {
+                      for ($a = 0; $a < count($parentCategory_arr); $a++) {
+                        // parent category list showing
+                        // $cityName= $parentCategory_arr[$a][1];
+                        $identifier=$a;
+                        echo '
+                        <a class="dropdown-btn collapsible-header childlink" data-toggle="sidebar" data-target=".subcategorylist'. $identifier.'">'.$parentCategory_arr[$a][1].' <i class="fa fa-angle-down"></i></a>
+                        ';
+                        $subCategory_sql="SELECT `categoryID`, `categoryName` FROM `category` WHERE `parentCategoryID` =".$parentCategory_arr[$a][0]."";
+                        $subCategory_res = mysqli_query($connection, $subCategory_sql);
+                        if ($subCategory_res != "") {
+                            $subCategory_arr = mysqli_fetch_all($subCategory_res);
                         } else {
-                        
+                            alert("sub category result empty");
+                        }
+                        echo '<div class="dropdown-container" class="subcategorylist'. $identifier.'">
+                                 <ul>';
+                        for ($b = 0; $b < count($subCategory_arr); $b++) {
+                            $categoryInfo = array(
+                                                'searchPara' => "?searchcategoryID=".$subCategory_arr[$b][0]."&searchcategoryName=".$subCategory_arr[$b][1]."&location=category",
+                                                'location' => "category"
+                                              );
+                            // var_dump($productInfo);
+                            $categoryInfoJson = json_encode($categoryInfo);
+                            // var_dump($productInfoJson);
+                            echo '<li class="contentsli">
+                                      <button type="button" class="linkanchor" value='.$categoryInfoJson.' onclick="showProduct(this.value)" >'.$subCategory_arr[$b][1].'</button>
+                                  </li>';
                         };
+                        echo '</ul>
+                            </div>';
+                      }
+                    }
 
                   ?>
 
             </ul>
       </div>
 
- 
-  
-  <li><a class="maintype" href="brandlist.php">Brand</a></li>
-  <li><a class="maintype" name="saletag" href="onsale.php" id="onsaletrigger">On Sale</a></li>
-  <a data-toggle="sidebar" data-target="#pricelist" class="dropdown-btn collapsible-header maintype" id="pricebutton">Price <i class="fas fa-caret-down"></i></a>
+  <?php
+    $brandInfo = array(
+                      'searchPara' => '?location=brandlist',
+                      'location' => 'brandlist'
+                      );
+    $brandInfoJson = json_encode($brandInfo);
+    $onSale = array(
+                    'searchPara' => '?location=salelist&opt=all',
+                    'location' => 'salelist'
+                    );
+    $onSaleJson = json_encode($onSale);
+  ?>
+  <li><button class="maintype" value='<?php echo $brandInfoJson ?>' onclick="showProduct(this.value)">Brand</button></li>
+  <li><button class="maintype" value='<?php echo $onSaleJson ?>' onclick="showProduct(this.value)">On Sale</button></li>
+  <a data-toggle="sidebar" href="#" data-target="#pricelist" class="dropdown-btn collapsible-header maintype" id="pricebutton">Price <i class="fas fa-caret-down"></i></a>
         <div  class="dropdown-container" id="pricelist">
-                    <ul>
-                    <li class="childlink" >
-                    <form  method="POST" action="pricesearch.php" data-target="pricesearch">
-                        <input type="hidden" name="searchstart" value="0">
-                        <input type="hidden" name="searchend" value="10">
-                        <a class="childprice"> <button class="pricetrigger" type="submit" >-NZ$10</button></a>
-                    </form>
-
-                    <li class="childlink">  
-                     <form  method="POST" action="pricesearch.php" data-target="pricesearch">
-                        <input type="hidden" name="searchstart" value="10">
-                        <input type="hidden" name="searchend" value="15">
-                        <a class="childprice"><button class="pricetrigger" type="submit" >NZ$10-NZ$15</button></a>
-                     </form>      
-                    </li>
-                    <li class="childlink">
-                    <form  method="POST" action="pricesearch.php" data-target="pricesearch">
-                        <input type="hidden" name="searchstart" value="15">
-                        <input type="hidden" name="searchend" value="20">
-                        <a class="childprice"><button class="pricetrigger" type="submit" >NZ$15-NZ$20</button></a>
-                     </form>    
-
-                    </li>
-                    <li class="childlink">
-                    <form  method="POST" action="pricesearch.php" data-target="pricesearch">
-                        <input type="hidden" name="searchstart" value="20">
-                        <input type="hidden" name="searchend" value="25">
-                        <a class="childprice"><button class="pricetrigger" type="submit" >NZ$20-NZ$25</button></a>
-                     </form>    
-                    </li>
-                    <li class="childlink">
-                    <form  method="POST" action="pricesearch.php" data-target="pricesearch">
-                        <input type="hidden" name="searchstart" value="25">
-                        <input type="hidden" name="searchend" value="30">
-                        <a class="childprice"><button class="pricetrigger" type="submit" >NZ$25-NS$30</button></a>
-                     </form>    
-                    </li>
-                    <li class="childlink">
-                    <form  method="POST" action="pricesearch.php" data-target="pricesearch">
-                        <input type="hidden" name="searchstart" value="30">
-                        <input type="hidden" name="searchend" value="35">
-                        <a class="childprice"><button class="pricetrigger" type="submit" >NZ$30-NZ$35</button></a>
-                     </form>    
-                    </li>
-                    <li class="childlink">
-                    <form  method="POST" action="pricesearch.php" data-target="pricesearch">
-                        <input type="hidden" name="searchstart" value="35">
-                        <input type="hidden" name="searchend" value="5000">
-                        <a class="childprice"> <button class="pricetrigger" type="submit" >NZ$35-</button></a>
-                     </form>    
-                    </li>
-                  </ul>
-            </div>
-
-    
+            <ul>
+                <?php
+                  $i = 0;
+                  while ($i <= 35) {
+                    // var_dump($i);
+                    $priceJson = array(
+                      'searchPara' => '',
+                      'location' => 'priceRange'
+                    );
+                    echo '
+                      <li class="childlink">';
+                    if ($i == 35) {
+                      $priceJson['searchPara'] = 'partials'.DIRECTORY_SEPARATOR.'discountrate.php?searchstart='.$i.'&location=priceRange';
+                      echo '
+                          <a class="childprice"><button value='.json_encode($priceJson).' class="pricetrigger" type="button" onclick="showProductAjax(this.value)">NZ$'.$i.'-</button></a>
+                      </li>
+                      ';
+                    } else {
+                      $priceJson['searchPara'] = 'partials'.DIRECTORY_SEPARATOR.'discountrate.php?searchstart='.$i.'&searchend='.($i+5).'&location=priceRange';
+                      echo '
+                          <a class="childprice"><button value='.json_encode($priceJson).' class="pricetrigger" type="button" onclick="showProductAjax(this.value)">NZ$'.$i.'-NZ$'.($i+5).'</button></a>
+                      </li>
+                      ';
+                    }
+                    $i = ($i + 5);
+                    // var_dump($i);
+                  }
+                ?>
+            </ul>
+        </div>
 </div>
 
 <style>
@@ -125,20 +112,21 @@ body {
 }
 .sidenav {
   text-align:center;
-  width: 220px; 
-  margin-top: 50px;
-  margin-left: 80px;
+  width: 100%;
+  margin: auto;
   overflow-x: hidden;
   padding: 8px 0;
 }
 
-.maintype{
+.maintype {
+  width: 100%;
   padding: 6px 8px 6px 16px;
   font-size: 17px;
   font-weight: 700;
   color: black;
   display: block;
   border-top: 1px solid rgba(144, 180, 148, 1);
+  border: none;
   text-align:center;
   background-color: rgba(224, 184, 65, 1);
 }
@@ -170,6 +158,7 @@ body {
 .sidenav a:hover ,.sidenav a:focus{
   color: #064579;
   background-color: #eee;
+  cursor: pointer;
 }
 .maintype:active{
   color: #064579;
@@ -180,6 +169,8 @@ body {
   background-color: #eee!important;
 }
 .maintype:hover{
+  color: #064579;
+  background-color: #eee!important;
   text-decoration: none;
 }
 li{

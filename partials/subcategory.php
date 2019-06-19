@@ -28,9 +28,7 @@
                                 echo '
                                 <button type="button" id="buttonIndex_'.$a.'" class="tablinks" onclick="openCity(this.id)" value="'.$cityName.'"><span>'.$cityName.'</span></button>
                                 ';
-                               
                             }
-                
                         } else {
                         
                         };
@@ -54,7 +52,7 @@
                                 for ($b = 0; $b < count($subCategory_arr); $b++) {
                                     echo '<div class="column">';
 
-                                    echo '<a class="linkanchor" href="categorysearch.php?searchcategoryID='.$subCategory_arr[$b][0].'&searchcategoryName='.$subCategory_arr[$b][1].'" > '.$subCategory_arr[$b][1].'</a> <br>';
+                                    echo '<a class="linkanchor" href="categorysearch.php?searchcategoryID='.$subCategory_arr[$b][0].'&searchcategoryName='.$subCategory_arr[$b][1].'&location=category" > '.$subCategory_arr[$b][1].'</a> <br>';
                                    
                                     echo '</div>';
                                 };

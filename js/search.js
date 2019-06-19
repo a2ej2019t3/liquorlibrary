@@ -25,6 +25,47 @@ document.getElementById("loginSubmit").onclick = function () {
     var xmlhttp = new XMLHttpRequest();
     var email = document.getElementsByName("email")[0].value;
     var password = document.getElementsByName("password")[0].value;
+    var classname= jQuery('.userlogin');
+      if(classname.hasClass('adminlogin')){
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                console.log(xmlhttp);
+                if(xmlhttp.responseText == 1){
+                    alert("Invalid admin information");
+                } else if (xmlhttp.responseText == 0) {
+                    alert("Invalid admin information");
+                } else if (xmlhttp.responseText == 3){
+                    document.location.reload(true);
+                    sessionStorage.setItem('status','loggedIn');
+                    alert('Welcome Admin');
+                }
+            }
+        };
+        xmlhttp.open("GET", "./signInUp/process_get_admin.php?email="+email+"&password="+password, true);
+        // xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlhttp.send();   
+      }
+    else if(classname.hasClass('branchlogin')){
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                console.log(xmlhttp);
+                if(xmlhttp.responseText == 1){
+                    alert("Invalid select information");
+                } else if (xmlhttp.responseText == 0) {
+                    alert("Invalid password information");
+                } else if (xmlhttp.responseText == 3){
+                    document.location.reload(true);
+                    sessionStorage.setItem('status','loggedIn'); 
+                    alert('Welcome, you are successfully logged in.');
+                }
+            }
+        };
+        xmlhttp.open("GET", "./signInUp/process_get_branch.php?email="+email+"&password="+password, true);
+        // xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlhttp.send();  
+    }
+    else{
+        // user login
     xmlhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             console.log(xmlhttp);
@@ -34,12 +75,15 @@ document.getElementById("loginSubmit").onclick = function () {
                 alert("Wrong password");
             } else if (xmlhttp.responseText == 3){
                 document.location.reload(true);
+                sessionStorage.setItem('status','loggedIn'); 
             }
         }
     };
     xmlhttp.open("GET", "./signInUp/process_get_user.php?email="+email+"&password="+password, true);
     // xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xmlhttp.send();
+    xmlhttp.send();        
+    }
+
 }
 
 document.getElementById("logoutButton").onclick = function () {
@@ -55,6 +99,54 @@ document.getElementById("logoutButton").onclick = function () {
     xmlhttp.open("GET", "./signInUp/logout.php", true);
     // xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.send();
+}
+// modal admin login& branch login js
+
+function adminmode(){
+    if(jQuery('.userlogin').hasClass('branchlogin')){
+        jQuery('.userlogin').removeClass('branchlogin');
+        jQuery('.userlogin').toggleClass('adminlogin');
+            if(jQuery('.userlogin').hasClass('adminlogin')){
+                jQuery('.logbutton').attr('id', 'adminlogbutton');
+            }
+            else{
+                jQuery('.logbutton').attr('id', 'loginSubmit');
+            }
+    }
+    else{
+        jQuery('.userlogin').toggleClass('adminlogin');  
+        if(jQuery('.userlogin').hasClass('adminlogin')){
+            jQuery('.logbutton').attr('id', 'adminlogbutton');
+        }
+        else{
+            jQuery('.logbutton').attr('id', 'loginSubmit');
+        }
+    }   
+}
+
+function branchmode(){
+    if(jQuery('.userlogin').hasClass('adminlogin')){
+        jQuery('.userlogin').removeClass('adminlogin');
+        jQuery('.userlogin').toggleClass('branchlogin');
+        if(jQuery('.userlogin').hasClass('branchlogin')){
+            jQuery('.logbutton').attr('id', 'branchlogbutton');
+        }
+        else{
+            jQuery('.logbutton').attr('id', 'loginSubmit');
+        }
+
+
+    }
+    else{
+        jQuery('.userlogin').toggleClass('branchlogin');
+        if(jQuery('.userlogin').hasClass('branchlogin')){
+            jQuery('.logbutton').attr('id', 'branchlogbutton');
+        }
+        else{
+            jQuery('.logbutton').attr('id', 'loginSubmit');
+        }
+    }
+
 }
 
 $(document).ready(function(){
@@ -83,11 +175,3 @@ $(document).ready(function(){
     });
   });
 
-//   function selectItem (pid) {
-//     // var trigger = $('.namebutton'),        
-//        var itemId= pid;
-//       // Set $this for re-use. Set target from data attribute
-//         var $this = $(this),
-//         val = $this.find(':selected').val();    
-//         $.   
-// }

@@ -56,7 +56,7 @@
                     <input type="radio" name="options" id="businessOption" checked/> Business
                 </label>
                 <label id="individualOptionLable" class="btn btn-default">
-                    <input type="radio" name="options" id="individualOption" value="3" /> Individual
+                    <input type="radio" name="options" id="individualOption" value="3"/> Individual
                 </label>
             </div>
           </div>
@@ -80,8 +80,8 @@
             </div>
             <div id="businessTypeField" class="fieldbox col-xs-12 col-sm-12 col-md-6 col-lg-6">
                 <label for="lable">*Please select the type of business(Business Client Only)</label><br>
-                <input name= "typeID" type="hidden" value="" type="text">
-                <select id="questiontopic">
+                <input name="typeID" type="hidden" value="">
+                <select id="questiontopic" onclick="getBusinessType(this)">
                 <?php 
                     $selectQuery = "SELECT * FROM `usertype` WHERE NOT typeID = 3";
                     //Checks the customer already exists with the user name.
@@ -89,6 +89,7 @@
                     if ($result = mysqli_query($connection, $selectQuery)) {
                         while ( $type = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
                     ?>
+                    
                     <option class="businessTypeOptions" value="<?php echo $type['typeID'] ?>"><?php echo $type['typeName'] ?></option>
                 <?php 
                         }

@@ -13,7 +13,8 @@
 </head>
 <body>
     <?php
-    include_once ("partials/header.php");
+        include_once ("partials/header.php");
+        include_once ("partials/indicatorDown.php");
     ?>
     <section>
       <div class="container-fluid">
@@ -30,8 +31,23 @@
             ?>
       </div>
     </section>
+    <br><br><br><br><hr>
+    <section style="margin-top:150px;">
 
-    <section id="aboutus" style="margin-top:200px;">
+            <?php
+              include ('partials/productindex.php');
+            ?>
+     
+    </section>
+    <hr>
+    <section class="container p-t-3" id="aboutus">
+<div class="row" id="slider-text"  style="margin-top:200px;">
+    <div class="col-md-6" >
+      <h2 style="font-family: 'Josefin Sans', sans-serif;">ABOUT US</h2>
+    </div>
+  </div>
+</section>
+    <section >
       <div class="container-fluid">
             <div class="container-fluid">
               <div class="aboutmain container-fluid"><p class="fourth-text">DEDICATED FOR 15 YEARS</p></div>
@@ -43,7 +59,9 @@
         </div>
 
     </section>
-
+    <?php
+    include_once ("partials/indicatorUp.php");
+  ?>
   <?php
     include_once ("partials/foot.php");
   ?>

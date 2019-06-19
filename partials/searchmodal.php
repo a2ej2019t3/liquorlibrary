@@ -1,4 +1,4 @@
-<div class="modal fade" id="modal2" tabindex="-1" data-trigger="hover" data-backdrop="false">
+<div class="modal fade" id="modal2" tabindex="-1" data-trigger="hover" data-backdrop="true">
         <div class="modal-dialog modal-lg modal-center" id="modal3">
             <div class="container">
                 <div class="modal-content">
@@ -20,10 +20,19 @@
     
                                     </div>                                          
                             </div>
-                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+
                         </form> 
                     </div>  
                 </div>
             </div> <!--  container ends -->
         </div>
     </div>
+
+    <style>
+        .modal-backdrop {
+            display: none !important;
+        }
+        body.modal-open {
+  overflow: visible;
+}
+    </style>

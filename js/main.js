@@ -1,5 +1,18 @@
+function addLoadEvent(func) {
+    var oldonload = window.onload;
+    if (typeof window.onload != 'function') {
+        window.onload = func;
+    } else {
+        window.onload = function() {
+            if (oldonload) {
+            oldonload();
+            }
+            func();
+        }
+    }
+};
 
-  $(window).scroll(function() {
+$(window).scroll(function() {
     if($(this).scrollTop() > 80)  /*height in pixels when the navbar becomes non opaque*/ 
     {
         $('.opaque-navbar').addClass('opaque');
@@ -99,18 +112,36 @@ $( document ).ready(function() {
     $('body').show();
 });
 
+function addLoadEvent(func) {
+    var oldonload = window.onload;
+    if (typeof window.onload != 'function') {
+        window.onload = func;
+    } else {
+        window.onload = function() {
+            if (oldonload) {
+            oldonload();
+            }
+            func();
+        }
+    }
+};
 
+addLoadEvent(function () {
+    document.getElementsByName("typeID")[0].value = 1;
+})
 // show register from for different user type
 document.getElementById("businessOptionLable").onclick = function () {
     document.getElementById("forBusiness").style.display = "";
     document.getElementById("company_name").value = "";
+    document.getElementsByName("typeID")[0].value = 1;
 }
 document.getElementById("individualOptionLable").onclick = function () {
     document.getElementById("forBusiness").style.display = "none";
     document.getElementsByName("typeID")[0].value = 3;
 }
 
-function getBusinessType (id) {
+function getBusinessType (obj) {
+    var id = obj.options[obj.selectedIndex].getAttribute('value');
     document.getElementsByName("typeID")[0].value = id;
 }
 

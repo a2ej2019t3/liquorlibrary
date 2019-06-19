@@ -75,7 +75,7 @@
                 echo '
                     <form method="post" action="productListPage.php">
                     <input type="hidden" name="brandID" value="'.$searchBrand_arr[$b][0].'">
-                    <button class="dropdown-item" href="#" type="submit">
+                    <a class="dropdown-item" href="brandsearch.php?brandname='.$searchBrand_arr[$b][1].'" type="submit">
                         <div class="row">
                             <div id="posterarea" style="display:inline-block">
                                
@@ -84,7 +84,7 @@
                                 <p style="color:black"><b>'.$searchBrand_arr[$b][1].'</b></p>
                             </div>
                         </div>
-                    </button>
+                    </a>
                     </form>
                 ';
             }

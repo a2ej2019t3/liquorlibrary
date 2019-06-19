@@ -5,20 +5,20 @@
         $className = 'header2li';
     }
 ?>
-<header>
+<header id="topsection">
     <nav class="navbar navbar-expand-lg navbar-inverse fixed-top opaque-navbar">
         <div class="container">
     <!-- login button -->
             <?php
-                    if (!isset($_SESSION['user'])) {
-                        echo '
-                            <button type="button" class="btn-warning btn-sm trigger-btn '.$className.'" href="#myModal" data-toggle="modal" style="position:absolute; right: 35px; top: 57px; color:white!important; background-color: rgba(224, 184, 65, 1)!important; border:none;">Login</button>
-                        ';
-                    } else {
-                        echo '
-                            <button type="button" id="logoutButton" class="btn-success btn-sm trigger-btn '.$className.'" style="position:absolute; right: 35px; top: 57px; color:white!important; background-color: rgba(224, 184, 65, 1)!important; border:none;">Logout</button>
-                        ';
-                    }
+                if (!isset($_SESSION['user'])) {
+                    echo '
+                        <button type="button" class="btn-warning btn-sm trigger-btn '.$className.'" href="#myModal" data-toggle="modal" style="position:absolute; right: 35px; top: 57px; color:white!important; background-color: rgba(224, 184, 65, 1)!important; border:none;">Login</button>
+                    ';
+                } else {
+                    echo '
+                        <button type="button" id="logoutButton" class="btn-success btn-sm trigger-btn '.$className.'" style="position:absolute; right: 35px; top: 57px; color:white!important; background-color: rgba(224, 184, 65, 1)!important; border:none;">Logout</button>
+                    ';
+                }
             ?>
             <br>
             <div class="navbar-header">
@@ -42,14 +42,18 @@
                 <ul class="nav navbar-nav ml-auto">
                     <li class="col" id="firstcol"><a class="<?php echo $className; ?>" href="#aboutus" style="color: white; font-size: 1rem; font-family: 'Roboto', sans-serif;">About Us</a></li>
                     <li class="col"><a class="<?php echo $className; ?>" href="findlocation/findus.php" style="color: white; font-size: 1rem; font-family: 'Roboto', sans-serif;">Find Us</a></li>
-                    <li class="col"><a class="<?php echo $className; ?>" id="ourdrinks" data-toggle="modal" data-target="#subnav" href="#" style="color: white; font-size: 1rem; font-family: 'Roboto', sans-serif;">Our Drinks</a></li> 
+                    <li class="col"><a class="<?php echo $className; ?> js-open-modal" id="ourdrinks" data-toggle="modal" data-target="#subnav" href="#" style="color: white; font-size: 1rem; font-family: 'Roboto', sans-serif;">Our Drinks</a></li> 
                     <li class="col"><a class="<?php echo $className; ?>" href="specials.php" style="color: white; font-size: 1rem; font-family: 'Roboto', sans-serif;">Specials</a></li> 
+<<<<<<< HEAD
                     <li class="col"><a class="<?php echo $className; ?>" href="#" style="color: white; font-size: 1rem; font-family: 'Roboto', sans-serif;">Cart</a></li>
+=======
+                    <li class="col"><a class="<?php echo $className; ?>" href="paymentprocess.php" style="color: white; font-size: 1rem; font-family: 'Roboto', sans-serif;">Cart</a></li>
+>>>>>>> master
                     <li class="col"><a class="<?php echo $className; ?>" href="orderhistory.php" style="color: white; font-size: 1rem; font-family: 'Roboto', sans-serif;">My orders</a></li>
                     <li class="col"><a class="<?php echo $className; ?>" href="contact.php" style="color: white; font-size: 1rem; font-family: 'Roboto', sans-serif;">Contact</a></li> 
                     <li class="col"><a class="<?php echo $className; ?>" href="admin_area/login.php" style="color: white; font-size: 1rem; font-family: 'Roboto', sans-serif;">Admin</a></li> 
                     <li class="col"> 
-                        <!-- modal button -->
+<!-- modal button                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               -->
                         <button type="button" class="btn btn-primary btn-lg pull-right" style="background-color: transparent; border:none;" data-toggle="modal" data-target="#modal2">
                             <span class="<?php echo $className; ?>" style="color: white; font-size: 20px; margin-top:10px;" id="b2"><i class="fas fa-search"></i></span> 
                         </button>
