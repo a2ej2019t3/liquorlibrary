@@ -146,7 +146,7 @@ $_SESSION['location'] = 'customerorder';
 
           // if ($statusID != '') {
             $consArr = array(
-              'buyerID' => $buyerID,
+              'buyerID' => $buyerID
               // 'status' => $statusID
             );
           // } else {
@@ -242,7 +242,7 @@ $_SESSION['location'] = 'customerorder';
                   break;
               }
               echo '
-                                              <div class="col-3 p-1 my-auto text-right pr-5" style="font-size:1.25rem;">
+                                              <div class="col-3 p-1 my-auto text-left pl-5" style="font-size:1.25rem;">
                                                   <span class="badge ' . $badgeType . '">' . $statusName . '</span>
                                               </div>';
               echo '

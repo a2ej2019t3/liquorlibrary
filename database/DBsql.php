@@ -64,6 +64,9 @@
                     } else if ($key == 'LIMIT') {
                         $constrant = trim($constrant, "AND ");
                         $constrant .= " LIMIT ".$value;
+                    } else if ($key == 'ORDER BY') {
+                        $constrant = trim($constrant, "AND ");
+                        $constrant .= "$key $value";
                     } else {
                         $constrant .= $this->prepareSql($key, $value);
                     }
@@ -157,7 +160,7 @@
             } else {
                 return false;
             }
-            return $sql;
+            // return $sql;
         }
 
         // insert into orderitems
