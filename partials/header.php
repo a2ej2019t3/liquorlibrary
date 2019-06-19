@@ -52,7 +52,7 @@
                                 <li class="col"><a class="'.$className.' js-open-modal" id="ourdrinks" data-toggle="modal" data-target="#subnav" href="#" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Our Drinks</a></li> 
                                 <li class="col"><a class="'.$className.'" href="specials.php" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Specials</a></li> 
                                 <li class="col"><a class="'.$className.'" href="paymentprocess.php" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Cart</a></li>
-                                <li class="col"><a class="'.$className.'" href="orderhistory.php" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">My orders</a></li>
+                                <li class="col2"><a class="'.$className.'" href="orderhistory.php" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">My orders</a></li>
                                 <li class="col"><a class="'.$className.'" href="contact.php" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Contact</a></li> 
                                 
             ';
@@ -64,15 +64,15 @@
                                 <li class="col"><a class="'.$className.'" href="specials.php" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Specials</a></li> 
                                 <li class="col"><a class="'.$className.'" href="paymentprocess.php" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Cart</a></li>
                                 <li class="col"><a class="'.$className.'" href="contact.php" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Contact</a></li> 
-                                <li class="col-2"><a class="'.$className.'" href="branchreport.php" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Branch Report</a></li> 
+                                <li class="col2"><a class="'.$className.'" href="branchreport.php" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Branch Report</a></li> 
             ';
                             }
                             else if ( $_SESSION['user']['typeID']==0) {
                                 echo ' 
-                                <li class="col" id="firstcol><a class="'.$className.'" href="findlocation/findus.php" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Find Us</a></li>
+                                <li class="col" id="firstcol"><a class="'.$className.'" href="findlocation/findus.php" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Find Us</a></li>
                                 <li class="col"><a class="'.$className.' js-open-modal" id="ourdrinks" data-toggle="modal" data-target="#subnav" href="#" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Our Drinks</a></li> 
                                 <li class="col"><a class="'.$className.'" href="specials.php" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Specials</a></li> 
-                                <li class="col-3"><a class="'.$className.'" href="" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Admin Report</a></li> 
+                                <li class="col2"><a class="'.$className.'" href="" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Admin Report</a></li> 
             ';
                             }
                             else{
@@ -116,18 +116,25 @@
                       
 <!-- Login modal -->
 <?php
+
     include_once ("partials/loginmodal.php");
+    // include_once (dirname(__DIR__) . DIRECTORY_SEPARATOR . 'partials' . DIRECTORY_SEPARATOR . 'searchmodal.php');
+
   ?>
 <!-- ------------ -->
 
 <!-- search modal ----------------------------------------------------------------------------------------->
 <?php
     include_once ("partials/searchmodal.php");
+    // include_once (dirname(__DIR__) . DIRECTORY_SEPARATOR . 'partials' . DIRECTORY_SEPARATOR . 'searchmodal.php');
+
   ?>
 <!-- ------------ -->
 <!-- sub Category modal ----------------------------------------------------------------------------------------->
 <?php
     include_once ("partials/subcategory.php");
+    // include_once (dirname(__DIR__) . DIRECTORY_SEPARATOR . 'partials' . DIRECTORY_SEPARATOR . 'subcategory.php');
+
   ?>
 <!-- ------------ -->
 </header> 

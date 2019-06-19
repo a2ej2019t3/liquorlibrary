@@ -71,7 +71,7 @@ require_once ('partials/piechartquery.php');
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Back Order</h6>
-        <a class="collapse-item" href="buttons.html">Order status</a>
+        <a class="collapse-item" href="branchpages/backorderstatus.php">Order status</a>
         <a class="collapse-item" href="cards.html">Order history</a>
         <a class="collapse-item" href="cards.html">Reports</a>
       </div>
