@@ -8,7 +8,7 @@
 </button>
 </div>
 <!-- modal cart ---------------------------------------------------------------------------------------->
-<div class="modal fade" id="cart" tabindex="-1" style="z-index:1;">
+<div class="modal fade" id="cart" tabindex="-1" style="">
   <div class="modal-dialog modal-md" role="document" style="position: absolute; right: 80px; width:400px;">
     <div class="modal-content"style="box-shadow: 2px 3px rgba(124, 99, 84, 1); height: 100%;">
 
@@ -73,9 +73,10 @@ $('#myModal').modal();
 
 .modal {
   bottom: initial!important;
+  
 }
 .modal-backdrop {
-  z-index: -1;
+
 }
 
 #btContainer {

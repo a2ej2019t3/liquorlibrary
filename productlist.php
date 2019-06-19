@@ -89,20 +89,20 @@
                                      <div class="row">
                                         <div class="col-sm-3 col-md-3" style="padding:0!important;"></div>
                                             <div class="col-sm-6 col-md-6">
-                                            <div class="row">
-                                                <div class="col-sm-6 col-md-6" style="padding:0!important;">
-                                                    <span class="product-grid__botton product-grid__add-to-cart" data-productID="'.$searchItem_arr[$b][0].'" onclick="addToCart(this)">
-                                                        <i class="fa fa-cart-arrow-down"></i><br> Add to cart
-                                                    </span>
-                                                </div>
-                                                <div class="col-sm-6 col-md-6" style="padding:0!important;">
-                                                    <a href="productlist.php?pid='.$searchItem_arr[$b][0].'">
-                                                        <span class="product-grid__botton product-grid__view">
-                                                            <i class="fa fa-eye"></i><br>View more
+                                                <div class="row">
+                                                    <div class="col-sm-6 col-md-6" style="padding:0!important;">
+                                                        <span class="product-grid__botton product-grid__add-to-cart" data-productID="'.$searchItem_arr[$b][0].'" onclick="addToCart(this)">
+                                                            <i class="fa fa-cart-arrow-down"></i><br> Add to cart
                                                         </span>
-                                                    </a>
+                                                    </div>
+                                                    <div class="col-sm-6 col-md-6" style="padding:0!important;">
+                                                        <a href="productlist.php?pid='.$searchItem_arr[$b][0].'">
+                                                            <span class="product-grid__botton product-grid__view">
+                                                                <i class="fa fa-eye"></i><br>View more
+                                                            </span>
+                                                        </a>
+                                                    </div>
                                                 </div>
-                                            </div>
                                             </div>
                                         <div class="col-sm-3 col-md-3" style="padding:0!important;"></div>
 
@@ -184,10 +184,20 @@
                                 }
                                 
                            echo         '<div class="product-grid__extend" style="width:100%;">
-                                         <div class="row">
-                                            <div class="col-sm-6 col-md-6" style="padding:0!important;"><span class="product-grid__botton product-grid__add-to-cart"><i class="fa fa-cart-arrow-down"></i><br> Add to cart</span></div>
-                                            <div class="col-sm-6 col-md-6" style="padding:0!important;"><a href="productlist.php?pid='.$suggestItem_arr[$b][0].'"><span class="product-grid__botton product-grid__view"><i class="fa fa-eye"></i><br>View more</span></a></div>    
-                                        </div>
+                                            <div class="row">
+                                                    <div class="col-sm-6 col-md-6" style="padding:0!important;">
+                                                        <span class="product-grid__botton product-grid__add-to-cart" data-productID="'.$searchItem_arr[$b][0].'" onclick="addToCart(this)">
+                                                            <i class="fa fa-cart-arrow-down"></i><br> Add to cart
+                                                        </span>
+                                                    </div>
+                                                    <div class="col-sm-6 col-md-6" style="padding:0!important;">
+                                                        <a href="productlist.php?pid='.$searchItem_arr[$b][0].'">
+                                                            <span class="product-grid__botton product-grid__view">
+                                                                <i class="fa fa-eye"></i><br>View more
+                                                            </span>
+                                                        </a>
+                                                    </div>
+                                                </div>
                                         </div>
                                   
                               
