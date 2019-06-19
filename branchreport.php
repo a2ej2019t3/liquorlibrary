@@ -6,7 +6,9 @@
 <?php    
 require_once ('partials/branchquery.php');
 require_once ('partials/branchearningchart.php');
+require_once ('partials/piechartquery.php');
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,27 +18,10 @@ require_once ('partials/branchearningchart.php');
     <title>Branch Admin Dashboard</title>
     <?php
     include_once ("partials/head.php");
+    require_once ('partials/chartrender.php');
     ?>
     <link rel="stylesheet" href="css/branchreport.css">
-    <script>
-window.onload = function () {
- 
-var chart = new CanvasJS.Chart("myAreaChart", {
-	title: {
-		text: "OVERVIEW"
-	},
-	axisY: {
-		title: "Earning from pickup orders"
-	},
-	data: [{
-		type: "line",
-		dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
-	}]
-});
-chart.render();
- 
-}
-</script>
+
 </head>
 
 <body>
@@ -125,9 +110,7 @@ chart.render();
     </a>
     <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
-        
-        <a class="collapse-item" href="login.html">Store information</a>
-        <a class="collapse-item" href="register.html">Update information</a>
+          <a class="collapse-item" href="updatestoreinfo.php">Update information</a>
 
       </div>
     </div>
@@ -282,14 +265,11 @@ chart.render();
                 </div>
               </div>
             </div>
-</div>
-<!-- pie chart -->
-
-  <div class="col-xl-4 col-lg-5">
+   <div class="col-xl-4 col-lg-5">
                 <div class="card shadow mb-4">
                   <!-- Card Header - Dropdown -->
                   <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Pickup Orders :Earnings Overview</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Pickup Orders :Payment Overview</h6>
                   </div>
                   <!-- Card Body -->
                   <div class="card-body">
@@ -300,7 +280,11 @@ chart.render();
                 </div>
               </div>
   </div>
+</div>           
 </div>
+<!-- pie chart -->
+
+
 
 <!-- ---------------------------------------------------------------------------------------------------------- -->
 </div>
@@ -312,6 +296,7 @@ chart.render();
   <script type="text/javascript" src="js/main.js"></script>
   <script type="text/javascript" src="js/search.js"></script>
   <script type="text/javascript" src="js/chart.js"></script>
+  <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
   <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 <!---------------------------------------------------------------------------------------------------------------->
 
