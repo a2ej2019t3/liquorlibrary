@@ -12,7 +12,7 @@
             $product_arr = $DBsql->select($DBsql->getProductInfo(), array('spec' => 'discountprice is not null'));
         } else if (isset($_GET['opt']) && $_GET['opt'] == 'dr') {
             $product_arr = $DBsql->select($DBsql->getProductInfo(), array('spec' => 'discountprice is not null ORDER BY discountRate DESC'));
-        }else if ($_GET['condition'] == 'ASC' || $_GET['condition'] == 'DESC') {
+        } else if ($_GET['condition'] == 'ASC' || $_GET['condition'] == 'DESC') {
             $product_arr = $DBsql->select($DBsql->getProductInfo(), array('spec' => 'discountprice is not null ORDER BY discountprice '.$_GET['condition']));
         }
     }
@@ -53,11 +53,11 @@
         // echo 'No result';
     }
     echo '
-    <hr style="margin-top:100px; margin-left:15px;">
+    <hr style="margin:0;">
     <div class="container_fluid">
         <div class="row">
     <!-- content body starts -->
-        <div class="productresult col-md-9 col-xs-12 content-right">
+        <div class="productresult col content-right">
     <!-- product list results -->';
     if (isset($_GET['brandname'])) {
     echo '
@@ -84,9 +84,8 @@
                             <div class="product-grid__img-wrapper" style="height: 185px; text-algin:center; ">';		
                                 if ($product_arr[$b]['discountRate']>20) {
                 echo '
-                                    <img src="images/specials.png" class="ribbon" style="width:75px; height: 60px; position:absolute; top: 0; left:0;">';
-                echo '
                                     <div class="offer-form">                             
+                                        <img src="images/specials.png" class="ribbon" style="width:75px; height: 60px; position:absolute; top: 0; left:0;">
                                         <button type="button" data-hover="'.round($product_arr[$b]['discountRate']).'%" class="discountbutton" data-active="ACTIVE"><span style="margin-left: -2px;">OFFER</span></button>
                                     </div>';
                 echo '
@@ -98,7 +97,7 @@
                                     </div>';
                                 }
                 echo '
-                                    <img src='.$imgpath.$product_arr[$b]['img'].' style="width: 120px; max-height: 170px;margin-top: -30px;">';
+                                    <img src='.$imgpath.$product_arr[$b]['img'].' style="width: auto; max-height: 170px;">';
                  
                 echo '
                             </div>
@@ -118,14 +117,19 @@
                             </div>';
                     }
                 echo '
-                            <div class="product-grid__extend" style="width:100%;">
+                            <div class="product-grid__extend" style="width:100%; padding-bottom: 2px;">
                                 <div class="row">
                                     <div class="col-sm-6 col-md-6" style="padding:0!important;">
                                         <span class="product-grid__botton product-grid__add-to-cart" data-productID="'.$product_arr[$b]['productID'].'" onclick="addToCart(this)">
                                             <i class="fa fa-cart-arrow-down"></i><br> Add to cart
                                         </span>
                                     </div>
-                                    <div class="col-sm-6 col-md-6" style="padding:0!important;"><a href="productlist.php?pid='.$product_arr[$b]['productID'].'"><span class="product-grid__botton product-grid__view"><i class="fa fa-eye"></i><br>View more</span></a>
+                                    <div class="col-sm-6 col-md-6" style="padding:0!important;">
+                                        <a href="productlist.php?pid='.$product_arr[$b]['productID'].'">
+                                            <span class="product-grid__botton product-grid__view">
+                                                <i class="fa fa-eye"></i><br>View more
+                                            </span>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -210,7 +214,7 @@ echo "
 /* ------------------------------------------------------------------------------------------------- */
 .adminbuttons{
     position:absolute;
-    right: 5px;
+    right: 90px;
     top: 3px;
     display:none;
 }
@@ -219,9 +223,13 @@ echo "
 }
 /* .button */
 .offer-form{
-    width: 70px;
-    height: 70px;
+    width: 100%;
 }
+
+.product-grid__botton {
+    margin:0;
+}
+
 .discountbutton {
     position: absolute;
     top: 5px;

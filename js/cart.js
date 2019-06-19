@@ -25,6 +25,7 @@ function addToCart (obj) {
                     alert('The product is already in your cart.');
                     $('#cart').modal();
                 } else {
+                    getItems();
                     showCart();
                 }
             }
@@ -56,4 +57,51 @@ function getItems () {
         };
     xmlhttp.open("GET", "Cart/getItems.php", true);
     xmlhttp.send();
+}
+
+function removeItem (json, opt) {
+    if (json === null && opt !== null && opt == 'all') {
+        var orderID = null,
+            productID = null,
+            opt = 'all';
+    } else if (json !== null) {
+        opt = null;
+        var obj = JSON.parse(json);
+        var orderID = obj.orderID,
+            productID = obj.productID;
+    }
+        var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log(xmlhttp);
+                    if (xmlhttp.response == 1) {
+                        location.reload();
+                    } else {
+                        alert('something wrong');
+                    }
+                    // document.getElementById("debug").innerHTML = xmlhttp.responseText;
+                }
+            };
+        xmlhttp.open("GET", "Cart/removeItem.php?oi=" + orderID + "&pi=" + productID + "&opt=" + opt, true);
+        xmlhttp.send();
+}
+
+function quantityCtrl (id, obj) {
+    var quantity = parseInt(document.getElementById('quantity['+id+']').value);
+    var orderid = obj.getAttribute('data-orderid');
+    var operation = obj.getAttribute('data-operation');
+    if (operation == 'd') {
+        if (quantity > 1) {
+            quantity -= 1;
+            document.getElementById('quantity['+id+']').value = quantity;
+        }
+    } else if (operation == 'i') {
+        quantity += 1;
+        document.getElementById('quantity['+id+']').value = quantity;
+    }
+    CaclulateCostTotal(id);
+    var str = document.getElementById('total['+id+']').innerHTML;
+    var arr = str.split('$');
+    var updatetotal = parseInt(arr[1]);
+    quantityUpdateToDB(id, orderid, quantity, updatetotal);
 }

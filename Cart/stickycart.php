@@ -1,5 +1,5 @@
 <div id="btContainer">
-<button id="stickyCart" class="cartbutton sticky" data-toggle="modal" data-target="#cart">
+<button id="stickyCart" class="cartbutton sticky" data-toggle="modal" data-target="#cart" onclick="finalPrice(), ">
 <!-- <button class="openbtn sticky" onclick="openNav()">Toggle Sidebar</button> -->
 <div>
     <div>
@@ -13,19 +13,19 @@
   <div class="modal-dialog modal-md" role="document" style="position: absolute; right: 80px; width:400px;">
     <div class="modal-content"style="box-shadow: 2px 3px rgba(124, 99, 84, 1); height: 100%;">
 
-      <div class="modal-body">
+      <div class="modal-body" style="padding:0;">
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span>&times;</span>
         </button>  
         <!-- class="show-cart table" -->
-        <div id="showItems" class="container">
-          
-          </div>
-          <span class="totalquantity">Total ( <span class="total-cart"></span> ITEMS)</span>  <span class="totalcost">price: $<span class="total-cart"></span></span>
+        <div id="showItems" class="container" style=" overflow:scroll; max-height:70vh;">
+
+        </div>
+        <span class="totalquantity">Total ( <span id="cartTotalQuantity" class="total-cart"></span> ITEMS)</span>  <span class="totalcost">price: $<span id="cartTotalPrice" class="total-cart"></span></span>
       </div>
       <div class="modal-footer" style="text-align:center; margin: 0 auto;">
-        <button type="button" class="btn btn-primary" id="checkoutbutton" >EMPTY CART</button>
-        <button type="button" class="btn btn-primary" id="checkoutbutton" onclick="location.href='paymentprocess.php';">CHECKOUT</button>
+        <button type="button" class="btn btn-primary" id="checkoutbutton" onclick="removeItem(null, 'all')">EMPTY CART</button>
+        <button type="button" class="btn btn-primary" id="checkoutbutton" onclick="location.href='paymentprocess.php?';">CHECKOUT</button>
       </div>
     </div>
   </div>
@@ -72,8 +72,10 @@ transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
   margin-left: 50px;
 }
 
-
-
+.close {
+  padding-top: 3px !important;
+  padding-right: 5px !important;
+}
 
 .modal {
   bottom: initial!important;

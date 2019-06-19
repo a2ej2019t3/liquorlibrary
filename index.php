@@ -13,11 +13,9 @@
 </head>
 <body>
     <?php
-    include_once ("partials/header.php");
+        include_once ("partials/header.php");
+        include_once ("partials/indicatorDown.php");
     ?>
-        <?php
-    include_once ("partials/indicatorDown.php");
-  ?>
     <section>
       <div class="container-fluid">
             <div class="row">

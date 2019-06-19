@@ -1,4 +1,3 @@
-
 function addLoadEvent(func) {
     var oldonload = window.onload;
     if (typeof window.onload != 'function') {
@@ -15,10 +14,10 @@ function addLoadEvent(func) {
 
 addLoadEvent(finalPrice);
 // addLoadEvent(finalquantity);
-
+$('#cart').on('shown.bs.modal', finalPrice);
 var CaclulateCostTotal = function(data) {
     // var $this = $(this);
-    var id= $(data).data('attribute');
+    var id= data;
             var cost= document.getElementById('ticket_price['+id+']').getAttribute('data-value');
             var quant= document.getElementById('quantity['+id+']').value;
             c = parseFloat(cost),
@@ -49,6 +48,7 @@ function finalPrice(params) {
 
    finalquantity();
 };
+
 function finalquantity(params){
     var quantity =document.getElementsByClassName('cart-item-quantity-display');
     var finalquantity = 0;
@@ -61,10 +61,10 @@ function finalquantity(params){
    document.getElementById('cartTotalQuantity').setAttribute('value',''+finalquantity+''); 
 
 };
-function quantityUpdate(data){
+function quantityUpdate(id){
     
     //itemID
-    var itemid= $(data).data('attribute');
+    var itemid= id;
    
     // orderId
     var orderid=document.getElementById('order'+itemid+'').value;
@@ -79,18 +79,21 @@ function quantityUpdate(data){
     // alert(updateorderid);
     // alert(updatequantity);
     // alert(updatetotal);
-
+    quantityUpdateToDB(itemid, updateorderid, updatequantity, updatetotal);
     
-    var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                console.log(xmlhttp);
-                // document.getElementById("content").innerHTML = xmlhttp.responseText;
-            }
-        };
-    xmlhttp.open("GET", "./payment/confirmpay.php?orderid="+updateorderid+"&itemid="+itemid+"&quantity="+updatequantity+"&updatetotal="+updatetotal, true);
-    xmlhttp.send();
-;}
+    ;}
+    
+  function quantityUpdateToDB(itemid, updateorderid, updatequantity, updatetotal){
+      var xmlhttp = new XMLHttpRequest();
+          xmlhttp.onreadystatechange = function () {
+              if (this.readyState == 4 && this.status == 200) {
+                  console.log(xmlhttp);
+                  // document.getElementById("content").innerHTML = xmlhttp.responseText;
+              }
+          };
+      xmlhttp.open("GET", "./payment/confirmpay.php?orderid="+updateorderid+"&itemid="+itemid+"&quantity="+updatequantity+"&updatetotal="+updatetotal, true);
+      xmlhttp.send();
+}
 
 var confirmorderdetail = function() {
    var ordertotalcost= document.getElementById('cartTotalPrice').getAttribute('value');
