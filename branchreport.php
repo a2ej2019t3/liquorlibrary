@@ -4,7 +4,8 @@
     include ('connection.php');
 ?>
 <?php    
-require_once ('partials/branchquery.php')
+require_once ('partials/branchquery.php');
+require_once ('partials/branchearningchart.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,6 +18,25 @@ require_once ('partials/branchquery.php')
     include_once ("partials/head.php");
     ?>
     <link rel="stylesheet" href="css/branchreport.css">
+    <script>
+window.onload = function () {
+ 
+var chart = new CanvasJS.Chart("myAreaChart", {
+	title: {
+		text: "OVERVIEW"
+	},
+	axisY: {
+		title: "Earning from pickup orders"
+	},
+	data: [{
+		type: "line",
+		dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
+	}]
+});
+chart.render();
+ 
+}
+</script>
 </head>
 
 <body>
@@ -111,20 +131,6 @@ require_once ('partials/branchquery.php')
 
       </div>
     </div>
-  </li>
-
-  <!-- Nav Item - Charts -->
-  <li class="nav-item">
-    <a class="nav-link" href="charts.html">
-      <i class="fas fa-fw fa-chart-area"></i>
-      <span>Charts</span></a>
-  </li>
-
-  <!-- Nav Item - Tables -->
-  <li class="nav-item">
-    <a class="nav-link" href="tables.html">
-      <i class="fas fa-fw fa-table"></i>
-      <span>Tables</span></a>
   </li>
 
   <!-- Divider -->
@@ -232,7 +238,7 @@ require_once ('partials/branchquery.php')
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
               <div class="text-xs font-weight-bold text-success text-uppercase mb-1" style="color: black!important;">Backorder Cost (This month)</div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">$<?php echo sprintf('%01.2f', $totalbackorder_cost);?></div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">$<?php echo number_format($totalbackorder_cost, 2, '.', ', ');?></div>
             </div>
             <div class="col-auto">
               <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -248,7 +254,7 @@ require_once ('partials/branchquery.php')
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
               <div class="text-xs font-weight-bold text-success text-uppercase mb-1" style="color: black!important;">Pickup income (This month)</div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">$<?php echo sprintf('%01.2f', $totalpickup_income);?></div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">$<?php echo number_format($totalpickup_income, 2, '.', ',');?></div>
             </div>
             <div class="col-auto">
               <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -257,18 +263,39 @@ require_once ('partials/branchquery.php')
         </div>
       </div>
     </div>
+</div>
+<br>
+<div class="row">
+<div class="col-xl-8 col-lg-7">
+              <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary">Pickup Orders :Earnings Overview</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                  <div class="chart-area">
+                  <div id="myAreaChart" style="height: 370px; width: 100%;"></div>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+</div>
 
 </div>
-      </div>
+
 <!-- ---------------------------------------------------------------------------------------------------------- -->
 </div>
 <!-- --------------------------------------------------------------------------------------------------------- -->
 <?php
     include_once ("partials/foot.php");
   ?>  
-  <script type="text/javascript" src="js/subcategory.js"></script>
+  <script type="text/javascript" src="js/sub.js"></script>
   <script type="text/javascript" src="js/main.js"></script>
   <script type="text/javascript" src="js/search.js"></script>
+  <script type="text/javascript" src="js/chart.js"></script>
+  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 <!---------------------------------------------------------------------------------------------------------------->
 
 </body>

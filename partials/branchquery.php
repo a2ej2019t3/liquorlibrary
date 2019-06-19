@@ -4,12 +4,16 @@ if(isset($_SESSION['warehouse']['whID'])){
     // echo $whID;
     $select_user="SELECT userID FROM staff WHERE whID='$whID'";
     $select_month="SELECT now(), extract(month from now()) as mon";
+    $select_year="SELECT now(), extract(year from now()) as yer";
     $selectuser_result=mysqli_query($connection, $select_user);
     $selectmonth_result=mysqli_query($connection, $select_month);
-    if ( $selectuser_result != "" && $selectmonth_result != "" ) {
+    $selectyear_result=mysqli_query($connection, $select_year);
+
+    if ( $selectuser_result != "" && $selectmonth_result != "" && $selectyear_result != "" ) {
         $selectmonth_arr=mysqli_fetch_all($selectmonth_result);
+        $selectyear_arr=mysqli_fetch_all($selectyear_result);
         $selectedmonth=$selectmonth_arr[0][1];
-        // echo $selectedmonth;
+        $selectedyear=$selectyear_arr[0][1];
         // store this month data
         $selectuser_arr = mysqli_fetch_all($selectuser_result);
         $backorder_arr=array();  
@@ -39,7 +43,7 @@ if(isset($_SESSION['warehouse']['whID'])){
         for($a=0; $a <count($selectuser_arr); $a++){
             $userID=$selectuser_arr[$a][0];
             // echo $userID;
-            $select_pendingorder="SELECT * FROM orders WHERE buyerID='$userID' AND extract(month from date) = '$selectedmonth'and status=1 or status=2 or status=7";
+            $select_pendingorder="SELECT * FROM orders WHERE buyerID='$userID' AND extract(month from date) = '$selectedmonth'  AND extract(year from date) = '$selectedyear'and status=1 or status=2 or status=7";
             $selectpendingorder_result=mysqli_query($connection, $select_pendingorder);
             // $order_array[$a]=$selectorder_result;
           
@@ -71,7 +75,7 @@ if(isset($_SESSION['warehouse']['whID'])){
         // var_dump($backorder_arr);
 
           // Select pick up orders information
-          $pickuporders_query="SELECT * from orders where whID='$whID' AND deliverymethod='pickup' AND status=4  AND extract(month from date)";
+          $pickuporders_query="SELECT * from orders where whID='$whID' AND deliverymethod='pickup' AND status=4  AND extract(month from date) = '$selectedmonth'";
           $pendingpickuporders_query="SELECT * from orders where whID='$whID' AND deliverymethod='pickup' AND status=1 or status=2 or status=3 or status=6";
           
           $pickuporders_res=mysqli_query($connection, $pickuporders_query);
