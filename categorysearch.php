@@ -25,7 +25,7 @@
             include ("Cart/stickycart.php");
             ?>
         <div class="container_fluid">
-            <div class="row">
+            <div class="row" style="margin-left:-30px;">
                 <!-- content body starts -->
                 <div class="sidenavbar col-md-3 col-xs-12 content-left" style="text-align:center;">
                     <!-- sideNave -->
@@ -33,8 +33,10 @@
                         include_once ("partials/sideNav.php");
                         ?>
                 </div>
-                <div class="productresult col-md-9 col-xs-12 content-right">
-                    <div id="pricesortDropdown" style="margin-top: 100px; "><hr><span style="font-size:24px;">Sale products</span>
+                <div class="productresult col" style="margin-top:100px">
+                    <hr style="margin:0;">
+                    <div id="pricesortDropdown" style="padding:10px 0 10px;">
+                        <span style="font-size:24px;">Sale products</span>
                         <select onchange="checkIfSelected()" class="sortselect" name="sortselect" id="selectsort" style="width: 300px;margin-left: 15px;">                                
                             <option id="Op0" data-target="onsalelist" selected="true" >ALL ITEMS</option>
                             <option id="Op1" data-target="discountrate" >BY DISCOUNT RATE</option>
@@ -58,6 +60,7 @@
     <script type="text/javascript" src="js/search.js"></script>
     <script type="text/javascript" src="js/product.js"></script>
     <script type="text/javascript" src="js/cart.js"></script>
+    <script type="text/javascript" src="js/pay.js"></script>
 </body>
 
 </html>

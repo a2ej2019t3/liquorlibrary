@@ -23,16 +23,52 @@
             
             return $sql;
         }
+
+        public function getOrderInfo ($cartID) {
+            $sql = "SELECT *,product.img, COALESCE((100-product.discountprice) * product.price / 100, 0) AS discountRate FROM product 
+            LEFT JOIN brand ON product.brandID = brand.brandID
+            LEFT JOIN category ON product.categoryID = category.categoryID 
+            LEFT JOIN orderitems ON product.productID = orderitems.itemID 
+            LEFT JOIN orders ON orderitems.orderID = orders.orderID WHERE orderitems.orderID = $cartID";
+            
+            $res = $this->connection->query($sql);
+            if ($res) {
+                $data = $res->fetch_all(MYSQLI_ASSOC);
+                return $data;
+            } else {
+                trigger_error($this->connection->error);
+            }
+        }
+
+        private function prepareSql ($key, $value) {
+            $res = '';
+            if (is_array($value)) {
+                foreach ($value as $k => $v) {
+                    $res .= "$key = $v OR ";
+                }
+                $res = trim($res, "OR ");
+            } else {
+                $res .= "$key = $value AND ";
+            }
+            return $res;
+        }
+
         //select * from a table
         private function selectSql($table, $consArr) {
             $constrant = "";
             $sql = "SELECT * FROM $table WHERE ";
             if ($consArr != null) {
                 foreach ($consArr as $key => $value) {
-                    if ($key != 'spec') {
-                        $constrant .= "$key = $value AND ";
-                    } else {
+                    if ($key == 'spec') {
                         $constrant .= "$value AND ";
+                    } else if ($key == 'LIMIT') {
+                        $constrant = trim($constrant, "AND ");
+                        $constrant .= " LIMIT ".$value;
+                    } else if ($key == 'ORDER BY') {
+                        $constrant = trim($constrant, "AND ");
+                        $constrant .= "$key $value";
+                    } else {
+                        $constrant .= $this->prepareSql($key, $value);
                     }
                 }
                 $sql .= $constrant;
@@ -45,17 +81,24 @@
 
 // Useable functions
         //select cart items and info
-        public function getCartItemsInfo($cartID) {
-            if ($cartID != null) {
+        public function getCartItemsInfo($cartID, $consArr) {
+            if ($cartID !== null) {
                 $sql = "";
                 $allProduct = $this->getProductInfo();
                 $allProduct .= "RIGHT JOIN orderitems ON allproduct.productID = orderitems.itemID ";
-                $consArr = array('orderID' => $cartID);
-                $sql .= $this->selectSql($allProduct, $consArr);
-
+                if ($consArr !== null) {
+                    $constrant = array('orderID' => $cartID);
+                    foreach ($consArr as $key => $value) {
+                        $constrant = array_merge($constrant, $consArr);
+                    }
+                } else if ($consArr === null || $consArr == '') {
+                    $constrant = array('orderID' => $cartID);
+                }
+                // return $constrant;
+                $sql .= $this->selectSql($allProduct, $constrant);
                 $res = $this->connection->query($sql);
                 if (!$res) {
-                    trigger_error('Invalid query: ' . $this->connection->error);
+                    trigger_error('Invalid query: '. $sql);
                     return $sql;
                 } else {
                     if ($res->num_rows > 0) {
@@ -66,6 +109,7 @@
                         $_SESSION['cartItemNum'] = count($data);
                         return $data;
                     } else {
+                        trigger_error($sql);
                         return false;
                     }
                 }
@@ -109,13 +153,14 @@
                     return $sql;
                 } else {
                     if ($res->num_rows > 0) {
-                        $arr = $res->fetch_all(MYSQLI_ASSOC);
-                        return $arr;
+                        $data = $res->fetch_all(MYSQLI_ASSOC);
+                        return $data;
                     }
                 }
             } else {
                 return false;
             }
+            // return $sql;
         }
 
         // insert into orderitems
@@ -173,8 +218,40 @@
                 if ($res) {
                     return true;
                 } else {
-                    return false;
                     trigger_error('Invalid query: ' . $this->connection->error);
+                    return false;
+                }
+            }
+        }
+
+        public function delete ($table, $consArr) {
+            if (isset($table)) {
+                $sql = "DELETE FROM $table WHERE ";
+                $constrant = '';
+                if ($consArr !== null && $consArr != 'ALL') {
+                    foreach ($consArr as $key => $value) {
+                        if ($key != 'spec') {
+                            $constrant .= "$key = $value AND ";
+                        } else {
+                            $constrant .= "$value AND ";
+                        }
+                    }
+                    $sql .= $constrant;
+                    $sql = rtrim($sql, "AND ");
+                } else if ($consArr == 'ALL') {
+                    $sql = rtrim($sql, "WHERE ");
+                } else {
+                    return false;
+                }
+                // return $sql;
+                $res = $this->connection->query($sql);
+                if ($res) {
+                    return true;
+                    // trigger_error($sql);
+                } else {
+                    trigger_error('Invalid query: ' . $this->connection->error);
+                    trigger_error('Invalid query: ' . $sql);
+                    return false;
                 }
             }
         }

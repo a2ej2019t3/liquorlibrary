@@ -1,5 +1,18 @@
+function addLoadEvent(func) {
+    var oldonload = window.onload;
+    if (typeof window.onload != 'function') {
+        window.onload = func;
+    } else {
+        window.onload = function() {
+            if (oldonload) {
+            oldonload();
+            }
+            func();
+        }
+    }
+};
 
-  $(window).scroll(function() {
+$(window).scroll(function() {
     if($(this).scrollTop() > 80)  /*height in pixels when the navbar becomes non opaque*/ 
     {
         $('.opaque-navbar').addClass('opaque');
@@ -160,4 +173,3 @@ document.getElementById("addToCart").onclick = function () {
     // xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.send();
 }
-

@@ -112,9 +112,8 @@ body {
 }
 .sidenav {
   text-align:center;
-  width: 220px; 
-  margin-top: 50px;
-  margin-left: 80px;
+  width: 100%;
+  margin: auto;
   overflow-x: hidden;
   padding: 8px 0;
 }
