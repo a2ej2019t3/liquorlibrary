@@ -5,22 +5,22 @@
       if(isset($_SESSION['user']['userID'])){
         $userID=$_SESSION['user']['userID'];
         $user_sql = "SELECT u.userID, u.typeID, u.firstName, u.lastName, u.companyName, u.email, u.phone, u.address, ut.typeID, ut.typeName FROM `users` AS u, usertype AS ut WHERE u.typeID=ut.typeID and u.userID='$userID'";
-        
+        $usertype=$_SESSION['user']['typeID'];
         $user_res = mysqli_query($connection, $user_sql);
         $ultimatePrice = $_GET['ordertotalcost'];
         $ultimateQuantity = $_GET['ordertotalquantity'];
         $note= $_GET['note'];
         $orderID=$_GET['orderId'];
-
+        // echo $userID;
+        
         if ($user_res != "") {
             $user_arr = mysqli_fetch_all($user_res);
-            $usertype= $user_arr[0][1];
             $username= $user_arr[0][2]. $user_arr[0][3];
             $companyname=$user_arr[0][4];
             $emailaddress=$user_arr[0][5];
             $phone=$user_arr[0][6];
             $address=$user_arr[0][7];
-
+            // echo $username;
           } else {
             alert("result empty");
           }
@@ -31,18 +31,26 @@
           echo '</script>';
         }
     include_once ("partials/head.php");
-    // $_SESSION['ordertotalcost']= $_POST['ordertotalcost'];
-    // $ordertotalcost= $_SESSION['ordertotalcost'];
-    // $_SESSION['ordertotalquantity']= $_POST['ordertotalquantity'];
-    // $ordertotalquantity= $_SESSION['ordertotalquantity'];
-    // $note= $_POST['note'];
-    // echo $ordertotalcost;
-    // echo $ordertotalquantity;
     echo $note;
+
+// getting warehouse information
+$warehouse_sql = "SELECT * from warehouse";
+$warehouse_res = mysqli_query($connection, $warehouse_sql);
+    if($warehouse_res != ""){
+        $warehouse_arr = mysqli_fetch_all($warehouse_res);
+
+    }
+    else{
+        alert("warehouse result empty");
+    }
+
+
 echo '
      <link rel="stylesheet" href="css/cart.css">
  
 <article id="second">
+<div id="loader5" class="lds-hourglass"> <span class="processmsg">Processing your order</span></div>
+
 <div class="container">
     <div class="row">
         <!-- info confirmation -->
@@ -53,33 +61,83 @@ echo '
                         <div class="row">
                             <div class="col-6 usernamebox contactinformationbox">
                             <label for="lable">Your Name </label><br>
-                            <input name="username" class="username" type="text" placeholder="'.$username.'" value="'.$username.'" id="usernamebox" onchange="detailname();" required>   
+                            <input name="username" class="username" type="text" value="'.$username.'" id="usernamebox" onchange="detailname();" required>   
                             </div>
                             <div class="col-6 companynamebox contactinformationbox">
                             <label for="lable">Company Name </label><br>
-                            <input name="companyname" class="companyname" placeholder="'.$companyname.'" type="text" value="'.$companyname.'" id="comname" onchange="detailcompany();" >   
+                            <input name="companyname" class="companyname" type="text" value="'.$companyname.'" id="comname" onchange="detailcompany();" >   
                             </div>                            
                         </div>
 
                         <div class="row">
-                             <div class="col-12 emailaddressbox contactinformationbox">
+                             <div class="col-6 emailaddressbox contactinformationbox">
                                 <label for="lable">Contact Email </label><br>
-                                <input name="emailaddress" class="emailaddress" placeholder="'.$emailaddress.'" type="email" value="'.$emailaddress.'" id="emailadd" onchange="detailemailupdate();"required>   
+                                <input name="emailaddress" class="emailaddress"type="email" value="'.$emailaddress.'" id="emailadd" onchange="detailemailupdate();"required>   
                             </div>                        
                         
-                            <div class="col-12 contactnumberbox contactinformationbox">
+                            <div class="col-6 contactnumberbox contactinformationbox">
                                 <label for="lable">Contact Number</label><br>
-                                <input name="contactnumber" class="contactnumber" placeholder="'.$phone.'" value="'.$phone.'" type="text" id="numberadd" onchange="detailnumberupdate();" required>   
-                            </div>                        
-                    <div class="contacthead">Shipping Information</div>    
-                          <div class="col-12 addressbox contactinformationbox">
-                                <label for="lable">Delivery Address</label><br>
-                                <input name="address" class="address" placeholder="'.$address.'" type="text" value="'.$address.'" id="addressadd" onchange="detailaddressupdate();" required>   
-                            </div>                        
-                        </div>
-                </div> 
-            
-        </div>
+                                <input name="contactnumber" class="contactnumber" value="'.$phone.'" type="text" id="numberadd" onchange="detailnumberupdate();" required>   
+                            </div>   
+                         </div>';
+                         if($usertype==1){
+
+                         }
+                         else{
+                             echo'<div class="extrainfo" id="extrainfo">
+                             <div class="contacthead">Shipping & Payment Information</div>
+                          <div class="row">                       
+                             
+                                  <div class="col-6 addressbox contactinformationbox">
+                                  <label for="lable">Delivery Method</label><br>
+                                  <select class="deliverymothod" name="deliverymothod" id="deliverymothod" required onchange="deliveryinput();"> 
+                                      <option value="">Select</option>
+                                      <option value="delivery">Delivery</option>
+                                      <option value="pickup">Pick up</option>
+                                  </select>
+                              </div>
+                                  
+                              <div class="col-6 addressbox contactinformationbox">
+                                      <label for="lable">Delivery Address</label><br>
+                                      <input name="address" class="address" placeholder="'.$address.'" type="text" value="'.$address.'" id="addressadd" onchange="detailaddressupdate();" required>   
+                                  </div> 
+                                  </div>
+                                  </div>   
+                         
+                           
+                     
+                    <div class="row">                       
+                           
+                    <div class="col-6 addressbox contactinformationbox">
+                    <label for="lable">Payment Method</label><br>
+                                <select class="paymentmothod" name="paymentmothod" id="paymentmothod" style="display:none" onchange="paymentinput();"> 
+                                    
+                                    <option value="1">Pay with Card</option>
+                                    <option value="2">Pay with Cash</option>
+                                </select>
+                    </div>
+                    
+                    <div class="col-6 addressbox contactinformationbox">
+                                <label for="lable">Pick Up Location</label><br>
+                                <select class="locationselect" name="locationselect" id="locationselect" style="display:none" onchange="locationinput();">                             
+                                <option value="">Select</option>';
+
+                                for($a = 0; $a < count($warehouse_arr); $a++){
+                                        $warehouseID=$warehouse_arr[$a][0];
+                                        $warehousename=$warehouse_arr[$a][2];
+                                        $warehouseaddress=$warehouse_arr[$a][3];     
+                                 echo '<option value='.$warehouseID.'>'.$warehouseaddress.' </option>';
+                                }
+
+                               echo' </select>
+                                             
+                    </div>
+                    </div>
+                  ';
+                }
+                          
+         echo   '</div>
+         </div>
         <!-- item confirmation -->
         <div class="col-sm-12 col-lg-4">
             <div class="sidecart">
@@ -88,14 +146,16 @@ echo '
                     
                   <div class="contacthead" style="text-align:center; margin-bottom: 20px;">Order Details</div>
                     <div class="iconwrapper"><img src="images/deliverytruck.png" alt="truckicon" style="width: 55px;"></div>
-                    <div class="labelindex">Total cost: <span class="costquantity" value="'.$ultimatePrice.'"> $'.$ultimatePrice.' </span></div>
-                    <div class="labelindex">Total amount: <span class="costquantity" name="costquantitybox" value="'.$ultimateQuantity.'"> '.$ultimateQuantity.' items</span></div>
-                    <div class="labelindex">Name: <span class="costquantity" id="namebox">'.$username.' </span> <span class="costquantity" id="companybox">  </span></div>
-                    <div class="labelindex">Contact Number: <br><span class="costquantity" id="numberbox"> '.$phone.' </span></div>
-                    <div class="labelindex">Contact Email: <br><span class="costquantity" id="emailbox"> '.$emailaddress.' </span></div>
-                    <div class="labelindex">Delivery Address: <br><span class="costquantity" id="addresschangearea" value="'.$address.'" > '.$address.' </span></div>
-
-                </div>
+                    <div class="labelindex">Total cost: <span id="totalcostbox" class="costquantity" value="'.$ultimatePrice.'" style="margin-right: 10px;"> $'.$ultimatePrice.' </span>Total amount: <span class="costquantity" name="costquantitybox" value="'.$ultimateQuantity.'" id="totalquantbox"> '.$ultimateQuantity.' items</span></div>
+                    <div class="labelindex">Name: <span class="costquantity" id="namebox" value="'.$username.'">'.$username.' </span> <span class="costquantity" id="companybox">  </span></div>
+                    <div class="labelindex">Contact Number: <span class="costquantity" value="'.$phone.'" id="numberbox" style="margin-right: 10px;"> '.$phone.' </span></div>
+                    <div class="labelindex">Contact Email: <span class="costquantity" value="'.$emailaddress.'" id="emailbox" style="margin-right: 10px;"> '.$emailaddress.' </span></div>
+                    <div class="labelindex">Delivery Address: <br><span class="costquantity" value="'.$address.'" id="addresschangearea" value="'.$address.'" > '.$address.' </span></div>
+                    <div class="labelindex">Delivery: <span class="costquantity" id="deliveryoption" style="margin-right: 10px;"> </span>Paymemt: <span class="costquantity" id="paymentoption"> </span></div>
+                    <div class="labelindex">Pick Up Address: <span class="costquantity" id="pickuparea" > </span></div>
+                    <input type="hidden" id="locationbox" >
+                    <input type="hidden" value="'.$note.'" id="notebox" >
+                    </div>
             </div>
         </div>
         <hr>
@@ -103,10 +163,17 @@ echo '
             <button type="submit" class="btn btn-secondary btn-sm" id="checkbutton">
                 <a href="paymentprocess.php"> BACK TO CART
                 </a>
-            </button>
-            <button type="button" class="btn btn-secondary btn-sm" onclick="paymentModal()" id="ckbtn" data-toggle="modal" data-target="#payModal">
+            </button>';
+            if($usertype==1){
+        echo    '<button type="button" class="btn btn-secondary btn-sm" onclick="payproceed()" id="ckbtn2" name="ckbtn2"> CEHCK OUT</button>';
+            }
+            else{
+         echo  ' <button type="button" class="btn btn-secondary btn-sm" onclick="payproceed()" id="ckbtn2" name="ckbtn2" style="display:none;"> CEHCK OUT</button>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="paymentModal()" id="ckbtn" name="ckbtn" data-toggle="modal" data-target="#payModal">
             CEHCK OUT
-            </button>
+            </button>   ';             
+            }
+echo '
 </div>
             <!-- Modal -->
             <div class="modal fade" id="payModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -126,6 +193,10 @@ echo '
                     <input type="hidden" value="'.$emailaddress.'" id="emailcontext" name="emailcontext">
                     <input type="hidden" value="'.$orderID.'" id="idcontext" name="idcontext">
                     <input type="hidden" value="'.$username.'" id="usernamecontext" name="usernamecontext">
+                    <input type="hidden" id="delivercontext" name="delivercontext">
+                    <input type="hidden" id="paymentcontext" name="paymentcontext">
+                    <input type="hidden" value="" id="pickupcontext" name="pickupcontext">
+                    <input type="hidden" value="'.$usertype.'" id="usertypecontext" name="usertypecontext">
 
                     <div class="form-row">
                         <div class="col-sm-12 col-md-4">
@@ -164,13 +235,14 @@ echo '
                                 </div>
                                         
                         </div>
+                        <span class="processmsg" style="background-color:rgba(124, 99, 84, 0.5);" ><div id="loader10" class="lds-hourglass" style="position: absolute; top:30%;"> Processing your order</div></span>
 
                 <!-- Used to display form errors. -->
                     <div id="card-errors" role="alert"></div>
                     </div>
                 
         
-                    <button id="paysubmitbtn">PAY NOW</button>
+                    <button id="paysubmitbtn" onclick="loader10();">PAY NOW</button>
                     <button id="dismissbtn" data-dismiss="modal">Close</button>
 
                 </form>
@@ -185,6 +257,7 @@ echo '
                 
                 </div>
                 </article>
+
 
                 <style>
 .contacthead{
@@ -281,8 +354,65 @@ echo '
     background-color: transparent;
     color: #E12726;
 }
+#ckbtn2{
+    background-color: #E12726;
+	width: 150px;
+	height: 45px;
+	font-size: 20px;
+    color: white;
+    margin: 20px auto;
+    border:none;
+}
+#ckbtn2:hover{
+    border: 1px solid #E12726;
+    background-color: transparent;
+    color: #E12726;
+}
 .buttonarea{
     margin: 15px auto;
 }
+
+.processmsg{
+    font-size: 2rem;
+    font-weight: 700;
+}
+.lds-hourglass {
+  display: none;
+  position: relative;
+  z-index: 50;
+  top: 49%;
+  margin: 10 auto;
+  width: 100%;
+  height: 64px;
+  text-align: center;
+}
+.lds-hourglass:after {
+  content: " ";
+  display: block;
+  border-radius: 50%;
+  width: 0;
+  height: 0;
+  text-align: center;
+  margin: 10px auto!important;
+  margin: 6px;
+  box-sizing: border-box;
+  border: 26px solid #fdd;
+  border-color: #fdd transparent #fdd transparent;
+  animation: lds-hourglass 1.2s infinite;
+}
+@keyframes lds-hourglass {
+  0% {
+    transform: rotate(0);
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+  50% {
+    transform: rotate(900deg);
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  100% {
+    transform: rotate(1800deg);
+  }
+}
 </style>
 ';
+?>

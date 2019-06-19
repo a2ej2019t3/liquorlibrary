@@ -98,7 +98,7 @@ if (isset($_SESSION['cartItems'])) {
         // </form>
     } else {
         $_SESSION['cartItemNum'] = 0;
-        echo 'Your cart is empty!';
+        echo '<div style="margin: 40px auto;">Your cart is empty! </div>';
     }
 } else {
     $_SESSION['cartItemNum'] = 0;

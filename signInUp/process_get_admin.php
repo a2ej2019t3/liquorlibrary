@@ -8,13 +8,8 @@ session_start();
 $email = $_REQUEST['email'];
 $password = $_REQUEST['password'];
 
-// print_r($email);
-// print_r($password);
 
-// $email = 'junboz598@gmail.com';
-// $password = 123;
-
-$selectQuery = "select * from users where email='" . $email . "' and typeID=2 or typeId=3";
+$selectQuery = "select * from users where email='" . $email . "' and typeID=0";
 
 
 if ($result = mysqli_query($connection, $selectQuery)) {
@@ -26,7 +21,7 @@ if ($result = mysqli_query($connection, $selectQuery)) {
     if ($email == $result_arr['email']) {
         if ($password == $result_arr['password']) {
             $_SESSION['user'] = $result_arr;
-            // print_r($_SESSION['user']);
+            
             echo 3;
         } else {
             echo 0;
