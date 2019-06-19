@@ -80,7 +80,7 @@ function removeItem (json, opt = 'spec') {
             productID = obj.productID,
             opt = 'spec';
         } else {
-            var orderID = obj.productID,
+            var orderID = obj.orderID,
             productID = obj.productID,
             opt = 'spec';
         }
