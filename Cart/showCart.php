@@ -7,20 +7,28 @@ if (session_status() == PHP_SESSION_NONE) {
 $DBsql = new sql;
 // $getItems_arr = $DBsql->getCartItems($cartID);
 if (isset($_SESSION['cartItems'])) {
-    $getItems_arr = $_SESSION['cartItems'];
-    // var_dump($getItems_arr);
+    $res = $_SESSION['cartItems'];
+    // var_dump($res);
     $tagForCategory = 'Category: ';
     $tagForBrand = 'Brand: ';
     $tagForPrice = 'Price: ';
     $imgpath = 'images/';
-    if ($getItems_arr != array()) {
+    if ($res != array()) {
     // var_dump($getItems_arr);
-        for ($b = 0; $b <count($getItems_arr); $b++) {
-            $idArr = array(
-                'orderID' => $getItems_arr[$b]['orderID'],
-                'productID' => $getItems_arr[$b]['productID']
-                );
-            $idJson = json_encode($idArr);
+        foreach ($res as $productID => $getItems_arr) {
+            if (isset($_SESSION['user'])) {
+                $idArr = array(
+                    'orderID' => $getItems_arr['orderID'],
+                    'productID' => $getItems_arr['productID']
+                    );
+                $idJson = json_encode($idArr);
+            } else {
+                $idArr = array(
+                    'orderID' => 'guest',
+                    'productID' => $getItems_arr['productID']
+                    );
+                $idJson = json_encode($idArr);
+            }
             echo '
             <div class="row" style="width: 100%; margin:0;">
                 <div class="container" style="left:0;">
@@ -34,14 +42,14 @@ if (isset($_SESSION['cartItems'])) {
                                 padding: 0 0 0 10px !important;
                                 margin: auto;
                                 text-align: center;">
-                                    <img class="img-fluid" src='.$imgpath.$getItems_arr[$b]['img'].' style = "max-height:70px;">
+                                    <img class="img-fluid" src='.$imgpath.$getItems_arr['img'].' style = "max-height:70px;">
                                 </div>
 
                                 <div id="titlearea" class="col" style="padding:0 0 0 5px; margin:auto;">
                                     <p style="color:black; text-align:left; margin:0;">
-                                        <b>'.$getItems_arr[$b]['productName'].'</b><br>
-                                        <a href="../categorysearch.php?searchcategoryID='.$getItems_arr[$b]['categoryID'].'&searchcategoryName='.$getItems_arr[$b]['categoryName'].'&location=category"><i style="font-size">'.$tagForCategory.$getItems_arr[$b]['categoryName'].'</i></a><br>
-                                        <a href="../categorysearch.php?brandname='.$getItems_arr[$b]['brandName'].'&location=brandproduct"><i>'.$tagForBrand.$getItems_arr[$b]['brandName'].'</i></a>
+                                        <b>'.$getItems_arr['productName'].'</b><br>
+                                        <a href="../categorysearch.php?searchcategoryID='.$getItems_arr['categoryID'].'&searchcategoryName='.$getItems_arr['categoryName'].'&location=category"><i style="font-size">'.$tagForCategory.$getItems_arr['categoryName'].'</i></a><br>
+                                        <a href="../categorysearch.php?brandname='.$getItems_arr['brandName'].'&location=brandproduct"><i>'.$tagForBrand.$getItems_arr['brandName'].'</i></a>
                                     </p>
                                 </div>
 
@@ -56,27 +64,35 @@ if (isset($_SESSION['cartItems'])) {
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <span id="total['.$getItems_arr[$b]['productID'].']" value="'.$getItems_arr[$b]['totalprice'].'" class="asdfa" style="font-size:1rem; margin-top:15px;">NZ$'.$getItems_arr[$b]['totalprice'].'</span>
+                                                <span id="total['.$getItems_arr['productID'].']" value="'.$getItems_arr['totalprice'].'" class="asdfa" style="font-size:1rem; margin-top:15px;">NZ$'.$getItems_arr['totalprice'].'</span>
                                             </tr>
                                             <tr>
                                                 <div id="quantityField" class="input-group">';
-                                                // var_dump($getItems_arr[$b]['discountprice']);
-                                                if ($getItems_arr[$b]['discountprice'] !== null) {
+                                                // var_dump($getItems_arr['discountprice']);
+                                                if ($getItems_arr['discountprice'] !== null) {
                                                     echo'
-                                                    <input type="hidden" id="ticket_price['.$getItems_arr[$b]['productID'].']" data-value="'.$getItems_arr[$b]['discountprice'].'">';
+                                                    <input type="hidden" id="ticket_price['.$getItems_arr['productID'].']" data-value="'.$getItems_arr['discountprice'].'">';
                                                 } else {
                                                     echo'
-                                                    <input type="hidden" id="ticket_price['.$getItems_arr[$b]['productID'].']" data-value="'.$getItems_arr[$b]['price'].'">';
+                                                    <input type="hidden" id="ticket_price['.$getItems_arr['productID'].']" data-value="'.$getItems_arr['price'].'">';
                                                 }
             echo '
-                                                    <input id="quantity['.$getItems_arr[$b]['productID'].']" type="number" value="'.$getItems_arr[$b]['quantity'].'" class="form-control cart-item-quantity-display" 
+                                                    <input id="quantity['.$getItems_arr['productID'].']" type="number" value="'.$getItems_arr['quantity'].'" class="form-control cart-item-quantity-display" 
                                                     style="padding: 0;
                                                     text-align: center;
                                                     height: 20px;
                                                     font-size: 0.7rem;">
-                                                    <div class="input-group-append" id="quantityCtrl">
-                                                        <button class="operation btn btn-sm btn-outline-secondary" data-operation="d" data-orderid='.$getItems_arr[$b]['orderID'].' type="button" onclick="quantityCtrl('.$getItems_arr[$b]['productID'].', this)">-</button>
-                                                        <button class="operation btn btn-sm btn-outline-secondary" data-operation="i" data-orderid='.$getItems_arr[$b]['orderID'].' type="button" onclick="quantityCtrl('.$getItems_arr[$b]['productID'].', this)">+</button>
+                                                    <div class="input-group-append" id="quantityCtrl">';
+            if (isset($_SESSION['user'])) {
+                echo '
+                                                            <button class="operation btn btn-sm btn-outline-secondary" data-operation="d" data-orderid='.$getItems_arr['orderID'].' type="button" onclick="quantityCtrl('.$getItems_arr['productID'].', this)">-</button>
+                                                            <button class="operation btn btn-sm btn-outline-secondary" data-operation="i" data-orderid='.$getItems_arr['orderID'].' type="button" onclick="quantityCtrl('.$getItems_arr['productID'].', this)">+</button>';
+            } else {
+                echo '
+                                                            <button class="operation btn btn-sm btn-outline-secondary" data-operation="d" data-orderid="Na" type="button" onclick="quantityCtrl('.$getItems_arr['productID'].', this)">-</button>
+                                                            <button class="operation btn btn-sm btn-outline-secondary" data-operation="i" data-orderid="Na" type="button" onclick="quantityCtrl('.$getItems_arr['productID'].', this)">+</button>';
+            }
+            echo '
                                                     </div>
                                                 </div>
                                             </tr>

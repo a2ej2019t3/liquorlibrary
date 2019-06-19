@@ -83,4 +83,7 @@
     color: black!important;
     text-decoration: none;
   }
+  ::-webkit-scrollbar {
+            width:0px;
+    }
 </style>

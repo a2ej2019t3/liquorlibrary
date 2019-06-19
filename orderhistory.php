@@ -113,7 +113,7 @@ $_SESSION['location'] = 'customerorder';
       <!-- <div class="container_fluid">    -->
       <!-- <div class="productresult col-md-9 col-xs-12 content-right"> -->
       <!-- product list results -->
-      <div style="font-size:20px;">Status
+      <div class="container mb-3 pl-3" style="font-size:20px;">Status
         <select onchange="selectChecking()" id="statusSort" style="width: 100px;margin-left: 15px;">
           <option value="0" selected="ture">All</option> -->
           <option value="1">PAID</option>

@@ -1,5 +1,5 @@
           <!-- Login modal -->
-          <div id="myModal" class="modal fade" data-backdrop="false">
+          <div id="myModal" class="modal fade">
             <div class="modal-dialog modal-login">
                 
               <div class="modal-content userlogin" style="height: 370px!important; border: 1px solid rgba(124, 99, 84, 1);">

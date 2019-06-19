@@ -1,8 +1,6 @@
-<div>
-    <h5 class="mb-0">
-        <button class="btn btn-sm btn-info" data-toggle="collapse" data-target="#coid'.$i.'">
-          Details
-          <i class="fas fa-chevron-circle-down"></i>
-        </button>
-    </h5>
-</div>
+<?php
+$a1=array('10009' => array('color' => 1, 'color2' => 2));
+$a2=array('10004' => array('color' => 3, 'color2' => 4));
+
+print_r(array_replace($a1,$a2));
+?>

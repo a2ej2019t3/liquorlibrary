@@ -1,6 +1,5 @@
 <div id="btContainer">
 <button id="stickyCart" class="cartbutton sticky" data-toggle="modal" data-target="#cart" onclick="finalPrice(), ">
-<!-- <button class="openbtn sticky" onclick="openNav()">Toggle Sidebar</button> -->
 <div>
     <div>
       <i class="fas fa-dolly"></i>
@@ -9,7 +8,7 @@
 </button>
 </div>
 <!-- modal cart ---------------------------------------------------------------------------------------->
-<div class="modal fade" id="cart" tabindex="-1" data-backdrop="false">
+<div class="modal fade" id="cart" tabindex="-1" style="z-index:1;">
   <div class="modal-dialog modal-md" role="document" style="position: absolute; right: 80px; width:400px;">
     <div class="modal-content"style="box-shadow: 2px 3px rgba(124, 99, 84, 1); height: 100%;">
 
@@ -24,7 +23,14 @@
         <span class="totalquantity">Total ( <span id="cartTotalQuantity" class="total-cart"></span> ITEMS)</span>  <span class="totalcost">price: $<span id="cartTotalPrice" class="total-cart"></span></span>
       </div>
       <div class="modal-footer" style="text-align:center; margin: 0 auto;">
-        <button type="button" class="btn btn-primary" id="checkoutbutton" onclick="removeItem(null, 'all')">EMPTY CART</button>
+      <?php
+      if (isset($_SESSION['user'])) {
+        $idJson = 'loggedIn';
+      } else {
+        $idJson = 'guest';
+      }
+      ?>
+        <button type="button" class="btn btn-primary" id="checkoutbutton" onclick='removeItem("<?php echo $idJson ?>", "all")'>EMPTY CART</button>
         <button type="button" class="btn btn-primary" id="checkoutbutton" onclick="location.href='paymentprocess.php?';">CHECKOUT</button>
       </div>
     </div>
@@ -60,35 +66,6 @@ $('#myModal').modal();
 </script>
 
 <style>
-.sidebar {
-height: 100%; /* 100% Full-height */
-width: 0; /* 0 width - change this with JavaScript */
-position: fixed; /* Stay in place */
-z-index: 1; /* Stay on top */
-top: 0;
-left: 0;
-background-color: #111; /* Black*/
-overflow-x: hidden; /* Disable horizontal scroll */
-padding-top: 60px; /* Place content 60px from the top */
-transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
-}
-.openbtn {
-  font-size: 20px;
-  cursor: pointer;
-  background-color: #111;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-}
-
-.sidebar .closebtn {
-  position: absolute;
-  top: 0;
-  right: 25px;
-  font-size: 36px;
-  margin-left: 50px;
-}
-
 .close {
   padding-top: 3px !important;
   padding-right: 5px !important;
@@ -111,10 +88,9 @@ transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
 }
   @keyframes onhovermovement {
     from {
-      margin-left: 0px;
     }
     to {
-      margin-left: -10px;
+      box-shadow: 0 0px 20px rgba(0, 0, 0, 0.5); 
     }
   }
 .sticky{

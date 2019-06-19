@@ -9,7 +9,7 @@
   $userID = $_SESSION['user']['userID'];
   $cartID = $_SESSION['cartID'];
   // $cartitem_sql = "SELECT o.orderID, o.buyerId, o.whID, o.status, oi.itemID, oi.quantity, p.productID, p.productName, p.price, p.discountprice, p.img, b.11brandName, c.categoryName, oi.totalprice FROM orders AS o, orderitems AS oi, product AS p, brand AS b, category AS c WHERE o.orderID=oi.orderID and oi.itemID=p.productID and p.brandID=b.brandID and p.categoryID= c.categoryID and o.status=0 and o.buyerID='$userID';";
-  $cartitem_arr = $DBsql->getOrderInfo($cartID);
+  $cartitem_arr = $DBsql->getOrderInfo($cartID, null);
   // var_dump($cartitem_arr);
   // $cartitem_sql = "SELECT o.orderID, o.buyerId, o.whID, o.status, oi.itemID, oi.quantity, p.productID, p.productName, p.price, p.discountprice, p.img, b.brandName, c.categoryName, oi.totalprice FROM orders AS o, orderitems AS oi, product AS p, brand AS b, category AS c WHERE o.orderID=oi.orderID and oi.itemID=p.productID and p.brandID=b.brandID and p.categoryID= c.categoryID and o.status=0 and o.buyerID='$userID';";
   // $cartitem_res = mysqli_query($connection, $cartitem_sql);
@@ -110,42 +110,42 @@
         $imgpath = 'images/'; 
         $carttotal=0;
         $carttotalquantity=0;
-        for($b = 0; $b <count($cartitem_arr); $b++){
+          foreach ($cartitem_arr as $key => $value) {
           echo '
           <input type="hidden" value="'.$orderID.'" id="orderidbox" name="orderidbox">
-          <input type="hidden" value="'.$cartitem_arr[$b]['orderID'].'" id="order'.$cartitem_arr[$b]['productID'].'">
-          <tr class="items" id="items['.$cartitem_arr[$b]['productID'].']" data-variant="'.$cartitem_arr[$b]['productID'].'" data-title="'.$cartitem_arr[$b]['productName'].' / '.$cartitem_arr[$b]['brandName'].' - '.$cartitem_arr[$b]['categoryName'].'" data-url="productlist.php?pid='.$cartitem_arr[$b]['productID'].'">
+          <input type="hidden" value="'.$cartitem_arr['orderID'].'" id="order'.$cartitem_arr['productID'].'">
+          <tr class="items" id="items['.$cartitem_arr['productID'].']" data-variant="'.$cartitem_arr['productID'].'" data-title="'.$cartitem_arr['productName'].' / '.$cartitem_arr['brandName'].' - '.$cartitem_arr['categoryName'].'" data-url="productlist.php?pid='.$cartitem_arr['productID'].'">
           
           <td class="cart-item-product first">
-          <div class="cart-image"><img class="img-fluid productimg" src="'.$imgpath.$cartitem_arr[$b]['img'].'" alt="'.$cartitem_arr[$b]['productName'].'"></div>
+          <div class="cart-image"><img class="img-fluid productimg" src="'.$imgpath.$cartitem_arr['img'].'" alt="'.$cartitem_arr['productName'].'"></div>
           <div class="cart-item-product-wrap">
-          <span class="cart-title"><a href="productlist.php?pid='.$cartitem_arr[$b]['productID'].'"><span class="itemname">'.$cartitem_arr[$b]['productName'].'</span> / '.$cartitem_arr[$b]['brandName'].' - '.$cartitem_arr[$b]['categoryName'].'</a></span>                
+          <span class="cart-title"><a href="productlist.php?pid='.$cartitem_arr['productID'].'"><span class="itemname">'.$cartitem_arr['productName'].'</span> / '.$cartitem_arr['brandName'].' - '.$cartitem_arr['categoryName'].'</a></span>                
           
           </div>
           </td>';
-          if($cartitem_arr[$b]['discountprice'] !==null ){
-            echo      '<td class="cart-item-price" name="ticket_price['.$cartitem_arr[$b]['productID'].']" id="ticket_price['.$cartitem_arr[$b]['productID'].']" data-value="'.$cartitem_arr[$b]['discountprice'].'">$'.$cartitem_arr[$b]['discountprice'].'</td>';
+          if($cartitem_arr['discountprice'] !==null ){
+            echo      '<td class="cart-item-price" name="ticket_price['.$cartitem_arr['productID'].']" id="ticket_price['.$cartitem_arr['productID'].']" data-value="'.$cartitem_arr['discountprice'].'">$'.$cartitem_arr['discountprice'].'</td>';
             echo        '<td class="cart-item-quantity" style="padding-top: 20px;">
-            <input type="number" min="1" name="quantity['.$cartitem_arr[$b]['productID'].']" id="quantity['.$cartitem_arr[$b]['productID'].']"  class="cart-item-quantity-display" data-attribute="'.$cartitem_arr[$b]['productID'].'" value="'.$cartitem_arr[$b]['quantity'].'" onblur="CaclulateCostTotal('.$getItems_arr[$b]['productID'].'); quantityUpdate('.$getItems_arr[$b]['productID'].');">
+            <input type="number" min="1" name="quantity['.$cartitem_arr['productID'].']" id="quantity['.$cartitem_arr['productID'].']"  class="cart-item-quantity-display" data-attribute="'.$cartitem_arr['productID'].'" value="'.$cartitem_arr['quantity'].'" onblur="CaclulateCostTotal('.$getItems_arr[$b]['productID'].'); quantityUpdate('.$getItems_arr[$b]['productID'].');">
             </td>';
           } else {
-            echo      '<td class="cart-item-price" name="ticket_price['.$cartitem_arr[$b]['productID'].']" id="ticket_price['.$cartitem_arr[$b]['productID'].']">$'.$cartitem_arr[$b]['price'].'</td>';
+            echo      '<td class="cart-item-price" name="ticket_price['.$cartitem_arr['productID'].']" id="ticket_price['.$cartitem_arr['productID'].']">$'.$cartitem_arr['price'].'</td>';
             echo        '<td class="cart-item-quantity" style="padding-top: 20px;">
-            <input type="number" name="quantity['.$cartitem_arr[$b]['productID'].']" id="quantity['.$cartitem_arr[$b]['productID'].']"  class="cart-item-quantity-display" data-attribute="'.$cartitem_arr[$b]['productID'].'" value="'.$cartitem_arr[$b]['quantity'].'" onblur="CaclulateCostTotal('.$getItems_arr[$b]['productID'].'); quantityUpdate('.$getItems_arr[$b]['productID'].');">
+            <input type="number" name="quantity['.$cartitem_arr['productID'].']" id="quantity['.$cartitem_arr['productID'].']"  class="cart-item-quantity-display" data-attribute="'.$cartitem_arr['productID'].'" value="'.$cartitem_arr['quantity'].'" onblur="CaclulateCostTotal('.$getItems_arr[$b]['productID'].'); quantityUpdate('.$getItems_arr[$b]['productID'].');">
             <p class="listprice"></p>
             </td>';
           }
-          if($cartitem_arr[$b]['discountprice'] !==null ){
+          if($cartitem_arr['discountprice'] !==null ){
             echo '  
-            <td class="cart-item-total last asdfa" id="total['.$cartitem_arr[$b]['productID'].']" value="'.$cartitem_arr[$b]['totalprice'].'" data-attribute="'.$cartitem_arr[$b]['productID'].'">NZ$'.$cartitem_arr[$b]['totalprice'].'</td>';
+            <td class="cart-item-total last asdfa" id="total['.$cartitem_arr['productID'].']" value="'.$cartitem_arr['totalprice'].'" data-attribute="'.$cartitem_arr['productID'].'">NZ$'.$cartitem_arr['totalprice'].'</td>';
             
           } else {
             echo ' 
-            <td class="cart-item-total last asdfa" id="total['.$cartitem_arr[$b]['productID'].']" value="'.$cartitem_arr[$b]['totalprice'].'" data-attribute="'.$cartitem_arr[$b]['productID'].'">NZ$'.$cartitem_arr[$b]['totalprice'].'</td>';          
+            <td class="cart-item-total last asdfa" id="total['.$cartitem_arr['productID'].']" value="'.$cartitem_arr['totalprice'].'" data-attribute="'.$cartitem_arr['productID'].'">NZ$'.$cartitem_arr['totalprice'].'</td>';          
           }
           $idArr = array(
-            'orderID' => $cartitem_arr[$b]['orderID'],
-            'productID' => $cartitem_arr[$b]['productID']
+            'orderID' => $cartitem_arr['orderID'],
+            'productID' => $cartitem_arr['productID']
           );
           $idJson = json_encode($idArr);
           echo '<td>

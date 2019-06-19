@@ -24,19 +24,35 @@
             return $sql;
         }
 
-        public function getOrderInfo ($cartID) {
+        public function getOrderInfo ($cartID, $itemID, $type = 'NUM') {
+            if ($cartID === null && $itemID !== null) {
+                if (is_array($itemID)) {
+                        $keyword = 'orderitems.itemID';
+                        $cons = $this->prepareSql($keyword, $itemID);
+                }
+            } else {
+                $cons = 'orderitems.orderID = '.$cartID;
+            }
             $sql = "SELECT *,product.img, COALESCE((100-product.discountprice) * product.price / 100, 0) AS discountRate FROM product 
             LEFT JOIN brand ON product.brandID = brand.brandID
             LEFT JOIN category ON product.categoryID = category.categoryID 
             LEFT JOIN orderitems ON product.productID = orderitems.itemID 
-            LEFT JOIN orders ON orderitems.orderID = orders.orderID WHERE orderitems.orderID = $cartID";
-            
+            LEFT JOIN orders ON orderitems.orderID = orders.orderID WHERE $cons";
             $res = $this->connection->query($sql);
+            $data = array();
             if ($res) {
-                $data = $res->fetch_all(MYSQLI_ASSOC);
+                $arr = $res->fetch_all(MYSQLI_ASSOC);
+                if (isset($type) && $type == 'ASSOC') {
+                    foreach ($arr as $key => $value) {
+                        $data[$value['productID']] =  $value;
+                    }
+                } else if (isset($type) && $type == 'NUM') {
+                    $data = $arr;
+                }
                 return $data;
             } else {
                 trigger_error($this->connection->error);
+                trigger_error($sql);
             }
         }
 
