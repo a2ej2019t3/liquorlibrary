@@ -129,6 +129,59 @@
                     <h1 class="h3 mb-0 text-gray-800">Order status</h1>
                     <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                 </div>
+                <!-- backorder collapse starts -->
+                                      
+                <div class="container">                                         
+                          <div class="card">
+                        <button type="button" class="btn btn-primary listcol" id="col1" data-toggle="collapse" data-target="#demo">Latest back order</button>
+                        <div id="demo" class="collapse show">
+                            <p></p>
+                            <button type="button" class="btn btn-primary">Abrir</button>
+                        <button type="button" class="btn btn-primary">Alterar</button>
+                          <button type="button" class="btn btn-primary">Encerrar</button>
+                          <p></p>
+                            <button type="button" class="btn btn-primary">Consultar Processos</button>
+                        <button type="button" class="btn btn-primary">Renovação de Licenças</button>
+                          <button type="button" class="btn btn-primary">Outros</button>
+                          
+                        </div>
+                        <p></p>
+                        </div>
+                          <div class="card">
+                          <button type="button" class="btn btn-primary listcol" id="col2" data-toggle="collapse" data-target="#demo2">Other back orders on shipping</button>
+                        <div id="demo2" class="collapse">
+                            <p></p>
+                            <button type="button" class="btn btn-primary">Abrir</button>
+                        <button type="button" class="btn btn-primary">Alterar</button>
+                          <button type="button" class="btn btn-primary">Encerrar</button>
+                          <p></p>
+                            <button type="button" class="btn btn-primary">Consultar Processos</button>
+                        <button type="button" class="btn btn-primary">Renovação de Licenças</button>
+                          <button type="button" class="btn btn-primary">Outros</button>
+                        </div>
+                        </div>
+                        <!-- last collapse -->
+                        <p></p>
+                        <div class="card">
+                          <button type="button" class="btn btn-primary listcol" id="col3" data-toggle="collapse" data-target="#demo2">paid back orders</button>
+                        <div id="demo2" class="collapse">
+                            <p></p>
+                            <button type="button" class="btn btn-primary">Abrir</button>
+                        <button type="button" class="btn btn-primary">Alterar</button>
+                          <button type="button" class="btn btn-primary">Encerrar</button>
+                          <p></p>
+                            <button type="button" class="btn btn-primary">Consultar Processos</button>
+                        <button type="button" class="btn btn-primary">Renovação de Licenças</button>
+                          <button type="button" class="btn btn-primary">Outros</button>
+                        </div>
+                        </div>
+                        <!-- collase ends -->
+                      </div>
+                
+                <!-- backorder collapse ends -->
+
+
+
         </div>
     </div>
 </div>
@@ -143,3 +196,12 @@
 
 </body>
 </html>
+<style>
+  .listcol{
+    
+  }
+  #col1{
+    background-color: rgba(224, 184, 65, 1);
+    border: 1px solid rgba(224, 184, 65, 1);
+  }
+  </style>
