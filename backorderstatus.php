@@ -61,10 +61,10 @@
       <i class="fas fa-fw fa-cog"></i>
       <span>Back Order</span>
     </a>
-    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+    <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Back Order</h6>
-        <a class="collapse-item" href="buttons.html">Order status</a>
+        <a class="collapse-item active" href="backorderstatus.php">Order status</a>
         <a class="collapse-item" href="cards.html">Order history</a>
         <a class="collapse-item" href="cards.html">Reports</a>
       </div>
@@ -101,9 +101,9 @@
       <i class="fas fa-fw fa-folder"></i>
       <span>Store information</span>
     </a>
-    <div id="collapsePages" class="collapse show" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+    <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
-          <a class="collapse-item active" href="partials/updatestoreinfo.php">Update information</a>
+          <a class="collapse-item" href="partials/updatestoreinfo.php">Update information</a>
 
       </div>
     </div>
@@ -126,7 +126,7 @@
 
           <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                    <h1 class="h3 mb-0 text-gray-800">Order status</h1>
                     <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                 </div>
         </div>
