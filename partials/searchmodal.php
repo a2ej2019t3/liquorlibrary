@@ -1,4 +1,4 @@
-<div class="modal fade" id="modal2" tabindex="-1" data-trigger="hover">
+<div class="modal fade" id="searchModal" tabindex="-1" data-trigger="hover">
         <div class="modal-dialog modal-lg modal-center" id="modal3">
             <div class="container">
                 <div class="modal-content">

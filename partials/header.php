@@ -23,16 +23,16 @@
             ?>
             <br>
             <div class="navbar-header">
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navMain">
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navMain" style="border: 1px solid black !important">
     <!-- navbar toggler here -->
                     <?php
                         if ($_SESSION['location'] == 'index') {
                             echo '
-                                <span style="color:white" id="iconarea"><i class="fas fa-angle-down"></i></span>
+                                <span style="color:black" id="iconarea"><i class="fas fa-angle-down"></i></span>
                             ';
                         } else if ($_SESSION['location'] == 'contact') {
                             echo '
-                                <span id="icon"><i class="fas fa-angle-down"></i></span>
+                                <span style="color:black" id="icon"><i class="fas fa-angle-down"></i></span>
                             ';
                         }
                     ?>
@@ -103,7 +103,7 @@
                     <li class="col"><a class="<?php echo $className; ?>" href="admin_area/login.php" style="color: white; font-size: 1rem; font-family: 'Roboto', sans-serif;">Admin</a></li>  -->
                     <li class="col"> 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-                        <button type="button" class="btn btn-primary btn-lg pull-right" style="background-color: transparent; border:none;" data-toggle="modal" data-target="#modal2">
+                        <button type="button" class="btn btn-primary btn-lg pull-right" style="background-color: transparent; border:none;" data-toggle="modal" data-target="#searchModal">
                             <span class="<?php echo $className; ?>" style="color: white; font-size: 20px; margin-top:10px;" id="b2"><i class="fas fa-search"></i></span> 
                         </button>
                     </li>

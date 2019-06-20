@@ -10,7 +10,7 @@
     }
 
         echo'
-            <div class="modal" id="subnav" tabindex="-1" data-trigger="hover" data-backdrop="false">
+            <div class="modal" id="subnav" tabindex="-1" data-trigger="hover">
                 <div class="modal-dialog modal-center style="max-width: 700px!important; max-height: 360px!important;">
                     <div class="container">
                         <div class="row">

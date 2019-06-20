@@ -270,7 +270,7 @@ $_SESSION['location'] = 'customerorder';
         </div>
       </footer>
       <?php
-      include_once("partials/foot.php");
+      include_once ("partials/foot.php");
       ?>
       <script>
         $(function() {
