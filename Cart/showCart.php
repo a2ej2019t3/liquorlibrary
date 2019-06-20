@@ -58,7 +58,7 @@ if (isset($_SESSION['cartItems'])) {
                         <div class="col" style="padding:0;">
                             <div class="row">
 
-                                <div id="quantityCol" class="col" style="margin-top:15px;">
+                                <div id="quantityCol" class="col-7" style="margin-top:15px;">
                                     <table>
                                         <thead>
                                         </thead>
@@ -77,7 +77,7 @@ if (isset($_SESSION['cartItems'])) {
                                                     <input type="hidden" id="ticket_price['.$getItems_arr['productID'].']" data-value="'.$getItems_arr['price'].'">';
                                                 }
             echo '
-                                                    <input id="quantity['.$getItems_arr['productID'].']" type="number" value="'.$getItems_arr['quantity'].'" class="form-control cart-item-quantity-display" 
+                                                    <input id="quantity['.$getItems_arr['productID'].']" type="number" value="'.$getItems_arr['quantity'].'" onchange="quantityCtrl('.$getItems_arr['productID'].', this)" class="form-control cart-item-quantity-display" 
                                                     style="padding: 0;
                                                     text-align: center;
                                                     height: 20px;
@@ -100,7 +100,7 @@ if (isset($_SESSION['cartItems'])) {
                                     </table>
                                 </div>
 
-                                <div id="removeCol" class="col">
+                                <div id="removeCol" class="col-5">
                                     <button id="cart-item-remove" class="btn btn-sm btn-outline-danger" value='.$idJson.' type="button" onclick="removeItem(this.value)">remove</button> 
                                 </div>
 

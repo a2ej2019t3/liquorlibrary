@@ -9,16 +9,16 @@
   $userID = $_SESSION['user']['userID'];
   $cartID = $_SESSION['cartID'];
   // $cartitem_sql = "SELECT o.orderID, o.buyerId, o.whID, o.status, oi.itemID, oi.quantity, p.productID, p.productName, p.price, p.discountprice, p.img, b.11brandName, c.categoryName, oi.totalprice FROM orders AS o, orderitems AS oi, product AS p, brand AS b, category AS c WHERE o.orderID=oi.orderID and oi.itemID=p.productID and p.brandID=b.brandID and p.categoryID= c.categoryID and o.status=0 and o.buyerID='$userID';";
-  $cartitem_arr = $DBsql->getOrderInfo($cartID, null);
-  // var_dump($cartitem_arr);
+  $res = $DBsql->getOrderInfo($cartID, null);
+  // var_dump($res);
   // $cartitem_sql = "SELECT o.orderID, o.buyerId, o.whID, o.status, oi.itemID, oi.quantity, p.productID, p.productName, p.price, p.discountprice, p.img, b.brandName, c.categoryName, oi.totalprice FROM orders AS o, orderitems AS oi, product AS p, brand AS b, category AS c WHERE o.orderID=oi.orderID and oi.itemID=p.productID and p.brandID=b.brandID and p.categoryID= c.categoryID and o.status=0 and o.buyerID='$userID';";
   // $cartitem_res = mysqli_query($connection, $cartitem_sql);
   
-  if ($cartitem_arr != "") {
+  if ($res != "") {
       // var_dump($cartitem_arr);
-      $resultcount=count($cartitem_arr);
+      $resultcount=count($res);
       if($resultcount!==0){
-       $orderID=$cartitem_arr[0]['orderID'];
+       $orderID=$res[0]['orderID'];
       }
      
     } else {
@@ -106,11 +106,11 @@
       <tbody>
       <?php
     if (isset($_SESSION['user']['userID'])) {
-      if (count($cartitem_arr) != 0) {
+      if (count($res) != 0) {
         $imgpath = 'images/'; 
         $carttotal=0;
         $carttotalquantity=0;
-          foreach ($cartitem_arr as $key => $value) {
+          foreach ($res as $key => $cartitem_arr) {
           echo '
           <input type="hidden" value="'.$orderID.'" id="orderidbox" name="orderidbox">
           <input type="hidden" value="'.$cartitem_arr['orderID'].'" id="order'.$cartitem_arr['productID'].'">
