@@ -126,12 +126,12 @@
           if($cartitem_arr['discountprice'] !==null ){
             echo      '<td class="cart-item-price" name="ticket_price['.$cartitem_arr['productID'].']" id="ticket_price['.$cartitem_arr['productID'].']" data-value="'.$cartitem_arr['discountprice'].'">$'.$cartitem_arr['discountprice'].'</td>';
             echo        '<td class="cart-item-quantity" style="padding-top: 20px;">
-            <input type="number" min="1" name="quantity['.$cartitem_arr['productID'].']" id="quantity['.$cartitem_arr['productID'].']"  class="cart-item-quantity-display" data-attribute="'.$cartitem_arr['productID'].'" value="'.$cartitem_arr['quantity'].'" onblur="CaclulateCostTotal('.$getItems_arr[$b]['productID'].'); quantityUpdate('.$getItems_arr[$b]['productID'].');">
+            <input type="number" min="1" name="quantity['.$cartitem_arr['productID'].']" id="quantity['.$cartitem_arr['productID'].']"  class="cart-item-quantity-display" data-attribute="'.$cartitem_arr['productID'].'" value="'.$cartitem_arr['quantity'].'" onblur="CaclulateCostTotal('.$cartitem_arr['productID'].'); quantityUpdate('.$cartitem_arr['productID'].');">
             </td>';
           } else {
             echo      '<td class="cart-item-price" name="ticket_price['.$cartitem_arr['productID'].']" id="ticket_price['.$cartitem_arr['productID'].']">$'.$cartitem_arr['price'].'</td>';
             echo        '<td class="cart-item-quantity" style="padding-top: 20px;">
-            <input type="number" name="quantity['.$cartitem_arr['productID'].']" id="quantity['.$cartitem_arr['productID'].']"  class="cart-item-quantity-display" data-attribute="'.$cartitem_arr['productID'].'" value="'.$cartitem_arr['quantity'].'" onblur="CaclulateCostTotal('.$getItems_arr[$b]['productID'].'); quantityUpdate('.$getItems_arr[$b]['productID'].');">
+            <input type="number" name="quantity['.$cartitem_arr['productID'].']" id="quantity['.$cartitem_arr['productID'].']"  class="cart-item-quantity-display" data-attribute="'.$cartitem_arr['productID'].'" value="'.$cartitem_arr['quantity'].'" onblur="CaclulateCostTotal('.$cartitem_arr['productID'].'); quantityUpdate('.$cartitem_arr['productID'].');">
             <p class="listprice"></p>
             </td>';
           }

@@ -25,6 +25,13 @@ if (isset($_REQUEST['i']) && $_REQUEST['i']!=""){
 	}
 	if (isset($_SESSION['user'])) {
 		$cartID = $_SESSION['cartID'];
+		if (isset($_GET['q']) && isset($_GET['t'])) {
+			$quantity = $_GET['q'];
+			$totalprice = $quantity * $pricePerUnit;
+		} else {
+			$quantity = 1;
+			$totalprice = $pricePerUnit;
+		}
 		$cartItems = array(
 			$productID => array(
 				// 'productName'=>$productName,
@@ -35,8 +42,8 @@ if (isset($_REQUEST['i']) && $_REQUEST['i']!=""){
 				// 'categoryID'=>$categoryID,
 				// 'categoryName'=>$categoryName,
 				// 'brandName'=>$brandName,
-				'quantity'=>1,
-				'totalprice'=> $pricePerUnit,
+				'quantity'=>$quantity,
+				'totalprice'=> $totalprice,
 				// 'img'=>$img,
 				// 'whID'=>1,
 				// 'date'=>now(),
