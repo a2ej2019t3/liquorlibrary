@@ -90,7 +90,7 @@
                                     </div>';
                 echo '
                                     <div class="adminbuttons" id="adminbtsgroup">
-                                        <button type="button" data-id='.$product_arr[$b]['productID'].' class="customebts btn btn-secondary btn-sm" data-toggle="modal" data-target="#specialproductadd" style="color: rgba(48, 43, 41,1); background-color: transparent; border:none;">
+                                        <button type="button" value='.$product_arr[$b]['productID'].' class="customebts btn btn-secondary btn-sm" onclick="openSpecialModal(this.value)" style="color: rgba(48, 43, 41,1); background-color: transparent; border:none;">
                                             <i class="fas fa-thumbtack"></i>
                                                 Specials
                                         </button>
@@ -167,7 +167,7 @@
      <div class="modal-dialog modal-sm" role="document">
      <div class="modal-content">
          <div class="modal-header">
-         <h5 class="modal-title" id="specialproductadd">Add Special Product</h5>
+         <h5 class="modal-title">Add Special Product</h5>
          <button type="button" class="close" data-dismiss="modal">
              <span>&times;</span>
          </button>
@@ -198,16 +198,6 @@
      </div>
  </div>
 </section>';
-
-echo '
-<script>
-$("#specialproductadd").on("show.bs.modal", function (e) {
-    var mypostNumber = $(e.relatedTarget).attr("data-id");
-    $(this).find("#postNumber").text(mypostNumber);
-    // $(this).find("#postinput").val(mypostNumber);
-    $("#postinput").val(mypostNumber);
-});
-</script>';
 
 echo "
 <style>

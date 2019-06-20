@@ -145,6 +145,22 @@ function checkIfSelected () {
     showProductAjax(Json);
 };
 
+function openSpecialModal(obj) {
+    $('#specialproductadd').modal('show');
+    var id = obj;
+    $('#specialproductadd #postNumber').text(id);
+    $('#postinput').attr('value', id);
+}
+
+// $(function(){
+//     $("#specialproductadd").on("shown.bs.modal", function (e) {
+//         var mypostNumber = $(e.relatedTarget).data("id");
+//         $(this).find("#postNumber").text(mypostNumber);
+//         // $(this).find("#postinput").val(mypostNumber);
+//         $("#postinput").val(mypostNumber);
+//     });
+// })
+
 
 // function getBrandlist () {
 //     var xmlhttp = new XMLHttpRequest();

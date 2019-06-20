@@ -59,6 +59,13 @@ if (isset($_REQUEST['i']) && $_REQUEST['i']!=""){
 		}
 	} else {
 		$cartID = "";
+		if (isset($_GET['q']) && isset($_GET['t'])) {
+			$quantity = $_GET['q'];
+			$totalprice = $quantity * $pricePerUnit;
+		} else {
+			$quantity = 1;
+			$totalprice = $pricePerUnit;
+		}
 		$cartItems = array(
 			$productID => array(
 				// 'productName'=>$productName,
@@ -69,8 +76,8 @@ if (isset($_REQUEST['i']) && $_REQUEST['i']!=""){
 				// 'categoryID'=>$categoryID,
 				// 'categoryName'=>$categoryName,
 				// 'brandName'=>$brandName,
-				'quantity'=>1,
-				'totalprice'=>$pricePerUnit,
+				'quantity'=>$quantity,
+				'totalprice'=>$totalprice,
 				// 'img'=>$img,
 				// 'whID'=>1,
 				// 'date'=>now(),
@@ -79,13 +86,17 @@ if (isset($_REQUEST['i']) && $_REQUEST['i']!=""){
 			);
 		if (isset($_COOKIE['tempCart'])) {
 			$cookieCart = objectToArray(json_decode($_COOKIE['tempCart']));
+			$_SESSION['cartItems'] = $cookieCart;
 			$existedProductID = array_keys($cookieCart);
 			if (in_array($productID,$existedProductID)) {
+				$_SESSION['cartItems'] = array_replace($_SESSION['cartItems'],$cartItems);
+				setcookie('tempCart', json_encode($_SESSION['cartItems']), time() + (86400 * 30), '/');
 				echo 3;
 			} else {
 				$_SESSION['cartItems'] = array_replace($_SESSION['cartItems'],$cartItems);
 				setcookie('tempCart', json_encode($_SESSION['cartItems']), time() + (86400 * 30), '/');
-				echo 4;
+				// echo 4;
+				echo var_dump($_SESSION['cartItems']).var_dump($cartItems);
 			}
 		} else {
 			$_SESSION['cartItems'] = $cartItems;
