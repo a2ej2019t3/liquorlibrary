@@ -19,7 +19,7 @@ if (isset($_SESSION['user'])) {
         // var_dump($cartID);
         
         // get DB cart as array
-        $getItems_arr = $DBsql->getOrderInfo($cartID, null);
+        $getItems_arr = $DBsql->getOrderInfo($cartID, null, 'ASSOC');
         // var_dump($getItems_arr);
         
         // merge cookie cart to DB if exists

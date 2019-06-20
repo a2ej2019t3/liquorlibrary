@@ -32,9 +32,8 @@ $(window).scroll(function() {
 
 // modal js+ jquery
 $("#b2").hover(function () {
-  $('#modal2').modal({
-      show: true,
-      backdrop: false
+  $('#searchModal').modal({
+      show: true
   })
 });
 
@@ -44,8 +43,7 @@ $('#myModal').on('shown.bs.modal', function() {
 
 $("#ourdrinks").hover(function () {
 $('#subnav').modal({
-    show: true,
-    backdrop: false
+    show: true
 })
 });
 
