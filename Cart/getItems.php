@@ -41,7 +41,7 @@ if (isset($_SESSION['user'])) {
                     #var_dump($res);
                     setcookie('tempCart', "", time() - 3600, "/");
                 }
-                $getItems_arr = $DBsql->getOrderInfo($cartID, null);
+                $getItems_arr = $DBsql->getOrderInfo($cartID, null, "ASSOC");
                 $_SESSION['cartID'] = $cartID;
                 // echo 'DBcart is empty, insert cookiecart into dbcart';
             // if DBcart is not empty
