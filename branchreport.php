@@ -36,7 +36,7 @@ require_once ('partials/piechartquery.php');
 <div id="wrapper">
 
 <!-- Sidebar -->
-<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: rgba(48, 43, 41,1); margin-top:130px; background-image:none;">
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: rgba(48, 43, 41,1); margin-top:100px; background-image:none;">
 
   <!-- Sidebar - Brand -->
   <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
@@ -72,7 +72,7 @@ require_once ('partials/piechartquery.php');
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Back Order</h6>
         <a class="collapse-item" href="backorderstatus.php">Order status</a>
-        <a class="collapse-item" href="">Order history</a>
+        <a class="collapse-item" href="backorderhistory.php">Order history</a>
         <a class="collapse-item" href="">Reports</a>
       </div>
     </div>
@@ -126,14 +126,14 @@ require_once ('partials/piechartquery.php');
 
 </ul>
 <!-- content starts -------------------------------------------------------------------------------------------->
-<div id="content" style="margin-top:130px; width:100%;">
+<div id="content" style="margin-top:100px; width:100%;">
 
 <!-- Begin Page Content -->
 <div class="container-fluid" style="width:100%;">
 
   <!-- Page Heading -->
   <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+    <h1 class="h3 mb-0 text-gray-800" style="font-wight:600">Dashboard</h1>
     <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
   </div>
 

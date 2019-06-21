@@ -171,3 +171,10 @@ document.getElementById("addToCart").onclick = function () {
     // xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.send();
 }
+function openForm() {
+    document.getElementById("branchemail").style.display = "block";
+  }
+  
+  function closeForm() {
+    document.getElementById("branchemail").style.display = "none";
+  }

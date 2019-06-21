@@ -21,7 +21,7 @@ if(isset($_SESSION['warehouse']['whID'])){
         for($a=0; $a <count($selectuser_arr); $a++){
             $userID=$selectuser_arr[$a][0];
             // echo $userID;
-            $select_order="SELECT * FROM orders WHERE buyerID='$userID' AND extract(month from date) = '$selectedmonth' AND status=4";
+            $select_order="SELECT * FROM orders WHERE buyerID='$userID' AND extract(month from date) = '$selectedmonth' AND status=4 order by `date`";
             $selectorder_result=mysqli_query($connection, $select_order);
             // $order_array[$a]=$selectorder_result;
           
@@ -43,7 +43,7 @@ if(isset($_SESSION['warehouse']['whID'])){
         for($a=0; $a <count($selectuser_arr); $a++){
             $userID=$selectuser_arr[$a][0];
             // echo $userID;
-            $select_pendingorder="SELECT * FROM orders WHERE buyerID='$userID' AND extract(month from date) = '$selectedmonth'  AND extract(year from date) = '$selectedyear'and status=1 or status=2 or status=7";
+            $select_pendingorder="SELECT * FROM orders WHERE buyerID='$userID' AND extract(month from date) = '$selectedmonth'  AND extract(year from date) = '$selectedyear'and status=1 or status=2 or status=7 order by `date`";
             $selectpendingorder_result=mysqli_query($connection, $select_pendingorder);
             // $order_array[$a]=$selectorder_result;
           
@@ -55,9 +55,9 @@ if(isset($_SESSION['warehouse']['whID'])){
                    echo '<br>';
                  }else{
                   $pendingbackorder_arr=array_merge($pendingorder_array);
-                
+                  
                  }
-                       
+                  
               }
      
         };
