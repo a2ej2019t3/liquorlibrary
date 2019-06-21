@@ -10,7 +10,7 @@ $mail = new PHPMailer();
 
 $emailBody = '
 <div class="mailbox" style="text-align: center; border: 1px solid rgba(215, 232, 186, 1); border-radius:25px; margin-top: 30px; font-family: "Montserrat", sans-serif;>
-    <div class="mailheading"> <h2> Thank you for your order '.$username.'! </h2></div>
+    <div class="mailheading"> <h2> Thank you for your order! </h2></div>
     <div class="mailcontent" style="background-color: rgba(144, 180, 148, 1); margin-top: 20px; margin-bottom: 30px; ">
         <p style="font-size: 25px; font-weight: 700; margin-top: 10px;"> your order (ordernumber # '.$orderId.') is successfully processed! </p>
        <hr>
