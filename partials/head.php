@@ -10,13 +10,3 @@
     <link href="https://fonts.googleapis.com/css?family=Cinzel:700|Lato|Montserrat|Open+Sans|Roboto|Shadows+Into+Light|Playfair+Display" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400,700&subset=latin-ext" rel="stylesheet">
     <!-- Css transition -->
-    <!-- <style type="text/css">
-     
-        body > div
-        {
-                    width:483px;
-                    height:298px;
-                    background:#676470;
-                    transition:all 0.3s ease;
-        }
-        </style> -->

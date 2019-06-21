@@ -1,55 +1,59 @@
 <?php
-include(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'liquorlibrary' . DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 'DBsql.php');
+include(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'liquorlibrary' . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 'DBsql.php');
 $DBsql = new sql;
-$optIndex = $_GET['i'];
-if ($optIndex == 0) {
-    $statusID = '';
-} else if ($optIndex == 1) {
-    $statusID = array(1, 6);
-} else if ($optIndex == 2) {
-    $statusID = 3;
-} else if ($optIndex == 3) {
-    $statusID = 7;
-} else if ($optIndex == 4) {
-    $statusID = 4;
-}
-var_dump($statusID);
 if (isset($_SESSION['user'])) {
     $buyerID = $_SESSION['user']['userID'];
-
-    if ($statusID != '') {
+    
+    if ($_GET['si']) {
+        $optIndex = $_GET['si'];
+        if ($optIndex == 'all') {
+            $statusID = array(1,3,4,6,7);
+        } else if ($optIndex == 'paid') {
+            $statusID = array(1, 6);
+        } else if ($optIndex == 'completed') {
+            $statusID = 4;
+        } else if ($optIndex == 'processing') {
+            $statusID = array(3,7);
+        } else if ($optIndex == 'cancelled') {
+            $statusID = 5;
+        }
+    } else {
+        echo 'no opt index.';
+    }
         $consArr = array(
             'buyerID' => $buyerID,
-            'status' => $statusID
+            'statusID' => $statusID
         );
-    } else {
-        $consArr = array(
-            'buyerID' => $buyerID
-        );
+    $result = $DBsql->select('orders LEFT JOIN status ON orders.status = status.statusID', $consArr);
+    // var_dump($result);
+    $sortKey = 'date';
+    foreach ($result as $key => $value) {
+        $sorted[$value[$sortKey]] = $value;
     }
-    $res = $DBsql->select('orders LEFT JOIN status ON orders.status = status.statusID', $consArr);
-    // var_dump($res);
-    if ($res !== null) {
+
+    ksort($sorted);
+    // var_dump($sorted);
+    if ($sorted !== null) {
         echo '
               <div id="accordion">';
-        for ($i = 0; $i < count($res); $i++) {
+        foreach ($sorted as $key => $res) {
             echo '
                           <div class="card">
-                              <a class="btn p-0 orders"  data-toggle="collapse" data-target="#coid' . $i . '" data-orderid="' . $res[$i]['orderID'] . '" style="width:100%;">
+                              <a class="btn p-0 orders"  data-toggle="collapse" data-target="#coid' . $res['orderID'] . '" data-orderid="' . $res['orderID'] . '" style="width:100%;">
 
                                       <div id="heading" class="py-2">
                                           <div class="row">
                                               <div class="col-9 my-auto">
                                                   <div class="row">
                                                       <div class="col-2 mx-auto">
-                                                          <h5 class="ids">#' . $res[$i]['orderID'] . '</h5>
+                                                          <h5 class="ids">#' . $res['orderID'] . '</h5>
                                                       </div>
                                                       <div class="col-4 text-left">
                                                           <div class="row">
                                                               <h5 class="secondHeader">Items</h5>
                                                           </div>
                                                           <div class="row secondRow">';
-            $items = $DBsql->getCartItemsInfo($res[$i]['orderID'], array('LIMIT' => '3'));
+            $items = $DBsql->getCartItemsInfo($res['orderID'], array('LIMIT' => '3'));
             // var_dump($items);
             $imgpath = 'images/';
             if (count($items) != 0) {
@@ -69,7 +73,7 @@ if (isset($_SESSION['user'])) {
                                                               <h5 class="secondHeader">Price</h5>
                                                           </div>
                                                           <div class="row secondRow">
-                                                              <h5>NZ$' . $res[$i]['cost'] . '</h5>
+                                                              <h5>NZ$' . $res['cost'] . '</h5>
                                                           </div>
                                                       </div>
                                                       <div class="col-3 text-left">
@@ -77,14 +81,14 @@ if (isset($_SESSION['user'])) {
                                                               <h5 class="ordertime secondHeader">Ordered On:</h5>
                                                           </div>
                                                           <div class="row secondRow">
-                                                              <h5>' . $res[$i]['date'] . '</h5>
+                                                              <h5>' . $res['date'] . '</h5>
                                                           </div>
                                                       </div>
                                                   </div>
                                               </div>
                                               ';
-            $statusName = $res[$i]['statusName'];
-            switch ($res[$i]['statusID']) {
+            $statusName = $res['statusName'];
+            switch ($res['statusID']) {
                 case 0:
                     $badgeType = 'badge-secondary';
                     break;
@@ -115,7 +119,7 @@ if (isset($_SESSION['user'])) {
                     break;
             }
             echo '
-                                              <div class="col-3 p-1 my-auto text-right pr-5" style="font-size:1.25rem;">
+                                              <div class="col-3 p-1 my-auto text-left pl-5" style="font-size:1.25rem;">
                                                   <span class="badge ' . $badgeType . '">' . $statusName . '</span>
                                               </div>';
             echo '
@@ -123,7 +127,7 @@ if (isset($_SESSION['user'])) {
                                       </div>
 
                               </a>
-                              <div id="coid' . $i . '" class="collapse" data-parent="#accordion">
+                              <div id="coid' . $res['orderID'] . '" class="collapse" data-parent="#accordion">
                                   <hr class="my-0">
                                   <div class="py-4 details">
                                       
