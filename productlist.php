@@ -20,22 +20,22 @@
  ?>
 
 
- <!DOCTYPE html>
- <html lang="en">
- <head>
- <?php
-    include_once ("partials/head.php");
-  ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<?php
+include_once ("partials/head.php");
+?>
  
 <title>Product_listby search</title>
- </head>
- <body style="height: 110%;">
-     <section>
-        <?php
-            include_once ("partials/header.php");
-        ?>        
-     </section>
-     <br><br>
+</head>
+<body style="height: 110%;">
+    <section>
+    <?php
+        include_once ("partials/header.php");
+    ?>        
+    </section>
+    <br><br>
 <?php
  include ("Cart/stickycart.php");
 ?>
@@ -107,13 +107,9 @@
                                         <div class="col-sm-3 col-md-3" style="padding:0!important;"></div>
 
                                     </div>
-                                    </div>
-                          
+                                </div>
                         </div>';
-                
-                
-
-             echo '</div>
+                echo '</div>
                 </div>';
             } else {
               

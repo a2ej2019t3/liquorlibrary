@@ -1,5 +1,5 @@
 <div id="btContainer">
-<button id="stickyCart" class="cartbutton sticky" data-toggle="modal" data-target="#cart" onclick="finalPrice(), ">
+<button id="stickyCart" class="cartbutton sticky" data-toggle="modal" data-target="#cart" onclick="finalPrice()">
 <div>
     <div>
       <i class="fas fa-dolly"></i>
@@ -50,19 +50,17 @@
 function checkgetitem(){
 if (sessionStorage.getItem('status') != null){
   location.href='paymentprocess.php';
- }
- else{
-  //show validation message
- alert("Please log in to proceed");
- $("#cart .close").click();
+  }
+  else{
+    //show validation message
+  alert("Please log in to proceed");
+  $("#cart .close").click();
 //  jQuery.noConflict(); 
 //   $('#myModal').modal('show');
 $('#myModal').modal();
   exit();
-
- }
+  }
 }
-
 </script>
 
 <style>
