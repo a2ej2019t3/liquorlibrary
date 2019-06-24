@@ -170,7 +170,7 @@
                 } else {
                     if ($res->num_rows > 0) {
                         $data = $res->fetch_all(MYSQLI_ASSOC);
-                        return $data;
+                        return $sql;
                     }
                 }
             } else {

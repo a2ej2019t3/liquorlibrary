@@ -1,38 +1,74 @@
 <?php
+session_start();
 include(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'liquorlibrary' . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 'DBsql.php');
 $DBsql = new sql;
 if (isset($_SESSION['user'])) {
     $buyerID = $_SESSION['user']['userID'];
-    
-    if ($_GET['si']) {
-        $optIndex = $_GET['si'];
-        if ($optIndex == 'all') {
-            $statusID = array(1,3,4,6,7);
-        } else if ($optIndex == 'paid') {
-            $statusID = array(1, 6);
-        } else if ($optIndex == 'completed') {
-            $statusID = 4;
-        } else if ($optIndex == 'processing') {
-            $statusID = array(3,7);
-        } else if ($optIndex == 'cancelled') {
-            $statusID = 5;
+    if ($_GET['op'] == 'filt') {
+        echo '1';
+        if ($_GET['si']) {
+            $optIndex = $_GET['si'];
+            if ($optIndex == 'all') {
+                $statusID = array(1,3,4,6,7);
+            } else if ($optIndex == 'paid') {
+                $statusID = array(1, 6);
+            } else if ($optIndex == 'completed') {
+                $statusID = 4;
+            } else if ($optIndex == 'processing') {
+                $statusID = array(3,7);
+            } else if ($optIndex == 'cancelled') {
+                $statusID = 5;
+            }
+        } else {
+            echo 'no opt index.';
         }
-    } else {
-        echo 'no opt index.';
+            $consArr = array(
+                'buyerID' => $buyerID,
+                'statusID' => $statusID
+            );
+        $result = $DBsql->select('orders LEFT JOIN status ON orders.status = status.statusID', $consArr);
+        echo var_dump($result);
+        $sortKey = 'orderID';
+        if ($result !== null) {
+            foreach ($result as $key => $value) {
+                $sorted[$value[$sortKey]] = $value;
+            }
+            ksort($sorted);
+            // var_dump($sorted);
+            $_SESSION['sorted'] = $sorted;
+        } else {
+            $sorted = null;
+            echo "
+                <div class='container text-center'>
+                    <div class='alert alert-secondary'>
+                        <b>You don't have any orders.</b>
+                    </div>
+                </div>";
+        }
+    } else if ($_GET['op'] == 'sort') {
+        echo '2';
+        if (isset($_SESSION['sorted'])) {
+            $sortKey = $_GET['key'];
+            $sort = $_GET['sort'];
+            $result = $_SESSION['sorted'];
+            foreach ($result as $key => $value) {
+                $sorted[$value[$sortKey]] = $value;
+            }
+            if ($sort == 'asc') {
+                ksort($sorted);
+            } else if ($sort == 'des') {
+                krsort($sorted);
+            }
+        } else {
+            $sorted = null;
+            echo "
+                <div class='container text-center'>
+                    <div class='alert alert-secondary'>
+                        <b>You don't have any orders.</b>
+                    </div>
+                </div>";
+        }
     }
-        $consArr = array(
-            'buyerID' => $buyerID,
-            'statusID' => $statusID
-        );
-    $result = $DBsql->select('orders LEFT JOIN status ON orders.status = status.statusID', $consArr);
-    // var_dump($result);
-    $sortKey = 'date';
-    foreach ($result as $key => $value) {
-        $sorted[$value[$sortKey]] = $value;
-    }
-
-    ksort($sorted);
-    // var_dump($sorted);
     if ($sorted !== null) {
         echo '
               <div id="accordion">';
@@ -138,5 +174,10 @@ if (isset($_SESSION['user'])) {
     }
     echo '</div>';
 } else {
-    echo 'Please log in to see your orders.';
+    echo '
+        <div class="container text-center">
+            <div class="alert alert-warning">
+                <b>Please log in to see your orders.</b>
+            </div>
+        </div>';
 }

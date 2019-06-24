@@ -1,5 +1,5 @@
 addLoadEvent(loadOrders("all"));
-function loadOrders (index = "all") {
+function loadOrders (index = "all", keyword = "orderID", sort = "asc", operation = "filt") {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
@@ -8,7 +8,7 @@ function loadOrders (index = "all") {
             loadDetails();
         }
     }
-    xmlhttp.open("GET", "orderHistoryOrder.php?si=" + index + "&key=" + keyword + "&opertaion=" + operation, true);
+    xmlhttp.open("GET", "orderHistoryOrder.php?si=" + index + "&key=" + keyword + "&sort=" + sort + "&op=" + operation, true);
     xmlhttp.send();
 }
 
@@ -32,14 +32,15 @@ function loadDetails () {
     });
 };
 
-$(function(){
+$(function changesort (){
     $('.sorter').on('click', function () {
-        var keyword = $(this).data('key');
-        var operation = $(this).data('operation');
-        if (operation == 'asc') {
-            $(this).data('operation', 'des');
-        } else if (operation == 'des') {
-            $(this).data('operation', 'asc');
+        var keyword = $(this).attr('data-key');
+        var sort = $(this).attr('data-sort');
+        loadOrders('', keyword, sort, 'sort');
+        if (sort == 'asc') {
+            $(this).attr('data-sort', 'des');
+        } else if (sort == 'des') {
+            $(this).attr('data-sort', 'asc');
         }
     });
-})
+});

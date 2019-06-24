@@ -118,16 +118,16 @@ $_SESSION['location'] = 'customerorder';
           <div class="col-9">
             <div class="row">
               <div class="col-2">
-                <span>ID <button data-key="id" data-operation="asc" class="sorter btn btn-light px-1 py-0"><i class="fas fa-sort"></i></button></span>
+                <span>ID <button data-key="orderID" data-sort="des" class="sorter btn btn-light px-1 py-0"><i class="fas fa-sort"></i></button></span>
               </div>
               <div class="col-4 text-left">
               <span>Items in order</span>
               </div>
               <div class="col-3 text-left">
-              <span>Total price <button data-key="totalprice" data-operation="asc" class="sorter btn btn-light px-1 py-0"><i class="fas fa-sort"></i></button></span>
+              <span>Total price <button data-key="cost" data-sort="des" class="sorter btn btn-light px-1 py-0"><i class="fas fa-sort"></i></button></span>
               </div>
               <div class="col-3 text-left">
-              <span>Order date <button data-key="orderdate" data-operation="asc" class="sorter btn btn-light px-1 py-0"><i class="fas fa-sort"></i></button></span>
+              <span>Order date <button data-key="date" data-sort="des" class="sorter btn btn-light px-1 py-0"><i class="fas fa-sort"></i></button></span>
               </div>
             </div>
           </div>
