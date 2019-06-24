@@ -15,6 +15,7 @@
     <title>Branch Admin Dashboard</title>
     <?php
     include_once ("partials/head.php");
+    include_once ("Emailsending/branchemail.php");
     include(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'liquorlibrary' . DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 'DBsql.php');
     $DBsql = new sql;
     ?>
@@ -344,7 +345,7 @@
                                                     
                                                 </div>
                                                 <div class="col-2 p-1 my-auto  pl-5" style="font-size:1.25rem;">
-                                                <button class="btn btn-primary adminmsg" style=";"><i class="fa fa-envelope"></i> </button>
+                                            <button class="btn btn-primary adminmsg" id="branchemailbutton"  data-toggle="modal" data-target="#branchemail" value="' . $totalbackorder_arr[$i][0] . '" onclick="branchorderid();"><i class="fa fa-envelope"></i> </button>
                                                 
                                             </div>
 
@@ -527,7 +528,7 @@
                                                   <span class="badge badge-warning">shipping</span>
                                               </div>';
                                           echo ' <div class="col-2 col-xs-6 p-1 my-auto  pl-5" style="font-size:1.25rem;">
-                                          <button class="btn btn-primary adminmsg" style=";"><i class="fa fa-envelope"></i> </button>
+                                          <button class="btn btn-primary adminmsg"  data-toggle="modal" data-target="#branchemail"><i class="fa fa-envelope"></i> </button>
                                           
                                       </div>
                                           </div>
@@ -615,7 +616,7 @@
                                                                   <span class="badge badge-info">paid</span>
                                                                 </div>';
                                                             echo '       <div class="col-2 col-xs-6 p-1 my-auto  pl-5" style="font-size:1.25rem;">
-                                                            <button class="btn btn-primary adminmsg" style=";"><i class="fa fa-envelope"></i> </button>
+                                                        <button class="btn btn-primary adminmsg" id="branchemailbutton"  data-toggle="modal" data-target="#branchemail" value="' . $totalbackorder_arr[$i][0] . '" onclick="branchorderid();"><i class="fa fa-envelope"></i> </button>
                                                             
                                                         </div>
                                                           </div>
@@ -704,7 +705,7 @@
                                                                   <span class="badge badge-dark' . $badgeType . '">cancelled</span>
                                                               </div>';
                                                                 echo ' <div class="col-2 col-xs-6 p-1 my-auto  pl-5" style="font-size:1.25rem;">
-                                                                <button class="btn btn-primary adminmsg" style=";"><i class="fa fa-envelope"></i> </button>
+                                                            <button class="btn btn-primary adminmsg" id="branchemailbutton"  data-toggle="modal" data-target="#branchemail" value="' . $totalbackorder_arr[$i][0] . '" onclick="branchorderid();"><i class="fa fa-envelope"></i> </button>
                                                                 
                                                             </div>
                                                           </div>

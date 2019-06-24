@@ -171,10 +171,17 @@ document.getElementById("addToCart").onclick = function () {
     // xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.send();
 }
-function openForm() {
-    document.getElementById("branchemail").style.display = "block";
-  }
+
+
   
-  function closeForm() {
-    document.getElementById("branchemail").style.display = "none";
-  }
+
+//   brnachemail orderid js
+
+function branchorderid () {
+    var idlocation= document.getElementById("branchemailbutton");
+    var orderid= idlocation.value;
+
+    var hiddenorderid=document.getElementById('questionorder');
+    hiddenorderid.setAttribute('value',orderid);
+}
+

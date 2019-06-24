@@ -14,6 +14,7 @@
     <title>Branch Admin Dashboard</title>
     <?php
     include_once ("partials/head.php");
+    include_once ("Emailsending/branchemail.php");
     include(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'liquorlibrary' . DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 'DBsql.php');
     $DBsql = new sql;
     ?>
@@ -122,6 +123,9 @@
     .orderdate{
       font-size: 1rem;
     }
+
+
+    
   </style>
 </head>
 
@@ -135,7 +139,17 @@
 <!-- top header ends--------------------------------------------------------------------------------- -->
 <!-- Side Nav included--------------------------------------------------------------------------------- -->
 <div id="wrapper">
-
+<div id="modal-container">
+  <div class="modal-background">
+    <div class="modal">
+      <h2>I'm a Modal</h2>
+      <p>Hear me roar.</p>
+      <svg class="modal-svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="none">
+								<rect x="0" y="0" fill="none" width="226" height="162" rx="3" ry="3"></rect>
+							</svg>
+    </div>
+  </div>
+</div>
 <!-- Sidebar -->
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: rgba(48, 43, 41,1); margin-top:40px; background-image:none;">
 
@@ -301,7 +315,7 @@
                                                   <span class="badge badge-success">Completed</span>
                                               </div>';
                                             echo ' <div class="col-2 col-xs-6 p-1 my-auto  pl-5" style="font-size:1.25rem;">
-                                            <button class="btn btn-primary adminmsg" style=";"><i class="fa fa-envelope"></i> </button>
+                                            <button class="btn btn-primary adminmsg" id="branchemailbutton"  data-toggle="modal" data-target="#branchemail" value="' . $totalbackorder_arr[$i][0] . '" onclick="branchorderid();"><i class="fa fa-envelope"></i> </button>
                                             
                                         </div>
                                           </div>
