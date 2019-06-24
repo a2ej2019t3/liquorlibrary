@@ -17,6 +17,9 @@
     ?>
     <link rel="stylesheet" href="css/branchreport.css">
     <link rel="stylesheet" href="css/branch.css">
+    <style>
+  
+  </style>
 </head>
 
 <body>
@@ -29,12 +32,13 @@
 <?php
 if(isset($_SESSION['warehouse'])){
 require_once ('partials/branchquery.php');
-require_once ('partials/backorderquery.php');
+require_once ('partials/pickuporderquery.php');
 include_once ("Emailsending/branchemail.php");
   ?>
 <!-- top header ends--------------------------------------------------------------------------------- -->
 <!-- Side Nav included--------------------------------------------------------------------------------- -->
 <div id="wrapper">
+
 <!-- Sidebar -->
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: rgba(48, 43, 41,1); margin-top:40px; background-image:none;">
 
@@ -68,11 +72,11 @@ include_once ("Emailsending/branchemail.php");
       <i class="fas fa-fw fa-cog"></i>
       <span>Back Order</span>
     </a>
-    <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Back Order</h6>
         <a class="collapse-item" href="backorderstatus.php">Order status</a>
-        <a class="collapse-item active" href="backorderhistory.php">Order history</a>
+        <a class="collapse-item" href="backorderhistory.php">Order history</a>
         <a class="collapse-item" href="cards.html">Reports</a>
       </div>
     </div>
@@ -84,10 +88,10 @@ include_once ("Emailsending/branchemail.php");
       <i class="fas fa-fw fa-wrench"></i>
       <span>Customer Order</span>
     </a>
-    <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+    <div id="collapseUtilities" class="collapse show" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Customer Order</h6>
-        <a class="collapse-item" href="pickuporderstatus.php">Order status</a>
+        <a class="collapse-item active" href="pickuporderstatus.php">Order status</a>
         <a class="collapse-item" href="utilities-border.html">Order history</a>
         <a class="collapse-item" href="utilities-animation.html">Reports</a>
       </div>
@@ -133,27 +137,43 @@ include_once ("Emailsending/branchemail.php");
 
           <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Order history </h1><span style="float:left!important">All the completed orders</span>
+                    <h1 class="h3 mb-0 text-gray-800">Orders status </h1><span style="float:left!important">Click the panel to see the status.</span>
                     <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                 </div>
-                <!-- backorder collapse starts -->
-                <p></p>
+
+
+<!-- ------------copy -->
+
+<div class="container-fluid">
+              <div class="row">
+                <div class="col-12 ">
+                  <nav>
+                    <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                      <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">New Pickups</a>
+                      <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Ready Pickups</a>
+                    </div>
+                  </nav>
+                  <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+<!-- first new pick up orders------------------------------------------------------------------------------ -->
+               <!-- backorder collapse starts -->
+               <p></p>
                             <?php
                             
             echo '
               <div id="accordion">';
-        if(!empty($totalbackorder_arr)){
-            for ($i = 0; $i < count($totalbackorder_arr); $i++) {
+        if(!empty($newpickups_arr)){
+            for ($i = 0; $i < count($newpickups_arr); $i++) {
               echo '
                           <div class="card">
-                              <a class="btn p-0 orders"  data-toggle="collapse" data-target="#coid' . $i . '" data-orderid="' . $totalbackorder_arr[$i][0] . '" style="width:100%;">
+                              <a class="btn p-0 orders"  data-toggle="collapse" data-target="#coid' . $i . '" data-orderid="' . $newpickups_arr[$i][0] . '" style="width:100%;">
 
                                       <div id="heading" class="py-2">
                                           <div class="row">
                                               <div class="col-9 my-auto">
                                                   <div class="row">
                                                       <div class="col-2 mx-auto">
-                                                          <h5 class="ids">#' . $totalbackorder_arr[$i][0] . '</h5>
+                                                          <h5 class="ids">#' . $newpickups_arr[$i][0] . '</h5>
                                                       </div>
                                                       <div class="col-4 text-left">
                                                           <div class="row">
@@ -161,7 +181,7 @@ include_once ("Emailsending/branchemail.php");
                                                           </div>
                                                           <div class="row secondRow">';
              $imgpath = 'images/';
-              $items = $DBsql->getCartItemsInfo($totalbackorder_arr[$i][0], array('LIMIT' => '3'));
+              $items = $DBsql->getCartItemsInfo($newpickups_arr[$i][0], array('LIMIT' => '3'));
               // var_dump($items);
               
               if (count($items) != 0) {
@@ -181,7 +201,7 @@ include_once ("Emailsending/branchemail.php");
                                                               <h5 class="secondHeader">Price</h5>
                                                           </div>
                                                           <div class="row secondRow">
-                                                              <h5>NZ$' . $totalbackorder_arr[$i][6] . '</h5>
+                                                              <h5>NZ$' . $newpickups_arr[$i][6] . '</h5>
                                                           </div>
                                                       </div>
                                                       <div class="col-3 text-left">
@@ -189,18 +209,41 @@ include_once ("Emailsending/branchemail.php");
                                                               <h5 class="ordertime secondHeader">Ordered On:</h5>
                                                           </div>
                                                           <div class="row secondRow">
-                                                              <h5 class="orderdate">' . $totalbackorder_arr[$i][3] . '</h5>
+                                                              <h5 class="orderdate">' . $newpickups_arr[$i][3] . '</h5>
                                                           </div>
                                                       </div>
                                                   </div>
-                                              </div>
-                                            
+                                              </div>';
+                                              $statusName = $newpickups_arr[$i][4];
+                                              switch ($newpickups_arr[$i][4]) {
+                                                case 0:
+                                                  $badgeType = 'badge-secondary';
+                                                  
+                                                  break;
+                                                case 1:
+                                                  $badgeType = 'badge-info';
+                                                  $statusName = 'paid';
+                                                  break;
+
+                                                case 3:
+                                                  $badgeType = 'badge-warning';
+                                                  $statusName = 'ready to pick up';
+                                                  break;
+
+                                                case 6:
+                                                  $badgeType = 'badge-info';
+                                                  $statusName = 'pay by cash';
+                                                  break;
+                                                default:
+                                                  # code...
+                                                  break;
+                                              }
        
-                                              <div class="col-1 p-1 my-auto text-left pl-5" style="font-size:1.25rem;">
-                                                  <span class="badge badge-success">Completed</span>
+                                echo'         <div class="col-1 p-1 my-auto text-left pl-5" style="font-size:1.25rem;">
+                                              <span class="badge ' . $badgeType . '">' . $statusName . '</span>
                                               </div>';
                                             echo ' <div class="col-2 col-xs-6 p-1 my-auto  pl-5" style="font-size:1.25rem;">
-                                            <button class="btn btn-primary adminmsg" id="branchemailbutton"  data-toggle="modal" data-target="#branchemail" value="' . $totalbackorder_arr[$i][0] . '" onclick="branchorderid();"><i class="fa fa-envelope"></i> </button>
+                                            <button class="btn btn-primary adminmsg" id="branchemailbutton"  data-toggle="modal" data-target="#branchemail" value="' . $newpickups_arr[$i][0] . '" ><i class="fa fa-envelope"></i> </button>
                                             
                                         </div>
                                           </div>
@@ -218,15 +261,25 @@ include_once ("Emailsending/branchemail.php");
          
           echo '</div>';
           }else{
-            echo 'There is no completed order yet';
+            echo 'There is no new pickup order yet';
           }
         ?>
     <!-- backorder collapse ends -->
+                </div>
+                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                      Et et consectetur ipsum labore excepteur est proident excepteur ad velit occaecat qui minim occaecat veniam. Fugiat veniam incididunt anim aliqua enim pariatur veniam sunt est aute sit dolor anim. Velit non irure adipisicing aliqua ullamco irure incididunt irure non esse consectetur nostrud minim non minim occaecat. Amet duis do nisi duis veniam non est eiusmod tempor incididunt tempor dolor ipsum in qui sit. Exercitation mollit sit culpa nisi culpa non adipisicing reprehenderit do dolore. Duis reprehenderit occaecat anim ullamco ad duis occaecat ex.
+                    </div>
 
-
+                  </div>
+                
+                </div>
+              </div>
+        </div>
+      </div>
+</div>
+<!-- ------------until -->
 
         </div>
-    </div>
 </div>
 <!-- --------------------------------------------------------------------------------------------------------- -->
 <?php

@@ -2,9 +2,6 @@
     session_start();
     $_SESSION['location'] = 'backorderstatus';
     include ('connection.php');  
-    require_once ('partials/branchquery.php');
-    require_once ('partials/backorderquery.php');
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,124 +12,11 @@
     <title>Branch Admin Dashboard</title>
     <?php
     include_once ("partials/head.php");
-    include_once ("Emailsending/branchemail.php");
     include(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'liquorlibrary' . DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 'DBsql.php');
     $DBsql = new sql;
     ?>
     <link rel="stylesheet" href="css/branchreport.css">
-    <style>
-    body, html{
-        height: 100%;
-        width: 100%;
-        scroll-behavior: smooth;
-        margin:0;
-        padding:0;
-        font-family: 'Roboto', sans-serif;
-    }
-  #col1{
-    background-color: #8B0000;
-    border: 1px solid #8B0000;
-  }
-  #col2{
-    background-color:#E5D4CE;
-    border: 1px solid #E5D4CE;
-  }
-  #col3{
-    background-color: #7F7F7F;
-    border: 1px solid #7F7F7F;
-  }
-  #col4{
-    background-color: rgba(48, 43, 41,1);
-    border: 1px solid rgba(48, 43, 41,1);
-  }
-  .status {
-      font-size: 30px;
-      margin: 2px 2px 0 0;
-      display: inline-block;
-      vertical-align: middle;
-      line-height: 10px;
-    }
-
-    a {
-      cursor: pointer;
-    }
-
-    #titlearea a {
-      text-decoration: none;
-      color: grey;
-    }
-
-    .card:hover {
-      animation-name: shadowFrame;
-      animation-duration: 0.2s;
-      animation-fill-mode: forwards;
-      z-index: 100;
-    }
-
-    .ids {
-      color: royalblue;
-      height: 100%;
-      line-height: 3.6rem;
-    }
-
-    .secondHeader {
-      color: black;
-      font-size: 0.9rem;
-      line-height: 1.45rem;
-      margin-left: -10px;
-    }
-
-    .secondRow,
-    .secondRow>h5 {
-      height: 40px;
-      line-height: 40px;
-    }
-
-    .thirdHeader {
-      font-size: 0.8rem;
-      line-height: 1.45rem;
-      color: gray;
-      padding-left: 10px;
-    }
-
-    h5 {
-      margin: 0;
-    }
-
-    h6 {
-      text-align: right;
-    }
-
-    .briefimg {
-      width: auto;
-      max-width: 40px;
-      height: 40px;
-    }
-
-    .button:active {
-      border: none;
-    }
-
-    .collapse:before {
-      box-shadow: 0px 6px 7px -6px rgba(0, 0, 0, 0.2) inset;
-    }
-
-    .details {
-      padding-left: 80px;
-      padding-right: 80px;
-    }
-
-    @keyframes shadowFrame {
-      from {}
-
-      to {
-        box-shadow: 0px 0px 10px 5px lightgray;
-      }
-    }
-    .orderdate{
-      font-size: 1rem;
-    }
-  </style>
+    <link rel="stylesheet" href="css/branch.css">
 </head>
 
 <body>
@@ -142,6 +26,12 @@
             include_once ("partials/header.php");
         ?>        
 </section>
+<?php
+if(isset($_SESSION['warehouse'])){
+require_once ('partials/branchquery.php');
+require_once ('partials/backorderquery.php');
+include_once ("Emailsending/branchemail.php");
+  ?>
 <!-- top header ends--------------------------------------------------------------------------------- -->
 <!-- Side Nav included--------------------------------------------------------------------------------- -->
 <div id="wrapper">
@@ -198,7 +88,7 @@
     <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Customer Order</h6>
-        <a class="collapse-item" href="utilities-color.html">Order status</a>
+        <a class="collapse-item" href="pickuporderstatus.php">Order status</a>
         <a class="collapse-item" href="utilities-border.html">Order history</a>
         <a class="collapse-item" href="utilities-animation.html">Reports</a>
       </div>
@@ -345,7 +235,7 @@
                                                     
                                                 </div>
                                                 <div class="col-2 p-1 my-auto  pl-5" style="font-size:1.25rem;">
-                                            <button class="btn btn-primary adminmsg" id="branchemailbutton"  data-toggle="modal" data-target="#branchemail" value="' . $totalbackorder_arr[$i][0] . '" onclick="branchorderid();"><i class="fa fa-envelope"></i> </button>
+                                            <button class="btn btn-primary adminmsg" id="branchemailbutton"  data-toggle="modal" data-target="#branchemail" value="' . $totalbackorder_arr[0][0] . '" onclick="branchorderid();"><i class="fa fa-envelope"></i> </button>
                                                 
                                             </div>
 
@@ -738,6 +628,12 @@
     </div>
 </div>
 <!-- --------------------------------------------------------------------------------------------------------- -->
+<?php
+}
+else{
+  echo '<h4 style="position: absolute; top: 40%; left: 40%;">This page needs a valid authentification to read.</h4> ';
+}
+?>
 <?php
     include_once ("partials/foot.php");
   ?>  

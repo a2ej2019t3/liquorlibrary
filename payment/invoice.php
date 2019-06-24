@@ -18,7 +18,14 @@
                 
                 // Cart items > in case of order status=0 
                 $date = date('Y-m-d H:i:s');
+                if($paymentmethod=='cash'){
+                $updateorder_sql = "UPDATE `orders` SET `status`=6 , note='$note', `date`= '$date', `whID`='$pickupwarehouseId', `paymentmethod`='$paymentmethod', `deliverymethod`='$deliverymethod' WHERE orderID='$orderId'";
+       
+                }
+                else{
                 $updateorder_sql = "UPDATE `orders` SET `status`=1 , note='$note', `date`= '$date', `whID`='$pickupwarehouseId', `paymentmethod`='$paymentmethod', `deliverymethod`='$deliverymethod' WHERE orderID='$orderId'";
+
+                }
                 // var_dump($charge->failure_message);
                 $updateorder_res = mysqli_query($connection, $updateorder_sql);
                

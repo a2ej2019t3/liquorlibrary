@@ -76,7 +76,7 @@ if(isset($_SESSION['warehouse']['whID'])){
 
           // Select pick up orders information
           $pickuporders_query="SELECT * from orders where whID='$whID' AND deliverymethod='pickup' AND status=4  AND extract(month from date) = '$selectedmonth'";
-          $pendingpickuporders_query="SELECT * from orders where whID='$whID' AND deliverymethod='pickup' AND status=1 or status=2 or status=3 or status=6";
+          $pendingpickuporders_query="SELECT * from orders where whID='$whID' AND deliverymethod='pickup' AND status=1 or status=3 or status=6";
           
           $pickuporders_res=mysqli_query($connection, $pickuporders_query);
           $pendingpickups_res=mysqli_query($connection, $pendingpickuporders_query);

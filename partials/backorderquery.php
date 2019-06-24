@@ -1,12 +1,7 @@
 <?php
 
     if ( isset($selectuser_result) && isset($selectmonth_result) &&  isset($selectyear_result)) {
-        // $selectmonth_arr=mysqli_fetch_all($selectmonth_result);
-        // $selectyear_arr=mysqli_fetch_all($selectyear_result);
-        // $selectedmonth=$selectmonth_arr[0][1];
-        // $selectedyear=$selectyear_arr[0][1];
-        // // store this month data
-        // $selectuser_arr = mysqli_fetch_all($selectuser_result);
+
         $totalbackorder_arr=array();  
         $shippingorder_arr=array();  
         $cancelorder_arr=array();  
