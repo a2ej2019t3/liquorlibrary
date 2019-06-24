@@ -5,7 +5,7 @@
     $cartID = $_GET['oi'];
     // $cartID = 1;
     $res = $DBsql->getOrderInfo($cartID, null);
-    var_dump($res);
+    // var_dump($res);
     $tagForCategory = 'Category: ';
     $tagForBrand = 'Brand: ';
     $tagForPrice = 'Price: ';

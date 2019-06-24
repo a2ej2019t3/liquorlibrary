@@ -5,17 +5,17 @@ $DBsql = new sql;
 if (isset($_SESSION['user'])) {
     $buyerID = $_SESSION['user']['userID'];
     if ($_GET['op'] == 'filt') {
-        echo '1';
+        // echo '1';
         if ($_GET['si']) {
             $optIndex = $_GET['si'];
             if ($optIndex == 'all') {
-                $statusID = array(1,3,4,6,7);
+                $statusID = array(1, 3, 4, 6, 7);
             } else if ($optIndex == 'paid') {
                 $statusID = array(1, 6);
             } else if ($optIndex == 'completed') {
                 $statusID = 4;
             } else if ($optIndex == 'processing') {
-                $statusID = array(3,7);
+                $statusID = array(3, 7);
             } else if ($optIndex == 'cancelled') {
                 $statusID = 5;
             }
@@ -27,14 +27,12 @@ if (isset($_SESSION['user'])) {
                 'statusID' => $statusID
             );
         $result = $DBsql->select('orders LEFT JOIN status ON orders.status = status.statusID', $consArr);
-        echo var_dump($result);
-        $sortKey = 'orderID';
+        // echo var_dump($result);
         if ($result !== null) {
             foreach ($result as $key => $value) {
-                $sorted[$value[$sortKey]] = $value;
+                $sorted[$value['orderID']] = $value;
             }
             ksort($sorted);
-            // var_dump($sorted);
             $_SESSION['sorted'] = $sorted;
         } else {
             $sorted = null;
@@ -46,18 +44,21 @@ if (isset($_SESSION['user'])) {
                 </div>";
         }
     } else if ($_GET['op'] == 'sort') {
-        echo '2';
         if (isset($_SESSION['sorted'])) {
+            // echo '2';
             $sortKey = $_GET['key'];
             $sort = $_GET['sort'];
             $result = $_SESSION['sorted'];
             foreach ($result as $key => $value) {
-                $sorted[$value[$sortKey]] = $value;
+                $sortArr[$key] = $value[$sortKey];
             }
             if ($sort == 'asc') {
-                ksort($sorted);
+                asort($sortArr);
             } else if ($sort == 'des') {
-                krsort($sorted);
+                arsort($sortArr);
+            }
+            foreach ($sortArr as $key => $value) {
+                $sorted[$key] = $result[$key];
             }
         } else {
             $sorted = null;
