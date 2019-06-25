@@ -185,3 +185,29 @@ function branchorderid () {
     hiddenorderid.setAttribute('value',orderid);
 }
 
+// var readypickup= function(data){
+//     var orderid=data.value;
+//     alert(orderid);
+// }
+function readypickup(json){
+
+    var obj = JSON.parse(json);
+    var orderid=obj.orderID;
+    var buyerid=obj.buyerID;
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(xmlhttp);
+            if(xmlhttp.responseText == 1){
+                alert('success!');
+            }
+            else if(xmlhttp.responseText == 2){
+                alert('email error!');
+            }
+            // document.getElementById("content").innerHTML = xmlhttp.responseText;
+            
+        }
+    };
+xmlhttp.open("GET", "partials/pickupready.php?id="+orderid+"&buyerid="+buyerid, true);
+xmlhttp.send();  
+}

@@ -1,6 +1,6 @@
 <?php
     session_start();
-    $_SESSION['location'] = 'backorderhistory';
+    $_SESSION['location'] = 'pickuporderstatus';
     include ('connection.php');  
 ?>
 <!DOCTYPE html>
@@ -37,7 +37,7 @@ include_once ("Emailsending/branchemail.php");
   ?>
 <!-- top header ends--------------------------------------------------------------------------------- -->
 <!-- Side Nav included--------------------------------------------------------------------------------- -->
-<div id="wrapper">
+<div id="wrapper" style="margin-top:40px;">
 
 <!-- Sidebar -->
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: rgba(48, 43, 41,1); margin-top:40px; background-image:none;">
@@ -92,7 +92,7 @@ include_once ("Emailsending/branchemail.php");
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Customer Order</h6>
         <a class="collapse-item active" href="pickuporderstatus.php">Order status</a>
-        <a class="collapse-item" href="utilities-border.html">Order history</a>
+        <a class="collapse-item" href="pickuporderhistory.php">Order history</a>
         <a class="collapse-item" href="utilities-animation.html">Reports</a>
       </div>
     </div>
@@ -238,13 +238,19 @@ include_once ("Emailsending/branchemail.php");
                                                   # code...
                                                   break;
                                               }
+                                              $orderIdArr= array(
+                                                'orderID'=> $newpickups_arr[$i][0],
+                                                'buyerID'=>$newpickups_arr[$i][1]                                                 
+                                              );
+                                              $orderidJson = json_encode($orderIdArr);
        
                                 echo'         <div class="col-1 p-1 my-auto text-left pl-5" style="font-size:1.25rem;">
                                               <span class="badge ' . $badgeType . '">' . $statusName . '</span>
                                               </div>';
                                             echo ' <div class="col-2 col-xs-6 p-1 my-auto  pl-5" style="font-size:1.25rem;">
                                             <button class="btn btn-primary adminmsg" id="branchemailbutton"  data-toggle="modal" data-target="#branchemail" value="' . $newpickups_arr[$i][0] . '" ><i class="fa fa-envelope"></i> </button>
-                                            
+                                            <button class="btn btn-danger" id="branchemailbutton" value=' . $orderidJson . ' onclick="readypickup(this.value);" >READY</button>
+
                                         </div>
                                           </div>
                                       </div>
@@ -267,8 +273,116 @@ include_once ("Emailsending/branchemail.php");
     <!-- backorder collapse ends -->
                 </div>
                     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                      Et et consectetur ipsum labore excepteur est proident excepteur ad velit occaecat qui minim occaecat veniam. Fugiat veniam incididunt anim aliqua enim pariatur veniam sunt est aute sit dolor anim. Velit non irure adipisicing aliqua ullamco irure incididunt irure non esse consectetur nostrud minim non minim occaecat. Amet duis do nisi duis veniam non est eiusmod tempor incididunt tempor dolor ipsum in qui sit. Exercitation mollit sit culpa nisi culpa non adipisicing reprehenderit do dolore. Duis reprehenderit occaecat anim ullamco ad duis occaecat ex.
-                    </div>
+<!-- ready pickup orders starts -->
+<?php
+                            
+                            echo '
+                              <div id="accordion">';
+                        if(!empty($readypickups_arr)){
+                            for ($i = 0; $i < count($readypickups_arr); $i++) {
+                              echo '
+                                          <div class="card">
+                                              <a class="btn p-0 orders"  data-toggle="collapse" data-target="#coid' . $i . '" data-orderid="' . $readypickups_arr[$i][0] . '" style="width:100%;">
+                
+                                                      <div id="heading" class="py-2">
+                                                          <div class="row">
+                                                              <div class="col-9 my-auto">
+                                                                  <div class="row">
+                                                                      <div class="col-2 mx-auto">
+                                                                          <h5 class="ids">#' . $readypickups_arr[$i][0] . '</h5>
+                                                                      </div>
+                                                                      <div class="col-4 text-left">
+                                                                          <div class="row">
+                                                                              <h5 class="secondHeader">Items</h5>
+                                                                          </div>
+                                                                          <div class="row secondRow">';
+                             $imgpath = 'images/';
+                              $items = $DBsql->getCartItemsInfo($readypickups_arr[$i][0], array('LIMIT' => '3'));
+                              // var_dump($items);
+                              
+                              if (count($items) != 0) {
+                                foreach ($items as $key => $value) {
+                                  echo '
+                                         <img class="img-thumbnail briefimg mx-1" src="' . $imgpath . $value['img'] . '">';
+                                }
+                                if (count($items) < 3) { } else {
+                                  echo '<i class="fas fa-ellipsis-h" style="color:grey; margin-left:5px; line-height:2.4;"></i>';
+                                }
+                              }
+                              echo '
+                                                                          </div>
+                                                                      </div>
+                                                                      <div class="col-3">
+                                                                          <div class="row">
+                                                                              <h5 class="secondHeader">Price</h5>
+                                                                          </div>
+                                                                          <div class="row secondRow">
+                                                                              <h5>NZ$' . $readypickups_arr[$i][6] . '</h5>
+                                                                          </div>
+                                                                      </div>
+                                                                      <div class="col-3 text-left">
+                                                                          <div class="row">
+                                                                              <h5 class="ordertime secondHeader">Ordered On:</h5>
+                                                                          </div>
+                                                                          <div class="row secondRow">
+                                                                              <h5 class="orderdate">' . $readypickups_arr[$i][3] . '</h5>
+                                                                          </div>
+                                                                      </div>
+                                                                  </div>
+                                                              </div>';
+                                                              $statusName = $readypickups_arr[$i][4];
+                                                              switch ($readypickups_arr[$i][4]) {
+                                                                case 0:
+                                                                  $badgeType = 'badge-secondary';
+                                                                  
+                                                                  break;
+                                                                case 1:
+                                                                  $badgeType = 'badge-info';
+                                                                  $statusName = 'paid';
+                                                                  break;
+                
+                                                                case 3:
+                                                                  $badgeType = 'badge-warning';
+                                                                  $statusName = 'ready to pick up';
+                                                                  break;
+                
+                                                                case 6:
+                                                                  $badgeType = 'badge-info';
+                                                                  $statusName = 'pay by cash';
+                                                                  break;
+                                                                default:
+                                                                  # code...
+                                                                  break;
+                                                              }
+                       
+                                                echo'         <div class="col-1 p-1 my-auto text-left pl-5" style="font-size:1.25rem;">
+                                                              <span class="badge ' . $badgeType . '">' . $statusName . '</span>
+                                                              </div>';
+                                                            echo ' <div class="col-2 col-xs-6 p-1 my-auto  pl-5" style="font-size:1.25rem;">
+                                                            <button class="btn btn-primary adminmsg" id="branchemailbutton"  data-toggle="modal" data-target="#branchemail" value="' . $readypickups_arr[$i][0] . '" ><i class="fa fa-envelope"></i> </button>
+                                                            <button class="btn btn-danger"  value="' . $newpickups_arr[$i][0] . '" >COMPLETE</button>
+
+                                                        </div>
+                                                          </div>
+                                                      </div>
+                
+                                              </a>
+                                              <div id="coid' . $i . '" class="collapsesub" data-parent="#accordion">
+                                                  <hr class="my-0">
+                                                  <div class="py-4 details" style="display:none;">
+                                                      
+                                                  </div>
+                                              </div>
+                                          </div>';
+                            }
+                         
+                          echo '</div>';
+                          }else{
+                            echo 'There is no ready pickup order yet';
+                          }
+                        ?>
+<!-- ready pickup orders ends -->
+                  </div>
 
                   </div>
                 

@@ -36,7 +36,7 @@ include_once ("Emailsending/branchemail.php");
 <!-- Side Nav included--------------------------------------------------------------------------------- -->
 <div id="wrapper">
 <!-- Sidebar -->
-<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: rgba(48, 43, 41,1); margin-top:40px; background-image:none;">
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: rgba(48, 43, 41,1);background-image:none;">
 
   <!-- Sidebar - Brand -->
   <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
@@ -88,7 +88,7 @@ include_once ("Emailsending/branchemail.php");
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Customer Order</h6>
         <a class="collapse-item" href="pickuporderstatus.php">Order status</a>
-        <a class="collapse-item" href="utilities-border.html">Order history</a>
+        <a class="collapse-item" href="pickuporderhistory.php">Order history</a>
         <a class="collapse-item" href="utilities-animation.html">Reports</a>
       </div>
     </div>
@@ -126,7 +126,7 @@ include_once ("Emailsending/branchemail.php");
 
 </ul>
 <!-- content starts -------------------------------------------------------------------------------------------->
-    <div id="content" style="margin-top:40px; width:100%;">
+    <div id="content" style="width:100%;">
 
     <!-- Begin Page Content -->
         <div class="container-fluid" style="width:100%;">
