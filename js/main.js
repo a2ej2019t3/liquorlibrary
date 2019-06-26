@@ -185,10 +185,7 @@ function branchorderid () {
     hiddenorderid.setAttribute('value',orderid);
 }
 
-// var readypickup= function(data){
-//     var orderid=data.value;
-//     alert(orderid);
-// }
+
 function readypickup(json){
 
     var obj = JSON.parse(json);
@@ -199,13 +196,13 @@ function readypickup(json){
         if (this.readyState == 4 && this.status == 200) {
             console.log(xmlhttp);
             if(xmlhttp.responseText == 1){
-                alert('success!');
+                alert('Now the order is ready and system sent an notification email to this customer.');
             }
             else if(xmlhttp.responseText == 2){
-                alert('email error!');
+                alert('We failed to send an email to customer.');
             }
             // document.getElementById("content").innerHTML = xmlhttp.responseText;
-            
+            // $("#content").load(" #content > *");
         }
     };
 xmlhttp.open("GET", "partials/pickupready.php?id="+orderid+"&buyerid="+buyerid, true);

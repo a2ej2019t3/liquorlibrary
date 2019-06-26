@@ -70,6 +70,9 @@ if(isset($_SESSION['warehouse']['whID'])){
           $totalbackorder_cost=$totalbackorder_cost+$sum;
           };              
         }
+        else{
+          $totalbackorder_cost=0;
+        }
  
         // echo  $totalbackorder_cost;
         // var_dump($backorder_arr);
@@ -91,7 +94,10 @@ if(isset($_SESSION['warehouse']['whID'])){
                     
                     $totalpickup_income=$totalpickup_income+$sum;
                     };              
-                };
+                }
+                else{
+                  $totalpickup_income=0;
+                }
 
           }
                 

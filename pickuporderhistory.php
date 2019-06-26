@@ -158,9 +158,7 @@ include_once ("Emailsending/branchemail.php");
 <!-- first new pick up orders------------------------------------------------------------------------------ -->
                <!-- backorder collapse starts -->
                <p></p>
-               <?php
-echo count($complete_arr);
-?>
+
 <?php
                             
                             echo '
@@ -277,10 +275,10 @@ echo count($complete_arr);
                          
                           echo '</div>';
                           }else{
-                            echo 'There is no cancelled pickup order yet';
+                            echo 'There is no completed pickup order yet';
                           }
                         ?>
-
+                </div>
     <!-- backorder collapse ends -->
                 </div>
                     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">

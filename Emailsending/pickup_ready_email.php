@@ -1,13 +1,14 @@
 
 <?php
 session_start();
-if(isset($buyeremail)){
-    $sendername='liquor library';
-    $senderemail_address='liquorlibrary@admin.com';
+if($buyeremail!=null){
+    // $sendername='liquor library';
+    // $senderemail_address='liquorlibrary@admin.com';
 
-    $branchname=$_SEESSION['warehouse']['whName'];
+    $branchname=$_SESSION['warehouse']['whName'];
     $requestorderID=$orderID;
-
+    $senderemail_address='admin@gmail.com';
+    $sendername='liquor libarary';
     define("PROJECT_HOME","http://localhost/liquorlibrary");
     
     define("PORT", ""); // port number
@@ -34,13 +35,13 @@ if(isset($buyeremail)){
            <hr>
             <br>
             <div style="boder: 1px solid rgba(124, 99, 84, 1); border-radius: 25px;">
-            <p style="font-size: 19px; font-weight: 700;">'.$branchname.' from '.$sendername.' is informing you that your order(order number: '.$orderID.') is now ready to meet you!</p>
+            <p style="font-size: 19px; font-weight: 700;">We are informing you that your order(order number: '.$orderID.') is now ready to meet you!</p>
             <div style="background-color: rgba(244, 232, 117, 1); margin: 20px auto; padding: 40px 0;">
             <p style="font-size: 19px; font-weight: 700;">notice: please do not forget to bring your ID with you.</p>
             </div> 
             </div>
             <p> To go to the home page <a href="'.PROJECT_HOME.'/index.php">Click here</a>. </p>
-            <p> To reply to this comment click here '.$senderemail_address.'</p>
+            <p> To reply to this comment click here liquorlibrary@admin.com</p>
 
             <br>
             <hr>
@@ -58,7 +59,7 @@ if(isset($buyeremail)){
     $mail->Host     = "smtp.gmail.com";
     $mail->Mailer   = "smtp";
     
-    $mail->SetFrom($senderemail_address, $sendername);
+    $mail->SetFrom($senderemail_address,  $sendername);
     // $mail->ReturnPath($email, $sender_name);
     $mail->AddAddress($buyeremail);
     $mail->Subject = "Liquor Library: your order is ready at the $branchname ";		
@@ -66,14 +67,10 @@ if(isset($buyeremail)){
     $mail->IsHTML(true);
     
     if(!$mail->Send()) {
-        return 2;
+        echo 2;
     } else {
-        echo ("<script LANGUAGE='JavaScript'>
-        window.alert('Your request is Succesfully sent!');
-        
-        </script>");
-        return 1;
-        // header('Location: ../'. $_SESSION['location'].'.php');
+        echo 1;
+       
     }
     
 }
