@@ -13,53 +13,52 @@
                     <label for="firstname" class="col-sm-3 control-label">Firstname</label>
 
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="firstname" name="firstname" value="">
+                      <input type="text" class="form-control" id="firstName" name="firstName" value="<?php echo $user['firstName']; ?>">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="lastname" class="col-sm-3 control-label">Lastname</label>
 
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="lastname" name="lastname" value="">
+                      <input type="text" class="form-control" id="lastName" name="lastName" value="<?php echo $user['lastName']; ?>">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="email" class="col-sm-3 control-label">Email</label>
 
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="email" name="email" value="">
+                      <input type="text" class="form-control" id="email" name="email" value="<?php echo $user['email']; ?>">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="password" class="col-sm-3 control-label">Password</label>
 
                     <div class="col-sm-9">
-                      <input type="password" class="form-control" id="password" name="password" value="">
+                      <input type="password" class="form-control" id="password" name="password" value="<?php echo $user['password']; ?>">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="contact" class="col-sm-3 control-label">Contact Info</label>
 
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="contact" name="contact" value="">
+                      <input type="text" class="form-control" id="contact" name="contact" value="<?php echo $user['phone']; ?>">
                     </div>
-                </div>
                 <div class="form-group">
                     <label for="address" class="col-sm-3 control-label">Address</label>
 
                     <div class="col-sm-9">
-                      <textarea class="form-control" id="address" name="address"></textarea>
+                      <input type="text" textarea class="form-control" id="address" name="address" value="<?php echo $user['address']; ?>" ></textarea>
                     </div>
                 </div>
                         <hr>
                 
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label for="curr_password" class="col-sm-3 control-label">Current Password</label>
 
                     <div class="col-sm-9">
                       <input type="password" class="form-control" id="curr_password" name="curr_password" placeholder="input current password to save changes" required>
                     </div>
-                </div>
+                </div> -->
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>

@@ -103,7 +103,7 @@
     </a>
     <div id="collapsePages" class="collapse show" aria-labelledby="headingPages" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
-          <a class="collapse-item active" href="updateinfo.php">Update information</a>
+          <a class="collapse-item active" href="updatestoreinfo1.php">Update information</a>
 
       </div>
     </div>

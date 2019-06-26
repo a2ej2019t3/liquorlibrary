@@ -1,21 +1,9 @@
-<?php
-   session_start();
+<?php 
+session_start();
    $_SESSION['location'] = 'updatestoreinfo1';
    include_once('connection.php');
    include_once('database/DBsql.php');
-    // if (isset($_SESSION['user'])) {
-    //   $user = $_SESSION['user'];
-    //   //$orders_list = "SELECT product.productID,product.productName,product.price,orderitems.orderID,orderitems.quantity,orderitems.totalprice FROM product product, orderitems orderitems, orders orders Where orderitems.ItemID = product.productID and orders.orderID = orderitems.orderID '".$user['userID']."'";
-    //             echo $_SESSION['warehouse']['whID'];
-    //            $whID=$_SESSION['warehouse']['whID'];
-    //             $orders_list =  "SELECT * from warehouse w where w.whID = '$whID'";
-    //   $query = mysqli_query($connection, $orders_list);
-    //   if (mysqli_num_rows($query) > 0)
-    //   {
-    //     $orderRow = mysqli_fetch_all($query, MYSQLI_ASSOC);
-?>
- 
-
+   ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,22 +41,42 @@
         <div class="col-sm-3">
 	        							<h4>StoreID:</h4>
                         <h4>StoreName:</h4>
-	        							<h4>Email:</h4>
+	        							
 	        							<h4>Contact Info:</h4>
+                        <h4>Email:</h4>
 	        							<h4>Address:</h4>
 	        		</div>
               </div>
               </div>
-              <div class="col-sm-3">                    
-	        							<h6><?php echo (!empty($user['storeID'])) ? $user['storeID']: 'N/a'; ?></h6>
-                        <h6><?php echo (!empty($user['storeName'])) ? $user['storeName']: 'N/a'; ?></h6>
-                        <h6><?php echo (!empty($user['email'])) ? $user['email']: 'N/a'; ?></h6>
-	        							<h6><?php echo (!empty($user['phone'])) ? $user['phone'] : 'N/a'; ?></h6>
-	        							<h6><?php echo (!empty($user['address'])) ? $user['address'] : 'N/a'; ?></h6>
-	        						</div>
-          	<!-- <div>
-        	    <button class="btn btn-primary">Update</button>
-        	</div> -->
+              <?php
+  
+    if (isset($_SESSION['user'])) {
+      $user = $_SESSION['user'];
+      //$orders_list = "SELECT product.productID,product.productName,product.price,orderitems.orderID,orderitems.quantity,orderitems.totalprice FROM product product, orderitems orderitems, orders orders Where orderitems.ItemID = product.productID and orders.orderID = orderitems.orderID '".$user['userID']."'";
+                echo $_SESSION['warehouse']['whID'];
+               $whID=$_SESSION['warehouse']['whID'];
+                $orders_list =  "SELECT * from warehouse w where w.whID = '$whID'";
+      $query = mysqli_query($connection, $orders_list);
+      if (mysqli_num_rows($query) > 0)
+      {
+        $orderRow = mysqli_fetch_all($query, MYSQLI_ASSOC);
+?>
+
+<?php
+									//var_dump(count($orderRow));
+									for ($i = 0; $i < count($orderRow); $i++) {
+										//var_dump($i);
+										echo '
+										<tr>
+											<h6><td>' . $orderRow[$i]["whID"] . '</td></h6>
+											<h6><td>' . $orderRow[$i]["whName"] . '</td></h6>
+										
+											<h6><td>' . $orderRow[$i]["phone"] . '</td>	</h6>
+											<h6><td>' . $orderRow[$i]["email"] . '</td></h6>
+                      <h6><td>' . $orderRow[$i]["address"] . '</td> </h6>                     
+										</tr>';
+									} ?>
+          
         </form>
       </div>
       <div class="tab-pane in" id="update">
@@ -94,20 +102,42 @@
 	        							<h4>Email:</h4>
 	        							<h4>Contact Info:</h4>
 	        							<h4>Address:</h4>
-	        							<h4>Member Since:</h4>
+	        							<!-- <h4>Member Since:</h4> -->
 	        						</div>
                       </div>
 	        						<div class="col-sm-9">
-	        						<!-- <h4><?php echo $user['firstname'].' '.$user['lastname']; ?> -->
+                      <?php
+                      if (isset($_SESSION['user'])) {
+      $user = $_SESSION['user'];
+      //$orders_list = "SELECT product.productID,product.productName,product.price,orderitems.orderID,orderitems.quantity,orderitems.totalprice FROM product product, orderitems orderitems, orders orders Where orderitems.ItemID = product.productID and orders.orderID = orderitems.orderID '".$user['userID']."'";
+                echo $_SESSION['user']['userID'];
+               $userID=$_SESSION['user']['userID'];
+                $orders_list =  "SELECT * from users u where u.userID = '$userID'";
+      $query = mysqli_query($connection, $orders_list);
+      if (mysqli_num_rows($query) > 0)
+      {
+        $orderRow = mysqli_fetch_all($query, MYSQLI_ASSOC);
+        ?>
+        	        						<!-- <h4><?php echo $user['firstName'].' '.$user['lastName']; ?> -->
 	        								<span class="pull-right">
 	        									<a href="#edit" class="btn btn-success btn-flat btn-sm" data-toggle="modal"><i class="fa fa-edit"></i> Edit</a>
 	        								</span>
             							<!-- </h4> -->
                        
-	        							<!-- <h4><?php echo $user['email']; ?></h4> -->
-	        							<!-- <h4><?php echo (!empty($user['contact_info'])) ? $user['contact_info'] : 'N/a'; ?></h4>
-	        							<h4><?php echo (!empty($user['address'])) ? $user['address'] : 'N/a'; ?></h4> -->
-	        							<!-- <h4><?php echo date('M d, Y', strtotime($user['created_on'])); ?></h4> -->
+                          <?php
+									//var_dump(count($orderRow));
+									for ($i = 0; $i < count($orderRow); $i++) {
+										//var_dump($i);
+										echo '
+										<tr>
+										
+											<h6><td>' . $orderRow[$i]["firstName"] . '</td></h6>
+											<h6><td>' . $orderRow[$i]["email"] . '</td></h6>
+											<h6><td>' . $orderRow[$i]["phone"] . '</td>	</h6>
+										
+                      <h6><td>' . $orderRow[$i]["address"] . '</td> </h6>                     
+										</tr>';
+									} ?>
 	        						</div>
 	        					</div>
 	        				</div>
@@ -140,10 +170,14 @@
   
   </body>
 </html>
-<!-- <?php
-//  }
-//     }
-    ?> -->
+<?php
+ }
+    }
+    ?>
+    <?php
+      }
+    }
+    ?>
 
 <style>
 .nav>li>a:hover, .nav>li>a:focus {
