@@ -1,10 +1,10 @@
 <?php
     
-    if ($_SESSION['location'] == 'index') {
+     if ($_SESSION['location'] == 'index') {
         $className = '';
     } else {
         $className = 'header2li';
-    }
+ }
 ?>
 <header id="topsection">
     <nav class="navbar navbar-expand-lg navbar-inverse fixed-top opaque-navbar">
@@ -13,7 +13,7 @@
             <?php
                 if (!isset($_SESSION['user'])) {
                     echo '
-                        <button type="button" class="btn-warning btn-sm trigger-btn '.$className.'" href="#myModal" data-toggle="modal" style="position:absolute; right: 35px; top: 57px; color:white!important; background-color: rgba(224, 184, 65, 1)!important; border:none;">Login</button>
+                        <button type="button" class="btn-warning btn-sm trigger-btn '.$className.'" href="#myModal" data-togglemodal=modal"modalmodal" style="position:absolute; right: 35px; top: 57px; color:white!important; background-color: rgba(224, 184, 65, 1)!important; border:none;">Login</button>
                     ';
                 } else {
                     echo '
@@ -47,6 +47,7 @@
                             if( $_SESSION['user']['typeID']==3 || $_SESSION['user']['typeID']==2){
                     
                                 echo ' 
+                                <li class="col" id="firstcol"><a class="'.$className.'" href="index.php" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Home</a></li>
                                 <li class="col" id="firstcol"><a class="'.$className.'" href="#aboutus" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">About Us</a></li>
                                 <li class="col"><a class="'.$className.'" href="findlocation/findus.php" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Find Us</a></li>
                                 <li class="col"><a class="'.$className.' js-open-modal" id="ourdrinks" data-toggle="modal" data-target="#subnav" href="#" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Our Drinks</a></li> 
@@ -81,6 +82,7 @@
                         }
                         else{
                             echo ' 
+                           
                             <li class="col" id="firstcol"><a class="'.$className.'" href="#aboutus" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">About Us</a></li>
                             <li class="col"><a class="'.$className.'" href="findlocation/findus.php" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Find Us</a></li>
                             <li class="col"><a class="'.$className.' js-open-modal" id="ourdrinks" data-toggle="modal" data-target="#subnav" href="#" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Our Drinks</a></li> 
