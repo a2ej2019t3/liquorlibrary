@@ -184,6 +184,38 @@ function branchorderid () {
     var hiddenorderid=document.getElementById('questionorder');
     hiddenorderid.setAttribute('value',orderid);
 }
+function updateorder(elem){
+
+    var id=$(elem).attr("data-id");
+    
+    var spinner='#spinner'+id;
+    var readysign='#readysign'+id;
+    
+    $(spinner).css("display","block");
+    $(readysign).css("display","none");
+        // setTimeout( "$('#spinner').css('display','none');", 8000);
+        window.setTimeout(function(){
+      $(spinner).css('display','none');
+      $(readysign).css("display","block");
+        }, 5000);
+
+
+  }
+    function completeorder(elem){
+
+    var id=$(elem).attr("data-id");
+
+    var spinner='#completespinner'+id;
+    var readysign='#completereadysign'+id;
+
+    $(spinner).css("display","block");
+    $(readysign).css("display","none");
+    // setTimeout( "$('#spinner').css('display','none');", 8000);
+    window.setTimeout(function(){
+    $(spinner).css('display','none');
+    $(readysign).css("display","block");
+    }, 5000);
+    }
 
 
 function readypickup(json){
@@ -201,10 +233,33 @@ function readypickup(json){
             else if(xmlhttp.responseText == 2){
                 alert('We failed to send an email to customer.');
             }
-            // document.getElementById("content").innerHTML = xmlhttp.responseText;
-            // $("#content").load(" #content > *");
+
+            window.location.reload();
         }
     };
 xmlhttp.open("GET", "partials/pickupready.php?id="+orderid+"&buyerid="+buyerid, true);
+xmlhttp.send();  
+}
+
+function completepickup(json){
+
+    var obj = JSON.parse(json);
+    var orderid=obj.orderID;
+    var buyerid=obj.buyerID;
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(xmlhttp);
+            if(xmlhttp.responseText == 1){
+                alert('This order has been completed, Thank you!');
+            }
+            else if(xmlhttp.responseText == 2){
+                alert('We failed to send an email to customer.');
+            }
+
+            window.location.reload();
+        }
+    };
+xmlhttp.open("GET", "partials/completepickup.php?id="+orderid+"&buyerid="+buyerid, true);
 xmlhttp.send();  
 }

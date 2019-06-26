@@ -34,7 +34,7 @@ include('connection.php');
   if (isset($_SESSION['warehouse'])) {
     require_once('partials/branchquery.php');
     require_once('partials/pickuporderquery.php');
-    include_once("Emailsending/branchemail.php");
+    include_once("Emailsending/branchemail_customorinform.php");
     ?>
     <!-- top header ends--------------------------------------------------------------------------------- -->
     <!-- Side Nav included--------------------------------------------------------------------------------- -->
@@ -241,7 +241,9 @@ include('connection.php');
                                               </div>
                                               <div class="col-3 col-xs-6 p-1 my-auto  pl-5" style="font-size:1.25rem;">
                                                   <button class="btn btn-primary adminmsg" id="branchemailbutton"  data-toggle="modal" data-target="#branchemail" value="' . $newpickups_arr[$i][0] . '" ><i class="fa fa-envelope"></i> </button>
-                                                  <button class="btn btn-danger" id="branchemailbutton" value=' . $orderidJson . ' onclick="readypickup(this.value);" >READY</button>
+                                                  <button class="btn btn-danger" id="updatebutton' . $i . '" data-id='.$i.' value=' . $orderidJson . ' onclick="updateorder(this); readypickup(this.value)" ><span id="readysign' . $i . '">READY</span>                                                  
+                                                  <span class="spinner-border spinner-border-sm" id="spinner' . $i . '" role="status" aria-hidden="true" style="display:none"></span>
+                                                  </button>
 
                                              </div>
                                               </div>
@@ -299,7 +301,7 @@ include('connection.php');
                             'orderID' => $readypickups_arr[$i][0],
                             'buyerID' => $readypickups_arr[$i][1]
                           );
-                          // $orderidJson = json_encode($orderIdArr);
+                          $orderidJson = json_encode($orderIdArr);
   
   
                             echo '<div class="card">
@@ -348,8 +350,11 @@ include('connection.php');
                                           </div>
                                           <div class="col-3 col-xs-6 p-1 my-auto  pl-5" style="font-size:1.25rem;">
                                               <button class="btn btn-primary adminmsg" id="branchemailbutton"  data-toggle="modal" data-target="#branchemail" value="' . $readypickups_arr[$i][0] . '" ><i class="fa fa-envelope"></i> </button>
-                                              <button class="btn btn-danger"  value="' . $readypickups_arr[$i][0] . '" >COMPLETE</button>
-
+                                              
+                                              <button class="btn btn-danger"  id="completebutton" data-id=' . $i . '   value=' . $orderidJson .  ' onclick="completeorder(this); completepickup(this.value);" ><span id="completereadysign' . $i . '"> COMPLETE</span>
+                                              <span class="spinner-border spinner-border-sm" id="completespinner' . $i . '" role="status" aria-hidden="true" style="display:none"></span>
+                                              </button>
+                                             
                                          </div>
                                           </div>
                                         </div>
@@ -408,6 +413,8 @@ include('connection.php');
         xmlhttp.send();
       });
     })
+
+ 
   </script>
   <script type="text/javascript" src="js/sub.js"></script>
   <script type="text/javascript" src="js/main.js"></script>
