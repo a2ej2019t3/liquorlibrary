@@ -10,10 +10,10 @@
     <nav class="navbar navbar-expand-lg navbar-inverse fixed-top opaque-navbar">
         <div class="container">
     <!-- login button -->
-            <?php
+    <?php
                 if (!isset($_SESSION['user'])) {
                     echo '
-                        <button type="button" class="btn-warning btn-sm trigger-btn '.$className.'" href="#myModal" data-togglemodal=modal"modalmodal" style="position:absolute; right: 35px; top: 57px; color:white!important; background-color: rgba(224, 184, 65, 1)!important; border:none;">Login</button>
+                        <button type="button" class="btn-warning btn-sm trigger-btn '.$className.'" href="#myModal" data-toggle="modal" style="position:absolute; right: 35px; top: 57px; color:white!important; background-color: rgba(224, 184, 65, 1)!important; border:none;">Login</button>
                     ';
                 } else {
                     echo '
