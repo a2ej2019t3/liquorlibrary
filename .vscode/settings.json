@@ -1,0 +1,4 @@
+{
+    "jshint.lintHTML": true,
+    "window.closeWhenEmpty": true
+}
