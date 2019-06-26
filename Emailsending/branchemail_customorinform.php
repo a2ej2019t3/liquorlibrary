@@ -1,4 +1,4 @@
-<div class="modal fade" id="branchemail" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="branch_customeremail" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -18,6 +18,7 @@
         <div class="form-group">
             <input type="hidden" name="brnachname" value="<?php echo $_SESSION['warehouse']['whName'] ?>">
             <input type="hidden" name="branchID" value="<?php echo $_SESSION['warehouse']['whID'] ?>">
+            <input type="hidden" name="buyerID" value="<?php echo $_SESSION['buyerID'] ?>">
             <input type="hidden" id="questionorder" name="questionorder">
 
         </div>
