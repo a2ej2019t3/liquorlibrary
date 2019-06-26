@@ -4,6 +4,9 @@ session_start();
    include_once('connection.php');
    include_once('database/DBsql.php');
    ?>
+   <?php
+   include_once("partials/head.php");
+   ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,9 +14,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Branch Admin Dashboard</title>
-    <?php
-     include_once ("partials/head.php");
-    ?>
+    
     <link rel="stylesheet" href="css/branchreport.css">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
    
@@ -23,11 +24,11 @@ session_start();
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
-<!-- <section>
+<section>
         <?php
             include_once ("partials/header.php");
         ?>        
-</section> -->
+</section>
 <div class="well">
     <ul class="nav nav-tabs">
       <li ><a href="#home" data-toggle="tab" class="mytabs">Store Information</a></li>
@@ -98,6 +99,7 @@ session_start();
 	        				<div class="col-sm-9">
 	        					<div class="row">
 	        						<div class="col-sm-3">
+                      <h4>userID</h4>
 	        							<h4>Name:</h4>
 	        							<h4>Email:</h4>
 	        							<h4>Contact Info:</h4>
@@ -118,11 +120,11 @@ session_start();
       {
         $orderRow = mysqli_fetch_all($query, MYSQLI_ASSOC);
         ?>
-        	        						<!-- <h4><?php echo $user['firstName'].' '.$user['lastName']; ?> -->
+        	        					
 	        								<span class="pull-right">
 	        									<a href="#edit" class="btn btn-success btn-flat btn-sm" data-toggle="modal"><i class="fa fa-edit"></i> Edit</a>
 	        								</span>
-            							<!-- </h4> -->
+            						
                        
                           <?php
 									//var_dump(count($orderRow));
@@ -131,11 +133,11 @@ session_start();
 										echo '
 										<tr>
 										
-											<h6><td>' . $orderRow[$i]["firstName"] . '</td></h6>
-											<h6><td>' . $orderRow[$i]["email"] . '</td></h6>
-											<h6><td>' . $orderRow[$i]["phone"] . '</td>	</h6>
+											<h4><td>' . $orderRow[$i]["firstName"] . '</td></h4>
+											<h4><td>' . $orderRow[$i]["email"] . '</td></h4>
+											<h4><td>' . $orderRow[$i]["phone"] . '</td>	</h4>
 										
-                      <h6><td>' . $orderRow[$i]["address"] . '</td> </h6>                     
+                      <h4><td>' . $orderRow[$i]["address"] . '</td> </h4>                     
 										</tr>';
 									} ?>
 	        						</div>
@@ -163,10 +165,10 @@ session_start();
   include_once ("profile_modal1.php");
   ?>
   
-  <!-- <script type="text/javascript" src="js/sub.js"></script>
+  <script type="text/javascript" src="js/sub.js"></script>
   <script type="text/javascript" src="js/main.js"></script>
   <script type="text/javascript" src="js/search.js"></script>
-  -->
+ 
   
   </body>
 </html>
