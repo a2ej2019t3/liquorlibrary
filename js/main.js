@@ -263,3 +263,26 @@ function completepickup(json){
 xmlhttp.open("GET", "partials/completepickup.php?id="+orderid+"&buyerid="+buyerid, true);
 xmlhttp.send();  
 }
+function openEmailModal(json){
+    var obj = JSON.parse(json);
+    var orderid=obj.orderID;
+    var buyerid=obj.buyerID;
+    
+    $('#branch_customeremail').modal('show');
+    $('#questionorder').attr('value', orderid);
+    $('#buyerid').attr('value', buyerid);    
+}
+function sendspin(){
+
+    var spinner='#sendspinner';
+    var sign='#sendsign';
+    
+    $(spinner).css("display","block");
+    $(sign).css("display","none");
+    // setTimeout( "$('#spinner').css('display','none');", 8000);
+    window.setTimeout(function(){
+    $(spinner).css('display','none');
+    $(sign).css("display","block");
+    }, 5000);
+    }
+    

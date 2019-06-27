@@ -192,9 +192,7 @@ include('connection.php');
                                 'orderID' => $newpickups_arr[$i][0],
                                 'buyerID' => $newpickups_arr[$i][1]
                               );
-                              $orderidJson = json_encode($orderIdArr);
-                              $_SESSION['buyerID']=$newpickups_arr[$i][1];
-      
+                              $orderidJson = json_encode($orderIdArr);      
                                 echo '<div class="card">
                                           <a class="btn p-0 orders"  data-toggle="collapse" data-target="#coid' . $i . '" data-orderid="' . $newpickups_arr[$i][0] . '" style="width:100%;">
                                            <div id="heading" class="py-2">
@@ -240,7 +238,7 @@ include('connection.php');
                                                    <span class="badge ' . $badgeType . '">' . $statusName . '</span>
                                               </div>
                                               <div class="col-3 col-xs-6 p-1 my-auto  pl-5" style="font-size:1.25rem;">
-                                                  <button class="btn btn-primary adminmsg" id="branchemailbutton"  data-toggle="modal" data-target="#branch_customeremail" value="' . $newpickups_arr[$i][0] . '" ><i class="fa fa-envelope"></i> </button>
+                                                  <button class="btn btn-primary adminmsg" id="branchemailbutton"  data-toggle="modal" value=' . $orderidJson . ' onclick="openEmailModal(this.value);" ><i class="fa fa-envelope"></i> </button>
                                                   <button class="btn btn-danger" id="updatebutton' . $i . '" data-id='.$i.' value=' . $orderidJson . ' onclick="updateorder(this); readypickup(this.value)" ><span id="readysign' . $i . '">READY</span>                                                  
                                                   <span class="spinner-border spinner-border-sm" id="spinner' . $i . '" role="status" aria-hidden="true" style="display:none"></span>
                                                   </button>
@@ -349,7 +347,7 @@ include('connection.php');
                                                <span class="badge ' . $badgeType . '">' . $statusName . '</span>
                                           </div>
                                           <div class="col-3 col-xs-6 p-1 my-auto  pl-5" style="font-size:1.25rem;">
-                                              <button class="btn btn-primary adminmsg" id="branchemailbutton"  data-toggle="modal" data-target="#branchemail" value="' . $readypickups_arr[$i][0] . '" ><i class="fa fa-envelope"></i> </button>
+                                             <button class="btn btn-primary adminmsg" id="branchemailbutton"  data-toggle="modal" value=' . $orderidJson . ' onclick="openEmailModal(this.value);" ><i class="fa fa-envelope"></i> </button>
                                               
                                               <button class="btn btn-danger"  id="completebutton" data-id=' . $i . '   value=' . $orderidJson .  ' onclick="completeorder(this); completepickup(this.value);" ><span id="completereadysign' . $i . '"> COMPLETE</span>
                                               <span class="spinner-border spinner-border-sm" id="completespinner' . $i . '" role="status" aria-hidden="true" style="display:none"></span>

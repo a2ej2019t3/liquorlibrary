@@ -25,7 +25,7 @@ var chart = new CanvasJS.Chart("myAreaChart", {
 		title: "Earning from pickup orders"
 	},
 	data: [{
-		type: "line",
+		type: "splineArea",
 		dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
 	}]
 });

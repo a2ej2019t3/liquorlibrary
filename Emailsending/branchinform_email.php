@@ -7,16 +7,16 @@ if (isset($_POST['branchinformform'])) {
     $requestcontent = $_POST['message'];
     $senderemail_address = $_POST['email'];
     $branchname = $_POST['brnachname'];
-    $branchID = $_POST['branchID'];
-    $buyerID = $_POST['buyerID'];
     $requestorderID = $_POST['questionorder'];
+    $buyerID= $_POST['buyerID'];
 
-    if ($buyerID) {
-        $buyeremail_sql = "SELECT email from users where userID='$buyerID'";
+    if ($requestorderID && $buyerID) {
+        $buyeremail_sql = "SELECT email from users WHERE userID='$buyerID'";
         $buyeremail_res = mysqli_query($connection, $buyeremail_sql);
         if ($buyeremail_res) {
-            $buyeremail = $buyeremail_res[0];
-
+            $row = mysqli_fetch_row($buyeremail_res); 
+            $buyeremail = $row[0]; 
+            echo $buyeremail;
             define("PROJECT_HOME", "http://localhost/liquorlibrary");
 
             define("PORT", ""); // port number
@@ -33,7 +33,7 @@ if (isset($_POST['branchinformform'])) {
                 require('phpmailer/class.smtp.php');
             }
 
-
+            
             $mail = new PHPMailer();
 
             $emailBody = '
@@ -70,8 +70,8 @@ if (isset($_POST['branchinformform'])) {
 
             $mail->SetFrom($senderemail_address, 'liquor library');
             // $mail->ReturnPath($email, $sender_name);
-            $mail->AddAddress($buyeremail);
-            $mail->Subject = "$branchname requested an answer regarding to order ID: $requestorderID";
+            $mail->AddAddress($buyeremail,'liquor library');
+            $mail->Subject = "Notification: from $branchname, Liquor Library ";
             $mail->MsgHTML($emailBody);
             $mail->IsHTML(true);
 

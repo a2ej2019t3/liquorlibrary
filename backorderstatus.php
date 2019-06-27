@@ -436,7 +436,7 @@ include_once ("Emailsending/branchemail.php");
          
           echo '</div>';
           }else{
-            echo 'There is no shipping order at the moment';
+            echo '<center>There is no shipping order at the moment</center>';
           }
         ?>
                         </div>
