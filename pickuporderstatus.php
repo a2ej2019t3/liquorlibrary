@@ -156,9 +156,25 @@ include('connection.php');
                 </nav>
 
                 <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
-                    <!--  -->
+                 
                     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                       <!--  -->
+                       <div class="row">
+                    <div class="col-7"></div>
+                    <div class="col-5" style="float:left;">
+                      <div style="  border: 3px solid #00B4CC; background-color:#00B4CC; border-radius: 5px;  outline: none;  height:38px;  color: #9DBFAF;">
+                          <input id="searchinput" search-id="ready" autocomplete="off" spellcheck="false" type="search" placeholder="Search by customer name or order ID" style="width:80%; float: left; display:inline-block;   border: 3px solid #00B4CC">;
+                          <button type="submit" class="searchButton" style="display:inline-block; width:20%;   border: 1px solid #00B4CC; background: #00B4CC;text-align: center; color: #fff; border-radius: 5px;cursor: pointer; position:absolute; top: 8px; right:12px;">
+                              <i class="fa fa-search"></i>
+                          </button>
+                      </div>  
+                      
+                    </div>
+                    </div>    
+                    <!--  -->
                     <p></p>
+                  
+                      <div id="newcontent">
                       <div id="accordion">
                           <?php
                           if (!empty($newpickups_arr)) {
@@ -262,6 +278,7 @@ include('connection.php');
                           ?>
                           
                       </div>  <!-- accordion ends -->
+                      </div> <!-- id=newcontent ends -->
                     </div> <!-- tab1 ends -->
                     <!--  -->
                     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
@@ -371,6 +388,7 @@ include('connection.php');
                       }
                           ?>
                       </div> <!-- accordion ends -->
+                     
                     </div><!-- tab2 ends -->
                     <!--  -->
                 
@@ -395,22 +413,7 @@ include('connection.php');
   include_once("partials/foot.php");
   ?>
   <script>
-    $(function() {
-      $('.collapsesub').on('show.bs.collapse', function() {
-        var obj = $(this);
-        var orderid = obj.siblings('.orders').data("orderid");
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function() {
-          if (this.readyState == 4 && this.status == 200) {
-            console.log(xmlhttp);
-            obj.children('div').html(xmlhttp.response);
-            obj.children('div').css('display', 'block');
-          }
-        }
-        xmlhttp.open("GET", "orderHistoryDetail.php?oi=" + orderid, true);
-        xmlhttp.send();
-      });
-    })
+    
 
  
   </script>
