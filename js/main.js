@@ -171,10 +171,118 @@ document.getElementById("addToCart").onclick = function () {
     // xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.send();
 }
-function openForm() {
-    document.getElementById("branchemail").style.display = "block";
-  }
+
+
   
-  function closeForm() {
-    document.getElementById("branchemail").style.display = "none";
+
+//   brnachemail orderid js
+
+function branchorderid () {
+    var idlocation= document.getElementById("branchemailbutton");
+    var orderid= idlocation.value;
+
+    var hiddenorderid=document.getElementById('questionorder');
+    hiddenorderid.setAttribute('value',orderid);
+}
+function updateorder(elem){
+
+    var id=$(elem).attr("data-id");
+    
+    var spinner='#spinner'+id;
+    var readysign='#readysign'+id;
+    
+    $(spinner).css("display","block");
+    $(readysign).css("display","none");
+        // setTimeout( "$('#spinner').css('display','none');", 8000);
+        window.setTimeout(function(){
+      $(spinner).css('display','none');
+      $(readysign).css("display","block");
+        }, 5000);
+
+
   }
+    function completeorder(elem){
+
+    var id=$(elem).attr("data-id");
+
+    var spinner='#completespinner'+id;
+    var readysign='#completereadysign'+id;
+
+    $(spinner).css("display","block");
+    $(readysign).css("display","none");
+    // setTimeout( "$('#spinner').css('display','none');", 8000);
+    window.setTimeout(function(){
+    $(spinner).css('display','none');
+    $(readysign).css("display","block");
+    }, 5000);
+    }
+
+
+function readypickup(json){
+
+    var obj = JSON.parse(json);
+    var orderid=obj.orderID;
+    var buyerid=obj.buyerID;
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(xmlhttp);
+            if(xmlhttp.responseText == 1){
+                alert('Now the order is ready and system sent an notification email to this customer.');
+            }
+            else if(xmlhttp.responseText == 2){
+                alert('We failed to send an email to customer.');
+            }
+
+            window.location.reload();
+        }
+    };
+xmlhttp.open("GET", "partials/pickupready.php?id="+orderid+"&buyerid="+buyerid, true);
+xmlhttp.send();  
+}
+
+function completepickup(json){
+
+    var obj = JSON.parse(json);
+    var orderid=obj.orderID;
+    var buyerid=obj.buyerID;
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(xmlhttp);
+            if(xmlhttp.responseText == 1){
+                alert('This order has been completed, Thank you!');
+            }
+            else if(xmlhttp.responseText == 2){
+                alert('We failed to send an email to customer.');
+            }
+
+            window.location.reload();
+        }
+    };
+xmlhttp.open("GET", "partials/completepickup.php?id="+orderid+"&buyerid="+buyerid, true);
+xmlhttp.send();  
+}
+function openEmailModal(json){
+    var obj = JSON.parse(json);
+    var orderid=obj.orderID;
+    var buyerid=obj.buyerID;
+    
+    $('#branch_customeremail').modal('show');
+    $('#questionorder').attr('value', orderid);
+    $('#buyerid').attr('value', buyerid);    
+}
+function sendspin(){
+
+    var spinner='#sendspinner';
+    var sign='#sendsign';
+    
+    $(spinner).css("display","block");
+    $(sign).css("display","none");
+    // setTimeout( "$('#spinner').css('display','none');", 8000);
+    window.setTimeout(function(){
+    $(spinner).css('display','none');
+    $(sign).css("display","block");
+    }, 5000);
+    }
+    

@@ -38,7 +38,8 @@ if($selectedmonth !=null){
 
     }
     // var_dump($yeararray);
-//   echo $montharray[0];
+//   echo $montharray[11];
+//   echo $get_day[$montharray[11]];
     if(!empty($montharray)){
         
         for($c=0;$c<count($montharray);$c++){
@@ -72,7 +73,7 @@ if($selectedmonth !=null){
             array("y" => $incomearray[8], "label" => $yeararray[8].$get_day[$montharray[8]]),
             array("y" => $incomearray[9], "label" =>  $yeararray[9].$get_day[$montharray[9]]),
             array("y" => $incomearray[10], "label" =>  $yeararray[10].$get_day[$montharray[10]]),
-            array("y" => $incomearray[11], "label" =>  $yeararray[11].$get_day[$montharray[11]])
+            // array("y" => $incomearray[11], "label" =>  $yeararray[11].$get_day[$montharray[11]])
         );
    
 }

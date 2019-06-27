@@ -12,11 +12,12 @@ if(isset($_SESSION['warehouse']['whID'])){
             $card_arr=mysqli_fetch_all($pickupCard_res);
 
             $cash_arr=mysqli_fetch_all($pickupCash_res);
-            if(!empty($card_arr)&& !empty($cash_arr)){
+            if(!empty($card_arr) || !empty($cash_arr)){
                 $totalVisitors=count($card_arr)+count($cash_arr);
+                // echo $totalVisitors;
                 $numberofcash=count($cash_arr);
                 $numberofcard=count($card_arr);
-                 // $totalVisitors = 883000;              
+                             
                 $paymentmethodDataPoints = array(
                     array("y"=> $numberofcard, "name"=> "Card", "color"=> "#E7823A"),
                     array("y"=> $numberofcash, "name"=> "Cash", "color"=> "#546BC1")
@@ -63,5 +64,3 @@ else{
         echo 'alert("Please log in to proceed")';
         echo '</script>';
 }
-// $totalVisitors = 883000;
- 

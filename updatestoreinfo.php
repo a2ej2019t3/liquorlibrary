@@ -80,8 +80,8 @@
     <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Customer Order</h6>
-        <a class="collapse-item" href="utilities-color.html">Order status</a>
-        <a class="collapse-item" href="utilities-border.html">Order history</a>
+        <a class="collapse-item" href="pickuporderstatus.php">Order status</a>
+        <a class="collapse-item" href="pickuporderhistory.php">Order history</a>
         <a class="collapse-item" href="utilities-animation.html">Reports</a>
       </div>
     </div>

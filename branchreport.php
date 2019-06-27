@@ -3,11 +3,7 @@
     $_SESSION['location'] = 'branchreport';
     include ('connection.php');
 ?>
-<?php    
-require_once ('partials/branchquery.php');
-require_once ('partials/branchearningchart.php');
-require_once ('partials/piechartquery.php');
-?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +14,6 @@ require_once ('partials/piechartquery.php');
     <title>Branch Admin Dashboard</title>
     <?php
     include_once ("partials/head.php");
-    require_once ('partials/chartrender.php');
     ?>
     <link rel="stylesheet" href="css/branchreport.css">
 
@@ -33,6 +28,13 @@ require_once ('partials/piechartquery.php');
 </section>
 <!-- top header ends--------------------------------------------------------------------------------- -->
 <!-- Side Nav included--------------------------------------------------------------------------------- -->
+<?php
+if(isset($_SESSION['warehouse'])){
+require_once ('partials/branchquery.php');
+require_once ('partials/branchearningchart.php');
+require_once ('partials/piechartquery.php');
+require_once ('partials/chartrender.php');
+  ?>
 <div id="wrapper">
 
 <!-- Sidebar -->
@@ -87,8 +89,8 @@ require_once ('partials/piechartquery.php');
     <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Customer Order</h6>
-        <a class="collapse-item" href="utilities-color.html">Order status</a>
-        <a class="collapse-item" href="utilities-border.html">Order history</a>
+        <a class="collapse-item" href="pickuporderstatus.php">Order status</a>
+        <a class="collapse-item" href="pickuporderhistory.php">Order history</a>
         <a class="collapse-item" href="utilities-animation.html">Reports</a>
       </div>
     </div>
@@ -289,6 +291,12 @@ require_once ('partials/piechartquery.php');
 <!-- ---------------------------------------------------------------------------------------------------------- -->
 </div>
 <!-- --------------------------------------------------------------------------------------------------------- -->
+<?php
+}
+else{
+  echo '<h4 style="position: absolute; top: 40%; left: 40%;">This page needs a valid authentification to read.</h4> ';
+}
+?>
 <?php
     include_once ("partials/foot.php");
   ?>  
