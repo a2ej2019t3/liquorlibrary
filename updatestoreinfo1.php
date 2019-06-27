@@ -43,7 +43,6 @@ include_once("partials/head.php");
             <div class="col-sm-3">
               <h4>StoreID:</h4>
               <h4>StoreName:</h4>
-
               <h4>Contact Info:</h4>
               <h4>Email:</h4>
               <h4>Address:</h4>
@@ -54,7 +53,6 @@ include_once("partials/head.php");
 
         if (isset($_SESSION['user'])) {
           $user = $_SESSION['user'];
-          //$orders_list = "SELECT product.productID,product.productName,product.price,orderitems.orderID,orderitems.quantity,orderitems.totalprice FROM product product, orderitems orderitems, orders orders Where orderitems.ItemID = product.productID and orders.orderID = orderitems.orderID '".$user['userID']."'";
           echo $_SESSION['warehouse']['whID'];
           $whID = $_SESSION['warehouse']['whID'];
           $orders_list =  "SELECT * from warehouse w where w.whID = '$whID'";
@@ -62,7 +60,6 @@ include_once("partials/head.php");
           if (mysqli_num_rows($query) > 0) {
             $orderRow = mysqli_fetch_all($query, MYSQLI_ASSOC);
             ?>
-
             <?php
             //var_dump(count($orderRow));
             for ($i = 0; $i < count($orderRow); $i++) {
@@ -77,7 +74,6 @@ include_once("partials/head.php");
                       <h6><td>' . $orderRow[$i]["address"] . '</td> </h6>                     
 										</tr>';
             } ?>
-
           </form>
         </div>
         <div class="tab-pane in" id="update">
@@ -104,14 +100,12 @@ include_once("partials/head.php");
                                   <h4>Email:</h4>
                                   <h4>Contact Info:</h4>
                                   <h4>Address:</h4>
-                                  <!-- <h4>Member Since:</h4> -->
                                 </div>
                               </div>
                               <div class="col-sm-9">
                                 <?php
                                 if (isset($_SESSION['user'])) {
                                   $user = $_SESSION['user'];
-                                  //$orders_list = "SELECT product.productID,product.productName,product.price,orderitems.orderID,orderitems.quantity,orderitems.totalprice FROM product product, orderitems orderitems, orders orders Where orderitems.ItemID = product.productID and orders.orderID = orderitems.orderID '".$user['userID']."'";
                                   echo $_SESSION['user']['userID'];
                                   $userID = $_SESSION['user']['userID'];
                                   $orders_list =  "SELECT * from users u where u.userID = '$userID'";
@@ -119,25 +113,21 @@ include_once("partials/head.php");
                                   if (mysqli_num_rows($query) > 0) {
                                     $orderRow = mysqli_fetch_all($query, MYSQLI_ASSOC);
                                     ?>
-
                                     <span class="pull-right">
                                       <a href="#edit" class="btn btn-success btn-flat btn-sm" data-toggle="modal"><i class="fa fa-edit"></i> Edit</a>
                                     </span>
-
-
                                     <?php
                                     //var_dump(count($orderRow));
                                     for ($i = 0; $i < count($orderRow); $i++) {
                                       //var_dump($i);
                                       echo '
-										<tr>
+										                          <tr>
 										
-											<h4><td>' . $orderRow[$i]["firstName"] . '</td></h4>
-											<h4><td>' . $orderRow[$i]["email"] . '</td></h4>
-											<h4><td>' . $orderRow[$i]["phone"] . '</td>	</h4>
-										
-                      <h4><td>' . $orderRow[$i]["address"] . '</td> </h4>                     
-										</tr>';
+											                            <h4><td>' . $orderRow[$i]["firstName"] . '</td></h4>
+										                            	<h4><td>' . $orderRow[$i]["email"] . '</td></h4>
+											                            <h4><td>' . $orderRow[$i]["phone"] . '</td>	</h4>
+										                              <h4><td>' . $orderRow[$i]["address"] . '</td> </h4>                     
+					                                  	</tr>';
                                     } ?>
                                   </div>
                                 </div>
@@ -145,42 +135,26 @@ include_once("partials/head.php");
                             </div>
                         </div>
               </form>
-            </div>
-          </div>
-
-        </div>
-        </div>
-        </div>
-        </form>
-        </div>
-        </div>
-
-        <?php
-        include_once("partials/foot.php");
-
-
+            <?php
+          }
+        }
         ?>
         <?php
-        include_once("profile_modal1.php");
-        ?>
-
-        <script type="text/javascript" src="js/sub.js"></script>
-        <script type="text/javascript" src="js/main.js"></script>
-        <script type="text/javascript" src="js/search.js"></script>
-
-
-        </body>
-
-        </html>
-      <?php
+      }
     }
-  }
-  ?>
-  <?php
-}
-}
-?>
+    ?>
+      <?php
+      include_once("partials/foot.php");
+      ?>
+      <?php
+      include_once("profile_modal1.php");
+      ?>
+      <script type="text/javascript" src="js/sub.js"></script>
+      <script type="text/javascript" src="js/main.js"></script>
+      <script type="text/javascript" src="js/search.js"></script>
+      </body>
 
+</html>
 <style>
   .nav>li>a:hover,
   .nav>li>a:focus {
