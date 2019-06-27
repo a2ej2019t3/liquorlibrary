@@ -166,5 +166,10 @@ echo '
 echo '
             </div>
         </div>
+        <div class="d-flex justify-content-end">
+            <button class="reorderBtn btn-sm btn-primary" data-roid="'. $res[0]['orderID'] .'" style="width:150px;">
+                Reorder
+            </button>
+        </div>
     </div>
 </div>';

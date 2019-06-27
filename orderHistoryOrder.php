@@ -1,44 +1,83 @@
 <?php
+$rf = dirname(__DIR__);
+
+session_start();
 include(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'liquorlibrary' . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 'DBsql.php');
 $DBsql = new sql;
 if (isset($_SESSION['user'])) {
     $buyerID = $_SESSION['user']['userID'];
-    
-    if ($_GET['si']) {
-        $optIndex = $_GET['si'];
-        if ($optIndex == 'all') {
-            $statusID = array(1,3,4,6,7);
-        } else if ($optIndex == 'paid') {
-            $statusID = array(1, 6);
-        } else if ($optIndex == 'completed') {
-            $statusID = 4;
-        } else if ($optIndex == 'processing') {
-            $statusID = array(3,7);
-        } else if ($optIndex == 'cancelled') {
-            $statusID = 5;
+    if ($_GET['op'] == 'filt') {
+        // echo '1';
+        if ($_GET['si']) {
+            $optIndex = $_GET['si'];
+            if ($optIndex == 'all') {
+                $statusID = array(1, 3, 4, 6, 7);
+            } else if ($optIndex == 'paid') {
+                $statusID = array(1, 6);
+            } else if ($optIndex == 'completed') {
+                $statusID = 4;
+            } else if ($optIndex == 'processing') {
+                $statusID = array(3, 7);
+            } else if ($optIndex == 'cancelled') {
+                $statusID = 5;
+            }
+        } else {
+            echo 'no opt index.';
         }
-    } else {
-        echo 'no opt index.';
-    }
         $consArr = array(
             'buyerID' => $buyerID,
             'statusID' => $statusID
         );
-    $result = $DBsql->select('orders LEFT JOIN status ON orders.status = status.statusID', $consArr);
-    // var_dump($result);
-    $sortKey = 'date';
-    foreach ($result as $key => $value) {
-        $sorted[$value[$sortKey]] = $value;
+        $result = $DBsql->select('orders LEFT JOIN status ON orders.status = status.statusID', $consArr);
+        // echo var_dump($result);
+        if ($result !== null) {
+            foreach ($result as $key => $value) {
+                $sorted[$value['orderID']] = $value;
+            }
+            ksort($sorted);
+            $_SESSION['sorted'] = $sorted;
+        } else {
+            $sorted = null;
+            echo "
+                <div class='container text-center'>
+                    <div class='alert alert-secondary'>
+                        <b>You don't have any orders.</b>
+                    </div>
+                </div>";
+        }
+    } else if ($_GET['op'] == 'sort') {
+        if (isset($_SESSION['sorted'])) {
+            // echo '2';
+            $sortKey = $_GET['key'];
+            $sort = $_GET['sort'];
+            $result = $_SESSION['sorted'];
+            foreach ($result as $key => $value) {
+                $sortArr[$key] = $value[$sortKey];
+            }
+            if ($sort == 'asc') {
+                asort($sortArr);
+            } else if ($sort == 'des') {
+                arsort($sortArr);
+            }
+            foreach ($sortArr as $key => $value) {
+                $sorted[$key] = $result[$key];
+            }
+        } else {
+            $sorted = null;
+            echo "
+                <div class='container text-center'>
+                    <div class='alert alert-secondary'>
+                        <b>You don't have any orders.</b>
+                    </div>
+                </div>";
+        }
     }
-
-    ksort($sorted);
-    // var_dump($sorted);
     if ($sorted !== null) {
         echo '
               <div id="accordion">';
         foreach ($sorted as $key => $res) {
             echo '
-                          <div class="card">
+                          <div class="card orderCard">
                               <a class="btn p-0 orders"  data-toggle="collapse" data-target="#coid' . $res['orderID'] . '" data-orderid="' . $res['orderID'] . '" style="width:100%;">
 
                                       <div id="heading" class="py-2">
@@ -87,47 +126,18 @@ if (isset($_SESSION['user'])) {
                                                   </div>
                                               </div>
                                               ';
-            $statusName = $res['statusName'];
-            switch ($res['statusID']) {
-                case 0:
-                    $badgeType = 'badge-secondary';
-                    break;
-                case 1:
-                    $badgeType = 'badge-info';
-                    $statusName = 'paid';
-                    break;
-                case 2:
-                    $badgeType = 'badge-primary';
-                    break;
-                case 3:
-                    $badgeType = 'badge-warning';
-                    break;
-                case 4:
-                    $badgeType = 'badge-success';
-                    break;
-                case 5:
-                    $badgeType = 'badge-dark';
-                    break;
-                case 6:
-                    $badgeType = 'badge-info';
-                    $statusName = 'paid';
-                    break;
-                case 7:
-                    $badgeType = 'badge-warning';
-                default:
-                    # code...
-                    break;
-            }
+            include('./partials/badgeSwitch.php');
+
             echo '
                                               <div class="col-3 p-1 my-auto text-left pl-5" style="font-size:1.25rem;">
-                                                  <span class="badge ' . $badgeType . '">' . $statusName . '</span>
+                                                  <span class="badge statusBadge ' . $badgeType . '">' . $statusName . '</span>
                                               </div>';
             echo '
                                           </div>
                                       </div>
 
                               </a>
-                              <div id="coid' . $res['orderID'] . '" class="collapse" data-parent="#accordion">
+                              <div id="coid' . $res['orderID'] . '" class="collapse orderCollapse" data-parent="#accordion">
                                   <hr class="my-0">
                                   <div class="py-4 details">
                                       
@@ -138,5 +148,10 @@ if (isset($_SESSION['user'])) {
     }
     echo '</div>';
 } else {
-    echo 'Please log in to see your orders.';
+    echo '
+        <div class="container text-center">
+            <div class="alert alert-warning">
+                <b>Please log in to see your orders.</b>
+            </div>
+        </div>';
 }

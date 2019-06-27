@@ -10,3 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=Cinzel:700|Lato|Montserrat|Open+Sans|Roboto|Shadows+Into+Light|Playfair+Display" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400,700&subset=latin-ext" rel="stylesheet">
     <!-- Css transition -->
+
+    <?php
+        $rf = dirname(__DIR__, 1);
+    ?>
