@@ -1,4 +1,6 @@
 <?php
+$rf = dirname(__DIR__);
+
 session_start();
 include(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'liquorlibrary' . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 'DBsql.php');
 $DBsql = new sql;
@@ -22,10 +24,10 @@ if (isset($_SESSION['user'])) {
         } else {
             echo 'no opt index.';
         }
-            $consArr = array(
-                'buyerID' => $buyerID,
-                'statusID' => $statusID
-            );
+        $consArr = array(
+            'buyerID' => $buyerID,
+            'statusID' => $statusID
+        );
         $result = $DBsql->select('orders LEFT JOIN status ON orders.status = status.statusID', $consArr);
         // echo var_dump($result);
         if ($result !== null) {
@@ -75,7 +77,7 @@ if (isset($_SESSION['user'])) {
               <div id="accordion">';
         foreach ($sorted as $key => $res) {
             echo '
-                          <div class="card">
+                          <div class="card orderCard">
                               <a class="btn p-0 orders"  data-toggle="collapse" data-target="#coid' . $res['orderID'] . '" data-orderid="' . $res['orderID'] . '" style="width:100%;">
 
                                       <div id="heading" class="py-2">
@@ -124,47 +126,18 @@ if (isset($_SESSION['user'])) {
                                                   </div>
                                               </div>
                                               ';
-            $statusName = $res['statusName'];
-            switch ($res['statusID']) {
-                case 0:
-                    $badgeType = 'badge-secondary';
-                    break;
-                case 1:
-                    $badgeType = 'badge-info';
-                    $statusName = 'paid';
-                    break;
-                case 2:
-                    $badgeType = 'badge-primary';
-                    break;
-                case 3:
-                    $badgeType = 'badge-warning';
-                    break;
-                case 4:
-                    $badgeType = 'badge-success';
-                    break;
-                case 5:
-                    $badgeType = 'badge-dark';
-                    break;
-                case 6:
-                    $badgeType = 'badge-info';
-                    $statusName = 'paid';
-                    break;
-                case 7:
-                    $badgeType = 'badge-warning';
-                default:
-                    # code...
-                    break;
-            }
+            include('./partials/badgeSwitch.php');
+
             echo '
                                               <div class="col-3 p-1 my-auto text-left pl-5" style="font-size:1.25rem;">
-                                                  <span class="badge ' . $badgeType . '">' . $statusName . '</span>
+                                                  <span class="badge statusBadge ' . $badgeType . '">' . $statusName . '</span>
                                               </div>';
             echo '
                                           </div>
                                       </div>
 
                               </a>
-                              <div id="coid' . $res['orderID'] . '" class="collapse" data-parent="#accordion">
+                              <div id="coid' . $res['orderID'] . '" class="collapse orderCollapse" data-parent="#accordion">
                                   <hr class="my-0">
                                   <div class="py-4 details">
                                       

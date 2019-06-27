@@ -5,7 +5,6 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 // get cart items with userID and status 0 'OK'
 $DBsql = new sql;
-// $getItems_arr = $DBsql->getCartItems($cartID);
 if (isset($_SESSION['cartItems'])) {
     $res = $_SESSION['cartItems'];
     // var_dump($res);
@@ -56,9 +55,9 @@ if (isset($_SESSION['cartItems'])) {
                             </div>
                         </div>
                         <div class="col" style="padding:0;">
-                            <div class="row">
+                            <div class="row my-auto" style="min-height:100%;">
 
-                                <div id="quantityCol" class="col-7" style="margin-top:15px;">
+                                <div id="quantityCol" class="col-7 my-auto" style="margin-top:15px;">
                                     <table>
                                         <thead>
                                         </thead>
@@ -67,7 +66,7 @@ if (isset($_SESSION['cartItems'])) {
                                                 <span id="total['.$getItems_arr['productID'].']" value="'.$getItems_arr['totalprice'].'" class="asdfa" style="font-size:1rem; margin-top:15px;">NZ$'.$getItems_arr['totalprice'].'</span>
                                             </tr>
                                             <tr>
-                                                <div id="quantityField" class="input-group">';
+                                                <div id="quantityField" class="input-group mx-auto" style="max-width:100px;">';
                                                 // var_dump($getItems_arr['discountprice']);
                                                 if ($getItems_arr['discountprice'] !== null) {
                                                     echo'
