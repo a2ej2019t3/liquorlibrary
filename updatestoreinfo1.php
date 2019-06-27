@@ -85,80 +85,75 @@ include_once("partials/head.php");
                     <div class="col-md-12">
                       <h4>Your Profile</h4>
                       <hr>
+                      <span class="pull-right">
+                        <a href="#edit" class="btn btn-success btn-flat btn-sm" data-toggle="modal"><i class="fa fa-edit"></i> Edit</a>
+                      </span>
                     </div>
                   </div>
-                  <div class="row">
-                    <div class="col-md-12">
-                      <form>
-                        <div class="box box-solid">
-                          <div class="box-body">
-                            <div class="col-sm-9">
-                              <div class="row">
-                                <div class="col-sm-3">
-                                  <h4>userID</h4>
-                                  <h4>Name:</h4>
-                                  <h4>Email:</h4>
-                                  <h4>Contact Info:</h4>
-                                  <h4>Address:</h4>
-                                </div>
-                              </div>
-                              <div class="col-sm-9">
-                                <?php
-                                if (isset($_SESSION['user'])) {
-                                  $user = $_SESSION['user'];
-                                  echo $_SESSION['user']['userID'];
-                                  $userID = $_SESSION['user']['userID'];
-                                  $orders_list =  "SELECT * from users u where u.userID = '$userID'";
-                                  $query = mysqli_query($connection, $orders_list);
-                                  if (mysqli_num_rows($query) > 0) {
-                                    $orderRow = mysqli_fetch_all($query, MYSQLI_ASSOC);
-                                    ?>
-                                    <span class="pull-right">
-                                      <a href="#edit" class="btn btn-success btn-flat btn-sm" data-toggle="modal"><i class="fa fa-edit"></i> Edit</a>
-                                    </span>
-                                    <?php
-                                    //var_dump(count($orderRow));
-                                    for ($i = 0; $i < count($orderRow); $i++) {
-                                      //var_dump($i);
-                                      echo '
-										                          <tr>
-										
-											                            <h4><td>' . $orderRow[$i]["firstName"] . '</td></h4>
-										                            	<h4><td>' . $orderRow[$i]["email"] . '</td></h4>
-											                            <h4><td>' . $orderRow[$i]["phone"] . '</td>	</h4>
-										                              <h4><td>' . $orderRow[$i]["address"] . '</td> </h4>                     
-					                                  	</tr>';
-                                    } ?>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
+                  <div class="tab-pane active in" id="home">
+                    <form id="tab">
+                      <div class="card1">
+                        <div class="card-body">
+                          <div class="col-sm-3">
+                            <h4>userID:</h4>
+                            <h4>Name:</h4>
+                            <h4>Contact Info:</h4>
+                            <h4>Email:</h4>
+                            <h4>Address:</h4>
+                          </div>
                         </div>
-              </form>
-            <?php
-          }
-        }
-        ?>
-        <?php
-      }
-    }
-    ?>
-      <?php
-      include_once("partials/foot.php");
-      ?>
-      <?php
-      include_once("profile_modal1.php");
-      ?>
-      <script type="text/javascript" src="js/sub.js"></script>
-      <script type="text/javascript" src="js/main.js"></script>
-      <script type="text/javascript" src="js/search.js"></script>
-      </body>
+                      </div>
+                      <?php
+                      if (isset($_SESSION['user'])) {
+                        $user = $_SESSION['user'];
+                        echo $_SESSION['user']['userID'];
+                        $userID = $_SESSION['user']['userID'];
+                        $orders_list =  "SELECT * from users u where u.userID = '$userID'";
+                        $query = mysqli_query($connection, $orders_list);
+                        if (mysqli_num_rows($query) > 0) {
+                          $orderRow = mysqli_fetch_all($query, MYSQLI_ASSOC);
+                          ?>
+                          <?php
+                          //var_dump(count($orderRow));
+                          for ($i = 0; $i < count($orderRow); $i++) {
+                            //var_dump($i);
+                            echo '
+										<tr>
+											
+											<h6><td>' . $orderRow[$i]["firstName"] . '</td></h6>
+										
+											<h6><td>' . $orderRow[$i]["phone"] . '</td>	</h6>
+											<h6><td>' . $orderRow[$i]["email"] . '</td></h6>
+                      <h6><td>' . $orderRow[$i]["address"] . '</td> </h6>                     
+										</tr>';
+                          } ?>
+                        </form>
+                      </div>
+                    <?php
+                  }
+                }
+                ?>
+
+                <?php
+              }
+            }
+            ?>
+              <?php
+              include_once("partials/foot.php");
+              ?>
+              <?php
+              include_once("profile_modal1.php");
+              ?>
+              <script type="text/javascript" src="js/sub.js"></script>
+              <script type="text/javascript" src="js/main.js"></script>
+              <script type="text/javascript" src="js/search.js"></script>
+              </body>
 
 </html>
 <style>
   .nav>li>a:hover,
   .nav>li>a:focus {
     text-decoration: none;
-    background-color: yellow !important;
+    background-color: gold !important;
   }
 </style>
