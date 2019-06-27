@@ -1,8 +1,8 @@
   <?php
   session_start();
   $_SESSION['location'] = 'paymentprocess';
-  include(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'liquorlibrary' . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 'DBsql.php');
-  include(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'liquorlibrary' . DIRECTORY_SEPARATOR . 'objectToArray.php');
+  include_once(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'liquorlibrary' . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 'DBsql.php');
+  include_once(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'liquorlibrary' . DIRECTORY_SEPARATOR . 'objectToArray.php');
 
   $DBsql = new sql();
 
@@ -26,15 +26,11 @@
       alert("result empty");
     }
   } else {
-    echo '<script type="text/javascript">';
-    echo 'alert("Please log in to proceed")';
-    echo '</script>';
+    echo '<script type="text/javascript">
+          alert("Please log in to proceed");
+          window.location.replace("index.php");
+          </script>';
   }
-
-
-
-
-
   ?>
   <!DOCTYPE html>
   <html lang="en">
