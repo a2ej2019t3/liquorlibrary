@@ -21,7 +21,8 @@ function addToCart (obj) {
                 // alert(xmlhttp.responseText);
                 if (xmlhttp.responseText == 1 || xmlhttp.responseText == 3) {
                     alert('The product is already in your cart.');
-                    $('#cart').modal();
+                    $('#stickyCart').css('display', 'block');
+                    $('#stickyCart').addClass('showCart');        
                 } else {
                     // document.getElementById('productArea').innerHTML = xmlhttp.response;
                     // alert(xmlhttp.response);

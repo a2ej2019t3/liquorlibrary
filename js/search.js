@@ -35,8 +35,16 @@ $(document).ready(function () {
             $('#stickyCart').addClass('fadeOutCart');
             setTimeout(function () {
                 $('#stickyCart').css('display', 'none');
-            },500);
+            }, 500);
         }
+    });
+
+    $('#stickyCartClose').on('click', function () {
+        $('#stickyCart').removeClass('showCart');
+        $('#stickyCart').addClass('fadeOutCart');
+        setTimeout(function () {
+            $('#stickyCart').css('display', 'none');
+        }, 500);
     })
 });
 
