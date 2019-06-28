@@ -29,8 +29,7 @@ if ($maindeal_res != "") {
   <title>Special Deals</title>
 </head>
 
-<body style="height: 110%;">
-
+<body>
   <section>
     <?php
     include_once("partials/header.php");
