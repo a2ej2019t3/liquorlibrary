@@ -1,5 +1,9 @@
 <link rel="stylesheet" href="css/branch.css">
+<link rel="stylesheet" href="css/branchreport.css">
+
 <?php
+session_start();
+    $whID=$_SESSION['warehouse']['whID'];
     include ('connection.php');
 
     include_once("partials/head.php");
@@ -10,14 +14,14 @@
 
     //search Customer
     $searchCustomer_sql = 
-        "SELECT DISTINCT  o.* FROM `orders` AS o, `users` AS u WHERE u.userID=o.buyerID  AND o.status !=0  AND o.status !=5 AND o.status !=4 AND CONCAT(u.firstname, u.lastname) LIKE '%$searchcontent%' ";
+        "SELECT DISTINCT  o.*, u.userID FROM `orders` AS o, `users` AS u WHERE u.userID=o.buyerID  AND o.status !=0  AND o.status !=5 AND o.status !=4 AND  whID='$whID' AND deliverymethod='pickup' AND CONCAT(u.firstname, u.lastname) LIKE '%$searchcontent%' ";
 
     $searchCustomer_res = mysqli_query($connection, $searchCustomer_sql);
     if ($searchCustomer_res) {
         $searchCustomer_arr = mysqli_fetch_all($searchCustomer_res);
     }
     //search orderID
-    $searchID_sql = "SELECT DISTINCT * from orders WHERE `status` !=0  AND `status` !=5 AND `status` !=4 AND orderID LIKE '%$searchcontent%' ";
+    $searchID_sql = "SELECT DISTINCT * from orders WHERE `status` !=0  AND  whID='$whID' AND deliverymethod='pickup' AND `status` !=5 AND `status` !=4 AND orderID LIKE '%$searchcontent%' ";
     $searchID_res = mysqli_query($connection, $searchID_sql);
     if ($searchID_res) {
         $searchID_arr = mysqli_fetch_all($searchID_res);
@@ -33,7 +37,7 @@
     echo '<div>
     <h6 class="dropdown-header"><center><b style="text-align:center;">search by Customer</b></center>Customer Name: '.$searchcontent.'</h6>
     ';
-
+      
         if (count($searchCustomer_arr) > 0) { 
            
           echo'<div id="accordion">';

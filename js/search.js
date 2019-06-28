@@ -174,9 +174,69 @@ $(document).ready(function () {
 
         return false;
     });
-
+    loadSort();
+    loadSortsecond();
+    loadSortthird();
     collapseShowEl();
+    
 });
+
+function loadSort() {
+    $('.sorter').on('click', function () {
+        var element = $(this);
+        var keyword = element.attr('data-key');
+        var sort = element.attr('data-sort');
+        $("#accordion").load("pickuporderhistory.php?key=" + keyword + "&sort=" + sort + " #accordion", function (responseTxt, statusTxt, xhr) {
+            if (statusTxt == "success") {
+                collapseShowEl();
+                if (sort == 'asc') {
+                    element.attr('data-sort', 'des');
+                } else if (sort == 'des') {
+                    element.attr('data-sort', 'asc');
+                }
+            }
+        });
+    });
+};
+
+// second confirm sorter
+function loadSortsecond() {
+    $('.secondsorter').on('click', function () {
+        var element = $(this);
+        var keyword = element.attr('data-key');
+        var sort = element.attr('data-sort');
+        $("#accordion2").load("pickuporderhistory.php?key=" + keyword + "&sort=" + sort + " #accordion2", function (responseTxt, statusTxt, xhr) {
+            if (statusTxt == "success") {
+                collapseShowEl();
+                if (sort == 'asc') {
+                    element.attr('data-sort', 'des');
+                } else if (sort == 'des') {
+                    element.attr('data-sort', 'asc');
+                }
+            }
+        });
+    });
+};
+
+
+// loadSortthird confirm sorter
+function loadSortthird() {
+    $('.thirdsorter').on('click', function () {
+        var element = $(this);
+        var keyword = element.attr('data-key');
+        var sort = element.attr('data-sort');
+        $("#accordion3").load("backorderhistory.php?key=" + keyword + "&sort=" + sort + " #accordion3", function (responseTxt, statusTxt, xhr) {
+            if (statusTxt == "success") {
+                collapseShowEl();
+                if (sort == 'asc') {
+                    element.attr('data-sort', 'des');
+                } else if (sort == 'des') {
+                    element.attr('data-sort', 'asc');
+                }
+            }
+        });
+    });
+};
 
 function collapseShowEl() {
     $('.collapsesub').on('show.bs.collapse', function () {
@@ -207,34 +267,52 @@ document.getElementById("searchinput").onkeyup = function () {
             var res = xmlhttp.response;
 
             var resText = xmlhttp.responseText;
-            document.getElementById("newcontent").innerHTML = resText;
-            collapseShowEl();
+            if(searchtype == "backorder"){
+                document.getElementById("accordion3").innerHTML = resText;
+                collapseShowEl();  
+            }
+            else{
+               document.getElementById("accordion").innerHTML = resText;
+            collapseShowEl();   
+            }
+          
 
             var res = resText.slice(0, 2);
             if (res == 000) {
-                if(searchtype=="ready"){
-                $("#newcontent").load("pickuporderstatus.php #newcontent",function(responseTxt , statusTxt, xhr){
-                    if(statusTxt=="success")
-                    // alert("External content loaded successfully!");
-                    collapseShowEl();
-                })
-                }
-                else if(searchtype=="complete"){
-                    $("#newcontent").load("pickuporderhistory.php #newcontent",function(responseTxt , statusTxt, xhr){
-                        if(statusTxt=="success")
-                        // alert("External content loaded successfully!");
-                        collapseShowEl();
+                if (searchtype == "ready") {
+                    $("#accordion").load("pickuporderstatus.php #accordion", function (responseTxt, statusTxt, xhr) {
+                        if (statusTxt == "success")
+                            // alert("External content loaded successfully!");
+                            collapseShowEl();
                     })
                 }
-             }
+                else if (searchtype == "complete") {
+                    $("#accordion").load("pickuporderhistory.php #accordion", function (responseTxt, statusTxt, xhr) {
+                        if (statusTxt == "success")
+                            // alert("External content loaded successfully!");
+                            collapseShowEl();
+                    })
+                }
+                else if (searchtype == "backorder") {
+                    $("#accordion3").load("backorderhistory.php #accordion3", function (responseTxt, statusTxt, xhr) {
+                        if (statusTxt == "success")
+                            // alert("External content loaded successfully!");
+                            collapseShowEl();
+                    })
+                }
+            }
         }
     };
-    if(searchtype=="ready"){
+    if (searchtype == "ready") {
         xmlhttp.open("GET", "./reportsearch.php?sc=" + val, true);
         xmlhttp.send();
     }
-    else if(searchtype=="complete"){
+    else if (searchtype == "complete") {
         xmlhttp.open("GET", "./reportsearchcomplete.php?sc=" + val, true);
-        xmlhttp.send(); 
+        xmlhttp.send();
+    }
+    else if (searchtype == "backorder") {
+        xmlhttp.open("GET", "./reportsearchbackorder.php?sc=" + val, true);
+        xmlhttp.send();
     }
 };

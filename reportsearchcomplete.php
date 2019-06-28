@@ -1,7 +1,8 @@
 <link rel="stylesheet" href="css/branch.css">
 <?php
     include ('connection.php');
-
+    session_start();
+    $whID=$_SESSION['warehouse']['whID'];
     include_once("partials/head.php");
     include(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'liquorlibrary' . DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 'DBsql.php');
     $DBsql = new sql;
@@ -10,14 +11,14 @@
 
     //search Customer
     $searchCustomer_sql = 
-        "SELECT DISTINCT  o.* FROM `orders` AS o, `users` AS u WHERE u.userID=o.buyerID  AND o.status !=0  AND o.status !=1 AND o.status !=2  AND o.status !=3  AND o.status !=6 AND o.status !=7 AND CONCAT(u.firstname, u.lastname) LIKE '%$searchcontent%' ";
+        "SELECT DISTINCT  o.* FROM `orders` AS o, `users` AS u WHERE u.userID=o.buyerID  AND o.whID='$whID' AND deliverymethod='pickup' AND o.status !=0  AND o.status !=1 AND o.status !=2  AND o.status !=3  AND o.status !=6 AND o.status !=7 AND CONCAT(u.firstname, u.lastname) LIKE '%$searchcontent%' ";
 
     $searchCustomer_res = mysqli_query($connection, $searchCustomer_sql);
     if ($searchCustomer_res) {
         $searchCustomer_arr = mysqli_fetch_all($searchCustomer_res);
     }
     //search orderID
-    $searchID_sql = "SELECT DISTINCT * from orders WHERE status !=0  AND `status` !=1 AND `status` !=2  AND `status` !=3  AND `status` !=6 AND `status` !=7  AND orderID LIKE '%$searchcontent%' ";
+    $searchID_sql = "SELECT DISTINCT * from orders WHERE whID='$whID' AND deliverymethod='pickup' AND status !=0  AND `status` !=1 AND `status` !=2  AND `status` !=3  AND `status` !=6 AND `status` !=7  AND orderID LIKE '%$searchcontent%' ";
     $searchID_res = mysqli_query($connection, $searchID_sql);
     if ($searchID_res) {
         $searchID_arr = mysqli_fetch_all($searchID_res);

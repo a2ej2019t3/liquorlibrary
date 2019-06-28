@@ -1,7 +1,8 @@
 <?php
     session_start();
     $_SESSION['location'] = 'backorderhistory';
-    include ('connection.php');  
+    include ('connection.php');
+    include_once ('partials/arr_function.php');  
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -138,90 +139,42 @@ include_once ("Emailsending/branchemail.php");
                 </div>
                 <!-- backorder collapse starts -->
                 <p></p>
-                            <?php
+                    <!--  -->
+                    <div class="row">
+                      <div class="col-7">
+
+                      <?php
+                      include_once('partials/branchreportCtrl3.php');
+                       ?>
+                      </div>
+                      <div class="col-5" style="float:left;">
+                        <div style="  border: 3px solid #00B4CC; background-color:#00B4CC; border-radius: 5px;  outline: none;  height:38px;  color: #9DBFAF;">
+                          <input id="searchinput" search-id="backorder" autocomplete="off" spellcheck="false" type="search" placeholder="Search by customer name or order ID" style="width:80%; float: left; display:inline-block;   border: 3px solid #00B4CC">;
+                          <button type="submit" class="searchButton" style="display:inline-block; width:20%;   border: 1px solid #00B4CC; background: #00B4CC;text-align: center; color: #fff; border-radius: 5px;cursor: pointer; position:absolute; top: 8px; right:12px;">
+                            <i class="fa fa-search"></i>
+                          </button>
+                        </div>
+
+                      </div>
+                    </div>
+                    <!--  -->
+
+
+                <!--  -->
+                           
                             
-            echo '
-              <div id="accordion">';
-        if(!empty($totalbackorder_arr)){
-            for ($i = 0; $i < count($totalbackorder_arr); $i++) {
-              echo '
-                          <div class="card">
-                              <a class="btn p-0 orders"  data-toggle="collapse" data-target="#coid' . $i . '" data-orderid="' . $totalbackorder_arr[$i][0] . '" style="width:100%;">
-
-                                      <div id="heading" class="py-2">
-                                          <div class="row">
-                                              <div class="col-9 my-auto">
-                                                  <div class="row">
-                                                      <div class="col-2 mx-auto">
-                                                          <h5 class="ids">#' . $totalbackorder_arr[$i][0] . '</h5>
-                                                      </div>
-                                                      <div class="col-4 text-left">
-                                                          <div class="row">
-                                                              <h5 class="secondHeader">Items</h5>
-                                                          </div>
-                                                          <div class="row secondRow">';
-             $imgpath = 'images/';
-              $items = $DBsql->getCartItemsInfo($totalbackorder_arr[$i][0], array('LIMIT' => '3'));
-              // var_dump($items);
-              
-              if (count($items) != 0) {
-                foreach ($items as $key => $value) {
-                  echo '
-                         <img class="img-thumbnail briefimg mx-1" src="' . $imgpath . $value['img'] . '">';
-                }
-                if (count($items) < 3) { } else {
-                  echo '<i class="fas fa-ellipsis-h" style="color:grey; margin-left:5px; line-height:2.4;"></i>';
-                }
-              }
-              echo '
-                                                          </div>
-                                                      </div>
-                                                      <div class="col-3">
-                                                          <div class="row">
-                                                              <h5 class="secondHeader">Price</h5>
-                                                          </div>
-                                                          <div class="row secondRow">
-                                                              <h5>NZ$' . $totalbackorder_arr[$i][6] . '</h5>
-                                                          </div>
-                                                      </div>
-                                                      <div class="col-3 text-left">
-                                                          <div class="row">
-                                                              <h5 class="ordertime secondHeader">Ordered On:</h5>
-                                                          </div>
-                                                          <div class="row secondRow">
-                                                              <h5 class="orderdate">' . $totalbackorder_arr[$i][3] . '</h5>
-                                                          </div>
-                                                      </div>
-                                                  </div>
-                                              </div>
-                                            
-       
-                                              <div class="col-1 p-1 my-auto text-left pl-5" style="font-size:1.25rem;">
-                                                  <span class="badge badge-success">Completed</span>
-                                              </div>';
-                                            echo ' <div class="col-2 col-xs-6 p-1 my-auto  pl-5" style="font-size:1.25rem;">
-                                            <button class="btn btn-primary adminmsg" id="branchemailbutton"  data-toggle="modal" data-target="#branchemail" value="' . $totalbackorder_arr[$i][0] . '" onclick="branchorderid();"><i class="fa fa-envelope"></i> </button>
-                                            
-                                        </div>
-                                          </div>
-                                      </div>
-
-                              </a>
-                              <div id="coid' . $i . '" class="collapsesub" data-parent="#accordion">
-                                  <hr class="my-0">
-                                  <div class="py-4 details" style="display:none;">
-                                      
-                                  </div>
-                              </div>
-                          </div>';
-            }
-         
-          echo '</div>';
-          }else{
-            echo 'There is no completed order yet';
-          }
-        ?>
-    <!-- backorder collapse ends -->
+           
+              <div id="accordion3">
+                  <?php
+                        
+                        if (isset($_GET['key']) && isset($_GET['sort'])) {
+                          $keyword = $_GET['key'];
+                          $sort = $_GET['sort'];
+                          completed_Arr("historyorder_arr",'sort', $keyword, $sort);
+                        } else {
+                          completed_Arr($arr="historyorder_arr");
+                        }
+                    ?>
 
 
 

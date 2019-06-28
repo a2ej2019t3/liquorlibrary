@@ -2,6 +2,7 @@
 session_start();
 $_SESSION['location'] = 'backorderhistory';
 include('connection.php');
+include_once ('partials/arr_function.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,8 +13,8 @@ include('connection.php');
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Branch Admin pickup orders history</title>
   <?php
-  include_once("partials/head.php");
-  include(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'liquorlibrary' . DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 'DBsql.php');
+  include_once ("partials/head.php");
+  include_once (dirname(__DIR__) . DIRECTORY_SEPARATOR . 'liquorlibrary' . DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 'DBsql.php');
   $DBsql = new sql;
   ?>
   <link rel="stylesheet" href="css/branchreport.css">
@@ -146,21 +147,27 @@ include('connection.php');
           <!-- ------------copy -->
           <div class="container-fluid">
             <div class="row">
-              <div class="col-12 ">
+              <div class="col-12 " >
                 <nav>
                   <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Completed Pickups</a>
-                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Cancelled Pickups</a>
+                    <a onclick=activechecking(); class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true" >Completed Pickups</a>
+                    <a onclick=activechecking(); class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Cancelled Pickups</a>
                   </div>
                 </nav>
 
                 <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
                   <!--  -->
+                  
                   <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-
+                  
                     <!--  -->
                     <div class="row">
-                      <div class="col-7"></div>
+                      <div class="col-7">
+
+                      <?php
+                      include_once ('partials/branchreportCtrl.php');
+                       ?>
+                      </div>
                       <div class="col-5" style="float:left;">
                         <div style="  border: 3px solid #00B4CC; background-color:#00B4CC; border-radius: 5px;  outline: none;  height:38px;  color: #9DBFAF;">
                           <input id="searchinput" search-id="complete" autocomplete="off" spellcheck="false" type="search" placeholder="Search by customer name or order ID" style="width:80%; float: left; display:inline-block;   border: 3px solid #00B4CC">;
@@ -176,233 +183,44 @@ include('connection.php');
 
                     <p></p>
                     <div id="newcontent">
-                    <div id="accordion">
-                      <?php
-                      if (!empty($complete_arr)) {
-                        for ($i = 0; $i < count($complete_arr); $i++) {
-
-                          $statusName = $complete_arr[$i][4];
-                          switch ($complete_arr[$i][4]) {
-                            case 0:
-                              $badgeType = 'badge-secondary';
-
-                              break;
-                            case 1:
-                              $badgeType = 'badge-info';
-                              $statusName = 'paid';
-                              break;
-
-                            case 3:
-                              $badgeType = 'badge-warning';
-                              $statusName = 'ready to pick up';
-                              break;
-                            case 4:
-                              $badgeType = 'badge-success';
-                              $statusName = 'Completed';
-                              break;
-                            case 5:
-                              $badgeType = 'badge-dark';
-                              $statusName = 'Cancelled';
-                              break;
-                            case 6:
-                              $badgeType = 'badge-info';
-                              $statusName = 'pay by cash';
-                              break;
-                            case 7:
-                              $badgeType = 'badge-warning';
-                              $statusName = 'Shipping';
-                              break;
-                            default:
-                              # code...
-                              break;
-                          }
-                          $orderIdArr = array(
-                            'orderID' => $complete_arr[$i][0],
-                            'buyerID' => $complete_arr[$i][1]
-                          );
-                          $orderidJson = json_encode($orderIdArr);
-
-
-                          echo '<div class="card">
-                                          <a class="btn p-0 orders"  data-toggle="collapse" data-target="#coid' . $i . '" data-orderid="' . $complete_arr[$i][0] . '" style="width:100%;">
-                                           <div id="heading" class="py-2">
-                                             <div class="row">
-                                                <div class="col-1 mx-auto">
-                                                     <h5 class="ids">#' . $complete_arr[$i][0] . '</h5>
-                                                 </div>
-                                                 <div class="col-3 text-left">
-                                                    <div class="row">
-                                                        <h5 class="secondHeader">Items</h5>
-                                                    </div>
-                                                 <div class="row secondRow">';
-                          $imgpath = 'images/';
-                          $items = $DBsql->getCartItemsInfo($complete_arr[$i][0], array('LIMIT' => '3'));
-                          if (count($items) != 0) {
-                            foreach ($items as $key => $value) {
-                              echo '
-                                                    <img class="img-thumbnail briefimg mx-1" src="' . $imgpath . $value['img'] . '">';
-                            }
-                            if (count($items) < 3) { } else {
-                              echo '<i class="fas fa-ellipsis-h" style="color:grey; margin-left:5px; line-height:2.4;"></i>';
-                            }
-                          }
-                          echo '</div>
-                                                  </div>
-                                                  <div class="col-2">
-                                                      <div class="row">
-                                                          <h5 class="secondHeader">Price</h5>
-                                                      </div>
-                                                      <div class="row secondRow">
-                                                          <h5>NZ$' . $complete_arr[$i][6] . '</h5>
-                                                      </div>
-                                                </div> 
-                                                <div class="col-2 text-left">
-                                                    <div class="row">
-                                                        <h5 class="ordertime secondHeader">Ordered On:</h5>
-                                                    </div>
-                                                    <div class="row secondRow">
-                                                        <h5 class="orderdate">' . $complete_arr[$i][3] . '</h5>
-                                                    </div>
-                                               </div>
-                                               <div class="col-1 p-1 my-auto text-left pl-5" style="font-size:1.25rem;">
-                                                   <span class="badge ' . $badgeType . '">' . $statusName . '</span>
-                                              </div>
-                                              <div class="col-3 col-xs-6 p-1 my-auto  pl-5" style="font-size:1.25rem;">
-                                                  <button class="btn btn-primary adminmsg" id="branchemailbutton"  data-toggle="modal" data-target="#branchemail" value="' . $complete_arr[$i][0] . '" ><i class="fa fa-envelope"></i> </button>
-
-                                             </div>
-                                              </div>
-                                            </div>
-                                          </a>
-                                          <div id="coid' . $i . '" class="collapsesub" data-parent="#accordion">
-                                            <hr class="my-0">
-                                            <div class="py-4 details" style="display:none;">
-                                                
-                                            </div>
-                                        </div>
-                                      </div>
-                                       ';
+                      
+                      <div id="accordion">
+                        
+                        <?php
+                        
+                        if (isset($_GET['key']) && isset($_GET['sort'])) {
+                          $keyword = $_GET['key'];
+                          $sort = $_GET['sort'];
+                          completed_Arr("complete_arr",'sort', $keyword, $sort);
+                        } else {
+                          completed_Arr($arr="complete_arr");
                         }
-                      } else {
-                        echo 'There is no new pickup order yet';
-                      }
-                      ?>
+                        ?>
 
-                    </div> <!-- accordion ends -->
+                      </div> <!-- accordion ends -->
                     </div> <!-- id=newcontent ends -->
                   </div> <!-- tab1 ends -->
                   <!--  -->
                   <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                    <p></p>
-                    <div id="accordion">
+                  <?php
+                      include_once('partials/branchreportCtrl2.php');
+                  ?>
+                  <p></p>
+                    <div id="newcontent2">
+                    
+                    <div id="accordion2">
                       <?php
-                      if (!empty($cancelled_arr)) {
-                        for ($i = 0; $i < count($cancelled_arr); $i++) {
-
-                          $statusName = $cancelled_arr[$i][4];
-                          switch ($cancelled_arr[$i][4]) {
-                            case 0:
-                              $badgeType = 'badge-secondary';
-
-                              break;
-                            case 1:
-                              $badgeType = 'badge-info';
-                              $statusName = 'paid';
-                              break;
-
-                            case 3:
-                              $badgeType = 'badge-warning';
-                              $statusName = 'ready to pick up';
-                              break;
-                            case 4:
-                              $badgeType = 'badge-success';
-                              $statusName = 'Completed';
-                              break;
-                            case 5:
-                              $badgeType = 'badge-dark';
-                              $statusName = 'Cancelled';
-                              break;
-                            case 6:
-                              $badgeType = 'badge-info';
-                              $statusName = 'pay by cash';
-                              break;
-                            case 7:
-                              $badgeType = 'badge-warning';
-                              $statusName = 'Shipping';
-                              break;
-                          }
-                          $orderIdArr = array(
-                            'orderID' => $cancelled_arr[$i][0],
-                            'buyerID' => $cancelled_arr[$i][1]
-                          );
-                          // $orderidJson = json_encode($orderIdArr);
-
-
-                          echo '<div class="card">
-                                      <a class="btn p-0 orders"  data-toggle="collapse" data-target="#coid' . $i . '" data-orderid="' . $cancelled_arr[$i][0] . '" style="width:100%;">
-                                       <div id="heading" class="py-2">
-                                         <div class="row">
-                                            <div class="col-1 mx-auto">
-                                                 <h5 class="ids">#' . $cancelled_arr[$i][0] . '</h5>
-                                             </div>
-                                             <div class="col-3 text-left">
-                                                <div class="row">
-                                                    <h5 class="secondHeader">Items</h5>
-                                                </div>
-                                             <div class="row secondRow">';
-                          $imgpath = 'images/';
-                          $items = $DBsql->getCartItemsInfo($cancelled_arr[$i][0], array('LIMIT' => '3'));
-                          if (count($items) != 0) {
-                            foreach ($items as $key => $value) {
-                              echo '
-                                                <img class="img-thumbnail briefimg mx-1" src="' . $imgpath . $value['img'] . '">';
-                            }
-                            if (count($items) < 3) { } else {
-                              echo '<i class="fas fa-ellipsis-h" style="color:grey; margin-left:5px; line-height:2.4;"></i>';
-                            }
-                          }
-                          echo '</div>
-                                              </div>
-                                              <div class="col-2">
-                                                  <div class="row">
-                                                      <h5 class="secondHeader">Price</h5>
-                                                  </div>
-                                                  <div class="row secondRow">
-                                                      <h5>NZ$' . $cancelled_arr[$i][6] . '</h5>
-                                                  </div>
-                                            </div> 
-                                            <div class="col-2 text-left">
-                                                <div class="row">
-                                                    <h5 class="ordertime secondHeader">Ordered On:</h5>
-                                                </div>
-                                                <div class="row secondRow">
-                                                    <h5 class="orderdate">' . $cancelled_arr[$i][3] . '</h5>
-                                                </div>
-                                           </div>
-                                           <div class="col-1 p-1 my-auto text-left pl-5" style="font-size:1.25rem;">
-                                               <span class="badge ' . $badgeType . '">' . $statusName . '</span>
-                                          </div>
-                                          <div class="col-3 col-xs-6 p-1 my-auto  pl-5" style="font-size:1.25rem;">
-                                              <button class="btn btn-primary adminmsg" id="branchemailbutton"  data-toggle="modal" data-target="#branchemail" value="' . $cancelled_arr[$i][0] . '" ><i class="fa fa-envelope"></i> </button>
-
-                                         </div>
-                                          </div>
-                                        </div>
-                                      </a>
-                                      <div id="coid' . $i . '" class="collapsesub" data-parent="#accordion">
-                                        <hr class="my-0">
-                                        <div class="py-4 details" style="display:none;">
-                                            
-                                        </div>
-                                    </div>
-                                  </div>
-                                   ';
-                        }
+                      if (isset($_GET['key']) && isset($_GET['sort'])) {
+                        $keyword = $_GET['key'];
+                        $sort = $_GET['sort'];
+                        completed_Arr("cancelled_arr",'sort', $keyword, $sort);
                       } else {
-                        echo 'There is no new ready order yet';
+                        completed_Arr($arr="cancelled_arr");
                       }
+                      
                       ?>
                     </div> <!-- accordion ends -->
+                    </div><!-- newcontents2 ends -->
                   </div><!-- tab2 ends -->
                   <!--  -->
 
@@ -433,22 +251,9 @@ include('connection.php');
   include_once("partials/foot.php");
   ?>
   <script>
-    $(function() {
-      $('.collapsesub').on('show.bs.collapse', function() {
-        var obj = $(this);
-        var orderid = obj.siblings('.orders').data("orderid");
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function() {
-          if (this.readyState == 4 && this.status == 200) {
-            console.log(xmlhttp);
-            obj.children('div').html(xmlhttp.response);
-            obj.children('div').css('display', 'block');
-          }
-        }
-        xmlhttp.open("GET", "orderHistoryDetail.php?oi=" + orderid, true);
-        xmlhttp.send();
-      });
-    })
+
+
+
   </script>
   <script type="text/javascript" src="js/sub.js"></script>
   <script type="text/javascript" src="js/main.js"></script>
