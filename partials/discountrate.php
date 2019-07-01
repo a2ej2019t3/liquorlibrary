@@ -219,6 +219,10 @@ echo "
     margin:0;
 }
 
+.product-grid__botton:active {
+    background: rgb(202, 27, 86);
+}
+
 .discountbutton {
     position: absolute;
     top: 5px;

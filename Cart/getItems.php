@@ -1,6 +1,6 @@
 <?php
 include_once(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 'DBsql.php');
-
+include_once(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'objectToArray.php');
 $DBsql = new sql();
 
 

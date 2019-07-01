@@ -15,7 +15,6 @@
 
   @keyframes onhovermovement {
     from {}
-
     to {
       box-shadow: 0 0px 20px rgba(0, 0, 0, 0.5);
     }
@@ -112,7 +111,7 @@
 </style>
 
 <div id="btContainer">
-  <!-- click event of the button below is in search.js line 26 -->
+  <!-- click event func of the button located in search.js line 26 -->
   <button id="stickyCartBtn" class="cartbutton sticky">
     <div>
       <div>
@@ -121,9 +120,6 @@
     </div>
   </button>
 </div>
-<!-- modal cart ---------------------------------------------------------------------------------------->
-<!-- <div class="" style="z-index:1000; border:none; display:none;"> -->
-<!-- <div class="card" id="stickyCart" role="document" style="position: absolute; right: 80px; width:400px;"> -->
 <div class="card" id="stickyCart" style="box-shadow: 2px 3px rgba(124, 99, 84, 1);
     position: fixed;
     right: 80px;
@@ -155,21 +151,3 @@
     </div>
   </div>
 </div>
-<!-- </div> -->
-<!-- </div> -->
-
-<script>
-  function checkgetitem() {
-    if (sessionStorage.getItem('status') != null) {
-      location.href = 'paymentprocess.php';
-    } else {
-      //show validation message
-      alert("Please log in to proceed");
-      $("#cart .close").click();
-      //  jQuery.noConflict(); 
-      //   $('#myModal').modal('show');
-      $('#myModal').modal();
-      exit();
-    }
-  }
-</script>
