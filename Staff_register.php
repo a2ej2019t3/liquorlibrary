@@ -1,12 +1,12 @@
 <?php
 session_start();
-$_SESSION['location'] = 'register';
+$_SESSION['location'] = 'Staff_register';
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>Register Here</title>
+    <title>Staff Up</title>
     <?php
     include_once("partials/head.php");
     include("connection.php");
@@ -24,18 +24,18 @@ $_SESSION['location'] = 'register';
     <section>
         <br><br><br><br>
         <!-- <img src="images/liquor4.jpg" alt=""> -->
-        <div class="container">
+        <!-- <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-md-12 col-lg-12">
-                    <div class="mySlides"> <img src="images/logow.jpg" style="width:100%; max-height:300px;" />
-                        <div class="content">ADD WareHouse</div>
+                    <div class="mySlides"> <img src="images/liquor5.jpg" style="width:100%; max-height:520px;" />
+                        <div class="content">Join us NOW</div>
                     </div>
-                    <!-- <div class="mySlides"> <img src="images/warehouse.jpg" style="width:100%; max-height:520px;" />
+                    <div class="mySlides"> <img src="images/liquor15.jpg" style="width:100%; max-height:520px;" />
                         <div class="content2">And enjoy <br> the benefits! </div>
-                    </div> -->
+                    </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
     </section>
     <br><br>
@@ -43,7 +43,7 @@ $_SESSION['location'] = 'register';
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 col-lg-12" style="text-align: center; font-family: 'Roboto', sans-serif;">
-                    <h1 style="font-family: 'Lato', sans-serif;"> Add Your Branch</h1>
+                    <h1 style="font-family: 'Lato', sans-serif;"> STAFF UP</h1>
                 </div>
             </div>
         </div>
@@ -51,7 +51,7 @@ $_SESSION['location'] = 'register';
     <br>
     <hr>
     <section id="form">
-        <form method="post" action="signInUp/Process_warehouse.php">
+        <form method="post" action="signInUp/Process_staff.php">
             <div class="container" style="max-width: 900px; text-align:center;">
                 <!-- <div class="row">
                     <div class="fieldbox col-xs-12 col-sm-12 col-md-6 col-lg-6">
@@ -68,34 +68,52 @@ $_SESSION['location'] = 'register';
                 </div> -->
                 <!-- second row of form -->
                 <div class="row">
-                    <div class="fieldbox col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                        <label for="lable">*Branch ID </label><br>
-                        <input name="Branch_ID" class="input2" type="text" required>
-                    </div>
-                    <div class="fieldbox col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                        <label for="lable">*Branch Name </label><br>
-                        <input name="branch_name" class="input2" type="text" required>
-                    </div>
+                    <!-- <div class="fieldbox col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <label for="lable">*First Name </label><br>
+                        <input name="first_name" class="input2" type="text" required>
+                    </div> -->
+                    <!-- <div class="fieldbox col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <label for="lable">*Last Name </label><br>
+                        <input name="last_name" class="input2" type="text" required>
+                    </div> -->
                 </div>
                 <!-- third row -->
                 <div id="forBusiness" class="row">
-                    <div id="companyNameField" class="fieldbox col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                        <label for="lable">*Address </label><br>
-                        <input id="address" name="address" class="input2" type="text">
-                    </div>
+                    <!-- <div id="companyNameField" class="fieldbox col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <label for="lable">*Your company Name </label><br>
+                        <input id="company_name" name="company_name" class="input2" type="text">
+                    </div> -->
                     <div id="businessTypeField" class="fieldbox col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                        <label for="lable">*Please select the type of business(Business Client Only)</label><br>
-                        <input name="typeID" type="hidden" value="">
-                        <select id="questiontopic" onclick="(this)">
+                        <label for="lable">*userID</label><br>
+                        <select id="questiontopic" name="userIDbox">
                             <?php
-                            $selectQuery = "SELECT * FROM `usertype` WHERE NOT typeID = 0";
+                            $selectQuery = "SELECT * FROM `users`  WHERE NOT userID = 0";
                             //Checks the customer already exists with the user name.
 
                             if ($result = mysqli_query($connection, $selectQuery)) {
                                 while ($type = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
                                     ?>
 
-                                    <option class="businessTypeOptions" value="<?php echo $type['typeID'] ?>"><?php echo $type['typeName'] ?></option>
+                                    <option class="businessTypeOptions" value="<?php echo $type['userID'] ?>"><?php echo $type['userID'] ?></option>
+                                <?php
+                            }
+                        }
+                        ?>
+                        </select>
+                    </div>
+                    <div id="businessTypeField" class="fieldbox col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <label for="lable">*WareHouseID</label><br>
+                        <input name="whID" type="hidden" value="">
+                        <select id="whIDselect" name="whInfo">
+                            <?php
+                            $selectQuery = "SELECT * FROM `warehouse`  WHERE NOT whID = 0";
+                            //Checks the customer already exists with the user name.
+
+                            if ($result = mysqli_query($connection, $selectQuery)) {
+                                while ($type = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+                                    ?>
+
+                                    <option class="businessTypeOptions" id="selectedwhinfo" value="<?php echo $type['whID'] ?>"><?php echo $type['whID'] ?></option>
                                 <?php
                             }
                         }
@@ -104,26 +122,26 @@ $_SESSION['location'] = 'register';
                     </div>
                 </div>
                 <!-- fourth row-->
-                <div class="row">
+                <!-- <div class="row">
                     <div class="fieldbox col-xs-12 col-sm-12 col-md-6 col-lg-6">
                         <label for="lable">*Contact number </label><br>
-                        <input name="phone" class="input2" type="text" required>
+                        <input name="contact_number" class="input2" type="text" required>
                     </div>
                     <div class="fieldbox col-xs-12 col-sm-12 col-md-6 col-lg-6">
                         <label for="lable">*Email address </label><br>
                         <input name="email" class="input2" type="email" required>
                     </div>
-                </div>
-                <!-- <div class="row">
-                    <div class="fieldbox col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                </div> -->
+                <div class="row">
+                    <!-- <div class="fieldbox col-xs-12 col-sm-12 col-md-6 col-lg-6">
                         <label for="lable">*Password </label><br>
                         <input name="password" class="input2" type="password" required>
                     </div>
                     <div class="fieldbox col-xs-12 col-sm-12 col-md-6 col-lg-6">
                         <label for="lable">*Confirm your password </label><br>
                         <input name="confirm_password" class="input2" type="password" required>
-                    </div>
-                </div> -->
+                    </div> -->
+                </div>
                 <!-- button row -->
 
                 <div class="row">
@@ -132,7 +150,8 @@ $_SESSION['location'] = 'register';
                         <button id="resetbutton" type="reset" class="btn btn-primary">Reset</button>
                     </div>
                     <div class="fieldbox col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                        <button id="submitbutton" type="submit" class="btn btn-primary">ADD</button>
+                        <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
+                        <input type="submit" id="submitbutton" value="Submit" name="submit" />
                     </div>
                 </div>
                 <br><br><br>
@@ -146,4 +165,4 @@ $_SESSION['location'] = 'register';
     <script type="text/javascript" src="js/search.js"></script>
 </body>
 
-</html>-
+</html>
