@@ -163,7 +163,7 @@ include_once ("Emailsending/branchemail.php");
                 <!--  -->
                            
                             
-           
+                <div id="accordion">
               <div id="accordion3">
                   <?php
                         
@@ -179,6 +179,7 @@ include_once ("Emailsending/branchemail.php");
 
 
         </div>
+                </div>
     </div>
 </div>
 <!-- --------------------------------------------------------------------------------------------------------- -->
