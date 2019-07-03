@@ -38,7 +38,7 @@ include('connection.php');
     ?>
     <!-- top header ends--------------------------------------------------------------------------------- -->
     <!-- Side Nav included--------------------------------------------------------------------------------- -->
-    <div id="wrapper" style="margin-top:40px;">
+    <div id="wrapper" style="margin-top:80px;">
 
       <!-- Sidebar -->
       <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: rgba(48, 43, 41,1); margin-top:40px; background-image:none;">
@@ -78,7 +78,7 @@ include('connection.php');
               <h6 class="collapse-header">Back Order</h6>
               <a class="collapse-item" href="backorderstatus.php">Order status</a>
               <a class="collapse-item" href="backorderhistory.php">Order history</a>
-              <a class="collapse-item" href="cards.html">Reports</a>
+
             </div>
           </div>
         </li>
@@ -94,7 +94,7 @@ include('connection.php');
               <h6 class="collapse-header">Customer Order</h6>
               <a class="collapse-item active" href="pickuporderstatus.php">Order status</a>
               <a class="collapse-item" href="pickuporderhistory.php">Order history</a>
-              <a class="collapse-item" href="utilities-animation.html">Reports</a>
+
             </div>
           </div>
         </li>
@@ -115,7 +115,7 @@ include('connection.php');
           </a>
           <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-              <a class="collapse-item" href="partials/updatestoreinfo.php">Update information</a>
+              <a class="collapse-item" href="updatestoreinfo.php">Update information</a>
 
             </div>
           </div>
@@ -131,7 +131,7 @@ include('connection.php');
 
       </ul>
       <!-- content starts -------------------------------------------------------------------------------------------->
-      <div id="content" style="margin-top:40px; width:100%;">
+      <div id="content" style="margin-top:80px; width:100%;">
 
         <!-- Begin Page Content -->
         <div class="container-fluid" style="width:100%;">
@@ -156,60 +156,60 @@ include('connection.php');
                 </nav>
 
                 <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
-                 
-                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                       <!--  -->
-                       <div class="row">
-                    <div class="col-7"></div>
-                    <div class="col-5" style="float:left;">
-                      <div style="  border: 3px solid #00B4CC; background-color:#00B4CC; border-radius: 5px;  outline: none;  height:38px;  color: #9DBFAF;">
+
+                  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                    <!--  -->
+                    <div class="row">
+                      <div class="col-7"></div>
+                      <div class="col-5" style="float:left;">
+                        <div style="  border: 3px solid #00B4CC; background-color:#00B4CC; border-radius: 5px;  outline: none;  height:38px;  color: #9DBFAF;">
                           <input id="searchinput" search-id="ready" autocomplete="off" spellcheck="false" type="search" placeholder="Search by customer name or order ID" style="width:80%; float: left; display:inline-block;   border: 3px solid #00B4CC">;
                           <button type="submit" class="searchButton" style="display:inline-block; width:20%;   border: 1px solid #00B4CC; background: #00B4CC;text-align: center; color: #fff; border-radius: 5px;cursor: pointer; position:absolute; top: 8px; right:12px;">
-                              <i class="fa fa-search"></i>
+                            <i class="fa fa-search"></i>
                           </button>
-                      </div>  
-                      
+                        </div>
+
+                      </div>
                     </div>
-                    </div>    
                     <!--  -->
                     <p></p>
-                  
-                      <div id="newcontent">
+
+                    <div id="newcontent">
                       <div id="accordion">
-                          <?php
-                          if (!empty($newpickups_arr)) {
-                            for ($i = 0; $i < count($newpickups_arr); $i++) {
-                              
-                              $statusName = $newpickups_arr[$i][4];
-                              switch ($newpickups_arr[$i][4]) {
-                                case 0:
-                                  $badgeType = 'badge-secondary';
-      
-                                  break;
-                                case 1:
-                                  $badgeType = 'badge-info';
-                                  $statusName = 'paid';
-                                  break;
-      
-                                case 3:
-                                  $badgeType = 'badge-warning';
-                                  $statusName = 'ready to pick up';
-                                  break;
-      
-                                case 6:
-                                  $badgeType = 'badge-info';
-                                  $statusName = 'pay by cash';
-                                  break;
-                                default:
-                                  # code...
-                                  break;
-                              }
-                              $orderIdArr = array(
-                                'orderID' => $newpickups_arr[$i][0],
-                                'buyerID' => $newpickups_arr[$i][1]
-                              );
-                              $orderidJson = json_encode($orderIdArr);      
-                                echo '<div class="card">
+                        <?php
+                        if (!empty($newpickups_arr)) {
+                          for ($i = 0; $i < count($newpickups_arr); $i++) {
+
+                            $statusName = $newpickups_arr[$i][4];
+                            switch ($newpickups_arr[$i][4]) {
+                              case 0:
+                                $badgeType = 'badge-secondary';
+
+                                break;
+                              case 1:
+                                $badgeType = 'badge-info';
+                                $statusName = 'paid';
+                                break;
+
+                              case 3:
+                                $badgeType = 'badge-warning';
+                                $statusName = 'ready to pick up';
+                                break;
+
+                              case 6:
+                                $badgeType = 'badge-info';
+                                $statusName = 'pay by cash';
+                                break;
+                              default:
+                                # code...
+                                break;
+                            }
+                            $orderIdArr = array(
+                              'orderID' => $newpickups_arr[$i][0],
+                              'buyerID' => $newpickups_arr[$i][1]
+                            );
+                            $orderidJson = json_encode($orderIdArr);
+                            echo '<div class="card">
                                           <a class="btn p-0 orders"  data-toggle="collapse" data-target="#coid' . $i . '" data-orderid="' . $newpickups_arr[$i][0] . '" style="width:100%;">
                                            <div id="heading" class="py-2">
                                              <div class="row">
@@ -221,18 +221,18 @@ include('connection.php');
                                                         <h5 class="secondHeader">Items</h5>
                                                     </div>
                                                  <div class="row secondRow">';
-                                                 $imgpath = 'images/';
-                                                 $items = $DBsql->getCartItemsInfo($newpickups_arr[$i][0], array('LIMIT' => '3'));
-                                                    if (count($items) != 0) {
-                                                      foreach ($items as $key => $value) {
-                                                        echo '
+                            $imgpath = 'images/';
+                            $items = $DBsql->getCartItemsInfo($newpickups_arr[$i][0], array('LIMIT' => '3'));
+                            if (count($items) != 0) {
+                              foreach ($items as $key => $value) {
+                                echo '
                                                     <img class="img-thumbnail briefimg mx-1" src="' . $imgpath . $value['img'] . '">';
-                                                      }
-                                                      if (count($items) < 3) { } else {
-                                                        echo '<i class="fas fa-ellipsis-h" style="color:grey; margin-left:5px; line-height:2.4;"></i>';
-                                                      }
-                                                    }
-                                               echo'</div>
+                              }
+                              if (count($items) < 3) { } else {
+                                echo '<i class="fas fa-ellipsis-h" style="color:grey; margin-left:5px; line-height:2.4;"></i>';
+                              }
+                            }
+                            echo '</div>
                                                   </div>
                                                   <div class="col-2">
                                                       <div class="row">
@@ -255,7 +255,7 @@ include('connection.php');
                                               </div>
                                               <div class="col-3 col-xs-6 p-1 my-auto  pl-5" style="font-size:1.25rem;">
                                                   <button class="btn btn-primary adminmsg" id="branchemailbutton"  data-toggle="modal" value=' . $orderidJson . ' onclick="openEmailModal(this.value);" ><i class="fa fa-envelope"></i> </button>
-                                                  <button class="btn btn-danger" id="updatebutton' . $i . '" data-id='.$i.' value=' . $orderidJson . ' onclick="updateorder(this); readypickup(this.value)" ><span id="readysign' . $i . '">READY</span>                                                  
+                                                  <button class="btn btn-danger" id="updatebutton' . $i . '" data-id=' . $i . ' value=' . $orderidJson . ' onclick="updateorder(this); readypickup(this.value)" ><span id="readysign' . $i . '">READY</span>                                                  
                                                   <span class="spinner-border spinner-border-sm" id="spinner' . $i . '" role="status" aria-hidden="true" style="display:none"></span>
                                                   </button>
 
@@ -270,40 +270,40 @@ include('connection.php');
                                             </div>
                                         </div>
                                       </div>
-                                       '; 
-                            }
-                          } else {
-                            echo 'There is no new pickup order yet';
+                                       ';
                           }
-                          ?>
-                          
-                      </div>  <!-- accordion ends -->
-                      </div> <!-- id=newcontent ends -->
-                    </div> <!-- tab1 ends -->
-                    <!--  -->
-                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        } else {
+                          echo 'There is no new pickup order yet';
+                        }
+                        ?>
+
+                      </div> <!-- accordion ends -->
+                    </div> <!-- id=newcontent ends -->
+                  </div> <!-- tab1 ends -->
+                  <!--  -->
+                  <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                     <p></p>
-                      <div id="accordion">
-                         <?php
+                    <div id="accordion">
+                      <?php
                       if (!empty($readypickups_arr)) {
                         for ($i = 0; $i < count($readypickups_arr); $i++) {
-                              
+
                           $statusName = $readypickups_arr[$i][4];
                           switch ($readypickups_arr[$i][4]) {
                             case 0:
                               $badgeType = 'badge-secondary';
-  
+
                               break;
                             case 1:
                               $badgeType = 'badge-info';
                               $statusName = 'paid';
                               break;
-  
+
                             case 3:
                               $badgeType = 'badge-warning';
                               $statusName = 'ready to pick up';
                               break;
-  
+
                             case 6:
                               $badgeType = 'badge-info';
                               $statusName = 'pay by cash';
@@ -317,9 +317,9 @@ include('connection.php');
                             'buyerID' => $readypickups_arr[$i][1]
                           );
                           $orderidJson = json_encode($orderIdArr);
-  
-  
-                            echo '<div class="card">
+
+
+                          echo '<div class="card">
                                       <a class="btn p-0 orders"  data-toggle="collapse" data-target="#coid' . $i . '" data-orderid="' . $readypickups_arr[$i][0] . '" style="width:100%;">
                                        <div id="heading" class="py-2">
                                          <div class="row">
@@ -331,18 +331,18 @@ include('connection.php');
                                                     <h5 class="secondHeader">Items</h5>
                                                 </div>
                                              <div class="row secondRow">';
-                                             $imgpath = 'images/';
-                                             $items = $DBsql->getCartItemsInfo($readypickups_arr[$i][0], array('LIMIT' => '3'));
-                                                if (count($items) != 0) {
-                                                  foreach ($items as $key => $value) {
-                                                    echo '
+                          $imgpath = 'images/';
+                          $items = $DBsql->getCartItemsInfo($readypickups_arr[$i][0], array('LIMIT' => '3'));
+                          if (count($items) != 0) {
+                            foreach ($items as $key => $value) {
+                              echo '
                                                 <img class="img-thumbnail briefimg mx-1" src="' . $imgpath . $value['img'] . '">';
-                                                  }
-                                                  if (count($items) < 3) { } else {
-                                                    echo '<i class="fas fa-ellipsis-h" style="color:grey; margin-left:5px; line-height:2.4;"></i>';
-                                                  }
-                                                }
-                                           echo'</div>
+                            }
+                            if (count($items) < 3) { } else {
+                              echo '<i class="fas fa-ellipsis-h" style="color:grey; margin-left:5px; line-height:2.4;"></i>';
+                            }
+                          }
+                          echo '</div>
                                               </div>
                                               <div class="col-2">
                                                   <div class="row">
@@ -369,6 +369,10 @@ include('connection.php');
                                               <button class="btn btn-danger"  id="completebutton" data-id=' . $i . '   value=' . $orderidJson .  ' onclick="completeorder(this); completepickup(this.value);" ><span id="completereadysign' . $i . '"> COMPLETE</span>
                                               <span class="spinner-border spinner-border-sm" id="completespinner' . $i . '" role="status" aria-hidden="true" style="display:none"></span>
                                               </button>
+
+                                              <button class="btn btn-danger" style="background-color:black; border: none;" id="cancelbutton' . $i . '" data-id=' . $i . '   value=' . $orderidJson .  ' onclick="cancelorder(this);" ><span id="cancelsign' . $i . '"> Cancel</span>
+                                              <span class="spinner-border spinner-border-sm" id="cancelspinner' . $i . '" role="status" aria-hidden="true" style="display:none"></span>
+                                              </button>
                                              
                                          </div>
                                           </div>
@@ -381,42 +385,44 @@ include('connection.php');
                                         </div>
                                     </div>
                                   </div>
-                                   '; 
+                                   ';
                         }
                       } else {
                         echo 'There is no new ready order yet';
                       }
-                          ?>
-                      </div> <!-- accordion ends -->
-                     
-                    </div><!-- tab2 ends -->
-                    <!--  -->
-                
-                </div><!--nav-tabContent finishes-->
+                      ?>
+                    </div> <!-- accordion ends -->
 
-              </div><!--col-12 finishes-->
+                  </div><!-- tab2 ends -->
+                  <!--  -->
+
+                </div>
+                <!--nav-tabContent finishes-->
+
+              </div>
+              <!--col-12 finishes-->
             </div><!-- row finishes-->
-          </div><!--second class container fluid finishes-->
-        </div><!--class container fluid finishes-->
-      </div><!--id content finishes-->
+          </div>
+          <!--second class container fluid finishes-->
+        </div>
+        <!--class container fluid finishes-->
+      </div>
+      <!--id content finishes-->
       <!-- ------------until -->
 
-    
-    </div> <!--id wrapper finishes-->
+
+    </div>
+    <!--id wrapper finishes-->
     <!-- --------------------------------------------------------------------------------------------------------- -->
   <?php
-} else {
-  echo '<h4 style="position: absolute; top: 40%; left: 40%;">This page needs a valid authentification to read.</h4> ';
-}
-?>
+  } else {
+    echo '<h4 style="position: absolute; top: 40%; left: 40%;">This page needs a valid authentification to read.</h4> ';
+  }
+  ?>
   <?php
   include_once("partials/foot.php");
   ?>
-  <script>
-    
 
- 
-  </script>
   <script type="text/javascript" src="js/sub.js"></script>
   <script type="text/javascript" src="js/main.js"></script>
   <script type="text/javascript" src="js/search.js"></script>

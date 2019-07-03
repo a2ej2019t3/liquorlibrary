@@ -131,13 +131,9 @@ function completed_Arr($arr = " ", $index = "all", $keyword = "orderID", $sort =
                                                </div>
                                                 </div>
                                               </div>
-                                            </a>';
-                                                if ($GLOBALS[$arr] == "historyorder_arr") {
-                                                  echo '<div id="coid' . $complete_arr['orderID']  . '" class="collapsesub" data-parent="#accordion3">';
-                                                } else {
-                                                  echo ' <div id="coid' . $complete_arr['orderID']  . '" class="collapsesub" data-parent="#accordion">';
-                                                }
-                                                echo '       
+                                            </a>
+                                             <div id="coid' . $complete_arr['orderID']  . '" class="collapsesub" data-parent="#accordion">
+                                                    
                                               <hr class="my-0">
                                               <div class="py-4 details" style="display:none;">
                                                   

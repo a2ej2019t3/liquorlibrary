@@ -72,7 +72,7 @@
                                 <li class="col" id="firstcol"><a class="'.$className.'" href="findlocation/findus.php" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Find Us</a></li>
                                 <li class="col"><a class="'.$className.' js-open-modal" id="ourdrinks" data-toggle="modal" data-target="#subnav" href="#" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Our Drinks</a></li> 
                                 <li class="col"><a class="'.$className.'" href="specials.php" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Specials</a></li> 
-                                <li class="col2"><a class="'.$className.'" href="" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Admin Report</a></li> 
+                                <li class="col2"><a class="'.$className.'" href="adminreport.php" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Admin Report</a></li> 
             ';
                             }
                             else{

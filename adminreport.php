@@ -30,11 +30,12 @@ include('connection.php');
   <!-- top header ends--------------------------------------------------------------------------------- -->
   <!-- Side Nav included--------------------------------------------------------------------------------- -->
   <?php
-  if (isset($_SESSION['warehouse'])) {
-    require_once('partials/branchquery.php');
-    require_once('partials/branchearningchart.php');
-    require_once('partials/piechartquery.php');
-    require_once('partials/chartrender.php');
+  if (isset($_SESSION['admin'])) {
+    // require_once('partials/branchquery.php');
+    // require_once('partials/branchearningchart.php');
+    // require_once('partials/piechartquery.php');
+    // require_once('partials/chartrender.php');
+    require_once ('partials/adminquery.php');
     ?>
     <div id="wrapper">
 
@@ -44,7 +45,7 @@ include('connection.php');
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
 
-          <div class="sidebar-brand-text mx-3"><?php echo $_SESSION['warehouse']['whName'] ?></div>
+          <div class="sidebar-brand-text mx-3"><?php echo $_SESSION['user']['email'] ?></div>
         </a>
 
         <!-- Divider -->
@@ -101,7 +102,7 @@ include('connection.php');
 
         <!-- Heading -->
         <div class="sidebar-heading">
-          Warehouse information
+          Admin information
         </div>
 
         <!-- Nav Item - Pages Collapse Menu -->
@@ -149,14 +150,9 @@ include('connection.php');
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Backorders (This month)</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800"><?php
-                                                                          if (!empty($backorder_arr)) {
-                                                                            echo count($backorder_arr);
-                                                                          } else {
-                                                                            echo '0';
-                                                                          }
-
-                                                                          ?></div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                     
+                                                                          </div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -173,13 +169,7 @@ include('connection.php');
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Pending backorders</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800"><?php
-                                                                          if (!empty($pendingbackorder_arr)) {
-                                                                            echo count($pendingbackorder_arr);
-                                                                          } else {
-                                                                            echo '0';
-                                                                          }
-                                                                          ?> </div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-bus-alt fa-2x text-gray-300"></i>
@@ -196,13 +186,7 @@ include('connection.php');
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Pickup orders(this month)</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800"><?php
-                                                                          if (!empty($pickups_arr)) {
-                                                                            echo count($pickups_arr);
-                                                                          } else {
-                                                                            echo '0';
-                                                                          }
-                                                                          ?> </div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
 
                     </div>
                     <div class="col-auto">
@@ -220,14 +204,7 @@ include('connection.php');
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">incompleted Pickups</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800"><?php
-                                                                          if (!empty($pendingpickups_arr)) {
-                                                                            echo count($pendingpickups_arr);
-                                                                          } else {
-                                                                            echo '0';
-                                                                          }
-
-                                                                          ?></div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-person-booth fa-2x text-gray-300"></i>
@@ -249,7 +226,7 @@ include('connection.php');
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-success text-uppercase mb-1" style="color: black!important;">Backorder Cost (This month)</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">$<?php echo number_format($totalbackorder_cost, 2, '.', ', '); ?></div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">$</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -265,7 +242,7 @@ include('connection.php');
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-success text-uppercase mb-1" style="color: black!important;">Pickup income (This month)</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">$<?php echo number_format($totalpickup_income, 2, '.', ','); ?></div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">$</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>

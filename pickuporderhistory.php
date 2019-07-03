@@ -39,7 +39,7 @@ include_once ('partials/arr_function.php');
     ?>
     <!-- top header ends--------------------------------------------------------------------------------- -->
     <!-- Side Nav included--------------------------------------------------------------------------------- -->
-    <div id="wrapper" style="margin-top:40px;">
+    <div id="wrapper" style="margin-top:80px;">
 
       <!-- Sidebar -->
       <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: rgba(48, 43, 41,1); margin-top:40px; background-image:none;">
@@ -79,7 +79,7 @@ include_once ('partials/arr_function.php');
               <h6 class="collapse-header">Back Order</h6>
               <a class="collapse-item" href="backorderstatus.php">Order status</a>
               <a class="collapse-item" href="backorderhistory.php">Order history</a>
-              <a class="collapse-item" href="cards.html">Reports</a>
+             
             </div>
           </div>
         </li>
@@ -95,7 +95,7 @@ include_once ('partials/arr_function.php');
               <h6 class="collapse-header">Customer Order</h6>
               <a class="collapse-item" href="pickuporderstatus.php">Order status</a>
               <a class="collapse-item active" href="pickuporderhistory.php">Order history</a>
-              <a class="collapse-item" href="utilities-animation.html">Reports</a>
+            
             </div>
           </div>
         </li>
@@ -116,7 +116,7 @@ include_once ('partials/arr_function.php');
           </a>
           <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-              <a class="collapse-item" href="partials/updatestoreinfo.php">Update information</a>
+              <a class="collapse-item" href="updatestoreinfo.php">Update information</a>
 
             </div>
           </div>
@@ -132,7 +132,7 @@ include_once ('partials/arr_function.php');
 
       </ul>
       <!-- content starts -------------------------------------------------------------------------------------------->
-      <div id="content" style="margin-top:40px; width:100%;">
+      <div id="content" style="margin-top:80px; width:100%;">
 
         <!-- Begin Page Content -->
         <div class="container-fluid" style="width:100%;">

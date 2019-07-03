@@ -74,7 +74,7 @@ include_once ("Emailsending/branchemail.php");
         <h6 class="collapse-header">Back Order</h6>
         <a class="collapse-item" href="backorderstatus.php">Order status</a>
         <a class="collapse-item active" href="backorderhistory.php">Order history</a>
-        <a class="collapse-item" href="cards.html">Reports</a>
+       
       </div>
     </div>
   </li>
@@ -90,7 +90,7 @@ include_once ("Emailsending/branchemail.php");
         <h6 class="collapse-header">Customer Order</h6>
         <a class="collapse-item" href="pickuporderstatus.php">Order status</a>
         <a class="collapse-item" href="pickuporderhistory.php">Order history</a>
-        <a class="collapse-item" href="utilities-animation.html">Reports</a>
+      
       </div>
     </div>
   </li>
@@ -111,7 +111,7 @@ include_once ("Emailsending/branchemail.php");
     </a>
     <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
-          <a class="collapse-item" href="partials/updatestoreinfo.php">Update information</a>
+          <a class="collapse-item" href="updatestoreinfo.php">Update information</a>
 
       </div>
     </div>

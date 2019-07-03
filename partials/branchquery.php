@@ -37,6 +37,9 @@ if(isset($_SESSION['warehouse']['whID'])){
                  }
                        
               }
+              else{
+                
+              }
      
         };
         // select pending backorders
