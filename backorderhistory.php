@@ -12,7 +12,7 @@
     <title>Branch Admin backorder history</title>
     <?php
     include_once ("partials/head.php");
-    include(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'liquorlibrary' . DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 'DBsql.php');
+    include(__DIR__ . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 'DBsql.php');
     $DBsql = new sql;
     ?>
     <link rel="stylesheet" href="css/branchreport.css">

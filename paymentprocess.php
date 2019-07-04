@@ -1,8 +1,8 @@
   <?php
   session_start();
   $_SESSION['location'] = 'paymentprocess';
-  include_once(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'liquorlibrary' . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 'DBsql.php');
-  include_once(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'liquorlibrary' . DIRECTORY_SEPARATOR . 'objectToArray.php');
+  include_once(__DIR__ . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 'DBsql.php');
+  include_once(__DIR__ . DIRECTORY_SEPARATOR . 'objectToArray.php');
 
   $DBsql = new sql();
 

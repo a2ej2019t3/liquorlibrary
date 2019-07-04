@@ -134,6 +134,11 @@
     </button>
     <div id="showItems" class="container" style=" overflow:scroll; max-height:70vh; text-align: center;">
     </div>
+    <?php
+    echo 'asdfa';
+    var_dump(dirname(__DIR__));
+
+?>
     <span class="totalquantity">Total ( <span id="cartTotalQuantity" class="total-cart"></span> ITEMS)</span> <span class="totalcost">price: $<span id="cartTotalPrice" class="total-cart"></span></span>
   </div>
   <div style="text-align: center; margin: 20px auto 10px; width: 100%;">

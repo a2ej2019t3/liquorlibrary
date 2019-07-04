@@ -2,7 +2,7 @@
 $rf = dirname(__DIR__);
 
 session_start();
-include(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'liquorlibrary' . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 'DBsql.php');
+include(__DIR__ . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 'DBsql.php');
 $DBsql = new sql;
 if (isset($_SESSION['user'])) {
     $buyerID = $_SESSION['user']['userID'];
