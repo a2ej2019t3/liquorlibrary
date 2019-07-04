@@ -10,8 +10,7 @@ $(function () {
     goToOrder();
 });
 addLoadEvent(loadHome);
-// addLoadEvent(showToasts);
-// addLoadEvent(loadOrders);
+
 function loadOrders(index = "all", keyword = "orderID", sort = "asc", operation = "filt", gto = null) {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function () {
@@ -20,7 +19,6 @@ function loadOrders(index = "all", keyword = "orderID", sort = "asc", operation 
             document.getElementById('container').innerHTML = xmlhttp.response;
             loadDetails();
             $('.orderCollapse').on('shown.bs.collapse', function () {
-                // $(this)[0].scrollIntoView();
                 var offset = $(this).offset();
                 offset.top -= 300;
                 $('html, body').animate({
@@ -127,6 +125,6 @@ function reorder () {
     $('.reorderBtn').on('click', function () {
        var roid =  $(this).data('roid');
        getItems(roid);
-       window.location.replace("paymentprocess.php");
-    })
+       window.location = "paymentprocess.php";
+    });
 }

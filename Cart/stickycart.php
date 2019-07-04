@@ -133,7 +133,6 @@
       <span>&times;</span>
     </button>
     <div id="showItems" class="container" style=" overflow:scroll; max-height:70vh; text-align: center;">
-
     </div>
     <span class="totalquantity">Total ( <span id="cartTotalQuantity" class="total-cart"></span> ITEMS)</span> <span class="totalcost">price: $<span id="cartTotalPrice" class="total-cart"></span></span>
   </div>
@@ -147,7 +146,7 @@
     ?>
     <div style="width: 300px; display:inline-block;">
       <button type="button" class="btn btn-primary" id="checkoutbutton" onclick='removeItem("<?php echo $idJson ?>", "all")'>EMPTY CART</button>
-      <button type="button" class="btn btn-primary" id="checkoutbutton" onclick="location.href='paymentprocess.php?';">CHECKOUT</button>
+      <button type="button" class="btn btn-primary" id="checkoutbutton" onclick="location.href='paymentprocess.php';">CHECKOUT</button>
     </div>
   </div>
 </div>
