@@ -17,7 +17,21 @@ include('connection.php');
     include_once("partials/head.php");
     ?>
     <link rel="stylesheet" href="css/branchreport.css">
-
+    <link rel="stylesheet" href="css/branch.css">
+    <style>
+        .total {
+            font-size: 0.7rem;
+        }
+        .thismonth{
+            color: #8B0000;
+        }
+        .buttongr:hover{
+            background-color: rgba(48, 43, 41,1)!important;
+        }
+        .buttongr2:hover{
+            background-color:rgba(242, 201, 21, 1)!important;
+        }
+    </style>
 </head>
 
 <body>
@@ -31,11 +45,11 @@ include('connection.php');
     <!-- Side Nav included--------------------------------------------------------------------------------- -->
     <?php
     if (isset($_SESSION['admin'])) {
-        // require_once('partials/branchquery.php');
-        // require_once('partials/branchearningchart.php');
-        // require_once('partials/piechartquery.php');
-        // require_once('partials/chartrender.php');
         require_once('partials/adminquery.php');
+        // require_once('partials/branchquery.php');
+        require_once('partials/adminearningchart.php');
+        // require_once('partials/piechartquery.php');
+        require_once('partials/adminchartrender.php');
         ?>
         <div id="wrapper">
 
@@ -53,7 +67,7 @@ include('connection.php');
 
                 <!-- Nav Item - Dashboard -->
                 <li class="nav-item active">
-                    <a class="nav-link" href="branchreport.php">
+                    <a class="nav-link" href="adminreport.php">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span></a>
                 </li>
@@ -75,8 +89,8 @@ include('connection.php');
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Back Order</h6>
-                            <a class="collapse-item" href="backorderstatus.php">Order status</a>
-                            <a class="collapse-item" href="backorderhistory.php">Order history</a>
+                            <a class="collapse-item" href="admin_backorderstatus.php">BackOrder status</a>
+                            <a class="collapse-item" href="admin_backorderhistory.php">BackOrder history</a>
                         </div>
                     </div>
                 </li>
@@ -90,7 +104,8 @@ include('connection.php');
                     <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Customer Order</h6>
-                            <a class="collapse-item" href="pickuporderstatus.php">Order status</a>
+                            <a class="collapse-item" href="pickuporderstatus.php">Delivery Orders</a>
+                            <a class="collapse-item" href="pickuporderstatus.php">Pickup Orders</a>
                             <a class="collapse-item" href="pickuporderhistory.php">Order history</a>
 
                         </div>
@@ -109,9 +124,21 @@ include('connection.php');
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
                         <i class="fas fa-fw fa-folder"></i>
-                        <span>Store information</span>
+                        <span>Report</span>
                     </a>
                     <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" href="updatestoreinfo.php">Branch Report</a>
+                            <a class="collapse-item" href="updatestoreinfo.php">Staff Report</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages2" aria-expanded="true" aria-controls="collapsePages2">
+                        <i class="fas fa-fw fa-folder"></i>
+                        <span>Store information</span>
+                    </a>
+                    <div id="collapsePages2" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <a class="collapse-item" href="updatestoreinfo.php">Update information</a>
 
@@ -193,7 +220,7 @@ include('connection.php');
                                                     } else {
                                                         echo '0';
                                                     }
-                                                    ?>
+                                                    ?>(total)
                                                 </span>
                                             </div>
                                         </div>
@@ -213,7 +240,7 @@ include('connection.php');
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-info text-uppercase mb-1">pending pickup orders</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                            <?php
+                                                <?php
                                                 if (!empty($pending_pickup_Arr)) {
                                                     echo count($pending_pickup_Arr);
                                                 } else {
@@ -239,7 +266,7 @@ include('connection.php');
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">completed Pickup orders</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                            <span class="thismonth">
+                                                <span class="thismonth">
                                                     <?php
                                                     if (!empty($completed_pickup_monthly_Arr)) {
                                                         echo count($completed_pickup_monthly_Arr);
@@ -256,7 +283,7 @@ include('connection.php');
                                                     } else {
                                                         echo '0';
                                                     }
-                                                    ?>
+                                                    ?>(total)
                                                 </span>
                                             </div>
                                         </div>
@@ -281,7 +308,7 @@ include('connection.php');
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1" style="color: black!important;">Backorder Cost (This month)</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                            <span class="thismonth">
+                                                <span class="thismonth">
                                                     <?php
                                                     echo '$' . number_format($confirm_delivery_monthly_cost, 2, '.', ', ');
                                                     ?>
@@ -290,7 +317,7 @@ include('connection.php');
                                                 <span class="total">
                                                     <?php
                                                     echo number_format($confirm_delivery_cost, 2, '.', ', ');
-                                                    ?>
+                                                    ?>(total)
                                                 </span>
                                             </div>
                                         </div>
@@ -309,7 +336,7 @@ include('connection.php');
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1" style="color: black!important;">Pickup income (This month)</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                            <span class="thismonth">
+                                                <span class="thismonth">
                                                     <?php
                                                     echo '$' . number_format($confirm_pickup_monthly_cost, 2, '.', ', ');
                                                     ?>
@@ -318,7 +345,7 @@ include('connection.php');
                                                 <span class="total">
                                                     <?php
                                                     echo number_format($confirm_pickup_cost, 2, '.', ', ');
-                                                    ?>
+                                                    ?>(total)
                                                 </span>
                                             </div>
                                         </div>
@@ -333,16 +360,16 @@ include('connection.php');
                     <br>
                     <div class="row">
                         <!-- Line chart -->
-                        <div class="col-xl-7 col-lg-7 col-sm-12">
+                        <div class="col-xl-7 col-lg-7 col-sm-12" style="width: 100%; height: 100%;">
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
                                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Pickup Orders :Earnings Overview</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Online Orders : Delivery/Pickup Overview</h6>
                                 </div>
                                 <!-- Card Body -->
-                                <div class="card-body">
-                                    <div class="chart-area">
-                                        <div id="myAreaChart" style="width: 100%;"></div>
+                                <div class="card-body" style="width: 100%; height: 100%; min-height: 430px;">
+                                    <div class="chart-area" style="height: 100%;">
+                                        <div id="adminchartContainer" style="width: 100%; max-height: 300px;"></div>
 
                                     </div>
                                 </div>
@@ -358,7 +385,7 @@ include('connection.php');
                                     <h6 class="m-0 font-weight-bold text-primary">Branch Backorders : Overview</h6>
                                 </div>
                                 <!-- Card Body -->
-                                <div class="card-body" style="width: 100%;">
+                                <div class="card-body" style="width: 100%; min-height: 430px;">
                                     <!--  -->
                                     <div class="row">
                                         <div class="col-6">
@@ -407,7 +434,7 @@ include('connection.php');
                                                                     } else {
                                                                         echo '0';
                                                                     }
-                                                                    ?>
+                                                                    ?>(total)
                                                                 </span>
                                                             </div>
                                                         </div>
@@ -424,7 +451,7 @@ include('connection.php');
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="card border-left-success shadow h-100 py-2" style="border-left: .25rem solid black!important;">
-                                                <div class="card-body">
+                                                <div class="card-body" style="height: 100%;">
                                                     <div class="row no-gutters align-items-center">
                                                         <div class="col mr-2">
                                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1" style="color: black!important;">backorders amount</div>
@@ -438,7 +465,7 @@ include('connection.php');
                                                                 <span class="total">
                                                                     <?php
                                                                     echo number_format($confirm_backorder_cost, 2, '.', ', ');
-                                                                    ?>
+                                                                    ?>(total)
                                                                 </span>
                                                             </div>
                                                         </div>
@@ -448,6 +475,13 @@ include('connection.php');
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <button class="buttongr" style="width:100%; height:50%; background-color: black; color: white; border:none;margin-top: 20px;font-size: 1.5rem;">Branch Report</button>
+                                            <button class="buttongr2" style="width:100%; height:50%; background-color: rgba(250, 188, 60, 1); color: white; border:none;margin-top: 20px;font-size: 1.5rem;">Staff Report</button>
+
                                         </div>
                                     </div>
                                     <!--  -->

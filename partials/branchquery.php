@@ -46,7 +46,7 @@ if(isset($_SESSION['warehouse']['whID'])){
         for($a=0; $a <count($selectuser_arr); $a++){
             $userID=$selectuser_arr[$a][0];
             // echo $userID;
-            $select_pendingorder="SELECT * FROM orders WHERE buyerID='$userID' AND extract(month from date) = '$selectedmonth'  AND extract(year from date) = '$selectedyear'and status=1 or status=2 or status=7 order by `date`";
+            $select_pendingorder="SELECT * FROM orders WHERE buyerID='$userID' AND extract(month from date) = '$selectedmonth'  AND extract(year from date) = '$selectedyear'and status!=3 and status!=4 and status!=5 and status!=6 order by `date`";
             $selectpendingorder_result=mysqli_query($connection, $select_pendingorder);
             // $order_array[$a]=$selectorder_result;
           
@@ -84,7 +84,7 @@ if(isset($_SESSION['warehouse']['whID'])){
 
           // Select pick up orders information
           $pickuporders_query="SELECT * from orders where whID='$whID' AND deliverymethod='pickup' AND status=4  AND extract(month from date) = '$selectedmonth'";
-          $pendingpickuporders_query="SELECT * from orders where whID='$whID' AND deliverymethod='pickup' AND status=1 or status=3 or status=6";
+          $pendingpickuporders_query="SELECT * from orders where whID='$whID' AND deliverymethod='pickup' AND status!=4 AND status!=5 AND status!=0";
           
           $pickuporders_res=mysqli_query($connection, $pickuporders_query);
           $pendingpickups_res=mysqli_query($connection, $pendingpickuporders_query);

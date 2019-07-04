@@ -35,7 +35,7 @@ include('connection.php');
     ?>
     <!-- top header ends--------------------------------------------------------------------------------- -->
     <!-- Side Nav included--------------------------------------------------------------------------------- -->
-    <div id="wrapper" style="margin-top:50px;">
+    <div id="wrapper" style="margin-top:130px;">
 
       <!-- Sidebar -->
       <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: rgba(48, 43, 41,1); background-image:none;">
@@ -146,7 +146,7 @@ include('connection.php');
               <div id="demo" class="collapse show">
                 <p></p>
                 <?php
-                //  
+                if($totalbackorder_arr){
                 echo '<div class="card">
                               
                                         <div id="heading" class="py-2">
@@ -355,6 +355,10 @@ include('connection.php');
 
                             </div>';
                 // 
+              }
+              else{
+                echo '<center>There is no order at the moment</center>';
+              }
                 ?>
                 <p></p>
 
