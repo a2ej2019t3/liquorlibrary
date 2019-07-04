@@ -109,6 +109,10 @@
                 </ul>
             </div>
         </div>
+        <?php
+echo 'asd';
+var_dump($connection);
+        ?>
     </nav>     
                    
 
