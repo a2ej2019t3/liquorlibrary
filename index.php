@@ -57,7 +57,7 @@ $_SESSION['location'] = "index";
           <p class="fourth-text">DEDICATED FOR 15 YEARS</p>
         </div>
         <div class="aboutdes container">
-          <img id="s3test" src="https://liquorlibrary-test.s3-ap-southeast-2.amazonaws.com/banner1.jpg" alt="asdf">
+          <!-- <img id="s3test" src="https://liquorlibrary-test.s3-ap-southeast-2.amazonaws.com/banner1.jpg" alt="asdf"> -->
           <p class="aboutdes">With <b>over 15 years experience</b> in Alcohol industry Liquor Library combines innovation with <b>traditional liquor</b> with access to <b>hundreds of on premises</b> and off premise retail location Nation wide along with extensive networks Globally to offer what we believe.</p>
         </div>
         <div class="brand container-fluid">

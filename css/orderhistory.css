@@ -2,6 +2,19 @@ body {
     background-color: rgba(221, 226, 234, 0.11);
   }
 
+  .fas {
+    color: inherit !important;
+  }
+
+  .fas:hover {
+    color: inherit !important;
+  }
+
+  #profileTable {
+    margin-left: 20px;
+    line-height: 2rem;
+  }
+
   .status {
     font-size: 30px;
     margin: 2px 2px 0 0;

@@ -108,7 +108,6 @@ $DBsql = new sql;
         </div>
       </div>
       <div class="col-10">
-
         <section id="content_wrapper" class="col card" style="width:100%; padding-top: 30px; min-height:100vh; height:100%; padding-bottom: 30px;">
           
         </section>
@@ -125,12 +124,6 @@ $DBsql = new sql;
   <script type="text/javascript" src="js/orderhistory.js"></script>
   <script type="text/javascript" src="js/chart.js"></script>
   <script type="text/javascript" src="js/pay.js"></script>
-
-  <script>
-
-  </script>
-
-  <!-- <script type="text/javascript" src="js/orderhistory.js"></script> -->
 </body>
 
 </html>

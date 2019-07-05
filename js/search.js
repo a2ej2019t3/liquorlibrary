@@ -146,7 +146,7 @@ document.getElementById("logoutButton").onclick = function () {
         if (this.readyState == 4 && this.status == 200) {
             console.log(xmlhttp);
             if (xmlhttp.responseText == 1) {
-                document.location.reload(true);
+                document.location = './index.php';
             }
         }
     };
