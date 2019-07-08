@@ -1,0 +1,20 @@
+branch-defaults:
+  James'-Week9-2:
+    environment: bravenew-env
+environment-defaults:
+  bravenew-env:
+    branch: null
+    repository: null
+global:
+  application_name: liquorlibrary
+  default_ec2_keyname: test-key-pair-beanstalk
+  default_platform: arn:aws:elasticbeanstalk:ap-southeast-2::platform/PHP 7.2 running
+    on 64bit Amazon Linux/2.8.12
+  default_region: ap-southeast-2
+  include_git_submodules: true
+  instance_profile: null
+  platform_name: null
+  platform_version: null
+  profile: eb-cli
+  sc: git
+  workspace_type: Application
