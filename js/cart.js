@@ -12,8 +12,6 @@ function addLoadEvent(func) {
     }
   }
 
-addLoadEvent(getItems);
-
 function addToCart (obj) {
     var id = obj.getAttribute('data-productID');
     var xmlhttp = new XMLHttpRequest();
@@ -40,6 +38,7 @@ function showCart () {
     var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
+                console.log('showCart function');
                 console.log(xmlhttp);
                 document.getElementById("showItems").innerHTML = xmlhttp.responseText;
                 finalPrice();
@@ -49,16 +48,23 @@ function showCart () {
     xmlhttp.send();
 }
 
-function getItems () {
+function getItems (roid = 'Na') {
+    if (roid == 'Na') {
+        var url = "Cart/getItems.php";
+    } else {
+        var url = "Cart/getItems.php?roid=" + roid;
+    }
     var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
+                console.log('getItem function:');
                 console.log(xmlhttp);
                 showCart();
+                // document.getElementById('content_wrapper').innerHTML = xmlhttp.response;
                 // document.getElementById("debug").innerHTML = xmlhttp.responseText;
             }
         };
-    xmlhttp.open("GET", "Cart/getItems.php", true);
+    xmlhttp.open("GET", url, true);
     xmlhttp.send();
 }
 
@@ -88,6 +94,7 @@ function removeItem (json, opt = 'spec') {
     var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
+                console.log('remove function:')
                 console.log(xmlhttp);
                 if (xmlhttp.response == 1) {
                     getItems();

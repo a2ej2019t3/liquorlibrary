@@ -3,7 +3,7 @@
     $DBsql = new sql;
     
     $cartID = $_GET['oi'];
-    // $cartID = 1;
+    echo $cartID;
     $res = $DBsql->getOrderInfo($cartID, null);
     // var_dump($res);
     $tagForCategory = 'Category: ';
@@ -13,7 +13,7 @@
 echo '
 <div class="row">
     <div class="col-4 text-left">
-';
+ ';
 // for ($b = 0; $b < count($res); $b++) {
     $userinfo = $DBsql->select('users', array('userID'=>$res[0]['buyerID']));
     if ($res[0]['deliverymethod'] == 'delivery') {
@@ -165,6 +165,11 @@ echo '
     }
 echo '
             </div>
+        </div>
+        <div class="d-flex justify-content-end">
+            <button class="reorderBtn btn-sm btn-primary" data-roid="'. $res[0]['orderID'] .'" style="width:150px;">
+                Reorder
+            </button>
         </div>
     </div>
 </div>';

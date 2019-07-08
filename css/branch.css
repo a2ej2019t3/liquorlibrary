@@ -1,0 +1,149 @@
+
+nav > .nav.nav-tabs{
+
+    border: none;
+      color:#fff;
+      background:#272e38;
+      border-radius:0;
+  
+  }
+  nav > div a.nav-item.nav-link,
+  nav > div a.nav-item.nav-link.active
+  {
+    border: none;
+      padding: 18px 25px;
+      color:#fff;
+      background:#272e38;
+      border-radius:0;
+  }
+  
+  nav > div a.nav-item.nav-link.active:after
+   {
+    content: "";
+    position: relative;
+    bottom: -60px;
+    left: -10%;
+    border: 15px solid transparent;
+    border-top-color: #e74c3c ;
+  }
+  .tab-content{
+    background: #fdfdfd;
+      line-height: 25px;
+      border: 1px solid #ddd;
+      border-top:5px solid #e74c3c;
+      border-bottom:5px solid #e74c3c;
+      padding:30px 25px;
+  }
+  
+  nav > div a.nav-item.nav-link:hover,
+  nav > div a.nav-item.nav-link:focus
+  {
+    border: none;
+      background: #e74c3c;
+      color:#fff;
+      border-radius:0;
+      transition: back-ground 0.20s linear;
+  }
+  body, html{
+    height: 100%;
+    width: 100%;
+    scroll-behavior: smooth;
+    margin:0;
+    padding:0;
+    font-family: 'Roboto', sans-serif;
+}
+#col1{
+background-color: rgba(224, 184, 65, 1);
+border: 1px solid rgba(224, 184, 65, 1);
+}
+#col2{
+background-color:rgba(48, 43, 41,1);
+border: 1px solid rgba(48, 43, 41,1);
+}
+.status {
+  font-size: 30px;
+  margin: 2px 2px 0 0;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 10px;
+}
+
+a {
+  cursor: pointer;
+}
+
+#titlearea a {
+  text-decoration: none;
+  color: grey;
+}
+
+.card:hover {
+  animation-name: shadowFrame;
+  animation-duration: 0.2s;
+  animation-fill-mode: forwards;
+  z-index: 100;
+}
+
+.ids {
+  color: royalblue;
+  height: 100%;
+  line-height: 3.6rem;
+}
+
+.secondHeader {
+  color: black;
+  font-size: 0.9rem;
+  line-height: 1.45rem;
+  margin-left: -10px;
+}
+
+.secondRow,
+.secondRow>h5 {
+  height: 40px;
+  line-height: 40px;
+}
+
+.thirdHeader {
+  font-size: 0.8rem;
+  line-height: 1.45rem;
+  color: gray;
+  padding-left: 10px;
+}
+
+h5 {
+  margin: 0;
+}
+
+h6 {
+  text-align: right;
+}
+
+.briefimg {
+  width: auto;
+  max-width: 40px;
+  height: 40px;
+}
+
+.button:active {
+  border: none;
+}
+
+.collapse:before {
+  box-shadow: 0px 6px 7px -6px rgba(0, 0, 0, 0.2) inset;
+}
+
+.details {
+  padding-left: 80px;
+  padding-right: 80px;
+}
+
+@keyframes shadowFrame {
+  from {}
+
+  to {
+    box-shadow: 0px 0px 10px 5px lightgray;
+  }
+}
+.orderdate{
+  font-size: 1rem;
+}

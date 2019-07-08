@@ -14,7 +14,7 @@ $password = $_REQUEST['password'];
 // $email = 'junboz598@gmail.com';
 // $password = 123;
 
-$selectQuery = "select * from users where email='" . $email . "' and typeID=2 or typeId=3";
+$selectQuery = "select * from users where email='" . $email . "' and typeID=2 or email='" . $email . "' and typeId=3";
 
 
 if ($result = mysqli_query($connection, $selectQuery)) {

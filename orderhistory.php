@@ -1,6 +1,9 @@
 <?php
 session_start();
-$_SESSION['location'] = 'customerorder';
+$_SESSION['location'] = 'index';
+include(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'liquorlibrary' . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 'DBsql.php');
+$DBsql = new sql;
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,165 +11,126 @@ $_SESSION['location'] = 'customerorder';
 <head>
   <title>Order_History</title>
   <?php
-  include_once ("./partials/head.php");
+  include_once("./partials/head.php");
   ?>
+  <!-- <link rel="stylesheet" href="css/branchreport.css"> -->
   <link rel="stylesheet" href="css/index.css">
-  <style type="text/css">
-    .status {
-      font-size: 30px;
-      margin: 2px 2px 0 0;
-      display: inline-block;
-      vertical-align: middle;
-      line-height: 10px;
-    }
-
-    a {
-      cursor: pointer;
-    }
-
-    #titlearea a {
-      text-decoration: none;
-      color: grey;
-    }
-
-    .card:hover {
-      animation-name: shadowFrame;
-      animation-duration: 0.2s;
-      animation-fill-mode: forwards;
-      z-index: 100;
-    }
-
-    .ids {
-      color: royalblue;
-      height: 100%;
-      line-height: 3.6rem;
-    }
-
-    .secondHeader {
-      color: grey;
-      font-size: 0.9rem;
-      line-height: 1.45rem;
-      margin-left: -10px;
-    }
-
-    .secondRow,
-    .secondRow>h5 {
-      height: 40px;
-      line-height: 40px;
-    }
-
-    .thirdHeader {
-      font-size: 0.8rem;
-      line-height: 1.45rem;
-      color: gray;
-      padding-left: 10px;
-    }
-
-    h5 {
-      margin: 0;
-    }
-
-    h6 {
-      text-align: right;
-    }
-
-    .briefimg {
-      width: auto;
-      max-width: 40px;
-      height: 40px;
-    }
-
-    .button:active {
-      border: none;
-    }
-
-    .collapse:before {
-      box-shadow: 0px 6px 7px -6px rgba(0, 0, 0, 0.2) inset;
-    }
-
-    .details {
-      padding-left: 80px;
-      padding-right: 80px;
-    }
-
-    @keyframes shadowFrame {
-      from {}
-
-      to {
-        box-shadow: 0px 0px 10px 5px lightgray;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="css/orderhistory.css">
 </head>
 
 <body>
+  <?php
+  $buyerID = $_SESSION['user']['userID'];
+  $readyOrder = $DBsql->select('orders LEFT JOIN status ON orders.status = status.statusID', array('buyerID' => $buyerID, 'status' => 3));
+  // var_dump($readyOrder);
+
+  // toast wrapper here
+  echo '
+                  <div id="toast_wrapper" class="d-flex flex-column m-4">';
+  foreach ($readyOrder as $key => $value) {
+    $orderID = $value['orderID'];
+    echo '
+                          <div id="myToast" class="toast" data-autohide="false">
+                            <div class="toast-header">
+                              <i class="fas fa-bell"></i>
+                              <strong class="mr-auto">&nbsp;&nbsp;Order ready</strong>
+                              <button type="button" class="ml-2 mb-1 close" data-dismiss="toast">
+                                <span>&times;</span>
+                              </button>
+                            </div>
+                            <div class="toast-body">
+                              <p class="my-auto">You have an order ready to pickup! <button class="btn btn-link toastCheck" data-oid="' . $orderID . '">check</button></p>
+                            </div>
+                          </div>';
+  }
+  echo '
+                  </div>';
+  // toast wrapper end
+
+  ?>
   <section>
     <?php
-    include_once("./partials/header.php");
+    include_once($rf . "/partials/header.php");
     ?>
   </section>
-  <section>
-    <div>
-      <p class="contactms">Customer Order Details</p>
-      <hr style="color: black;">
-      <!-- <div class="filter-group"> -->
-      <!-- <div class="container_fluid">    -->
-      <!-- <div class="productresult col-md-9 col-xs-12 content-right"> -->
-      <!-- product list results -->
-      <div class="container mb-1 pl-3" style="font-size:20px;">
-        <div class="row">
-          <div class="col-9">
-            <div class="row">
-              <div class="col-2">
-                <span>ID <button data-key="id" data-operation="asc" class="sorter btn btn-light px-1 py-0"><i class="fas fa-sort"></i></button></span>
-              </div>
-              <div class="col-4 text-left">
-              <span>Items in order</span>
-              </div>
-              <div class="col-3 text-left">
-              <span>Total price <button data-key="totalprice" data-operation="asc" class="sorter btn btn-light px-1 py-0"><i class="fas fa-sort"></i></button></span>
-              </div>
-              <div class="col-3 text-left">
-              <span>Order date <button data-key="orderdate" data-operation="asc" class="sorter btn btn-light px-1 py-0"><i class="fas fa-sort"></i></button></span>
-              </div>
+  <section id="banner">
+    <img id="bannerPic" class="img-fluid" src="images\liquor19.jpeg">
+  </section>
+  <div id="wrapper" class="container-fluid">
+    <div class="row pt-2">
+      <!-- Sidebar -->
+      <div id="sideNav_wrapper" class="col-2 pr-0">
+        <div class="card sideCard px-2">
+          <ul class="navbar-nav sidenav">
+            <div class="headerPart mb-4">
+              <span class="sidebar-brand d-flex flex-column align-items-center justify-content-center" href="index.php">
+                <div style="width:auto;">
+                  <img src="images/filepic1.png" alt="File pic" class="rounded-circle img-thumbnail img-fluid" style="max-width:60%; background-color:white; margin-top:-30%;">
+                </div>
+                <div>
+                  <p id="userName">Welcome!<br><?php echo '<b>' . $_SESSION['user']['firstName'] . ' ' . $_SESSION['user']['lastName'] . '</b>'; ?></p>
+                </div>
+              </span>
             </div>
-          </div>
-          <div class="col-3">
-            <div class="btn-group">
-              <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
-                Status filter
+            <hr class="p-0 mx-auto mb-1" style="width:95%;">
+            <li>
+              <button class="btn sideBtn homeBtn" type="button">
+                <i class="fas fa-home"></i>
+                Home
               </button>
-              <div class="dropdown-menu">
-                <button class="dropdown-item" value="all" onclick="selectChecking(this.value)">All</button>
-                <button class="dropdown-item" value="paid" onclick="selectChecking(this.value)">Paid</button>
-                <button class="dropdown-item" value="completed" onclick="selectChecking(this.value)">Completed</button>
-                <button class="dropdown-item" value="processing" onclick="selectChecking(this.value)">Processing</button>
-                <button class="dropdown-item" value="cancelled" onclick="selectChecking(this.value)">Cancelled</button>
+            </li>
+            <li>
+              <div class="btn-group d-flex">
+                <button id="orderHistoryTab" type="button" class="btn sideBtn" value="all" onclick="selectChecking(this.value)">
+                  <i class="fas fa-history"></i>
+                  Order History
+                </button>
+                <button type="button" class="btn filter my-auto " style="border-left:1px solid grey;" data-toggle="collapse" data-target="#statusFilter">
+                  <i class="fas fa-filter"></i>
+                </button>
               </div>
-            </div>
-          </div>
+              <div id="statusFilter" class="collapse mx-2 mt-1">
+                <div class="d-flex flex-column">
+                  <button class="btn optBtn" value="paid" onclick="selectChecking(this.value)"><b>Paid</b></button>
+                  <button class="btn optBtn" value="completed" onclick="selectChecking(this.value)"><b>Completed</b></button>
+                  <button class="btn optBtn" value="processing" onclick="selectChecking(this.value)"><b>Processing</b></button>
+                  <button class="btn optBtn" value="cancelled" onclick="selectChecking(this.value)"><b>Cancelled</b></button>
+                </div>
+              </div>
+            </li>
+            <li>
+              <button class="btn sideBtn" type="button">
+                <i class="fas fa-user-circle"></i>
+                My Profile
+              </button>
+            </li>
+          </ul>
         </div>
       </div>
-      <article id="container" class="container mx-auto">
-        <!-----orders go here----->
-        
-      </article>
-      <footer>
-        <div style="height:500px;">
-        </div>
-      </footer>
-      <?php
-      include_once ("partials/foot.php");
-      ?>
-      <script type="text/javascript" src="js/sub.js"></script>
-      <script type="text/javascript" src="js/search.js"></script>
-      <script type="text/javascript" src="js/main.js"></script>
-      <script type="text/javascript" src="js/orderhistory.js"></script>
-      <script>
+      <div class="col-10">
 
-      </script>
-      
-      <!-- <script type="text/javascript" src="js/orderhistory.js"></script> -->
+        <section id="content_wrapper" class="col card" style="width:100%; padding-top: 30px; min-height:100vh; height:100%; padding-bottom: 30px;">
+          
+        </section>
+      </div>
+    </div>
+  </div>
+  <?php
+  include_once("partials/foot.php");
+  ?>
+  <script type="text/javascript" src="js/sub.js"></script>
+  <script type="text/javascript" src="js/search.js"></script>
+  <script type="text/javascript" src="js/main.js"></script>
+  <script type="text/javascript" src="js/cart.js"></script>
+  <script type="text/javascript" src="js/orderhistory.js"></script>
+  <script type="text/javascript" src="js/chart.js"></script>
+  <script type="text/javascript" src="js/pay.js"></script>
+
+  <script>
+
+  </script>
+
+  <!-- <script type="text/javascript" src="js/orderhistory.js"></script> -->
 </body>
 
 </html>

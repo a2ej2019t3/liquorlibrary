@@ -191,7 +191,6 @@
              </div>
              <div class="modal-footer" style="text-align:center!important;">
                  <input type="submit" class="btn btn-secondary" value="UPLOAD" name="submit" style="text-align:center!important; margin:0 auto; background-color: rgba(48, 43, 41,1);"/>
-                 <!-- <button type="submit" form="uploadimg" class="btn btn-primary"  name="submit">Submit</button> -->
              </div>
          </form>
      </div>
