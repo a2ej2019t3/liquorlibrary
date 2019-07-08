@@ -10,6 +10,7 @@ $(function () {
     goToOrder();
 });
 addLoadEvent(loadHome);
+// addLoadEvent();
 
 function loadOrders(index = "all", keyword = "orderID", sort = "asc", operation = "filt", gto = null) {
     var xmlhttp = new XMLHttpRequest();
@@ -58,6 +59,7 @@ function loadHome () {
             showMessage();
             getItems();
             goToOrder();
+            editProfile();
         }
     }
     xmlhttp.open("GET", "personalHome.php", true);
@@ -115,7 +117,7 @@ function loadCtrls() {
             }
         }
         xmlhttp.open("GET", "orderhistoryCtrl.php", true);
-    xmlhttp.send();
+        xmlhttp.send();
     } else {
         loadOrders();
     }
@@ -128,3 +130,24 @@ function reorder () {
        window.location = "paymentprocess.php";
     });
 }
+
+function editProfile() {
+    $('.editProfileBtn').on('click', function () {
+        $('.displayTable').removeClass('show');
+        $('.displayTable').addClass('hide');
+        $('.editForm').removeClass('show');
+        $('.editForm').removeClass('hide');
+        $('#profileBtn').removeClass('editProfileBtn btn-light');
+        $('#profileBtn').addClass('saveChange btn-success');
+        $('#profileBtn').html('<i class="far fa-save" style="color:inherit;"></i> SAVE');
+    })
+}
+
+function saveChange() {
+    $('.saveChange').on('click', function () {
+        $.post('resetPassword.php',{
+            
+        })
+    })
+}
+

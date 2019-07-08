@@ -107,7 +107,7 @@ echo '
               <div class="col-6 ml-3 pb-2 card homeCards">
                 <div class="py-auto my-3 d-flex justify-content-between">
                   <h5 style="width:auto;"><i class="fas fa-user-circle"></i> My Profile</h5>
-                  <button class="btn btn-sm btn-light"><i class="fas fa-edit" style="color:inherit;"></i> Edit</button>
+                  <button id="profileBtn" class="editProfileBtn btn btn-sm btn-light"><i class="fas fa-edit" style="color:inherit;"></i> Edit</button>
                 </div>
                 <hr class="m-0 p-0">
                 <div class="row">
@@ -121,25 +121,28 @@ echo '
                   <tbody>
                     <tr>
                       <th scope="row"><b>Name:</b></th>
-                      <td class="displayTable">'.$info['firstName'].' '.$info['lastName'].'</td>
-                      <td class="editForm"><input type="text" class="form-control form-control-sm" placeholder="'.$info['firstName'].' '.$info['lastName'].'"></td>
+                      <td class="displayTable show">'.$info['firstName'].' '.$info['lastName'].'</td>
+                      <td class="editForm hide"><input type="text" class="form-control form-control-sm" placeholder="'.$info['firstName'].' '.$info['lastName'].'"></td>
                     </tr>
                     <tr>
                       <th scope="row"><b>Email:</b></th>
-                      <td class="displayTable">'. $info['email'] .'</td>
-                      <td class="editForm"><input type="email" class="form-control form-control-sm" placeholder="'.$info['email'].'"></td>
+                      <td class="displayTable show">'. $info['email'] .'</td>
+                      <td class="editForm hide"><input type="email" class="form-control form-control-sm" placeholder="'.$info['email'].'"></td>
                     </tr>
                     <tr>
                       <th scope="row"><b>Contact number:</b></th>
-                      <td class="displayTable">'. $info['phone'] .'</td>
+                      <td class="displayTable show">'. $info['phone'] .'</td>
+                      <td class="editForm hide"><input type="number" class="form-control form-control-sm" placeholder="'.$info['phone'].'"></td>
                     </tr>
                     <tr>
                       <th scope="row"><b>Billing address:</b></th>
-                      <td class="displayTable">'. $info['address'] .'</td>
+                      <td class="displayTable show">'. $info['address'] .'</td>
+                      <td class="editForm hide"><input type="text" class="form-control form-control-sm" placeholder="'.$info['address'].'"></td>
                     </tr>
                     <tr>
                       <th scope="row"><b>Company name:</b></th>
-                      <td class="displayTable">'. $info['companyName'] .'</td>
+                      <td class="displayTable show">'. $info['companyName'] .'</td>
+                      <td class="editForm hide"><input type="text" class="form-control form-control-sm" placeholder="'.$info['companyName'].'"></td>
                     </tr>
                     <tr>
                       <th scope="row"><b>Password:</b></th>

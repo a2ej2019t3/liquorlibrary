@@ -1,191 +1,191 @@
 body {
     background-color: rgba(221, 226, 234, 0.11);
-  }
+}
 
-  .fas {
+.fas {
     color: inherit !important;
-  }
+}
 
-  .fas:hover {
+.fas:hover {
     color: inherit !important;
-  }
+}
 
-  #profileTable {
+#profileTable {
     margin-left: 20px;
     line-height: 2rem;
-  }
+}
 
-  .status {
+.status {
     font-size: 30px;
     margin: 2px 2px 0 0;
     display: inline-block;
     vertical-align: middle;
     line-height: 10px;
-  }
+}
 
-  a {
+a {
     cursor: pointer;
-  }
+}
 
-  #titlearea a {
+#titlearea a {
     text-decoration: none;
     color: grey;
-  }
+}
 
-  .orderCard {
+.orderCard {
     transition: box-shadow 0.3s;
-  }
+}
 
-  .orderCard:hover {
+.orderCard:hover {
     box-shadow: 0px 0px 10px 5px lightgray;
     z-index: 100;
-  }
+}
 
-  .orderCard:focus,
-  .orderCard:active {
+.orderCard:focus,
+.orderCard:active {
     box-shadow: 0px 0px 10px 5px lightgray;
-  }
+}
 
-  .ids {
+.ids {
     color: royalblue;
     height: 100%;
     line-height: 3.6rem;
-  }
+}
 
-  .secondHeader {
+.secondHeader {
     color: grey;
     font-size: 0.9rem;
     line-height: 1.45rem;
     margin-left: -10px;
-  }
+}
 
-  .secondRow,
-  .secondRow>h5 {
+.secondRow,
+.secondRow>h5 {
     height: 40px;
     line-height: 40px;
-  }
+}
 
-  .thirdHeader {
+.thirdHeader {
     font-size: 0.8rem;
     line-height: 1.45rem;
     color: gray;
     padding-left: 10px;
-  }
+}
 
-  h5 {
+h5 {
     margin: 0;
-  }
+}
 
-  h6 {
+h6 {
     text-align: right;
-  }
+}
 
-  .briefimg {
+.briefimg {
     width: auto;
     max-width: 40px;
     height: 40px;
-  }
+}
 
-  .sideBtn:focus,
-  .sideBtn:active,
-  .filter:focus,
-  .filter:active {
+.sideBtn:focus,
+.sideBtn:active,
+.filter:focus,
+.filter:active {
     background-color: rgba(255, 193, 5, 1);
     outline: none !important;
     box-shadow: none !important;
-  }
+}
 
-  .collapse:before {
+.collapse:before {
     box-shadow: 0px 6px 7px -6px rgba(0, 0, 0, 0.2) inset;
-  }
+}
 
-  .details {
+.details {
     padding-left: 80px;
     padding-right: 80px;
-  }
+}
 
-  .sideCard {
+.sideCard {
     background-color: none;
     min-height: 100vh;
     height: 100%;
     /* border-right: 1px solid lightgrey */
-  }
+}
 
-  .sidenav li .sideBtn,
-  .sidenav li .filter {
+.sidenav li .sideBtn,
+.sidenav li .filter {
     text-align: left;
     font-size: 1rem;
     margin: 3px 0px 3px 3px;
-  }
+}
 
-  .fas:hover {
+/* .fas:hover {
     color: white;
-  }
+} */
 
-  .sideBtn {
+.sideBtn {
     width: 100%;
     height: 40px;
-  }
+}
 
-  .filter {
+.filter {
     width: auto;
     height: 40px;
-  }
+}
 
-  .sideBtn:hover,
-  .filter:hover {
+.sideBtn:hover,
+.filter:hover {
     color: white;
     background-color: rgba(255, 193, 5, 1);
-  }
+}
 
-  .homeCards>div {
+.homeCards>div {
     width: 100%;
     margin: 2px 3px 2px;
-  }
+}
 
-  .homeCards {
+.homeCards {
     transition: box-shadow 0.2s;
-  }
+}
 
-  .homeCards:hover {
+.homeCards:hover {
     box-shadow: 0px 0px 10px 5px lightgray;
     z-index: 99;
-  }
+}
 
-  .card-header {
+.card-header {
     text-align: left;
     font-size: 1.2rem;
-  }
+}
 
-  .optBtn {
+.optBtn {
     text-align: right;
     color: white;
-  }
+}
 
-  .optBtn:hover {
+.optBtn:hover {
     background-color: rgba(255, 193, 5, 1);
-  }
+}
 
-  #statusFilter {
+#statusFilter {
     background-color: rgba(255, 193, 5, 0.7);
     border-radius: 3px;
     margin-left: auto;
     margin-right: auto;
-  }
+}
 
-  #wrapper {
+#wrapper {
     /* margin-top:130px; */
     margin-top: 0px;
     /* z-index: 10; */
-  }
+}
 
-  #bannerPic {
+#bannerPic {
     object-fit: cover;
     height: 300px;
     min-width: 100vw;
-  }
+}
 
-  #bannerPic::after {
+#bannerPic::after {
     position: absolute;
     top: 0;
     left: 0;
@@ -193,39 +193,48 @@ body {
     min-width: 100vw;
     box-shadow: 0px 0px 7px 6px rgba(0, 0, 0, 0.8) inset;
     z-index: 1000;
-  }
+}
 
-  .orderBadge {
+.orderBadge {
     line-height: 1rem;
     transition: background-color 0.2s;
-  }
+}
 
-  .orderBadge:hover {
+.orderBadge:hover {
     color: white;
     background-color: darkblue;
     cursor: pointer;
-  }
+}
 
-  #toast_wrapper {
+#toast_wrapper {
     position: fixed;
     z-index: 1000;
     bottom: 0;
     right: 0;
-  }
+}
 
-  .ordertitle {
+.ordertitle {
     color: lightslategrey;
-  }
+}
 
-  .statusBadge {
+.statusBadge {
     min-width: 90px;
     line-height: 1rem;
-  }
+}
 
-  @keyframes shadowFrame {
+@keyframes shadowFrame {
     from {}
-
     to {
-      box-shadow: 0px 0px 10px 5px lightgray;
+        box-shadow: 0px 0px 10px 5px lightgray;
     }
-  }
+}
+
+/* profile edit */
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}
