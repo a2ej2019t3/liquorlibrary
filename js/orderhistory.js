@@ -140,14 +140,32 @@ function editProfile() {
         $('#profileBtn').removeClass('editProfileBtn btn-light');
         $('#profileBtn').addClass('saveChange btn-success');
         $('#profileBtn').html('<i class="far fa-save" style="color:inherit;"></i> SAVE');
+        saveChange();
     })
 }
 
 function saveChange() {
     $('.saveChange').on('click', function () {
-        $.post('resetPassword.php',{
-            
-        })
+        // alert($('input[name=email]'));
+        var formVals = JSON.stringify({
+            firstName: $('input[name=firstName]').val(),
+            lastName: $('input[name=lastName]').val(),
+            email: $('input[type=email]').val(),
+            phone: $('input[name=phone]').val(),
+            address: $('input[name=address]').val(),
+            companyName: $('input[name=companyName]').val()
+        });
+
+        var xmlhttp  = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                console.log(xmlhttp);
+                console.log(xmlhttp.response);
+            }
+        }
+        xmlhttp.open("POST", "saveChange.php", true);
+        xmlhttp.setRequestHeader("Content-type", "application/json")
+        xmlhttp.send(formVals);
     })
 }
 

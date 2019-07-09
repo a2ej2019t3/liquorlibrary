@@ -18,7 +18,7 @@ $DBsql = new sql;
   <link rel="stylesheet" href="css/orderhistory.css">
 </head>
 
-<body>
+<body style="overflow-x: hidden;">
   <?php
   $buyerID = $_SESSION['user']['userID'];
   $readyOrder = $DBsql->select('orders LEFT JOIN status ON orders.status = status.statusID', array('buyerID' => $buyerID, 'status' => 3));
