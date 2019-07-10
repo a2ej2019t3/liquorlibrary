@@ -28,7 +28,7 @@
   } else {
     echo '<script type="text/javascript">
           alert("Please log in to proceed");
-          window.location.replace("index.php");
+          window.location = "index.php";
           </script>';
   }
   ?>
@@ -231,6 +231,9 @@
               <script type="text/javascript" src="js/cart.js"></script>
               <script type="text/javascript" src="js/pay.js"></script>
               <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
+              <script>
+                addLoadEvent(getItems);
+              </script>
 
   </body>
 

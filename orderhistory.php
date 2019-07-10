@@ -16,6 +16,7 @@ $DBsql = new sql;
   <!-- <link rel="stylesheet" href="css/branchreport.css"> -->
   <link rel="stylesheet" href="css/index.css">
   <link rel="stylesheet" href="css/orderhistory.css">
+
 </head>
 
 <body style="overflow-x: hidden;">
@@ -109,7 +110,7 @@ $DBsql = new sql;
       </div>
       <div class="col-10">
         <section id="content_wrapper" class="col card" style="width:100%; padding-top: 30px; min-height:100vh; height:100%; padding-bottom: 30px;">
-          
+
         </section>
       </div>
     </div>
@@ -117,6 +118,7 @@ $DBsql = new sql;
   <?php
   include_once("partials/foot.php");
   ?>
+  <script src="https://www.google.com/recaptcha/api.js?render=6LeF6qwUAAAAAAdU7lgKBD5Bs7reJ6DxPSmhpQE8"></script>
   <script type="text/javascript" src="js/sub.js"></script>
   <script type="text/javascript" src="js/search.js"></script>
   <script type="text/javascript" src="js/main.js"></script>

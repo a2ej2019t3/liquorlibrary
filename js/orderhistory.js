@@ -1,5 +1,5 @@
 $(function () {
-    $('#toast_wrapper').css('display','block');
+    $('#toast_wrapper').css('display', 'block');
     setTimeout(function () {
         $('.toast').toast('show');
     }, 1000);
@@ -10,7 +10,7 @@ $(function () {
     goToOrder();
 });
 addLoadEvent(loadHome);
-// addLoadEvent();
+addLoadEvent(resetPassword);
 
 function loadOrders(index = "all", keyword = "orderID", sort = "asc", operation = "filt", gto = null) {
     var xmlhttp = new XMLHttpRequest();
@@ -27,7 +27,7 @@ function loadOrders(index = "all", keyword = "orderID", sort = "asc", operation 
                 })
             })
             if (gto !== null) {
-                var element = '#coid'+gto;
+                var element = '#coid' + gto;
                 $(element).collapse('show');
             }
         }
@@ -36,21 +36,21 @@ function loadOrders(index = "all", keyword = "orderID", sort = "asc", operation 
     xmlhttp.send();
 }
 
-function showMessage () {
+function showMessage() {
     $('.orderBadge').on('click', function () {
         $('.toast').toast('show');
     })
 }
 
-function goToOrder () {
+function goToOrder() {
     $('.goToOrder,.toastCheck').on('click', function () {
         var orderID = $(this).data('oid');
         loadCtrls();
-        loadOrders(undefined,undefined,undefined,undefined,orderID);
+        loadOrders(undefined, undefined, undefined, undefined, orderID);
     })
 }
 
-function loadHome () {
+function loadHome() {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
@@ -60,6 +60,7 @@ function loadHome () {
             getItems();
             goToOrder();
             editProfile();
+            resetPassword();
         }
     }
     xmlhttp.open("GET", "personalHome.php", true);
@@ -108,7 +109,7 @@ function changesort() {
 
 function loadCtrls() {
     if (document.getElementById('historyCtrls') == null) {
-        var xmlhttp  = new XMLHttpRequest();
+        var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 console.log(xmlhttp);
@@ -123,11 +124,11 @@ function loadCtrls() {
     }
 }
 
-function reorder () {
+function reorder() {
     $('.reorderBtn').on('click', function () {
-       var roid =  $(this).data('roid');
-       getItems(roid);
-       window.location = "paymentprocess.php";
+        var roid = $(this).data('roid');
+        getItems(roid);
+        window.location = "paymentprocess.php";
     });
 }
 
@@ -156,7 +157,7 @@ function saveChange() {
             companyName: $('input[name=companyName]').val()
         });
 
-        var xmlhttp  = new XMLHttpRequest();
+        var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 console.log(xmlhttp);
@@ -169,3 +170,27 @@ function saveChange() {
     })
 }
 
+function resetPassword() {
+    // when reset btn clicked
+    $('#resetPasswordBtn').on('click', function () {
+        // needs for recaptacha ready
+        grecaptcha.ready(function () {
+            // do request for recaptcha token
+            // response is promise with passed token
+            grecaptcha.execute('6LeF6qwUAAAAAAdU7lgKBD5Bs7reJ6DxPSmhpQE8', {
+                action: 'RESET_PASSWORD'
+            }).then(function (token) {
+                $.post("resetToken.php", {
+                    token: token
+                }, function (result) {
+                    console.log(result);
+                    if (result) {
+                        alert('DONE check your email.')
+                    } else {
+                        alert('You are spammer ! Get the @$%K out.')
+                    }
+                });
+            });;
+        });
+    });
+}

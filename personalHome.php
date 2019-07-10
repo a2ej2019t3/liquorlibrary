@@ -150,7 +150,7 @@ echo '
                     </tr>
                     <tr>
                       <th scope="row"><b>Password:</b></th>
-                      <td colspan="3" colspan="3"><b>********</b>  <a class="ml-3" style="color:royalblue; font-size:1rem;"><i class="fas fa-undo" style="font-size:0.8rem;"></i> Reset</a></td>
+                      <td colspan="3" colspan="3"><b>********</b>  <a id="resetPasswordBtn" class="ml-3" style="color:royalblue; font-size:1rem;"><i class="fas fa-undo" style="font-size:0.8rem;"></i> Reset</a></td>
                     </tr>
                   </tbody>
                 </table>

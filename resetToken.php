@@ -3,90 +3,96 @@ session_start();
 include_once(__DIR__ . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 'DBsql.php');
 $DBsql = new sql;
 
-// prepare the token
-$length = 75;
-$token = bin2hex(random_bytes($length));
+// reCAPTCHA
+$captcha = $_REQUEST['token'];
+if (!$captcha) {
+    echo '<h2>Please check the the captcha form.</h2>';
+    exit;
+}
+$secretKey = "6LeF6qwUAAAAAMYo3Pv_bys2TRSGF2ultYSKCaWC";
+$ip = $_SERVER['REMOTE_ADDR'];
 
-// get userID
-if (isset($_SESSION['user'])) {
-    $userID = $_SESSION['user']['userID'];
-} else {
-    $res = $DBsql->select('users', array('eamil' => $_POST['email']));
-    if ($res) {
-        $userID = $res['userID'];
+// post request to server
+$url = 'https://www.google.com/recaptcha/api/siteverify';
+$data = array('secret' => $secretKey, 'response' => $captcha);
+
+$options = array(
+    'http' => array(
+        'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+        'method'  => 'POST',
+        'content' => http_build_query($data)
+    )
+);
+$context  = stream_context_create($options);
+$response = file_get_contents($url, false, $context);
+$responseKeys = json_decode($response, true);
+if ($responseKeys["success"]) {
+    // echo true;
+
+    // prepare the token
+    $length = 75;
+    $token = bin2hex(random_bytes($length));
+
+    // get userID
+    if (isset($_SESSION['user'])) {
+        $userID = $_SESSION['user']['userID'];
+        $userEmail = $_SESSION['user']['email'];
+        var_dump($userEmail);
     } else {
-        var_dump($res);
+        $res = $DBsql->select('users', array('eamil' => $_POST['email']));
+        if ($res) {
+            $userID = $res['userID'];
+        } else {
+            var_dump($res);
+        }
+        $userEmail = $_POST['email'];
     }
-}
 
-// update db
-$DBsql->updateDB('users', array('resettoken' => $token, 'resettime' => date("Y-m-d H:i:s")), array('userID' => $userID));
+    // update db
+    $res = $DBsql->updateDB('users', array('resettoken' => $token, 'resettime' => date("Y-m-d H:i:s")), array('userID' => $userID));
 
-define("PROJECT_HOME", "http://localhost/liquorlibrary");
+    if ($res) {
+        define("PROJECT_HOME", "http://localhost/liquorlibrary");
+        define("ADMIN_EMAIL", "admin@gmail.com");
 
-define("PORT", ""); // port number
-define("MAIL_USERNAME", "ham38538821@gmail.com"); // smtp usernmae
-define("MAIL_PASSWORD", "gkatkdgur88!!"); // smtp password
-define("MAIL_HOST", "smtp.gmail.com"); // smtp host
-define("MAILER", "smtp");
+        if (!class_exists('PHPMailer')) {
+            require('phpmailer/class.phpmailer.php');
+            require('phpmailer/class.smtp.php');
+        }
 
-define("SENDER_NAME", 'Liquor Library');
-define("SERDER_EMAIL", $senderemail_address);
+        $mail = new PHPMailer();
 
-if (!class_exists('PHPMailer')) {
-    require('phpmailer/class.phpmailer.php');
-    require('phpmailer/class.smtp.php');
-}
+        $emailBody = '
+        <div class="mailbox" style="text-align: center; border: 1px solid rgba(215, 232, 186, 1); border-radius:25px; margin-top: 30px; font-family: "Montserrat", sans-serif;>
+            <p><b>TEST MAIL for reset password...</b></p>                    
+        </div>
+        ';
 
+        $mail->IsSMTP();
+        $mail->SMTPDebug = 0;
+        $mail->SMTPAuth = TRUE;
+        $mail->SMTPSecure = "tls";
+        $mail->Port     = 587;
+        $mail->Username = "ham38538821@gmail.com";
+        $mail->Password = "gkatkdgur88!!";
+        $mail->Host     = "smtp.gmail.com";
+        $mail->Mailer   = "smtp";
 
-$mail = new PHPMailer();
+        $mail->SetFrom(ADMIN_EMAIL, 'liquor library');
+        $mail->AddAddress($userEmail, 'liquor library');
+        $mail->Subject = "Reset password";
+        $mail->MsgHTML($emailBody);
+        $mail->IsHTML(true);
 
-$emailBody = '
-                <div class="mailbox" style="text-align: center; border: 1px solid rgba(215, 232, 186, 1); border-radius:25px; margin-top: 30px; font-family: "Montserrat", sans-serif;>
-                    <div class="mailheading"> <h2> Liquor Library: You have 1 email from ' . $branchname . ' </h2></div>
-                    <div class="mailcontent" style="margin-top: 20px; margin-bottom: 30px; ">
-                    <hr>
-                        <br>
-                        <div style="boder: 1px solid rgba(124, 99, 84, 1); border-radius: 25px;">
-                        <p style="font-size: 19px; font-weight: 700;"> ' . $branchname . ' sent a request regarding orderId ' . $requestorderID . '</p>
-                        <div style="background-color: rgba(244, 232, 117, 1); margin: 20px auto; padding: 40px 0;">
-                        <p style="font-size: 19px; font-weight: 700;">Request content: </p>
-                        <p  style="font-size: 16px; font-weight: 600;">' . $requestcontent . '</p>
-                        </div> 
-                        </div>
-                        <p> To go to the home page <a href="' . PROJECT_HOME . '/index.php">Click here</a>. </p>
-                        <p> To reply to this comment click here ' . $senderemail_address . '</p>
-
-                        <br>
-                        <hr>
-                        </div>
-                </div>
-                ';
-
-$mail->IsSMTP();
-$mail->SMTPDebug = 0;
-$mail->SMTPAuth = TRUE;
-$mail->SMTPSecure = "tls";
-$mail->Port     = 587;
-$mail->Username = "ham38538821@gmail.com";
-$mail->Password = "gkatkdgur88!!";
-$mail->Host     = "smtp.gmail.com";
-$mail->Mailer   = "smtp";
-
-$mail->SetFrom($senderemail_address, 'liquor library');
-// $mail->ReturnPath($email, $sender_name);
-$mail->AddAddress($buyeremail, 'liquor library');
-$mail->Subject = "Notification: from $branchname, Liquor Library ";
-$mail->MsgHTML($emailBody);
-$mail->IsHTML(true);
-
-if (!$mail->Send()) {
-    $error_message = 'Problem in Sending Email';
-    echo  $error_message;
+        if (!$mail->Send()) {
+            $error_message = 'Problem in Sending Email';
+            echo  $error_message;
+        } else {
+            echo true;
+        }
+    } else {
+        echo 'something wrong.';
+    }
 } else {
-    echo ("<script LANGUAGE='JavaScript'>
-                    window.alert('Your request is Succesfully sent!');
-                    
-                    </script>");
-    header('Location: ../' . $_SESSION['location'] . '.php');
+    echo json_encode(array('success' => 'false'));
 }

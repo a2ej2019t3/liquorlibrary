@@ -15,6 +15,7 @@
 
   @keyframes onhovermovement {
     from {}
+
     to {
       box-shadow: 0 0px 20px rgba(0, 0, 0, 0.5);
     }
@@ -134,11 +135,6 @@
     </button>
     <div id="showItems" class="container" style=" overflow:scroll; max-height:70vh; text-align: center;">
     </div>
-    <?php
-    echo 'asdfa';
-    var_dump(dirname(__DIR__));
-
-?>
     <span class="totalquantity">Total ( <span id="cartTotalQuantity" class="total-cart"></span> ITEMS)</span> <span class="totalcost">price: $<span id="cartTotalPrice" class="total-cart"></span></span>
   </div>
   <div style="text-align: center; margin: 20px auto 10px; width: 100%;">
@@ -151,7 +147,17 @@
     ?>
     <div style="width: 300px; display:inline-block;">
       <button type="button" class="btn btn-primary" id="checkoutbutton" onclick='removeItem("<?php echo $idJson ?>", "all")'>EMPTY CART</button>
-      <button type="button" class="btn btn-primary" id="checkoutbutton" onclick="location.href='paymentprocess.php';">CHECKOUT</button>
+      <?php
+      if (isset($_SESSION['user'])) {
+        echo '
+          <a href="paymentprocess.php" class="btn btn-primary" id="checkoutbutton">CHECKOUT</a>
+          ';
+      } else {
+        echo '
+          <button type="button" class="btn btn-primary" id="checkoutbutton" onclick="openLoginModal()">CHECKOUT</button>
+        ';
+      }
+      ?>
     </div>
   </div>
 </div>
