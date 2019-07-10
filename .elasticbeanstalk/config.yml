@@ -1,13 +1,15 @@
 branch-defaults:
-  Emma's_week10_branch:
-    environment: LiquorlibraryV2-env
+  James'-Week9-2:
+    environment: Liquorlibrary-env-1
+  master:
+    environment: Liquorlibrary-env-1
 environment-defaults:
-  LiquorlibraryV2-env:
+  Liquorlibrary-env-1:
     branch: null
     repository: null
 global:
-  application_name: liquorlibrary-v2
-  default_ec2_keyname: liquorlibrary-sydney
+  application_name: liquorlibrary
+  default_ec2_keyname: test-key-pair-beanstalk
   default_platform: arn:aws:elasticbeanstalk:ap-southeast-2::platform/PHP 7.2 running
     on 64bit Amazon Linux/2.8.12
   default_region: ap-southeast-2

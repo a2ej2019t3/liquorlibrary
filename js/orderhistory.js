@@ -1,5 +1,5 @@
 $(function () {
-    $('#toast_wrapper').css('display','block');
+    $('#toast_wrapper').css('display', 'block');
     setTimeout(function () {
         $('.toast').toast('show');
     }, 1000);
@@ -10,8 +10,8 @@ $(function () {
     goToOrder();
 });
 addLoadEvent(loadHome);
-// addLoadEvent(showToasts);
-// addLoadEvent(loadOrders);
+addLoadEvent(resetPassword);
+
 function loadOrders(index = "all", keyword = "orderID", sort = "asc", operation = "filt", gto = null) {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function () {
@@ -20,7 +20,6 @@ function loadOrders(index = "all", keyword = "orderID", sort = "asc", operation 
             document.getElementById('container').innerHTML = xmlhttp.response;
             loadDetails();
             $('.orderCollapse').on('shown.bs.collapse', function () {
-                // $(this)[0].scrollIntoView();
                 var offset = $(this).offset();
                 offset.top -= 300;
                 $('html, body').animate({
@@ -28,7 +27,7 @@ function loadOrders(index = "all", keyword = "orderID", sort = "asc", operation 
                 })
             })
             if (gto !== null) {
-                var element = '#coid'+gto;
+                var element = '#coid' + gto;
                 $(element).collapse('show');
             }
         }
@@ -37,21 +36,21 @@ function loadOrders(index = "all", keyword = "orderID", sort = "asc", operation 
     xmlhttp.send();
 }
 
-function showMessage () {
+function showMessage() {
     $('.orderBadge').on('click', function () {
         $('.toast').toast('show');
     })
 }
 
-function goToOrder () {
+function goToOrder() {
     $('.goToOrder,.toastCheck').on('click', function () {
         var orderID = $(this).data('oid');
         loadCtrls();
-        loadOrders(undefined,undefined,undefined,undefined,orderID);
+        loadOrders(undefined, undefined, undefined, undefined, orderID);
     })
 }
 
-function loadHome () {
+function loadHome() {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
@@ -60,6 +59,8 @@ function loadHome () {
             showMessage();
             getItems();
             goToOrder();
+            editProfile();
+            resetPassword();
         }
     }
     xmlhttp.open("GET", "personalHome.php", true);
@@ -117,16 +118,79 @@ function loadCtrls() {
             }
         }
         xmlhttp.open("GET", "orderhistoryCtrl.php", true);
-    xmlhttp.send();
+        xmlhttp.send();
     } else {
         loadOrders();
     }
 }
 
-function reorder () {
+function reorder() {
     $('.reorderBtn').on('click', function () {
-       var roid =  $(this).data('roid');
-       getItems(roid);
-       window.location.replace("paymentprocess.php");
+        var roid = $(this).data('roid');
+        getItems(roid);
+        window.location = "paymentprocess.php";
+    });
+}
+
+function editProfile() {
+    $('.editProfileBtn').on('click', function () {
+        $('.displayTable').removeClass('show');
+        $('.displayTable').addClass('hide');
+        $('.editForm').removeClass('show');
+        $('.editForm').removeClass('hide');
+        $('#profileBtn').removeClass('editProfileBtn btn-light');
+        $('#profileBtn').addClass('saveChange btn-success');
+        $('#profileBtn').html('<i class="far fa-save" style="color:inherit;"></i> SAVE');
+        saveChange();
     })
+}
+
+function saveChange() {
+    $('.saveChange').on('click', function () {
+        // alert($('input[name=email]'));
+        var formVals = JSON.stringify({
+            firstName: $('input[name=firstName]').val(),
+            lastName: $('input[name=lastName]').val(),
+            email: $('input[type=email]').val(),
+            phone: $('input[name=phone]').val(),
+            address: $('input[name=address]').val(),
+            companyName: $('input[name=companyName]').val()
+        });
+
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                console.log(xmlhttp);
+                console.log(xmlhttp.response);
+            }
+        }
+        xmlhttp.open("POST", "saveChange.php", true);
+        xmlhttp.setRequestHeader("Content-type", "application/json")
+        xmlhttp.send(formVals);
+    })
+}
+
+function resetPassword() {
+    // when reset btn clicked
+    $('#resetPasswordBtn').on('click', function () {
+        // needs for recaptacha ready
+        grecaptcha.ready(function () {
+            // do request for recaptcha token
+            // response is promise with passed token
+            grecaptcha.execute('6LeF6qwUAAAAAAdU7lgKBD5Bs7reJ6DxPSmhpQE8', {
+                action: 'RESET_PASSWORD'
+            }).then(function (token) {
+                $.post("resetToken.php", {
+                    token: token
+                }, function (result) {
+                    console.log(result);
+                    if (result) {
+                        alert('DONE check your email.')
+                    } else {
+                        alert('You are spammer ! Get the @$%K out.')
+                    }
+                });
+            });;
+        });
+    });
 }

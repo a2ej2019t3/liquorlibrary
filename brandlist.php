@@ -1,14 +1,16 @@
 <?php
 include ('connection.php');
-include(__DIR__ . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 'DBsql.php');
+include_once(__DIR__ . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 'DBsql.php');
 $DBsql = new sql;
 echo '
 <div class="container_fluid">
     <div class="row">
 <!-- content body starts -->
-        <div class="productresult col-md-9 col-xs-12 content-right">
+        <div class="productresult col content-right">
             <!-- product list results -->
-            <div style="margin-top: 100px; "><hr><span style="font-size:24px;">Shop By Brand </span>
+            <div>
+                <hr class="mt-0">
+                <span style="font-size:24px;">Shop By Brand </span>
                 <hr>
                 <div style="text-align:left;"><i class="far fa-compass" style="margin: 10px 10px;"></i><a style="color: black!important; text-decoration: none!important;" href="index.php">Home / </a> <span>All brands</span></div>
                 <span class="aphabetcontainer">

@@ -68,7 +68,7 @@
     }
     echo '
     <section>
-        <div class="container" style="padding-right: 45px;">
+        <div class="container">
             <div style="text-align:left;"><i class="far fa-compass" style="margin: 10px 10px;"></i><a style="color: black!important; text-decoration: none!important;" href="index.php">Home / </a> <span> Sale Products / Discount Rate / '.$resultcount.' products</span>
             </div>';
           if ($resultcount != 0) {
@@ -217,6 +217,10 @@ echo "
 
 .product-grid__botton {
     margin:0;
+}
+
+.product-grid__botton:active {
+    background: rgb(202, 27, 86);
 }
 
 .discountbutton {

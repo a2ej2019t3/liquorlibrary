@@ -1,7 +1,6 @@
 <?php
-  include(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 'DBsql.php');
-  include(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'objectToArray.php');
-
+include_once(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 'DBsql.php');
+include_once(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'objectToArray.php');
 $DBsql = new sql();
 
 if (isset($_SESSION['user'])) {
