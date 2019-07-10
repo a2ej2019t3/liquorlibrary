@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- 생성 시간: 19-06-19 05:19
--- 서버 버전: 8.0.15
--- PHP 버전: 7.3.1
+-- Generation Time: Jul 08, 2019 at 09:51 AM
+-- Server version: 8.0.15
+-- PHP Version: 7.2.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,68 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- 데이터베이스: `liquorlibrary`
+-- Database: `liquorlibrary`
 --
 
 -- --------------------------------------------------------
 
 --
--- 테이블 구조 `brand`
+-- Table structure for table `admin`
+--
+
+DROP TABLE IF EXISTS `admin`;
+CREATE TABLE IF NOT EXISTS `admin` (
+  `ID` int(20) NOT NULL AUTO_INCREMENT,
+  `password` varchar(20) DEFAULT NULL,
+  `whID` int(20) NOT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `whID` (`whID`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`ID`, `password`, `whID`) VALUES
+(1, '1234', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `backorderitems`
+--
+
+DROP TABLE IF EXISTS `backorderitems`;
+CREATE TABLE IF NOT EXISTS `backorderitems` (
+  `boItemID` int(20) NOT NULL AUTO_INCREMENT,
+  `boID` int(20) NOT NULL,
+  `quantity` int(20) DEFAULT '0',
+  PRIMARY KEY (`boItemID`),
+  KEY `boID` (`boID`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `backorders`
+--
+
+DROP TABLE IF EXISTS `backorders`;
+CREATE TABLE IF NOT EXISTS `backorders` (
+  `backorderID` int(20) NOT NULL AUTO_INCREMENT,
+  `out_whID` int(20) NOT NULL,
+  `in_whID` int(20) NOT NULL,
+  `date` datetime DEFAULT NULL,
+  `status` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`backorderID`),
+  KEY `out_whID` (`out_whID`),
+  KEY `in_whID` (`in_whID`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `brand`
 --
 
 DROP TABLE IF EXISTS `brand`;
@@ -37,7 +92,7 @@ CREATE TABLE IF NOT EXISTS `brand` (
 ) ENGINE=MyISAM AUTO_INCREMENT=145 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- 테이블의 덤프 데이터 `brand`
+-- Dumping data for table `brand`
 --
 
 INSERT INTO `brand` (`brandID`, `brandName`, `img`) VALUES
@@ -145,7 +200,7 @@ INSERT INTO `brand` (`brandID`, `brandName`, `img`) VALUES
 -- --------------------------------------------------------
 
 --
--- 테이블 구조 `category`
+-- Table structure for table `category`
 --
 
 DROP TABLE IF EXISTS `category`;
@@ -157,7 +212,7 @@ CREATE TABLE IF NOT EXISTS `category` (
 ) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- 테이블의 덤프 데이터 `category`
+-- Dumping data for table `category`
 --
 
 INSERT INTO `category` (`categoryID`, `parentCategoryID`, `categoryName`) VALUES
@@ -184,7 +239,7 @@ INSERT INTO `category` (`categoryID`, `parentCategoryID`, `categoryName`) VALUES
 -- --------------------------------------------------------
 
 --
--- 테이블 구조 `orderitems`
+-- Table structure for table `orderitems`
 --
 
 DROP TABLE IF EXISTS `orderitems`;
@@ -198,7 +253,7 @@ CREATE TABLE IF NOT EXISTS `orderitems` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- 테이블의 덤프 데이터 `orderitems`
+-- Dumping data for table `orderitems`
 --
 
 INSERT INTO `orderitems` (`itemID`, `orderID`, `quantity`, `totalprice`) VALUES
@@ -221,8 +276,8 @@ INSERT INTO `orderitems` (`itemID`, `orderID`, `quantity`, `totalprice`) VALUES
 (10009, 12, 4, 38),
 (10009, 13, 3, 28.5),
 (10022, 13, 1, 0),
-(10004, 0, 1, 0),
-(10009, 0, 1, 0),
+(10004, 0, 5, 37),
+(10009, 0, 1010, 9595),
 (10004, 15, 2, 15),
 (10009, 15, 6, 57),
 (10004, 16, 2, 15),
@@ -272,19 +327,34 @@ INSERT INTO `orderitems` (`itemID`, `orderID`, `quantity`, `totalprice`) VALUES
 (10009, 54, 1, 9.5),
 (10004, 55, 1, 7.5),
 (10009, 55, 1, 9.5),
+(10018, 55, 3, 58),
+(10019, 55, 4, 72),
+(10020, 55, 1, 22),
+(10009, 56, 3, 28.5),
 (10004, 56, 1, 7.5),
-(10009, 56, 1, 9.5),
-(10009, 57, 1, 9.5),
-(10004, 57, 1, 7.5),
-(10017, 57, 1, 18),
-(10018, 57, 1, 19.5),
+(10004, 58, 3, 22),
+(10006, 58, 2, 19),
+(10012, 57, 1, 9.5),
+(10003, 57, 1, 9.5),
+(10019, 57, 4, 72),
 (10020, 57, 1, 22),
-(10009, 58, 1, 9.5);
+(10009, 59, 3, 28),
+(10004, 59, 1, 7.5),
+(10019, 59, 2, 36),
+(10021, 59, 2, 170),
+(10009, 61, 5, 47.5),
+(10009, 60, 10, 95),
+(10017, 60, 1, 18),
+(10004, 61, 5, 37.5),
+(10018, 61, 3, 58),
+(10006, 64, 9, 85.5),
+(10004, 63, 3, 22),
+(10009, 63, 3, 28.5);
 
 -- --------------------------------------------------------
 
 --
--- 테이블 구조 `orders`
+-- Table structure for table `orders`
 --
 
 DROP TABLE IF EXISTS `orders`;
@@ -302,84 +372,53 @@ CREATE TABLE IF NOT EXISTS `orders` (
   PRIMARY KEY (`orderID`),
   KEY `buyerID` (`buyerID`),
   KEY `whID` (`whID`)
-) ENGINE=MyISAM AUTO_INCREMENT=91 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=65 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- 테이블의 덤프 데이터 `orders`
+-- Dumping data for table `orders`
 --
 
 INSERT INTO `orders` (`orderID`, `buyerID`, `whID`, `date`, `status`, `note`, `cost`, `transactionID`, `paymentmethod`, `deliverymethod`) VALUES
-(43, 5, 0, '2019-06-14 02:23:05', 1, 'card_invoice value checking', 0, 'ch_1El54HDxXQI5tIHycf9VFwud', 'card', ''),
-(42, 5, 10, '2019-06-14 02:15:32', 1, 'set test', 0, NULL, 'cash', 'pickup'),
+(56, 5, 0, '2019-06-19 01:30:10', 1, '', 0, 'ch_1EmscXDxXQI5tIHyXTkzRcQl', 'card', 'delivery'),
+(57, 5, 0, '2019-06-19 01:33:40', 1, 'a note', 0, 'ch_1Emsg3DxXQI5tIHyHvcifwhs', 'card', 'delivery'),
 (13, 2, 0, '2019-06-07 05:25:31', 1, '', 0, NULL, NULL, NULL),
 (14, 2, 9, '2019-06-14 01:52:59', 1, '', 0, NULL, '2', 'pickup'),
-(15, 6, 1, '2019-07-12 11:27:55', 1, 'ttt', 250, NULL, 'card', 'pickup'),
+(15, 6, 0, '2019-06-12 11:27:55', 1, 'ttt', 0, NULL, NULL, NULL),
 (16, 5, 10, '2019-06-14 01:54:38', 1, '', 0, NULL, '2', 'pickup'),
-(18, 6, 0, '2019-06-12 22:56:32', 7, 'payment ID test', 0, NULL, NULL, NULL),
-(19, 6, 0, '2019-06-12 22:58:41', 4, 'id test', 0, NULL, NULL, NULL),
+(18, 6, 0, '2019-06-12 22:56:32', 1, 'payment ID test', 0, NULL, NULL, NULL),
+(19, 6, 0, '2019-06-12 22:58:41', 1, 'id test', 0, NULL, NULL, NULL),
 (41, 5, 8, '2019-06-14 02:14:40', 1, 'lay2 test', 0, NULL, 'cash', 'pickup'),
-(40, 5, 10, '2019-06-14 02:12:14', 1, 'layout test', 0, NULL, 'cash', 'pickup'),
-(39, 5, 9, '2019-06-14 02:10:21', 1, 'tttest', 0, NULL, 'cash', 'pickup'),
-(29, 6, 0, '2019-06-12 23:32:49', 4, '42', 0, NULL, NULL, NULL),
+(40, 5, 10, '2019-06-14 02:12:14', 5, 'layout test', 0, NULL, 'cash', 'pickup'),
+(39, 5, 9, '2019-06-14 02:10:21', 5, 'tttest', 0, NULL, 'cash', 'pickup'),
+(29, 6, 0, '2019-06-12 23:32:49', 1, '42', 0, NULL, NULL, NULL),
 (38, 5, 9, '2019-06-14 02:07:10', 1, '', 0, NULL, 'cash', 'pickup'),
 (37, 5, 9, '2019-06-14 02:04:45', 1, '', 0, NULL, 'cash', 'pickup'),
-(32, 6, 0, '2019-06-12 23:50:49', 4, '', 0, 'ch_1EkgDMDxXQI5tIHyCBr0lsxk', NULL, NULL),
-(33, 6, 1, '2019-06-14 02:16:02', 4, '', 500, NULL, 'cash', 'pockup'),
-(34, 2, 1, '2019-06-14 01:53:48', 4, NULL, 150, NULL, NULL, 'pickup'),
+(32, 6, 0, '2019-06-12 23:50:49', 1, '', 0, 'ch_1EkgDMDxXQI5tIHyCBr0lsxk', NULL, NULL),
+(33, 6, 0, '2019-06-14 02:16:02', 5, '', 0, NULL, 'null', 'null'),
+(34, 2, 0, '2019-06-14 01:53:48', 0, NULL, 0, NULL, NULL, NULL),
 (35, 5, 9, '2019-06-14 01:57:21', 1, 'Cash emailsending testing', 0, NULL, '2', 'pickup'),
-(36, 5, 7, '2019-06-14 02:02:48', 1, '', 0, NULL, 'cash', 'pickup'),
+(36, 5, 7, '2019-06-14 02:02:48', 3, '', 0, NULL, 'cash', 'pickup'),
 (44, 5, 0, '2019-06-14 02:31:06', 1, '', 0, 'ch_1El5BzDxXQI5tIHyD8RH2tpZ', 'card', ''),
-(45, 5, 0, '2019-06-14 02:33:50', 1, 'delivery check', 0, 'ch_1El5EaDxXQI5tIHygMX0sqWE', 'card', 'delivery'),
-(46, 5, 0, '2019-06-14 02:37:32', 1, 'loader test', 0, 'ch_1El5I9DxXQI5tIHym3Q1r2YY', 'card', 'delivery'),
-(47, 5, 0, '2019-06-14 02:39:08', 1, '', 0, 'ch_1El5JgDxXQI5tIHyMQuMSk4x', 'null', 'null'),
-(48, 5, 0, '2019-06-14 02:41:09', 1, 'loader10 tst', 0, 'ch_1El5LeDxXQI5tIHyYMR35n02', 'null', 'null'),
-(49, 5, 0, '2019-06-14 02:49:14', 1, '', 0, 'ch_1El5TTDxXQI5tIHyvtMBqftk', 'card', 'delivery'),
+(45, 5, 0, '2019-06-14 02:33:50', 4, 'delivery check', 0, 'ch_1El5EaDxXQI5tIHygMX0sqWE', 'card', 'delivery'),
+(46, 5, 0, '2019-06-14 02:37:32', 7, 'loader test', 0, 'ch_1El5I9DxXQI5tIHym3Q1r2YY', 'card', 'delivery'),
+(59, 5, 0, '2019-06-19 09:01:39', 1, '', 242, 'ch_1EmzfXDxXQI5tIHy1mcusXUm', 'card', 'delivery'),
+(58, 5, 9, '2019-06-19 02:16:18', 1, '', 41, 'ch_1EmtLHDxXQI5tIHyaNgI6s72', 'null', 'pickup'),
 (50, 6, 0, '2019-06-14 02:56:51', 1, 'Branch test', 0, NULL, 'null', 'null'),
 (51, 5, 6, '2019-06-14 02:58:27', 1, 'pickup> cash test', 0, NULL, 'cash', 'pickup'),
 (52, 5, 0, '2019-06-14 02:59:27', 1, 'card> delivery', 0, 'ch_1El5dMDxXQI5tIHy9Ry6INFO', 'card', 'delivery'),
 (53, 6, 0, '2019-06-17 05:10:37', 1, '', 0, NULL, 'null', 'null'),
-(54, 7, 0, '2019-06-17 05:18:29', 1, 'price update test', 17, NULL, 'null', 'null'),
-(55, 8, 0, '2019-06-18 05:19:51', 1, '', 17, NULL, 'null', 'null'),
-(56, 5, 1, '2019-06-18 08:55:44', 1, '', 17, NULL, 'cash', 'pickup'),
-(57, 5, 1, '2019-06-18 08:56:15', 1, '', 77, NULL, 'cash', 'pickup'),
-(58, 6, 0, '2019-06-19 00:28:23', 0, NULL, 10, NULL, NULL, NULL),
-(59, 3, 1, '2019-08-12 00:00:00', 4, NULL, 420, NULL, 'cash', 'pickup'),
-(60, 3, 1, '2018-07-12 00:00:00', 4, NULL, 120, NULL, 'cash', 'pickup'),
-(61, 3, 1, '2018-08-12 00:00:00', 4, NULL, 120, NULL, 'cash', 'pickup'),
-(62, 3, 1, '2018-09-12 00:00:00', 4, NULL, 420, NULL, 'cash', 'pickup'),
-(63, 3, 1, '2018-10-12 00:00:00', 4, NULL, 720, NULL, 'cash', 'pickup'),
-(64, 3, 1, '2018-11-12 00:00:00', 4, NULL, 550, NULL, 'cash', 'pickup'),
-(65, 3, 1, '2018-12-12 00:00:00', 4, NULL, 400, NULL, 'cash', 'pickup'),
-(66, 3, 1, '2019-01-12 00:00:00', 4, NULL, 450, NULL, 'cash', 'pickup'),
-(67, 3, 1, '2019-02-12 00:00:00', 4, NULL, 440, NULL, 'cash', 'pickup'),
-(68, 3, 1, '2019-03-12 00:00:00', 4, NULL, 40, NULL, 'cash', 'pickup'),
-(69, 3, 1, '2019-04-12 00:00:00', 4, NULL, 47, NULL, 'cash', 'pickup'),
-(70, 3, 1, '2019-05-12 00:00:00', 4, NULL, 450, NULL, 'cash', 'pickup'),
-(71, 3, 1, '2019-06-12 00:00:00', 4, NULL, 47, NULL, 'cash', 'pickup'),
-(72, 5, 0, '2019-06-19 02:50:18', 0, NULL, 0, NULL, NULL, NULL),
-(73, 2, 1, '2019-06-10 00:00:00', 4, NULL, 41, NULL, 'card', 'pickup'),
-(74, 2, 1, '2019-06-10 00:00:00', 4, NULL, 41, NULL, 'card', 'pickup'),
-(75, 2, 1, '2019-06-10 00:00:00', 4, NULL, 41, NULL, 'card', 'pickup'),
-(76, 2, 1, '2019-06-10 00:00:00', 4, NULL, 41, NULL, 'card', 'pickup'),
-(77, 2, 1, '2019-06-10 00:00:00', 4, NULL, 41, NULL, 'card', 'pickup'),
-(78, 2, 1, '2019-06-10 00:00:00', 4, NULL, 41, NULL, 'card', 'pickup'),
-(79, 2, 1, '2019-06-10 00:00:00', 4, NULL, 41, NULL, 'card', 'pickup'),
-(80, 2, 1, '2019-06-10 00:00:00', 4, NULL, 41, NULL, 'card', 'pickup'),
-(81, 2, 1, '2019-06-10 00:00:00', 4, NULL, 41, NULL, 'card', 'pickup'),
-(82, 4, 1, '2019-04-06 00:00:00', 4, NULL, 20, NULL, 'card', 'pickup'),
-(83, 4, 1, '2019-04-06 00:00:00', 4, NULL, 20, NULL, 'card', 'pickup'),
-(84, 4, 1, '2019-04-06 00:00:00', 4, NULL, 20, NULL, 'card', 'pickup'),
-(85, 4, 1, '2019-04-06 00:00:00', 4, NULL, 20, NULL, 'card', 'pickup'),
-(86, 4, 1, '2019-04-06 00:00:00', 4, NULL, 20, NULL, 'card', 'pickup'),
-(87, 4, 1, '2019-04-06 00:00:00', 4, NULL, 20, NULL, 'card', 'pickup'),
-(88, 4, 1, '2019-04-06 00:00:00', 4, NULL, 20, NULL, 'card', 'pickup'),
-(89, 4, 1, '2019-04-06 00:00:00', 4, NULL, 20, NULL, 'card', 'pickup'),
-(90, 4, 1, '2019-04-06 00:00:00', 4, NULL, 20, NULL, 'card', 'pickup');
+(54, 6, 0, '2019-06-17 05:18:29', 1, 'price update test', 17, NULL, 'null', 'null'),
+(55, 5, 0, '2019-06-19 01:08:07', 1, 'testtesttesttesttest', 0, 'ch_1EmsHRDxXQI5tIHykpmQkOAy', 'card', 'delivery'),
+(60, 5, 0, '2019-06-20 00:56:07', 1, '', 113, 'ch_1EnEZDDxXQI5tIHy30gilhIU', 'card', 'delivery'),
+(61, 5, 0, '2019-06-20 02:03:37', 1, '', 143, 'ch_1EnFcZDxXQI5tIHyT3z8VFPP', 'card', 'delivery'),
+(62, 9, 0, '2019-06-20 00:59:51', 0, NULL, 0, NULL, NULL, NULL),
+(63, 5, 0, '2019-06-20 02:12:46', 0, NULL, 118, NULL, NULL, NULL),
+(64, 8, 0, '2019-06-27 22:06:19', 0, NULL, 0, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- 테이블 구조 `product`
+-- Table structure for table `product`
 --
 
 DROP TABLE IF EXISTS `product`;
@@ -397,7 +436,7 @@ CREATE TABLE IF NOT EXISTS `product` (
 ) ENGINE=MyISAM AUTO_INCREMENT=10023 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- 테이블의 덤프 데이터 `product`
+-- Dumping data for table `product`
 --
 
 INSERT INTO `product` (`productID`, `productName`, `price`, `discountprice`, `img`, `categoryID`, `brandID`) VALUES
@@ -422,7 +461,7 @@ INSERT INTO `product` (`productID`, `productName`, `price`, `discountprice`, `im
 (10022, 'Nonsale Product', 30, NULL, 'Hungary.png', 8, 2);
 
 --
--- 트리거 `product`
+-- Triggers `product`
 --
 DROP TRIGGER IF EXISTS `after_product_inserted`;
 DELIMITER $$
@@ -436,7 +475,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- 테이블 구조 `specials`
+-- Table structure for table `specials`
 --
 
 DROP TABLE IF EXISTS `specials`;
@@ -455,7 +494,7 @@ CREATE TABLE IF NOT EXISTS `specials` (
 ) ENGINE=MyISAM AUTO_INCREMENT=56 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- 테이블의 덤프 데이터 `specials`
+-- Dumping data for table `specials`
 --
 
 INSERT INTO `specials` (`specialId`, `specialName`, `specialType`, `specialPrice`, `specialInfo`, `specialImg`, `startTime`, `finishTime`, `productID`) VALUES
@@ -463,17 +502,17 @@ INSERT INTO `specials` (`specialId`, `specialName`, `specialType`, `specialPrice
 (3, NULL, 1, 13, '2+1 Event! get you authentic liquor', 'liquor1.jpg', NULL, NULL, NULL),
 (51, 'dada', 1, 200, 'Check', 'liquor3.jpg', NULL, NULL, NULL),
 (54, 'James... Damn Speical', 1, 500, 'Check this out Yash!!!', 'liquor3.jpg', NULL, NULL, NULL),
-(55, 'Special Offer', 1, 12, 'Grab your special offer now!', 'banner3.jpg', NULL, NULL, NULL),
 (36, 'Sawmill Signiture', 2, 9.5, '2+1= Event! check your cart', 'coolslight.png', NULL, NULL, 10003),
 (47, 'Tranditional Blond', 2, 10.5, 'Traditional house beer with no 20% off', 'traditionalblond.png', NULL, NULL, 10013),
 (38, 'Asahi light', 2, 7.5, 'text input', 'asahi.png', NULL, NULL, 10004),
 (53, 'punky brew Classic', 2, 6.5, 'James Damn!!', 'punk.png', NULL, NULL, 10015),
-(41, 'Asahi can', 2, 6.5, 'Authentic Japanese beer Event\r\nfine more now!', 'asahican.png', NULL, NULL, 10005);
+(41, 'Asahi can', 2, 6.5, 'Authentic Japanese beer Event\r\nfine more now!', 'asahican.png', NULL, NULL, 10005),
+(55, 'Mollys Cradle', 2, 18, 'asdf', 'MollysCradle.png', NULL, NULL, 10017);
 
 -- --------------------------------------------------------
 
 --
--- 테이블 구조 `staff`
+-- Table structure for table `staff`
 --
 
 DROP TABLE IF EXISTS `staff`;
@@ -487,7 +526,7 @@ CREATE TABLE IF NOT EXISTS `staff` (
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- 테이블의 덤프 데이터 `staff`
+-- Dumping data for table `staff`
 --
 
 INSERT INTO `staff` (`index`, `whID`, `userID`) VALUES
@@ -497,7 +536,7 @@ INSERT INTO `staff` (`index`, `whID`, `userID`) VALUES
 -- --------------------------------------------------------
 
 --
--- 테이블 구조 `status`
+-- Table structure for table `status`
 --
 
 DROP TABLE IF EXISTS `status`;
@@ -508,7 +547,7 @@ CREATE TABLE IF NOT EXISTS `status` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- 테이블의 덤프 데이터 `status`
+-- Dumping data for table `status`
 --
 
 INSERT INTO `status` (`statusID`, `statusName`) VALUES
@@ -524,7 +563,7 @@ INSERT INTO `status` (`statusID`, `statusName`) VALUES
 -- --------------------------------------------------------
 
 --
--- 테이블 구조 `stocklist`
+-- Table structure for table `stocklist`
 --
 
 DROP TABLE IF EXISTS `stocklist`;
@@ -539,7 +578,7 @@ CREATE TABLE IF NOT EXISTS `stocklist` (
 ) ENGINE=MyISAM AUTO_INCREMENT=342 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- 테이블의 덤프 데이터 `stocklist`
+-- Dumping data for table `stocklist`
 --
 
 INSERT INTO `stocklist` (`listIndex`, `productID`, `quantity`, `whID`) VALUES
@@ -888,7 +927,7 @@ INSERT INTO `stocklist` (`listIndex`, `productID`, `quantity`, `whID`) VALUES
 -- --------------------------------------------------------
 
 --
--- 테이블 구조 `users`
+-- Table structure for table `users`
 --
 
 DROP TABLE IF EXISTS `users`;
@@ -904,10 +943,10 @@ CREATE TABLE IF NOT EXISTS `users` (
   `address` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`userID`),
   KEY `typeID` (`typeID`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- 테이블의 덤프 데이터 `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`userID`, `typeID`, `firstName`, `lastName`, `companyName`, `password`, `email`, `phone`, `address`) VALUES
@@ -915,12 +954,13 @@ INSERT INTO `users` (`userID`, `typeID`, `firstName`, `lastName`, `companyName`,
 (6, 1, 'Emma', 'Ham', 'Aspire2 international', '1234', 'ham38538821@gmail.com', 1234, '6bowman road, Forrest Hill, Auckland 0620'),
 (5, 3, 'Junbo', 'Zhang', 'Aspire2 international', '1234', 'junboz598@gmail.com', 1234124, '6bowman road, Forrest Hill, Auckland 0620'),
 (0, 0, 'admin', '', 'liquor library', '1234', 'admin@gmail.com', 123412341234, 'liquor library address'),
-(8, 1, 'warehouse', 'admin', 'branch1', '1234', 'branch1@gmail.com', 12341234, 'address');
+(8, 1, 'warehouse', 'admin', 'branch1', '1234', 'branch1@gmail.com', 678967896789, 'address'),
+(9, 3, 'JJ', 'Z', '', '123', '598437013@qq.com', 1234123412, NULL);
 
 -- --------------------------------------------------------
 
 --
--- 테이블 구조 `usertype`
+-- Table structure for table `usertype`
 --
 
 DROP TABLE IF EXISTS `usertype`;
@@ -931,7 +971,7 @@ CREATE TABLE IF NOT EXISTS `usertype` (
 ) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- 테이블의 덤프 데이터 `usertype`
+-- Dumping data for table `usertype`
 --
 
 INSERT INTO `usertype` (`typeID`, `typeName`) VALUES
@@ -943,7 +983,7 @@ INSERT INTO `usertype` (`typeID`, `typeName`) VALUES
 -- --------------------------------------------------------
 
 --
--- 테이블 구조 `warehouse`
+-- Table structure for table `warehouse`
 --
 
 DROP TABLE IF EXISTS `warehouse`;
@@ -959,11 +999,11 @@ CREATE TABLE IF NOT EXISTS `warehouse` (
 ) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- 테이블의 덤프 데이터 `warehouse`
+-- Dumping data for table `warehouse`
 --
 
 INSERT INTO `warehouse` (`whID`, `typeID`, `whName`, `address`, `phone`, `email`) VALUES
-(1, 1, 'Auckland CBD', '6hobson', 0, 'hamfd@gmail.com'),
+(1, 1, 'CBD', '6hobson', 0, 'hamfd@gmail.com'),
 (2, 1, '4575abd', '1234567', 252144, 'abd@gmail.com'),
 (3, 1, 'Newmarket', '7symonds', 252144, 'abd@gmail.com'),
 (4, 1, 'Takapuna', 'bowman456', 252144, 'abd@gmail.com'),
@@ -974,7 +1014,27 @@ INSERT INTO `warehouse` (`whID`, `typeID`, `whName`, `address`, `phone`, `email`
 (9, 1, '9999', '67 zxcv', 12345234, '34534@asdf.com'),
 (10, 1, '1010', '23 asdf', 15878834, '234sdf@asdf.com'),
 (11, 1, '1010', '23 fdfddf', 2108216229, 'ham@asdf.com'),
-(0, 0, 'main warehouse', 'main warehouse address', 0, 'admin@gmail.com');
+(0, 0, 'main warehouse', '23 somewhere someplace', 123234, 'admin@gmail.com');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `warehousetype`
+--
+
+DROP TABLE IF EXISTS `warehousetype`;
+CREATE TABLE IF NOT EXISTS `warehousetype` (
+  `typeID` int(20) NOT NULL AUTO_INCREMENT,
+  `typeName` varchar(45) NOT NULL,
+  PRIMARY KEY (`typeID`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `warehousetype`
+--
+
+INSERT INTO `warehousetype` (`typeID`, `typeName`) VALUES
+(1, 'branch');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

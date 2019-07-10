@@ -63,8 +63,10 @@
                     $res .= "$key = $v OR ";
                 }
                 $res = trim($res, "OR ");
+            } else if ($value == null) {
+                $res = "$key = NULL";
             } else {
-                $res .= "$key = $value AND ";
+                $res .= "$key = '$value' AND ";
             }
             return $res;
         }
@@ -240,6 +242,40 @@
             }
         }
 
+        public function updateDB ($table, $valArr, $consArr) {
+            if ($table !== null && $consArr !== null && $valArr !== null) {
+                $newVals = "";
+                $cons = "";
+                foreach ($valArr as $key => $value) {
+                    if ($value == null) {
+                        $newVals .= $key." = NULL,";
+                    } else {
+                        $newVals .= $key."='".$value."',";
+                    }
+                }
+                $newVals = trim($newVals, ",");
+                foreach ($consArr as $key => $value) {
+                    if ($value == null) {
+                        $cons .= $key." = NULL AND ";
+                    } else {
+                        $cons .= $key."='".$value."' AND ";
+                    }
+                }
+                $cons = trim($cons, "AND ");
+                $sql = "UPDATE $table SET $newVals WHERE $cons";
+                $res = $this->connection->query($sql);
+                if ($res) {
+                    return $sql;
+                } else {
+                    trigger_error("Query: " . $sql);
+                    trigger_error("error: " . $this->connection->error);
+                    return false;
+                }
+            } else {
+                trigger_error('missing arguments.');
+            }
+        }
+
         public function delete ($table, $consArr) {
             if (isset($table)) {
                 $sql = "DELETE FROM $table WHERE ";
@@ -271,53 +307,4 @@
                 }
             }
         }
-
-        // insert into cart
-
-
-        // insert
-        // public function insert ($table, $valArr) {
-        //     $dbname = 'liquorlibrary';
-        //     // get col names of the table
-        //     $getColNames_sql = "SELECT `COLUMN_NAME`, `DATA_TYPE`
-        //                         FROM `INFORMATION_SCHEMA`.`COLUMNS` 
-        //                         WHERE `TABLE_SCHEMA`= $dbname 
-        //                             AND `TABLE_NAME`= $table";
-        //     if ($colNames_res = $this->connection->query($getColNames_sql)) {
-        //         $colNames = $colNames_res->fetch_all();
-        //     }
-        //     if ($table != null && $valArr != null) {
-        //         $colNum = $colNames->num_rows;
-        //         $col = "(";
-        //         $val = "(";
-        //         $dt = "";
-        //         for ($i = 0; $i < $colNum; $i++) {
-        //             $col .= $colNames[$i]['COLUMN_NAME'].",";
-        //             $val .= "?,";
-        //             $dt .= "s";
-        //             // switch ($colNames[$i]['DATA_TYPE']) {
-        //             //     case 'int':
-        //             //         $dt .= "i";
-        //             //         break;
-        //             //     case 'float':
-        //             //         $dt .= "d";
-        //             //         break;
-        //             //     case 'varchar'
-        //             //     default:
-        //             //         # code...
-        //             //         break;
-        //             // }
-        //         }
-        //         $col = trim($col, ",");
-        //         $val = trim($val, ",");
-        //         $val .= ")";
-        //         $col .= ")";
-        //     // create sql statement
-        //         $sql = "INSERT INTO ? $col VALUES $val";
-        //         while ($valArr) {
-        //             $vals .= 
-        //         }
-        //         $sql->bind_param
-        //     }
-        // }
     }

@@ -1,3 +1,55 @@
+$(document).ready(function () {
+    // Set trigger and container variables
+    var trigger = $('.sortselect');
+    // Fire on click
+    trigger.on('click', function () {
+        // Set $this for re-use. Set target from data attribute
+        var $this = $(this),
+            val = $this.find(':selected').val();
+        // var val = document.getElementById("pricelow").value;
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                console.log(xmlhttp);
+                if (xmlhttp.responseText == 1) {
+                    // document.location.reload(true);
+
+                }
+            }
+        };
+        xmlhttp.open("GET", "./pricesort.php?sc=" + val, true);
+        xmlhttp.send();
+
+        return false;
+    });
+
+    $('#stickyCartBtn').on('click', function () {
+        getItems();
+        finalPrice();
+        var $this = $('#stickyCart');
+        if ($this.css('display') == 'none') {
+            $('#stickyCart').css('display', 'block');
+            $('#stickyCart').addClass('showCart');
+        } else {
+            $('#stickyCart').removeClass('showCart');
+            $('#stickyCart').addClass('fadeOutCart');
+            setTimeout(function () {
+                $('#stickyCart').css('display', 'none');
+            }, 500);
+        }
+    });
+
+    $('#stickyCartClose').on('click', function () {
+        $('#stickyCart').removeClass('showCart');
+        $('#stickyCart').addClass('fadeOutCart');
+        setTimeout(function () {
+            $('#stickyCart').css('display', 'none');
+        }, 500);
+    })
+});
+
+
+
 // search function (Ajax - search.php)
 
 document.getElementById("searchbox").onkeyup = function () {
@@ -93,7 +145,7 @@ document.getElementById("logoutButton").onclick = function () {
         if (this.readyState == 4 && this.status == 200) {
             console.log(xmlhttp);
             if (xmlhttp.responseText == 1) {
-                document.location.reload(true);
+                document.location = './index.php';
             }
         }
     };

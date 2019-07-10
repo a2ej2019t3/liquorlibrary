@@ -89,7 +89,7 @@ if (isset($_POST['branchinformform'])) {
             echo 'customer email error';
         }
     } else {
-        echo 'customer ID erro';
+        echo 'customer ID error';
     }
 } else {
     echo 'form error';
