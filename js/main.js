@@ -12,11 +12,6 @@ function addLoadEvent(func) {
     }
 };
 
-function openLoginModal () {
-    alert('Please login');
-    $('#myModal').modal();
-}
-
 $(window).scroll(function () {
     if ($(this).scrollTop() > 80)  /*height in pixels when the navbar becomes non opaque*/ {
         $('.opaque-navbar').addClass('opaque');
@@ -109,6 +104,10 @@ document.addEventListener('DOMContentLoaded', function (event) {
     document.querySelector('body').style.opacity = 1
 })
 
+$(document).ready(function () {
+    $('body').show();
+});
+
 function addLoadEvent(func) {
     var oldonload = window.onload;
     if (typeof window.onload != 'function') {
@@ -183,6 +182,54 @@ function branchorderid() {
     var hiddenorderid = document.getElementById('questionorder');
     hiddenorderid.setAttribute('value', orderid);
 }
+function confirmcancel() {
+
+    if (confirm("Are you sure you want to cancel this backorder?")) {
+
+        cancellatest();
+        var canbtn = document.getElementById("cancelbuttonlatest")
+        var json = canbtn.getAttribute('value');
+        var obj = JSON.parse(json);
+        var orderid = obj.orderID;
+        var buyerid = obj.buyerID;
+
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                console.log(xmlhttp);
+                if (xmlhttp.responseText == 1) {
+                    alert('Now the order is cancelled');
+                }
+                else if (xmlhttp.responseText == 2) {
+                    alert('System failed to cancel this order.');
+                }
+
+                window.location.reload();
+            }
+        };
+        xmlhttp.open("GET", "partials/backordercancel.php?id=" + orderid + "&buyerid=" + buyerid, true);
+        xmlhttp.send();
+
+    }
+    else {
+
+    }
+}
+function cancellatest() {
+
+    var spinner = '#spinnerlatest';
+    var cancelsign = '#cancelsignlatest';
+    $(spinner).css("display", "block");
+    $(cancelsign).css("display", "none");
+    // setTimeout( "$('#spinner').css('display','none');", 8000);
+    window.setTimeout(function () {
+        $(spinner).css('display', 'none');
+        $(cancelsign).css("display", "block");
+    }, 5000);
+
+}
+
+
 function updateorder(elem) {
 
     var id = $(elem).attr("data-id");
@@ -200,6 +247,7 @@ function updateorder(elem) {
 
 
 }
+
 function completeorder(elem) {
 
     var id = $(elem).attr("data-id");
@@ -216,6 +264,53 @@ function completeorder(elem) {
     }, 5000);
 }
 
+
+function cancelorder(elem) {
+
+
+    if (confirm("Are you sure you want to cancel this order?")) {
+        var id = $(elem).attr("data-id");
+        var spinner = '#cancelspinner' + id;
+        var readysign = '#cancelsign' + id;
+
+        $(spinner).css("display", "block");
+        $(readysign).css("display", "none");
+        // setTimeout( "$('#spinner').css('display','none');", 8000);
+        window.setTimeout(function () {
+            $(spinner).css('display', 'none');
+            $(readysign).css("display", "block");
+        }, 5000);
+
+        // update database
+        var buttonId = "cancelbutton" + id;
+        var canbtn = document.getElementById(buttonId);
+        var json = canbtn.getAttribute('value');
+        var obj = JSON.parse(json);
+        var orderid = obj.orderID;
+        var buyerid = obj.buyerID;
+        // alert(orderid);
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                console.log(xmlhttp);
+                if (xmlhttp.responseText == 1) {
+                    alert('Now the order is cancelled');
+                }
+                else if (xmlhttp.responseText == 2) {
+                    alert('System failed to cancel this order.');
+                }
+
+                window.location.reload();
+            }
+        };
+        xmlhttp.open("GET", "partials/backordercancel.php?id=" + orderid + "&buyerid=" + buyerid, true);
+        xmlhttp.send();
+
+    }
+    else {
+
+    }
+}
 
 function readypickup(json) {
 
@@ -240,6 +335,27 @@ function readypickup(json) {
     xmlhttp.send();
 }
 
+function shippingbackorder(json){
+    var obj = JSON.parse(json);
+    var orderid = obj.orderID;
+    var buyerid = obj.buyerID;
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(xmlhttp);
+            if (xmlhttp.responseText == 1) {
+                alert('Now the order is shipping and system sent an notification email.');
+            }
+            else if (xmlhttp.responseText == 2) {
+                alert('We failed to send an email to the branch.');
+            }
+
+            window.location.reload();
+        }
+    };
+    xmlhttp.open("GET", "partials/shippingorder.php?id=" + orderid + "&buyerid=" + buyerid, true);
+    xmlhttp.send();
+}
 function completepickup(json) {
 
     var obj = JSON.parse(json);
@@ -260,6 +376,28 @@ function completepickup(json) {
         }
     };
     xmlhttp.open("GET", "partials/completepickup.php?id=" + orderid + "&buyerid=" + buyerid, true);
+    xmlhttp.send();
+}
+
+function completebackorder(json){
+    var obj = JSON.parse(json);
+    var orderid = obj.orderID;
+    var buyerid = obj.buyerID;
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(xmlhttp);
+            if (xmlhttp.responseText == 1) {
+                alert('This order has been completed, Thank you!');
+            }
+            else if (xmlhttp.responseText == 2) {
+                alert('We failed to send an email to this branch.');
+            }
+
+            window.location.reload();
+        }
+    };
+    xmlhttp.open("GET", "partials/completebackorder.php?id=" + orderid + "&buyerid=" + buyerid, true);
     xmlhttp.send();
 }
 function openEmailModal(json) {

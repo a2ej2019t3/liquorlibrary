@@ -1,5 +1,5 @@
 <?php
-include('../database/DBsql.php');
+include ('../database/DBsql.php');
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -13,19 +13,19 @@ if (isset($_SESSION['cartItems'])) {
     $tagForPrice = 'Price: ';
     $imgpath = 'images/';
     if ($res != array()) {
-        // var_dump($getItems_arr);
+    // var_dump($getItems_arr);
         foreach ($res as $productID => $getItems_arr) {
             if (isset($_SESSION['user'])) {
                 $idArr = array(
                     'orderID' => $getItems_arr['orderID'],
                     'productID' => $getItems_arr['productID']
-                );
+                    );
                 $idJson = json_encode($idArr);
             } else {
                 $idArr = array(
                     'orderID' => 'guest',
                     'productID' => $getItems_arr['productID']
-                );
+                    );
                 $idJson = json_encode($idArr);
             }
             echo '
@@ -35,15 +35,20 @@ if (isset($_SESSION['cartItems'])) {
                         <div class="col">
                             <div class="row" style="min-height:80px;">
 
-                                <div id="posterarea" class="col" style="max-width: 50px; min-width: 25px; padding: 0 0 0 10px !important; margin: auto; text-align: center;">
-                                    <img class="img-fluid" src=' . $imgpath . $getItems_arr['img'] . ' style = "max-height:70px;">
+                                <div id="posterarea" class="col" 
+                                style="max-width: 50px;
+                                min-width: 25px;
+                                padding: 0 0 0 10px !important;
+                                margin: auto;
+                                text-align: center;">
+                                    <img class="img-fluid" src='.$imgpath.$getItems_arr['img'].' style = "max-height:70px;">
                                 </div>
 
                                 <div id="titlearea" class="col" style="padding:0 0 0 5px; margin:auto;">
                                     <p style="color:black; text-align:left; margin:0;">
-                                        <b>' . $getItems_arr['productName'] . '</b><br>
-                                        <a href="../categorysearch.php?searchcategoryID=' . $getItems_arr['categoryID'] . '&searchcategoryName=' . $getItems_arr['categoryName'] . '&location=category"><i style="font-size">' . $tagForCategory . $getItems_arr['categoryName'] . '</i></a><br>
-                                        <a href="../categorysearch.php?brandname=' . $getItems_arr['brandName'] . '&location=brandproduct"><i>' . $tagForBrand . $getItems_arr['brandName'] . '</i></a>
+                                        <b>'.$getItems_arr['productName'].'</b><br>
+                                        <a href="../categorysearch.php?searchcategoryID='.$getItems_arr['categoryID'].'&searchcategoryName='.$getItems_arr['categoryName'].'&location=category"><i style="font-size">'.$tagForCategory.$getItems_arr['categoryName'].'</i></a><br>
+                                        <a href="../categorysearch.php?brandname='.$getItems_arr['brandName'].'&location=brandproduct"><i>'.$tagForBrand.$getItems_arr['brandName'].'</i></a>
                                     </p>
                                 </div>
 
@@ -58,20 +63,20 @@ if (isset($_SESSION['cartItems'])) {
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <span id="total[' . $getItems_arr['productID'] . ']" value="' . $getItems_arr['totalprice'] . '" class="asdfa" style="font-size:1rem; margin-top:15px;">NZ$' . $getItems_arr['totalprice'] . '</span>
+                                                <span id="total['.$getItems_arr['productID'].']" value="'.$getItems_arr['totalprice'].'" class="asdfa" style="font-size:1rem; margin-top:15px;">NZ$'.$getItems_arr['totalprice'].'</span>
                                             </tr>
                                             <tr>
                                                 <div id="quantityField" class="input-group mx-auto" style="max-width:100px;">';
-            // var_dump($getItems_arr['discountprice']);
-            if ($getItems_arr['discountprice'] !== null) {
-                echo '
-                                                    <input type="hidden" id="ticket_price[' . $getItems_arr['productID'] . ']" data-value="' . $getItems_arr['discountprice'] . '">';
-            } else {
-                echo '
-                                                    <input type="hidden" id="ticket_price[' . $getItems_arr['productID'] . ']" data-value="' . $getItems_arr['price'] . '">';
-            }
+                                                // var_dump($getItems_arr['discountprice']);
+                                                if ($getItems_arr['discountprice'] !== null) {
+                                                    echo'
+                                                    <input type="hidden" id="ticket_price['.$getItems_arr['productID'].']" data-value="'.$getItems_arr['discountprice'].'">';
+                                                } else {
+                                                    echo'
+                                                    <input type="hidden" id="ticket_price['.$getItems_arr['productID'].']" data-value="'.$getItems_arr['price'].'">';
+                                                }
             echo '
-                                                    <input id="quantity[' . $getItems_arr['productID'] . ']" type="number" value="' . $getItems_arr['quantity'] . '" onchange="quantityCtrl(' . $getItems_arr['productID'] . ', this)" class="form-control cart-item-quantity-display" 
+                                                    <input id="quantity['.$getItems_arr['productID'].']" type="number" value="'.$getItems_arr['quantity'].'" onchange="quantityCtrl('.$getItems_arr['productID'].', this)" class="form-control cart-item-quantity-display" 
                                                     style="padding: 0;
                                                     text-align: center;
                                                     height: 20px;
@@ -79,12 +84,12 @@ if (isset($_SESSION['cartItems'])) {
                                                     <div class="input-group-append" id="quantityCtrl">';
             if (isset($_SESSION['user'])) {
                 echo '
-                                                        <button class="operation btn btn-sm btn-outline-secondary" data-operation="d" data-orderid=' . $getItems_arr['orderID'] . ' type="button" onclick="quantityCtrl(' . $getItems_arr['productID'] . ', this)">-</button>
-                                                        <button class="operation btn btn-sm btn-outline-secondary" data-operation="i" data-orderid=' . $getItems_arr['orderID'] . ' type="button" onclick="quantityCtrl(' . $getItems_arr['productID'] . ', this)">+</button>';
+                                                            <button class="operation btn btn-sm btn-outline-secondary" data-operation="d" data-orderid='.$getItems_arr['orderID'].' type="button" onclick="quantityCtrl('.$getItems_arr['productID'].', this)">-</button>
+                                                            <button class="operation btn btn-sm btn-outline-secondary" data-operation="i" data-orderid='.$getItems_arr['orderID'].' type="button" onclick="quantityCtrl('.$getItems_arr['productID'].', this)">+</button>';
             } else {
                 echo '
-                                                        <button class="operation btn btn-sm btn-outline-secondary" data-operation="d" data-orderid="Na" type="button" onclick="quantityCtrl(' . $getItems_arr['productID'] . ', this)">-</button>
-                                                        <button class="operation btn btn-sm btn-outline-secondary" data-operation="i" data-orderid="Na" type="button" onclick="quantityCtrl(' . $getItems_arr['productID'] . ', this)">+</button>';
+                                                            <button class="operation btn btn-sm btn-outline-secondary" data-operation="d" data-orderid="Na" type="button" onclick="quantityCtrl('.$getItems_arr['productID'].', this)">-</button>
+                                                            <button class="operation btn btn-sm btn-outline-secondary" data-operation="i" data-orderid="Na" type="button" onclick="quantityCtrl('.$getItems_arr['productID'].', this)">+</button>';
             }
             echo '
                                                     </div>
@@ -95,7 +100,7 @@ if (isset($_SESSION['cartItems'])) {
                                 </div>
 
                                 <div id="removeCol" class="col-5">
-                                    <button id="cart-item-remove" class="btn btn-sm btn-outline-danger" value=' . $idJson . ' type="button" onclick="removeItem(this.value)">remove</button> 
+                                    <button id="cart-item-remove" class="btn btn-sm btn-outline-danger" value='.$idJson.' type="button" onclick="removeItem(this.value)">remove</button> 
                                 </div>
 
                             </div>
@@ -115,7 +120,7 @@ if (isset($_SESSION['cartItems'])) {
     echo 'Your cart is empty! (No session found)';
 }
 
-echo '
+echo'
     <style>
         a {
             font-size: 0.8rem;
@@ -180,5 +185,6 @@ echo '
             background:none;
         }
           
+
     </style>
 ';

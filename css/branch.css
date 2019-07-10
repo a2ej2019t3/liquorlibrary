@@ -17,6 +17,7 @@ nav > .nav.nav-tabs{
       border-radius:0;
   }
   
+
   nav > div a.nav-item.nav-link.active:after
    {
     content: "";
@@ -26,6 +27,7 @@ nav > .nav.nav-tabs{
     border: 15px solid transparent;
     border-top-color: #e74c3c ;
   }
+
   .tab-content{
     background: #fdfdfd;
       line-height: 25px;
@@ -146,4 +148,71 @@ h6 {
 }
 .orderdate{
   font-size: 1rem;
+}
+
+#header {
+  border-bottom: 5px solid #37474F;
+  color: #37474F;
+  margin-bottom: 1.5rem;
+  padding: 1rem 0;
+}
+
+#revenue-tag {
+  font-weight: inherit !important;
+  border-radius: 0px !important;
+}
+
+.card {
+  border: 0rem;
+  border-radius: 0rem;
+}
+
+.card-header {
+  background-color: #37474F;
+  border-radius: 0 !important;
+  color:	white;
+  margin-bottom: 0;
+  padding:	1rem;
+}
+
+.card-block {
+  border: 1px solid #cccccc;
+  /* height: 100%;
+  width: 100%;	 */
+}
+
+.shadow {
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14),
+              0 1px 18px 0 rgba(0, 0, 0, 0.12),
+              0 3px 5px -1px rgba(0, 0, 0, 0.2);
+}
+
+#revenue-column-chart, #products-revenue-pie-chart, #orders-spline-chart {
+  height: 300px;
+  width: 100%;
+}
+
+/*------ real time page charts ------*/
+
+#users-medium-pie-chart,
+#users-category-pie-chart,
+#page-views-per-second-column-chart,
+#page-views-per-minute-column-chart,
+#users-state-bar-chart {
+  height: 300px;
+  width: 95%;
+  margin: 0 auto;
+}
+#annualsales-doughnut-chart{
+  height: 300px;
+  width: 95%;
+  margin: 0 auto;
+}
+
+/*------ /real time page charts ------*/
+.badgeforchart{
+  width: 100px;
+  height: 20px;
+  margin: 0 auto;
+
 }
