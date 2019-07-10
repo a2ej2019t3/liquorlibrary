@@ -5,6 +5,7 @@
         $shippingorder_arr=array();  
         $cancelorder_arr=array();  
         $paidorder_arr=array();
+        $historyorder_arr=array();
         for($a=0; $a <count($selectuser_arr); $a++){
             $userID=$selectuser_arr[$a][0];
             // echo $userID;
@@ -27,6 +28,7 @@
               }
      
         };
+
         // select shipping backorders
         for($a=0; $a <count($selectuser_arr); $a++){
             $userID=$selectuser_arr[$a][0];
@@ -92,6 +94,27 @@ for($a=0; $a <count($selectuser_arr); $a++){
          }
           
       }
+
+};
+for($a=0; $a <count($selectuser_arr); $a++){
+  $userID=$selectuser_arr[$a][0];
+  // echo $userID;
+  $select_historyorder="SELECT * FROM orders WHERE buyerID='$userID'AND status=4 or buyerID='$userID'AND status=5 order by `date` DESC";
+  $selecthistoryorder_result=mysqli_query($connection, $select_historyorder);
+  // $order_array[$a]=$selectorder_result;
+
+    $historyorder_array=mysqli_fetch_all($selecthistoryorder_result , MYSQLI_ASSOC);
+    // print_r($order_array); 
+    if(!empty($historyorder_array)){
+      if(!empty($historyorder_arr)){
+        $historyorder_arr=array_merge($historyorder_arr,$historyorder_array);
+         echo '<br>';
+       }else{
+        $historyorder_arr=array_merge($historyorder_array);
+        
+       }
+        
+    }
 
 };
 
