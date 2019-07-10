@@ -203,11 +203,14 @@ include('connection.php');
 				<div class="col-xl-6">
 					<div class="card card-block">
 						<h4 class="card-title m-b-2">
-							<span id="visitors-chart-heading">New vs Returning Visitors </span>
+							<span id="visitors-chart-heading">Sales Summary</span>
 							<button class="btn pull-right invisible" type="button" id="visitors-chart-back-button"><i class="fa fa-angle-left fa-lg" aria-hidden="true"></i> Back</button>
 						</h4>
-						<span class="tag custom-tag" id="visitors-chart-tag">Try clicking on any segment</span>
-						<div id="visitors-chart"></div>
+						<span class="tag custom-tag" id="visitors-chart-tag">This is a summary for online sales.</span>
+						<div id="visitors-chart">
+                            
+
+                        </div>
 					</div>
 				</div>
 				<div class="col-xl-6">
