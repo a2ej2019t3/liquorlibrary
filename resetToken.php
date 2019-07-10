@@ -52,47 +52,10 @@ if ($responseKeys["success"]) {
     $res = $DBsql->updateDB('users', array('resettoken' => $token, 'resettime' => date("Y-m-d H:i:s")), array('userID' => $userID));
 
     if ($res) {
-        define("PROJECT_HOME", "http://localhost/liquorlibrary");
-        define("ADMIN_EMAIL", "admin@gmail.com");
-
-        if (!class_exists('PHPMailer')) {
-            require('phpmailer/class.phpmailer.php');
-            require('phpmailer/class.smtp.php');
-        }
-
-        $mail = new PHPMailer();
-
-        $emailBody = '
-        <div class="mailbox" style="text-align: center; border: 1px solid rgba(215, 232, 186, 1); border-radius:25px; margin-top: 30px; font-family: "Montserrat", sans-serif;>
-            <p><b>TEST MAIL for reset password...</b></p>                    
-        </div>
-        ';
-
-        $mail->IsSMTP();
-        $mail->SMTPDebug = 0;
-        $mail->SMTPAuth = TRUE;
-        $mail->SMTPSecure = "tls";
-        $mail->Port     = 587;
-        $mail->Username = "ham38538821@gmail.com";
-        $mail->Password = "gkatkdgur88!!";
-        $mail->Host     = "smtp.gmail.com";
-        $mail->Mailer   = "smtp";
-
-        $mail->SetFrom(ADMIN_EMAIL, 'liquor library');
-        $mail->AddAddress($userEmail, 'liquor library');
-        $mail->Subject = "Reset password";
-        $mail->MsgHTML($emailBody);
-        $mail->IsHTML(true);
-
-        if (!$mail->Send()) {
-            $error_message = 'Problem in Sending Email';
-            echo  $error_message;
-        } else {
-            echo true;
-        }
+        include_once('Emailsending/resetPasswordEmail.php');
     } else {
         echo 'something wrong.';
     }
 } else {
-    echo json_encode(array('success' => 'false'));
+    echo false;
 }

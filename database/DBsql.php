@@ -255,7 +255,7 @@
                 $sql = "UPDATE $table SET $newVals WHERE $cons";
                 $res = $this->connection->query($sql);
                 if ($res) {
-                    return true;
+                    return $sql;
                 } else {
                     trigger_error("Query: " . $sql);
                     trigger_error("error: " . $this->connection->error);
