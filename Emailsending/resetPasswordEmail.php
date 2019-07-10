@@ -27,7 +27,7 @@ $emailBody = '
         </p>
         <div style="width:100%; text-align:center; margin-top: 50px;">
             <div>
-                <a href="index.php" style="background-color: #555555;
+                <a href="localhost/liquorlibrary/resetPassword.php?token='.$token.'" style="background-color: #555555;
                         border: none;
                         border-radius: 4px;
                         color: #ffca2b;

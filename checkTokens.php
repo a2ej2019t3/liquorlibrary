@@ -16,7 +16,9 @@ if ($res != null) {
                 echo 'faild to delete token';
             }
         } else {
-            echo 'user ID: '.$value['userID'].', Reset password request expire in: '.$minutes. ' minutes.';
+            echo 'user ID: '.$value['userID'].', Reset password request expire in: '.round((5-$minutes), 1). ' minutes.';
         }
     }
+} else {
+    echo 'no request. peaceful day.';
 }

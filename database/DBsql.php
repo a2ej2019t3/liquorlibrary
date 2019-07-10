@@ -63,8 +63,10 @@
                     $res .= "$key = $v OR ";
                 }
                 $res = trim($res, "OR ");
+            } else if ($value == null) {
+                $res = "$key = NULL";
             } else {
-                $res .= "$key = $value AND ";
+                $res .= "$key = '$value' AND ";
             }
             return $res;
         }
@@ -245,11 +247,19 @@
                 $newVals = "";
                 $cons = "";
                 foreach ($valArr as $key => $value) {
-                    $newVals .= $key."='".$value."',";
+                    if ($value == null) {
+                        $newVals .= $key." = NULL,";
+                    } else {
+                        $newVals .= $key."='".$value."',";
+                    }
                 }
                 $newVals = trim($newVals, ",");
                 foreach ($consArr as $key => $value) {
-                    $cons .= $key."='".$value."' AND ";
+                    if ($value == null) {
+                        $cons .= $key." = NULL AND ";
+                    } else {
+                        $cons .= $key."='".$value."' AND ";
+                    }
                 }
                 $cons = trim($cons, "AND ");
                 $sql = "UPDATE $table SET $newVals WHERE $cons";

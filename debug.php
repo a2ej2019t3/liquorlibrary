@@ -19,7 +19,7 @@
             </div>
             <hr style="padding:0; margin:0;">
             <div id="content" style="height: auto; width:100%; min-height: 300px; padding: 30px 20px 0px;">
-                <form style="padding: 0px 140px 0px;" class="needs-validation" novalidate>
+                <form style="padding: 0px 140px 0px;" id="resetForm" class="needs-validation" novalidate="">
                     <div class="form-group">
                         <label for="inputpassword">New password: </label>
                         <input type="password" class="form-control" id="inputpassword" placeholder="Input new password" required>
@@ -37,7 +37,7 @@
                     </div>
                     <div class="form-group" style="text-align:center;">
                         <div>
-                            <button type="submit" style="background-color: #555555;
+                            <button type="submit" id="resetSubmit" style="background-color: #555555;
                         border: none;
                         border-radius: 4px;
                         color: #ffca2b;
@@ -74,17 +74,15 @@
     ?>
     <script>
         $(function() {
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            var forms = document.getElementsByClassName('needs-validation');
-            // Loop over them and prevent submission
-            var validation = Array.prototype.filter.call(forms, function(form) {
-                form.addEventListener('submit', function(event) {
-                    if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
+            $("#resetSubmit").on("click", function(e) {
+                var form = $("#resetForm")[0];
+                var isValid = form.checkValidity();
+                if (!isValid) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+                form.classList.add('was-validated');
+
             });
             $('#inputpassword').blur(function() {
                 if ($(this).val() != '') {

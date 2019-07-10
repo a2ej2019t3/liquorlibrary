@@ -2,11 +2,13 @@
 include_once(__DIR__ . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 'DBsql.php');
 $DBsql = new sql;
 
-if (isset($_REQUEST['token'])) {
+if ($_REQUEST['token'] != null) {
     $linkToken = $_REQUEST['token'];
+} else {
+    $linkToken = 'testtoken';
 }
 
-$res = $DBsql->select('users', array('resettoken' => $linkToken));
+$res = $DBsql->select('users', array('resettoken' => strval($linkToken)));
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +26,7 @@ $res = $DBsql->select('users', array('resettoken' => $linkToken));
 
 <body style="background-size: 150px; background-repeat: repeat; background-image: url(images/background3.png); overflow-y: hidden;">
     <div id="main" style="width:100%; margin-top: 50px;">
-        <div style="max-width: 800px; margin-left:auto; margin-right:auto; border:1px solid #eeeeee">
+        <div style="max-width: 800px; margin-left:auto; margin-right:auto; border:1px solid #eeeeee; background: white;">
             <div id="header" style="height:100px; width:100%; background-color:black; text-align:center;">
                 <img style="max-height:100px; width:auto;" src="https://liquorlibrary-email-pics.s3-ap-southeast-2.amazonaws.com/brandlogo.jpg">
             </div>
@@ -32,10 +34,41 @@ $res = $DBsql->select('users', array('resettoken' => $linkToken));
             <div id="content" style="height: auto; width:100%; padding: 30px 20px 0px;">
                 <?php
                 if ($res != null) {
-                    $userID = $res['userID'];
-                    $userEmail = $res['email'];
+                    $userID = $res[0]['userID'];
+                    $userEmail = $res[0]['email'];
                     echo '
-                        ';
+                    <form style="padding: 0px 140px 0px;" id="resetForm" class="needs-validation" novalidate="">
+                        <div class="form-group">
+                            <label for="inputpassword">New password: </label>
+                            <input type="password" class="form-control" id="inputpassword" placeholder="Input new password" required>
+                            <div class="invalid-feedback">
+                                The password can not be empry
+                            </div>
+                            <small id="passwordTips" class="form-text text-muted">Use capital letters, lowercase letter and symbols to increse the strength of your password.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmpassword">Confirm: </label>
+                            <input type="password" class="form-control" id="confirmpassword" placeholder="Password" required>
+                            <div class="invalid-feedback">
+                                The password does not match
+                            </div>
+                        </div>
+                        <div class="form-group" style="text-align:center;">
+                            <div>
+                                <button type="submit" id="resetSubmit" style="background-color: #555555;
+                            border: none;
+                            border-radius: 4px;
+                            color: #ffca2b;
+                            padding: auto 32px;
+                            height: 40px;
+                            text-align: center;
+                            text-decoration: none;
+                            display: inline-block;
+                            font-size: 1rem;
+                            width: 100px;">Submit</button>
+                            </div>
+                        </div>
+                    </form>';
                 } else {
                     echo '
                     <div style="text-align: center;">
@@ -66,6 +99,42 @@ $res = $DBsql->select('users', array('resettoken' => $linkToken));
     <?php
     include_once("partials/foot.php");
     ?>
+    <script>
+        $(function() {
+            $("#resetSubmit").on("click", function(e) {
+                var form = $("#resetForm")[0];
+                var isValid = form.checkValidity();
+                if (!isValid) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+                form.classList.add('was-validated');
+                $.POST()
+            });
+            $('#inputpassword').blur(function() {
+                if ($(this).val() != '') {
+                    $(this).addClass('is-valid');
+                    $(this).removeClass('is-invalid');
+                } else {
+                    $(this).removeClass('is-valid');
+                    $(this).addClass('is-invalid');
+                }
+            });
+            $('#confirmpassword').blur(function() {
+                if ($(this).val() != '') {
+                    if ($(this).val() != $('#inputpassword').val()) {
+                        $(this).removeClass('is-valid');
+                        $(this).addClass('is-invalid');
+                    } else {
+                        $(this).addClass('is-valid');
+                        $(this).removeClass('is-invalid');
+                    }
+                } else {
+                    $(this).removeClass('is-valid');
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
