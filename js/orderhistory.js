@@ -128,7 +128,7 @@ function reorder() {
     $('.reorderBtn').on('click', function () {
         var roid = $(this).data('roid');
         getItems(roid);
-        // window.location = "paymentprocess.php";
+        window.location = "paymentprocess.php";
     });
 }
 
