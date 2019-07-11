@@ -23,6 +23,7 @@ if ($result !== null) {
         $sorted[$value['date']] = $value;
     }
     krsort($sorted);
+    var_dump($sorted);
     foreach ($sorted as $key => $res) {
         echo '
                         <div class="list-group-item">
