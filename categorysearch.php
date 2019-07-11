@@ -13,6 +13,7 @@ $_SESSION['location'] = 'productlist';
     // include ("database/DBsql.php");
     ?>
     <title>Product_listbyCategory</title>
+    <link rel="stylesheet" href="css/displayproduct.css">
 </head>
 
 <body>

@@ -13,14 +13,13 @@ if ($parentCategory_res != "") {
   <div class="dropdown-container" id="categorylist" style="display: block;">
     <ul>
       <?php
+      // parent category list showing
       if (count($parentCategory_arr) != 0) {
         for ($a = 0; $a < count($parentCategory_arr); $a++) {
-          // parent category list showing
-          // $cityName= $parentCategory_arr[$a][1];
           $identifier = $a;
           echo '
-                        <a class="dropdown-btn collapsible-header childlink" data-toggle="sidebar" data-target=".subcategorylist' . $identifier . '">' . $parentCategory_arr[$a][1] . ' <i class="fa fa-angle-down"></i></a>
-                        ';
+              <a class="dropdown-btn collapsible-header childlink" data-toggle="sidebar" data-target=".subcategorylist' . $identifier . '">' . $parentCategory_arr[$a][1] . ' <i class="fa fa-angle-down"></i></a>
+              ';
           $subCategory_sql = "SELECT `categoryID`, `categoryName` FROM `category` WHERE `parentCategoryID` =" . $parentCategory_arr[$a][0] . "";
           $subCategory_res = mysqli_query($connection, $subCategory_sql);
           if ($subCategory_res != "") {
@@ -28,20 +27,21 @@ if ($parentCategory_res != "") {
           } else {
             alert("sub category result empty");
           }
-          echo '<div class="dropdown-container" class="subcategorylist' . $identifier . '">
-                                 <ul>';
+          echo '
+            <div class="dropdown-container" class="subcategorylist' . $identifier . '">
+              <ul>';
+          // subcategory links
           for ($b = 0; $b < count($subCategory_arr); $b++) {
             $categoryInfo = array(
               'searchPara' => "?searchcategoryID=" . $subCategory_arr[$b][0] . "&searchcategoryName=" . $subCategory_arr[$b][1] . "&location=category",
               'location' => "category"
             );
-            // var_dump($productInfo);
             $categoryInfoJson = json_encode($categoryInfo);
-            // var_dump($productInfoJson);
             echo '<li class="contentsli">
-                                      <button type="button" class="linkanchor" value=' . $categoryInfoJson . ' onclick="showProduct(this.value)" >' . $subCategory_arr[$b][1] . '</button>
-                                  </li>';
+                      <button type="button" class="linkanchor" value=' . $categoryInfoJson . ' onclick="showProduct(this.value)" >' . $subCategory_arr[$b][1] . '</button>
+                  </li>';
           };
+          // subcategory links end
           echo '</ul>
                             </div>';
         }

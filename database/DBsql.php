@@ -66,7 +66,7 @@
             } else if ($value == null) {
                 $res = "$key = NULL";
             } else {
-                $res .= "$key = $value AND ";
+                $res .= "$key = '$value' AND ";
             }
             return $res;
         }
@@ -265,7 +265,7 @@
                 $sql = "UPDATE $table SET $newVals WHERE $cons";
                 $res = $this->connection->query($sql);
                 if ($res) {
-                    return $sql;
+                    return $res;
                 } else {
                     trigger_error("Query: " . $sql);
                     trigger_error("error: " . $this->connection->error);

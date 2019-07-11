@@ -1,0 +1,139 @@
+.adminbuttons{
+    position:absolute;
+    right: 90px;
+    top: 3px;
+    display:none;
+}
+.product-grid__img-wrapper:hover > .adminbuttons {
+    display: block;   
+}
+/* .button */
+.offer-form{
+    width: 100%;
+}
+
+.product-grid__botton {
+    margin:0;
+}
+
+.product-grid__botton:active {
+    background: rgb(202, 27, 86);
+}
+
+.discountbutton {
+    position: absolute;
+    top: 5px;
+    right: 0px;
+    z-index: 10;
+    text-decoration: none;
+    font-size: 1em;
+    outline: none;
+    color:  #8B0000;
+    border:none;
+    background: transparent;
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    border-radius: 200px;
+    border:1px solid #8B0000;
+    height: 58px;
+    width: 58px;
+    margin-right:5px;
+}
+
+.discountbutton span {
+    -webkit-transition: 0.6s;
+    -moz-transition: 0.6s;
+    -o-transition: 0.6s;
+    transition: 0.6s;
+    -webkit-transition-delay: 0.2s;
+    -moz-transition-delay: 0.2s;
+    -o-transition-delay: 0.2s;
+    transition-delay: 0.2s;
+}
+
+.discountbutton:before,
+.discountbutton:after {
+    position: absolute;
+    top: 5px;
+    right: 4px;
+    z-index: 10;
+    opacity: 0;
+    color:  #8B0000;
+    border:none;
+    text-decoration: none;
+    font-size: 1.8em;
+    -webkit-transition: .4s,opacity .6s;
+    -moz-transition: .4s,opacity .6s;
+    -o-transition: .4s,opacity .6s;
+    transition: .4s,opacity .6s;
+}
+
+/* :before */
+
+.discountbutton:before {
+    content: attr(data-hover);
+    -webkit-transform: translate(-150%,0);
+    -moz-transform: translate(-150%,0);
+    -ms-transform: translate(-150%,0);
+    -o-transform: translate(-150%,0);
+    transform: translate(-150%,0);
+}
+
+/* :after */
+
+.discountbutton:after {
+    content: attr(data-active);
+    -webkit-transform: translate(150%,0);
+    -moz-transform: translate(150%,0);
+    -ms-transform: translate(150%,0);
+    -o-transform: translate(150%,0);
+    transform: translate(150%,0);
+}
+
+/* Span on :hover and :active */
+
+.discountbutton:hover span,
+.discountbutton:active span {
+    
+    opacity: 0;
+    -webkit-transform: scale(0.3);
+    -moz-transform: scale(0.3);
+    -ms-transform: scale(0.3);
+    -o-transform: scale(0.3);
+    transform: scale(0.3);
+}
+
+/*  
+    We show :before pseudo-element on :hover 
+    and :after pseudo-element on :active 
+*/
+
+.discountbutton:hover:before,
+.discountbutton:active:after {
+    opacity: 1;
+    -webkit-transform: translate(0,0);
+    -moz-transform: translate(0,0);
+    -ms-transform: translate(0,0);
+    -o-transform: translate(0,0);
+    transform: translate(0,0);
+    -webkit-transition-delay: .4s;
+    -moz-transition-delay: .4s;
+    -o-transition-delay: .4s;
+    transition-delay: .4s;
+}
+
+/* 
+  We hide :before pseudo-element on :active
+*/
+
+.discountbutton:active:before {
+    -webkit-transform: translate(-150%,0);
+    -moz-transform: translate(-150%,0);
+    -ms-transform: translate(-150%,0);
+    -o-transform: translate(-150%,0);
+    transform: translate(-150%,0);
+    -webkit-transition-delay: 0s;
+    -moz-transition-delay: 0s;
+    -o-transition-delay: 0s;
+    transition-delay: 0s;
+}

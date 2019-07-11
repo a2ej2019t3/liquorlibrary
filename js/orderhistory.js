@@ -138,9 +138,9 @@ function editProfile() {
         $('.displayTable').addClass('hide');
         $('.editForm').removeClass('show');
         $('.editForm').removeClass('hide');
-        $('#profileBtn').removeClass('editProfileBtn btn-light');
-        $('#profileBtn').addClass('saveChange btn-success');
-        $('#profileBtn').html('<i class="far fa-save" style="color:inherit;"></i> SAVE');
+        $('.editProfileBtn').addClass('hide');
+        $('.saveChange').removeClass('hide');
+        $('.saveChange').addClass('show');
         saveChange();
     })
 }
@@ -148,20 +148,39 @@ function editProfile() {
 function saveChange() {
     $('.saveChange').on('click', function () {
         // alert($('input[name=email]'));
-        var formVals = JSON.stringify({
+        var object = {
             firstName: $('input[name=firstName]').val(),
             lastName: $('input[name=lastName]').val(),
             email: $('input[type=email]').val(),
             phone: $('input[name=phone]').val(),
             address: $('input[name=address]').val(),
             companyName: $('input[name=companyName]').val()
-        });
-
+        };
+        var formVals = JSON.stringify(object);
+        $('.saveChange').removeClass('show');
+        $('.saveChange').addClass('hide');
+        $('.spinnerContainer').removeClass('hide');
+        $('.inputfield').attr('disabled', 'true');
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 console.log(xmlhttp);
                 console.log(xmlhttp.response);
+                $('.displayTable').addClass('show');
+                $('.displayTable').removeClass('hide');
+                $('.editForm').removeClass('show');
+                $('.editForm').addClass('hide');
+                $('.editProfileBtn').removeClass('hide');
+                $('.editProfileBtn').addClass('show');
+                $('.spinnerContainer').addClass('hide');
+                $('.inputfield').attr('disabled', 'false');
+                $('#namefield').text(object.firstName + " " + object.lastName);
+                $('#emailfield').text(object.email);
+                $('#phonefield').text(object.phone);
+                $('#addressfield').text(object.address);
+                $('#companyNamefield').text(object.companyName);
+                $('#userNameText').text(object.firstName + " " + object.lastName);
+                editProfile()
             }
         }
         xmlhttp.open("POST", "saveChange.php", true);
