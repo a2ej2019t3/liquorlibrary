@@ -102,14 +102,15 @@ if (!isset($_GET['re'])) {
         }
 // reorder start
 } else {
-    $roid = $_GET['roid'];
+    $roid = $_GET['re'];
     $getCart_arr = $DBsql->select('orders', array('buyerID' => $userID, 'status' => 0));
     include_once('../Cart/removeItem.php');
     // if user has status 0 cart
     if ($getCart_arr) {
         $_SESSION['cartID'] = $getCart_arr[0]['orderID'];
         $cartID = $_SESSION['cartID'];
-        removeitems();
+        $outcome = removeitems();
+        echo 'outcome of remove: '.$outcome;
     // if user does not have status 0 cart
     } else {
         $cartID = $DBsql->insertOrder($userID);
@@ -122,6 +123,7 @@ if (!isset($_GET['re'])) {
         $value['orderID'] = $cartID;
         // inserting
         $res = $DBsql->insertItems('orderitems', $value);
+        echo 'inserting result: '. $res;
     }
     // get cart
     $getItems_arr = $DBsql->getOrderInfo($cartID, null);

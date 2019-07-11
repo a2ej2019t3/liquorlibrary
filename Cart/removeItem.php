@@ -2,8 +2,8 @@
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
     }
-    include(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'objectToArray.php');
-    include(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 'DBsql.php');
+    include_once(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'objectToArray.php');
+    include_once(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 'DBsql.php');
     $DBsql = new sql;
 
     $orderID = $_GET['oi'];
