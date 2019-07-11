@@ -206,9 +206,16 @@ include('connection.php');
 							<span id="visitors-chart-heading">Sales Summary</span>
 							<button class="btn pull-right invisible" type="button" id="visitors-chart-back-button"><i class="fa fa-angle-left fa-lg" aria-hidden="true"></i> Back</button>
 						</h4>
-						<span class="tag custom-tag" id="visitors-chart-tag">This is a summary for online sales.</span>
+						<!-- <span class="tag custom-tag" id="visitors-chart-tag">This is a summary for online sales.</span> -->
 						<div id="visitors-chart">
-                            
+                            <h5>TOTAL ONLINE SALES</h5>
+                            <hr>
+                            <div class="sumnumber"> 
+                                <?php
+                                echo '$'.number_format($totalsales_Arr_cost,2,',',' ');
+                               
+                                ?>
+                            </div>
 
                         </div>
 					</div>

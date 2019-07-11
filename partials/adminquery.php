@@ -160,6 +160,38 @@ if (isset($_SESSION['admin'])) {
     // echo $confirm_backorder_monthly_cost;
 
     // delievery data select
+
+    // total sales
+    $totalsales_Arr = array();
+    $totalsales_Arr = getBackorders($connection = " ", $userID = " ", $condition = " `status`=4 AND `paymentmethod`!='null' AND `deliverymethod`!='null' order by `date`");
+    
+    if (!empty($totalsales_Arr)) {
+      $totalsales_Arr_cost = 0;
+      for ($a = 0; $a < count($totalsales_Arr); $a++) {
+        $sum = $totalsales_Arr[$a]['cost'];
+
+        $totalsales_Arr_cost = $totalsales_Arr_cost + $sum;
+      };
+    } else {
+      $totalsales_Arr_cost = 0;
+    }
+
+    
+// total monthly sales
+    $totalsales_monthly_Arr = array();
+    $totalsales_monthly_Arr = getBackorders($connection = " ", $userID = " ", $condition = " `status`=4 AND `paymentmethod`!='null' AND `deliverymethod`!='null'  extract(month from date) = '$selectedmonth' order by `date`");
+
+    if (!empty($totalsales_monthly_Arr)) {
+      $totalsales_monthly_Arr_cost = 0;
+      for ($a = 0; $a < count($totalsales_monthly_Arr); $a++) {
+        $sum = $totalsales_monthly_Arr[$a]['cost'];
+
+        $totalsales_monthly_Arr_cost = $totalsales_monthly_Arr_cost + $sum;
+      };
+    } else {
+      $totalsales_monthly_Arr_cost = 0;
+    }
+
     $completed_delivery_Arr = array();
     $completed_delivery_Arr = getBackorders($connection = " ", $userID = " ", $condition = " `status`=4 AND `deliverymethod`='delivery' order by `date`");
     // var_dump($completed_delivery_Arr);
