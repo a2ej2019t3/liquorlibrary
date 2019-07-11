@@ -12,6 +12,11 @@ function addLoadEvent(func) {
     }
 };
 
+function openLoginModal () {
+    alert('Please login');
+    $('#myModal').modal();
+}
+
 $(window).scroll(function () {
     if ($(this).scrollTop() > 80)  /*height in pixels when the navbar becomes non opaque*/ {
         $('.opaque-navbar').addClass('opaque');

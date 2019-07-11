@@ -5,7 +5,7 @@ $DBsql = new sql();
 
 if (isset($_SESSION['user'])) {
     $userID = $_SESSION['user']['userID'];
-    // echo $userID;
+    // var_dump(isset($_GET['re']));
 if (!isset($_GET['re'])) {
     // GET STATUS 0 CART OF LOGIN USER 'OK'
         $getCart_arr = $DBsql->select('orders',array('buyerID' => $userID, 'status' => '0'));

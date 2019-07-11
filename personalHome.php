@@ -6,6 +6,7 @@ $rf = dirname(__DIR__);
 
 $consArr = array(
     'buyerID' => $buyerID,
+    'spec' => 'statusID <> 0',
     'LIMIT' => 3
 );
 $result = $DBsql->select('orders LEFT JOIN status ON orders.status = status.statusID', $consArr);

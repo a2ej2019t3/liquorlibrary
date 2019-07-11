@@ -25,28 +25,30 @@ $DBsql = new sql;
   $readyOrder = $DBsql->select('orders LEFT JOIN status ON orders.status = status.statusID', array('buyerID' => $buyerID, 'status' => 3));
   // var_dump($readyOrder);
 
-  // toast wrapper here
-  echo '
-                  <div id="toast_wrapper" class="d-flex flex-column m-4">';
-  foreach ($readyOrder as $key => $value) {
-    $orderID = $value['orderID'];
+  if ($readyOrder != null) {
+    // toast wrapper here
     echo '
-                          <div id="myToast" class="toast" data-autohide="false">
-                            <div class="toast-header">
-                              <i class="fas fa-bell"></i>
-                              <strong class="mr-auto">&nbsp;&nbsp;Order ready</strong>
-                              <button type="button" class="ml-2 mb-1 close" data-dismiss="toast">
-                                <span>&times;</span>
-                              </button>
-                            </div>
-                            <div class="toast-body">
-                              <p class="my-auto">You have an order ready to pickup! <button class="btn btn-link toastCheck" data-oid="' . $orderID . '">check</button></p>
-                            </div>
-                          </div>';
+                    <div id="toast_wrapper" class="d-flex flex-column m-4">';
+    foreach ($readyOrder as $key => $value) {
+      $orderID = $value['orderID'];
+      echo '
+                        <div id="myToast" class="toast" data-autohide="false">
+                          <div class="toast-header">
+                            <i class="fas fa-bell"></i>
+                            <strong class="mr-auto">&nbsp;&nbsp;Order ready</strong>
+                            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast">
+                              <span>&times;</span>
+                            </button>
+                          </div>
+                          <div class="toast-body">
+                            <p class="my-auto">You have an order ready to pickup! <button class="btn btn-link toastCheck" data-oid="' . $orderID . '">check</button></p>
+                          </div>
+                        </div>';
+    }
+    echo '
+                    </div>';
+    // toast wrapper end
   }
-  echo '
-                  </div>';
-  // toast wrapper end
 
   ?>
   <section>

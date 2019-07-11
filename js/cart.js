@@ -64,8 +64,9 @@ function getItems (re = 'Na') {
             if (this.readyState == 4 && this.status == 200) {
                 console.log('getItem function:');
                 console.log(xmlhttp);
-                showCart();
-                // document.getElementById("debug").innerHTML = xmlhttp.responseText;
+                if (re == 'Na') {
+                    showCart();
+                }
             }
         };
     xmlhttp.open("GET", url, true);
