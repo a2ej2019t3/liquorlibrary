@@ -3,10 +3,10 @@ include_once(__DIR__ . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 
 $DBsql = new sql;
 
 if ($_REQUEST['token'] != null) {
-    $linkToken = $_REQUEST['token'];
+    $linkToken = "'".$_REQUEST['token']."'";
 } else {
     $linkToken = 'testtoken';
-}
+}   
 
 $res = $DBsql->select('users', array('resettoken' => strval($linkToken)));
 ?>
@@ -65,7 +65,10 @@ $res = $DBsql->select('users', array('resettoken' => strval($linkToken)));
                             text-decoration: none;
                             display: inline-block;
                             font-size: 1rem;
-                            width: 100px;">Submit</button>
+                            width: 100px;">Submit
+                            </button>
+                            <div class="spinner-border text-warning" style="display:none;">
+                            </div>
                             </div>
                         </div>
                     </form>';
@@ -104,12 +107,15 @@ $res = $DBsql->select('users', array('resettoken' => strval($linkToken)));
             $("#resetSubmit").on("click", function(e) {
                 var form = $("#resetForm")[0];
                 var isValid = form.checkValidity();
+                alert(!isValid);
                 if (!isValid) {
                     e.preventDefault();
                     e.stopPropagation();
                 }
                 form.classList.add('was-validated');
-                $.POST()
+                // $('#resetSubmit').css('display', 'none');
+                // $('.spinner-border').css('display', 'block');
+                // $.POST("")
             });
             $('#inputpassword').blur(function() {
                 if ($(this).val() != '') {
