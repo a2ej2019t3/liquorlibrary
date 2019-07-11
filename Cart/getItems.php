@@ -100,12 +100,34 @@ if (!isset($_GET['re'])) {
             }
             // echo 'user does not have status 0 cart';
         }
+// reorder start
 } else {
-    $cartID = $_SESSION['cartID'];
-    $roid = $_GET['re'];
-    $reorder = $DBsql->getCartItems($cartID);
-    $_SESSION['cartItems'] = $reorder;
+    $roid = $_GET['roid'];
+    $getCart_arr = $DBsql->select('orders', array('buyerID' => $userID, 'status' => 0));
+    include_once('../Cart/removeItem.php');
+    // if user has status 0 cart
+    if ($getCart_arr) {
+        $_SESSION['cartID'] = $getCart_arr[0]['orderID'];
+        $cartID = $_SESSION['cartID'];
+        removeitems();
+    // if user does not have status 0 cart
+    } else {
+        $cartID = $DBsql->insertOrder($userID);
+        $_SESSION['cartID'] = $cartID;
+    }
+    // get reorder items
+    $reorder = $DBsql->getCartItems($roid);
+    foreach ($reorder as $key => $value) {
+        // give reorder items new orderid
+        $value['orderID'] = $cartID;
+        // inserting
+        $res = $DBsql->insertItems('orderitems', $value);
+    }
+    // get cart
+    $getItems_arr = $DBsql->getOrderInfo($cartID, null);
+    $_SESSION['cartItems'] = $getItems_arr;
 }
+// reorder end
 
 // if user didn't logged in
 } else {
