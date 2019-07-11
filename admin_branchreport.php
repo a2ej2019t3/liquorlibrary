@@ -19,20 +19,36 @@ include('connection.php');
     <link rel="stylesheet" href="css/branchreport.css">
     <link rel="stylesheet" href="css/branch.css">
     <style>
-        .total {
-            font-size: 0.7rem;
+        .sumnumber {
+
+            width: 50%;
+            height: 100px;
+            text-align: center;
+            margin: 0 auto;
+
         }
 
-        .thismonth {
-            color: #8B0000;
+        .sumnum {
+            /* margin: 10px; */
+            margin-bottom: 10px;
+            border-bottom: 3px dashed rgb(94, 68, 153);
+            font-size: 2rem;
+            font-weight: 800;
         }
 
-        .buttongr:hover {
-            background-color: rgba(48, 43, 41, 1) !important;
+        .list-group-item {
+            text-align: left;
         }
 
-        .buttongr2:hover {
-            background-color: rgba(242, 201, 21, 1) !important;
+        .rankicon {
+            width: 30px;
+        }
+        .rank{
+            font-size:2rem;
+            font-weight: 800;
+            margin-left:50px;
+            margin-right:10px;
+            color: rgba(250, 188, 60, 1);
         }
     </style>
 </head>
@@ -48,12 +64,12 @@ include('connection.php');
     <!-- Side Nav included--------------------------------------------------------------------------------- -->
     <?php
     if (isset($_SESSION['admin'])) {
-        require_once ('partials/adminquery.php');
-        require_once ('partials/admin_reportquery.php');
-        require_once ('partials/adminearningchart.php');
-        require_once ('partials/testchart.php');
+        require_once('partials/adminquery.php');
+        require_once('partials/admin_reportquery.php');
+        require_once('partials/adminearningchart.php');
+        require_once('partials/testchart.php');
         // require_once('partials/piechartquery.php');
-        require_once ('partials/adminchartrender.php');
+        require_once('partials/adminchartrender.php');
         ?>
         <div id="wrapper">
 
@@ -199,34 +215,92 @@ include('connection.php');
                             </div>
                         </div>
                     </div>
+                    <br>
                     <div class="row">
-				<div class="col-xl-6">
-					<div class="card card-block">
-						<h4 class="card-title m-b-2">
-							<span id="visitors-chart-heading">Sales Summary</span>
-							<button class="btn pull-right invisible" type="button" id="visitors-chart-back-button"><i class="fa fa-angle-left fa-lg" aria-hidden="true"></i> Back</button>
-						</h4>
-						<!-- <span class="tag custom-tag" id="visitors-chart-tag">This is a summary for online sales.</span> -->
-						<div id="visitors-chart">
-                            <h5>TOTAL ONLINE SALES</h5>
-                            <hr>
-                            <div class="sumnumber"> 
-                                <?php
-                                echo '$'.number_format($totalsales_Arr_cost,2,',',' ');
-                               
-                                ?>
-                            </div>
+                        <div class="col-xl-6">
+                            <div class="card card-block">
+                                <h4 class="card-title m-b-2">
+                                    <span id="visitors-chart-heading">Sales Summary</span>
+                                    <button class="btn pull-right invisible" type="button" id="visitors-chart-back-button"><i class="fa fa-angle-left fa-lg" aria-hidden="true"></i> Back</button>
+                                </h4>
+                                <div id="visitors-chart">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="sumtitle" style="font-size: 1.1rem;font-weight: 700;">TOTAL ONLINE SALES</div>
 
+                                            <div class="sumnumber">
+                                                <?php
+                                                echo '<p class="sumnum">$' . number_format($totalsales_Arr_cost, 2, ',', ' ') . '</p>';
+
+                                                ?>
+                                                <span class="tooltiptext"><?php echo count($totalsales_Arr) . 'orders'; ?></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="sumtitle " style="font-size: 1.1rem;font-weight: 700;">MONTHLY ONLINE SALES</div>
+
+                                            <div class="sumnumber">
+                                                <?php
+                                                echo '<p class="sumnum">$' . number_format($totalsales_monthly_Arr_cost, 2, ',', ' ') . '</p>';
+                                                ?>
+                                                <span class="tooltiptext"><?php echo count($totalsales_monthly_Arr) . 'orders'; ?></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="sumtitle" style="font-size: 1.1rem;font-weight: 700;">MONTHLY DOMINANT PAY/DELIVERY METHOD</div>
+
+                                            <div class="sumnumber">
+                                                <?php
+                                                echo '<p class="sumnum">' . $dominantpay . '/' . $dominantdelivery . '</p>';
+                                                ?>
+                                                <span class="tooltiptext"><?php echo $dominantordernumberpay . 'orders/ ' . $dominantordernumberpay; ?></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-					</div>
-				</div>
-				<div class="col-xl-6">
-					<div class="card card-block">
-						<h4 class="card-title m-b-2">Users</h4>
-						<div id="users-spline-chart"></div>
-					</div>
-				</div>
-			</div>
+                        <div class="col-xl-6">
+                            <div class="card card-block">
+                                <h4 class="card-title m-b-2">Best Selling items</h4>
+                                <span class="tag custom-tag" id="visitors-chart-tag">Top5_total</span>
+
+                                <div id="users-spline-chart">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">
+                                            <div>
+                                                <span class="rank">1</span><span class="rankicon"><i class="fas fa-award fa-2x"></i></span>
+                                                
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <div>
+                                                <span class="rank">2</span><span class="rankicon"><i class="fas fa-award fa-2x"></i></span>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <div>
+                                                <span class="rank">3</span><span class="rankicon"><i class="fas fa-award fa-2x"></i></span>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <div>
+                                                <span class="rank">4</span><span class="rankicon"><i class="fas fa-award fa-2x"></i></span>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <div>
+                                                <span class="rank">5</span><span class="rankicon"><i class="fas fa-award fa-2x"></i></span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
             </div>

@@ -179,7 +179,7 @@ if (isset($_SESSION['admin'])) {
     
 // total monthly sales
     $totalsales_monthly_Arr = array();
-    $totalsales_monthly_Arr = getBackorders($connection = " ", $userID = " ", $condition = " `status`=4 AND `paymentmethod`!='null' AND `deliverymethod`!='null'  extract(month from date) = '$selectedmonth' order by `date`");
+    $totalsales_monthly_Arr = getBackorders($connection = " ", $userID = " ", $condition = " `status`=4 AND `paymentmethod`!='null' AND `deliverymethod`!='null' AND extract(month from date) = '$selectedmonth'  AND extract(year from date) = '$selectedyear' order by `date`");
 
     if (!empty($totalsales_monthly_Arr)) {
       $totalsales_monthly_Arr_cost = 0;

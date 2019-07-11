@@ -29,6 +29,13 @@ if (isset($_SESSION['admin'])) {
     if ($sales_card_Arr && $sales_cash_Arr) {
         $sales_card_number = count($sales_card_Arr);
         $sales_cash_number = count($sales_cash_Arr);
+        if ($sales_card_number >= $sales_cash_number) {
+            $dominantpay = 'Card';
+            $dominantordernumberpay = $sales_card_number;
+        } else {
+            $dominantpay = 'Cash';
+            $dominantordernumberpay = $sales_cash_number;
+        }
         $total_payment_number = count($sales_card_Arr) + count($sales_cash_Arr);
         $sales_card_amount = 0;
         $sales_cash_amount = 0;
@@ -42,14 +49,12 @@ if (isset($_SESSION['admin'])) {
             $sales_cash_amount = $sales_cash_amount + $sum;
         };
     } else {
-        if(empty($sales_cash_Arr)&& !empty($sales_card_Arr) ){
-            $total_payment_number=count($sales_card_Arr);
-        }
-        else if(!empty($sales_cash_Arr)&& empty($sales_card_Arr) ){
-            $total_payment_number=count($sales_cash_Arr);
-        }
-        else{
-            $total_payment_number=0;
+        if (empty($sales_cash_Arr) && !empty($sales_card_Arr)) {
+            $total_payment_number = count($sales_card_Arr);
+        } else if (!empty($sales_cash_Arr) && empty($sales_card_Arr)) {
+            $total_payment_number = count($sales_cash_Arr);
+        } else {
+            $total_payment_number = 0;
         }
         $sales_card_amount = 0;
         $sales_cash_amount = 0;
@@ -68,6 +73,14 @@ if (isset($_SESSION['admin'])) {
         $sales_pickup_amount = 0;
         $sales_delivery_amount = 0;
 
+        if ($sales_pickup_number >= $sales_delivery_number) {
+            $dominantdelivery = 'Pick up';
+            $dominantordernumber = $sales_pickup_number;
+        } else {
+            $dominantdelivery = 'Delivery';
+            $dominantordernumber = $sales_delivery_number;
+        }
+
         for ($a = 0; $a < count($sales_pickup_Arr); $a++) {
             $sum = $sales_pickup_Arr[$a]['cost'];
             $sales_pickup_amount = $sales_pickup_amount + $sum;
@@ -77,19 +90,25 @@ if (isset($_SESSION['admin'])) {
             $sales_delivery_amount = $sales_delivery_amount + $sum;
         };
     } else {
-        if(empty($sales_delivery_Arr)&& !empty($sales_pickup_Arr) ){
-            $total_payment_number=count($sales_pickup_Arr);
-        }
-        else if(!empty($sales_delivery_Arr)&& empty($sales_pickup_Arr) ){
-            $total_payment_number=count($sales_delivery_Arr);
-        }
-        else{
-            $total_payment_number=0;
+        if (empty($sales_delivery_Arr) && !empty($sales_pickup_Arr)) {
+            $total_payment_number = count($sales_pickup_Arr);
+        } else if (!empty($sales_delivery_Arr) && empty($sales_pickup_Arr)) {
+            $total_payment_number = count($sales_delivery_Arr);
+        } else {
+            $total_payment_number = 0;
         }
         $sales_pickup_amount = 0;
         $sales_delivery_amount = 0;
     }
-
+    // Top 5 item query
+    require ('connection.php');
+    $best_seller_sql = "SELECT oi.itemID,p.productName, p.img, SUM(`quantity`) AS `value_occurrence` ,SUM(`totalprice`) AS sellingincome FROM `orderitems` AS oi, `product` AS p WHERE oi.itemID=p.productID  GROUP BY `itemID` ORDER BY `value_occurrence` DESC LIMIT 5";
+    $best_seller_res = mysqli_query($connection, $best_seller_sql);
+    if ($best_seller_res){
+        $best_seller_arr=mysqli_fetch_all($best_seller_res,MYSQLI_ASSOC);
+        // var_dump($best_seller_arr);
+    }
+    
 } else {
     echo '<script type="text/javascript">';
     echo 'alert("Please log in to proceed")';

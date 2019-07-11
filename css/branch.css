@@ -208,11 +208,18 @@ h6 {
   width: 95%;
   margin: 0 auto;
 }
+#users-spline-chart{
+  width: 90%;
+  margin: 0 auto;
 
+}
 /*------ /real time page charts ------*/
 .badgeforchart{
   width: 100px;
   height: 20px;
   margin: 0 auto;
 
+}
+.sumtitle{
+  text-align: center!important;
 }
