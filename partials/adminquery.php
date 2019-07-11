@@ -98,6 +98,7 @@ if (isset($_SESSION['admin'])) {
       $confirm_backorder_Array = array();
       $confirm_backorder_Array = getBranchorder($connection = " ", $userID = $selectuser_arr[$a]['userID'], $condition = " AND status=4 AND `paymentmethod`='null' AND `deliverymethod`='null'order by `date`", $whID = $whID);
 
+      
       $confirm_backorder_Arr = array_merge($confirm_backorder_Arr, $confirm_backorder_Array);
       // var_dump($confirm_backorder_Array);
       // monthly completed backorders
