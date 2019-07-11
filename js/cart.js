@@ -19,16 +19,18 @@ function addToCart (obj) {
     var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
+                console.log('add to cart function:');
                 console.log(xmlhttp);
                 // alert(xmlhttp.responseText);
                 if (xmlhttp.responseText == 1 || xmlhttp.responseText == 3) {
                     getItems();
+                    
                     $('#stickyCart').css('display', 'block');
                     $('#stickyCart').addClass('showCart');
                 } else {
+                    getItems();
                     // document.getElementById('productArea').innerHTML = xmlhttp.response;
                     // alert(xmlhttp.response);
-                    getItems();
                 }
             }
         };
@@ -62,8 +64,9 @@ function getItems (re = 'Na') {
             if (this.readyState == 4 && this.status == 200) {
                 console.log('getItem function:');
                 console.log(xmlhttp);
-                showCart();
-                // document.getElementById("debug").innerHTML = xmlhttp.responseText;
+                if (re == 'Na') {
+                    showCart();
+                }
             }
         };
     xmlhttp.open("GET", url, true);

@@ -6,6 +6,7 @@ $rf = dirname(__DIR__);
 
 $consArr = array(
     'buyerID' => $buyerID,
+    'spec' => 'statusID <> 0',
     'LIMIT' => 3
 );
 $result = $DBsql->select('orders LEFT JOIN status ON orders.status = status.statusID', $consArr);
@@ -101,7 +102,7 @@ echo '
             // profile edit 
 $infoArr = $DBsql->select('users', array('userID'=>$buyerID));
 $info = $infoArr[0];
-var_dump($info);
+// var_dump($info);
 echo '
             <div class="row mt-3">
               <div class="col-6 ml-3 pb-2 card homeCards">

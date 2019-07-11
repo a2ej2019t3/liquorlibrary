@@ -85,7 +85,7 @@
                             <li class="col"><a class="'.$className.'" href="findlocation/findus.php" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Find Us</a></li>
                             <li class="col"><a class="'.$className.' js-open-modal" id="ourdrinks" data-toggle="modal" data-target="#subnav" href="#" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Our Drinks</a></li> 
                             <li class="col"><a class="'.$className.'" href="specials.php" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Specials</a></li> 
-                            <li class="col"><a class="'.$className.'" href="paymentprocess.php" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Cart</a></li>
+                            <li class="col"><a class="'.$className.'" onclick="openLoginModal()" href="#" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Cart</a></li>
                             <li class="col"><a class="'.$className.'" href="contact.php" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Contact</a></li> 
         ';
                     }

@@ -66,7 +66,7 @@
             } else if ($value == null) {
                 $res = "$key = NULL";
             } else {
-                $res .= "$key = '$value' AND ";
+                $res .= "$key = $value AND ";
             }
             return $res;
         }
