@@ -23,12 +23,13 @@ function addToCart (obj) {
                 // alert(xmlhttp.responseText);
                 if (xmlhttp.responseText == 1 || xmlhttp.responseText == 3) {
                     getItems();
+                    
                     $('#stickyCart').css('display', 'block');
                     $('#stickyCart').addClass('showCart');
                 } else {
-                    // document.getElementById('productArea').innerHTML = xmlhttp.response;
-                    // alert(xmlhttp.response);
                     getItems();
+                    document.getElementById('productArea').innerHTML = xmlhttp.response;
+                    // alert(xmlhttp.response);
                 }
             }
         };

@@ -53,7 +53,8 @@ if (isset($_REQUEST['i']) && $_REQUEST['i']!=""){
 		if (empty($_SESSION['cartItems'])) {
 			$addCartToDB_res = $DBsql->insertItems("orderitems",$cartItems[$productID]);
 			$_SESSION['cartItems'] = $cartItems;
-			echo 0;
+			// echo 0;
+			var_dump($addCartToDB_res);
 		} else {
 			$existedProductID = array_keys($_SESSION['cartItems']);
 			if (in_array($productID,$existedProductID)) {
