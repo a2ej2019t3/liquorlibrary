@@ -177,8 +177,8 @@ h6 {
 
 .card-block {
   border: 1px solid #cccccc;
-  /* height: 100%;
-  width: 100%;	 */
+  height: 105%;
+  /* width: 100%;	 */
 }
 
 .shadow {
@@ -198,7 +198,8 @@ h6 {
 #users-category-pie-chart,
 #page-views-per-second-column-chart,
 #page-views-per-minute-column-chart,
-#users-state-bar-chart {
+#users-state-bar-chart,
+#backorderchartbranch {
   height: 300px;
   width: 95%;
   margin: 0 auto;
@@ -212,6 +213,12 @@ h6 {
   width: 90%;
   margin: 0 auto;
 
+}
+#visitors-chart-heading,
+#users-spline-chart{
+  height: 300px;
+  width: 95%;
+  margin: 0 auto;
 }
 /*------ /real time page charts ------*/
 .badgeforchart{

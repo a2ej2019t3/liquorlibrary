@@ -15,6 +15,7 @@ include('connection.php');
     <title>Branch Admin Dashboard</title>
     <?php
     include_once("partials/head.php");
+    $imgpath = 'images/';
     ?>
     <link rel="stylesheet" href="css/branchreport.css">
     <link rel="stylesheet" href="css/branch.css">
@@ -36,19 +37,54 @@ include('connection.php');
             font-weight: 800;
         }
 
+        .proname {
+            font-size: 1.2em;
+            font-weight: 800;
+            margin: 0 auto;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        @media(max-width:992px) {
+            .proname {
+                font-size: 0.8em;
+                font-weight: 600;
+
+                text-align: center;
+            }
+
+        }
+
+        .iconto {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            margin-top: 10px;
+        }
+
         .list-group-item {
-            text-align: left;
+            text-align: center;
+            padding: 0;
         }
 
         .rankicon {
             width: 30px;
         }
-        .rank{
-            font-size:2rem;
+
+        .rank {
+            font-size: 2rem;
+            margin-right: 5px;
+            text-align: left;
             font-weight: 800;
-            margin-left:50px;
-            margin-right:10px;
             color: rgba(250, 188, 60, 1);
+        }
+
+        .secondHeader,
+        .secondRow {
+            text-align: center;
+            margin: 0 auto;
+            line-height: 20px !important;
         }
     </style>
 </head>
@@ -68,7 +104,7 @@ include('connection.php');
         require_once('partials/admin_reportquery.php');
         require_once('partials/adminearningchart.php');
         require_once('partials/testchart.php');
-        // require_once('partials/piechartquery.php');
+        require_once('partials/admin_branchchart.php');
         require_once('partials/adminchartrender.php');
         ?>
         <div id="wrapper">
@@ -215,12 +251,13 @@ include('connection.php');
                             </div>
                         </div>
                     </div>
-                    <br>
+                    <br><br>
                     <div class="row">
                         <div class="col-xl-6">
                             <div class="card card-block">
                                 <h4 class="card-title m-b-2">
                                     <span id="visitors-chart-heading">Sales Summary</span>
+
                                     <button class="btn pull-right invisible" type="button" id="visitors-chart-back-button"><i class="fa fa-angle-left fa-lg" aria-hidden="true"></i> Back</button>
                                 </h4>
                                 <div id="visitors-chart">
@@ -256,7 +293,7 @@ include('connection.php');
                                                 <?php
                                                 echo '<p class="sumnum">' . $dominantpay . '/' . $dominantdelivery . '</p>';
                                                 ?>
-                                                <span class="tooltiptext"><?php echo $dominantordernumberpay . 'orders/ ' . $dominantordernumberpay; ?></span>
+                                                <span class="tooltiptext"><?php echo $dominantordernumberpay . 'orders/ ' . $dominantordernumberpay . ' orders' ?></span>
                                             </div>
                                         </div>
                                     </div>
@@ -266,42 +303,179 @@ include('connection.php');
                         <div class="col-xl-6">
                             <div class="card card-block">
                                 <h4 class="card-title m-b-2">Best Selling items</h4>
-                                <span class="tag custom-tag" id="visitors-chart-tag">Top5_total</span>
+                                <!-- <span class="tag custom-tag" id="visitors-chart-tag">Top5_total</span> -->
 
                                 <div id="users-spline-chart">
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item">
-                                            <div>
-                                                <span class="rank">1</span><span class="rankicon"><i class="fas fa-award fa-2x"></i></span>
-                                                
-                                            </div>
+                                            <div class="row">
+                                                <div class="col-3" style="text-align:left;">
+                                                    <span class="rank">1</span><span class="rankicon"><i class="fas fa-award fa-2x"></i></span>
+
+                                                    <?php
+                                                    echo '
+                                                <span class="rankimg"><img class="briefimg mx-1" style="width: auto; max-width: 60px; max-height: 70px;" src="' . $imgpath . $best_seller_arr[0]["img"] . '"></span></div>
+                                                <div class="col-3">
+                                                    <div class="row secondHeader"> </div>
+                                                    <div class="row secondRow"><span class="proname">' . $best_seller_arr[0]["productName"] . '</span></div>
+                                                </div>
+                                                <div class="col-3">
+                                                    <div class="row secondHeader"><span>Selling units</span></div>
+                                                    <div class="row secondRow">
+                                                    <span> ' . number_format($best_seller_arr[0]["value_occurrence"], 0, ',', '') . 'Units </span></div>
+                                               </div>
+                                                <div class="col-2">
+                                                    <div class="row secondHeader"><span>Selling income</span></div>
+                                                    <div class="row secondRow">
+                                                    <span> $ ' . number_format($best_seller_arr[0]["sellingincome"], 2, '.', ',') . '</span></div>
+                                               </div> 
+                                               <div class="col-1">
+                                               <a href="productlist.php?pid=' . $best_seller_arr[0]["itemID"] . '"><i class="fas fa-chevron-circle-right fa-2x iconto" style="color:black!important;"></i></a>
+                                               </div>                                              
+                                                '
+                                                    ?>
+                                                </div>
+
                                         </li>
                                         <li class="list-group-item">
-                                            <div>
-                                                <span class="rank">2</span><span class="rankicon"><i class="fas fa-award fa-2x"></i></span>
-                                            </div>
+                                            <div class="row">
+                                                <div class="col-3" style="text-align:left;">
+                                                    <span class="rank">2</span><span class="rankicon"><i class="fas fa-award fa-2x"></i></span>
+
+                                                    <?php
+                                                    echo '
+                                                <span class="rankimg"><img class="briefimg mx-1" style="width: auto; max-width: 60px;max-height: 70px;" src="' . $imgpath . $best_seller_arr[1]["img"] . '"></span></div>
+                                                <div class="col-3">
+                                                    <div class="row secondHeader"> </div>
+                                                    <div class="row secondRow"><span class="proname">' . $best_seller_arr[1]["productName"] . '</span></div>
+                                                </div>
+                                                <div class="col-3">
+                                                    <div class="row secondHeader"><span>Selling units</span></div>
+                                                    <div class="row secondRow">
+                                                    <span> ' . number_format($best_seller_arr[1]["value_occurrence"], 0, ',', '') . 'Units </span></div>
+                                               </div>
+                                                <div class="col-2">
+                                                    <div class="row secondHeader"><span>Selling income</span></div>
+                                                    <div class="row secondRow">
+                                                    <span> $ ' . number_format($best_seller_arr[1]["sellingincome"], 2, '.', ',') . '</span></div>
+                                               </div>  
+                                               <div class="col-1">
+                                               <a href="productlist.php?pid=' . $best_seller_arr[1]["itemID"] . '"><i class="fas fa-chevron-circle-right fa-2x iconto" style="color:black!important;"></i></a>
+                                               </div>                                             
+                                                '
+                                                    ?>
+                                                </div>
                                         </li>
                                         <li class="list-group-item">
-                                            <div>
-                                                <span class="rank">3</span><span class="rankicon"><i class="fas fa-award fa-2x"></i></span>
-                                            </div>
+                                            <div class="row">
+                                                <div class="col-3" style="text-align:left;">
+                                                    <span class="rank">3</span><span class="rankicon"><i class="fas fa-award fa-2x"></i></span>
+
+                                                    <?php
+                                                    echo '
+                                                <span class="rankimg"><img class="briefimg mx-1" style="width: auto; max-width: 60px;max-height: 70px;" src="' . $imgpath . $best_seller_arr[2]["img"] . '"></span></div>
+                                                <div class="col-3">
+                                                    <div class="row secondHeader"> </div>
+                                                    <div class="row secondRow"><span class="proname">' . $best_seller_arr[2]["productName"] . '</span></div>
+                                                </div>
+                                                <div class="col-3">
+                                                    <div class="row secondHeader"><span>Selling units</span></div>
+                                                    <div class="row secondRow">
+                                                    <span> ' . number_format($best_seller_arr[2]["value_occurrence"], 0, ',', '') . 'Units </span></div>
+                                               </div>
+                                                <div class="col-2">
+                                                    <div class="row secondHeader"><span>Selling income</span></div>
+                                                    <div class="row secondRow">
+                                                    <span> $ ' . number_format($best_seller_arr[2]["sellingincome"], 2, '.', ',') . '</span></div>
+                                               </div>    
+                                               <div class="col-1">
+                                               <a href="productlist.php?pid=' . $best_seller_arr[2]["itemID"] . '"><i class="fas fa-chevron-circle-right fa-2x iconto" style="color:black!important;"></i></a>
+                                               </div>                                           
+                                                '
+                                                    ?>
+                                                </div>
                                         </li>
                                         <li class="list-group-item">
-                                            <div>
-                                                <span class="rank">4</span><span class="rankicon"><i class="fas fa-award fa-2x"></i></span>
-                                            </div>
+                                            <div class="row">
+                                                <div class="col-3" style="text-align:left;">
+                                                    <span class="rank">4</span><span class="rankicon"><i class="fas fa-award fa-2x"></i></span>
+
+                                                    <?php
+                                                    echo '
+                                                <span class="rankimg"><img class="briefimg mx-1" style="width: auto; max-width: 60px;max-height: 70px;" src="' . $imgpath . $best_seller_arr[3]["img"] . '"></span></div>
+                                                <div class="col-3">
+                                                    <div class="row secondHeader"> </div>
+                                                    <div class="row secondRow"><span class="proname">' . $best_seller_arr[3]["productName"] . '</span></div>
+                                                </div>
+                                                <div class="col-3">
+                                                    <div class="row secondHeader"><span>Selling units</span></div>
+                                                    <div class="row secondRow">
+                                                    <span> ' . number_format($best_seller_arr[3]["value_occurrence"], 0, ',', '') . 'Units </span></div>
+                                               </div>
+                                                <div class="col-2">
+                                                    <div class="row secondHeader"><span>Selling income</span></div>
+                                                    <div class="row secondRow">
+                                                    <span> $ ' . number_format($best_seller_arr[3]["sellingincome"], 2, '.', ',') . '</span></div>
+                                               </div>   
+                                               <div class="col-1">
+                                               <a href="productlist.php?pid=' . $best_seller_arr[3]["itemID"] . '"><i class="fas fa-chevron-circle-right fa-2x iconto" style="color:black!important;"></i></a>
+                                               </div>                                            
+                                                '
+                                                    ?>
+                                                </div>
                                         </li>
                                         <li class="list-group-item">
-                                            <div>
-                                                <span class="rank">5</span><span class="rankicon"><i class="fas fa-award fa-2x"></i></span>
-                                            </div>
+                                            <div class="row">
+                                                <div class="col-3" style="text-align:left;">
+                                                    <span class="rank">5</span><span class="rankicon"><i class="fas fa-award fa-2x"></i></span>
+
+                                                    <?php
+                                                    echo '
+                                                <span class="rankimg"><img class="briefimg mx-1" style="width: auto; max-width: 60px; max-height: 70px;" src="' . $imgpath . $best_seller_arr[4]["img"] . '"></span></div>
+                                                <div class="col-3">
+                                                    <div class="row secondHeader"> </div>
+                                                    <div class="row secondRow"><span class="proname">' . $best_seller_arr[4]["productName"] . '</span></div>
+                                                </div>
+                                                <div class="col-3">
+                                                    <div class="row secondHeader"><span>Selling units</span></div>
+                                                    <div class="row secondRow">
+                                                    <span> ' . number_format($best_seller_arr[4]["value_occurrence"], 0, ',', '') . 'Units </span></div>
+                                               </div>
+                                                <div class="col-2">
+                                                    <div class="row secondHeader"><span>Selling income</span></div>
+                                                    <div class="row secondRow">
+                                                    <span> $ ' . number_format($best_seller_arr[4]["sellingincome"], 2, '.', ',') . '</span></div>
+                                               </div>      
+                                               <div class="col-1">
+                                               <a href="productlist.php?pid=' . $best_seller_arr[4]["itemID"] . '"><i class="fas fa-chevron-circle-right fa-2x iconto" style="color:black!important;"></i></a>
+                                               </div>                                         
+                                                '
+                                                    ?>
+                                                </div>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <!--  -->
+                    <br>
+                    <h3 id="header">
+                        <strong>Branch backorders</strong>
+                        <small class="text-muted"><?php echo '-&nbsp' . $selectedmonthname . '&nbsp' . $selectedyear ?></small>
+                    </h3>
+                    <div class="row">
+                    <div class="col-xl-6">
+                            <div class="card card-block">
+                                <h4 class="card-title m-b-2">
+                                    <span id="visitors-chart-heading">Sales Summary</span>
 
+                                    <button class="btn pull-right invisible" type="button" id="visitors-chart-back-button"><i class="fa fa-angle-left fa-lg" aria-hidden="true"></i> Back</button>
+                                </h4>
+                                <div id="backorderchartbranch"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

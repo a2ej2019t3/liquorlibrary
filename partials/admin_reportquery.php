@@ -105,9 +105,10 @@ if (isset($_SESSION['admin'])) {
     $best_seller_sql = "SELECT oi.itemID,p.productName, p.img, SUM(`quantity`) AS `value_occurrence` ,SUM(`totalprice`) AS sellingincome FROM `orderitems` AS oi, `product` AS p WHERE oi.itemID=p.productID  GROUP BY `itemID` ORDER BY `value_occurrence` DESC LIMIT 5";
     $best_seller_res = mysqli_query($connection, $best_seller_sql);
     if ($best_seller_res){
-        $best_seller_arr=mysqli_fetch_all($best_seller_res,MYSQLI_ASSOC);
+        $best_seller_arr=mysqli_fetch_all($best_seller_res, MYSQLI_ASSOC);
         // var_dump($best_seller_arr);
     }
+    
     
 } else {
     echo '<script type="text/javascript">';
