@@ -28,7 +28,7 @@ function addToCart (obj) {
                     $('#stickyCart').addClass('showCart');
                 } else {
                     getItems();
-                    document.getElementById('productArea').innerHTML = xmlhttp.response;
+                    // document.getElementById('productArea').innerHTML = xmlhttp.response;
                     // alert(xmlhttp.response);
                 }
             }
