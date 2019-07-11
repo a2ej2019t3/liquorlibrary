@@ -214,12 +214,7 @@ function toggleDataSeries(e) {
                 { y: 15, label: "South Korea" },
                 { y: 12, label: "Netherlands" },
                 { y: 15, label: "Switzerland" },
-                { y: 25, label: "Britain" },
-                { y: 28, label: "Germany" },
-                { y: 29, label: "France" },
-                { y: 52, label: "Japan" },
-                { y: 103, label: "China" },
-                { y: 134, label: "US" }
+              
             ]
         }]
     });

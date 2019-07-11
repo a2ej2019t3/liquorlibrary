@@ -461,14 +461,14 @@ include('connection.php');
                     <!--  -->
                     <br>
                     <h3 id="header">
-                        <strong>Branch backorders</strong>
+                        <strong>Branch Reports</strong>
                         <small class="text-muted"><?php echo '-&nbsp' . $selectedmonthname . '&nbsp' . $selectedyear ?></small>
                     </h3>
                     <div class="row">
                     <div class="col-xl-6">
                             <div class="card card-block">
                                 <h4 class="card-title m-b-2">
-                                    <span id="visitors-chart-heading">Sales Summary</span>
+                                    <span id="visitors-chart-heading">Backorders/ branch</span>
 
                                     <button class="btn pull-right invisible" type="button" id="visitors-chart-back-button"><i class="fa fa-angle-left fa-lg" aria-hidden="true"></i> Back</button>
                                 </h4>
