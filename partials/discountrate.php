@@ -44,7 +44,7 @@ else if (isset($_GET['searchcategoryID']) && isset($_GET['searchcategoryName']))
 else if (isset($_GET['location']) && $_GET['location'] == 'brandproduct') {
     //  Brand list 
     if (isset($_GET['brandname'])) {
-        $searchcontent = "'" . $_GET['brandname'] . "'";
+        $searchcontent = $_GET['brandname'];
         $product_arr = $DBsql->select($DBsql->getProductInfo(), array('brandName' => $searchcontent));
     }
 } else if (isset($_GET['location']) && $_GET['location'] == 'priceRange') {
