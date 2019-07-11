@@ -103,7 +103,7 @@ if (!isset($_GET['re'])) {
 // reorder start
 } else {
     $roid = $_GET['re'];
-    $getCart_arr = $DBsql->select('orders', array('buyerID' => $userID, 'status' => 0));
+    $getCart_arr = $DBsql->select('orders', array('buyerID' => $userID, 'status' => '0'));
     include_once('../Cart/removeItem.php');
     // if user has status 0 cart
     if ($getCart_arr) {
