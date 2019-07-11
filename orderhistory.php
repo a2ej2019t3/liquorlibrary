@@ -71,7 +71,7 @@ $DBsql = new sql;
                   <img src="images/filepic1.png" alt="File pic" class="rounded-circle img-thumbnail img-fluid" style="max-width:60%; background-color:white; margin-top:-30%;">
                 </div>
                 <div>
-                  <p id="userName">Welcome!<br><?php echo '<b>' . $_SESSION['user']['firstName'] . ' ' . $_SESSION['user']['lastName'] . '</b>'; ?></p>
+                  <p id="userName">Welcome!<br><?php echo '<b id="userNameText">' . $_SESSION['user']['firstName'] . ' ' . $_SESSION['user']['lastName'] . '</b>'; ?></p>
                 </div>
               </span>
             </div>

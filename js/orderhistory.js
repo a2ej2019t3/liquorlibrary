@@ -179,6 +179,7 @@ function saveChange() {
                 $('#phonefield').text(object.phone);
                 $('#addressfield').text(object.address);
                 $('#companyNamefield').text(object.companyName);
+                $('#userNameText').text(object.firstName + " " + object.lastName);
                 editProfile()
             }
         }
