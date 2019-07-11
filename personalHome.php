@@ -7,7 +7,7 @@ $rf = dirname(__DIR__);
 $consArr = array(
     'buyerID' => $buyerID,
     'spec' => 'statusID <> 0',
-    'LIMIT' => 3
+    'LIMIT' => 4
 );
 $result = $DBsql->select('orders LEFT JOIN status ON orders.status = status.statusID', $consArr);
 echo '
@@ -23,7 +23,7 @@ if ($result !== null) {
         $sorted[$value['date']] = $value;
     }
     krsort($sorted);
-    var_dump($sorted);
+    // var_dump($sorted);
     foreach ($sorted as $key => $res) {
         echo '
                         <div class="list-group-item">
