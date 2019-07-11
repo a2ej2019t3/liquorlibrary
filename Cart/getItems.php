@@ -5,13 +5,14 @@ $DBsql = new sql();
 
 if (isset($_SESSION['user'])) {
     $userID = $_SESSION['user']['userID'];
+    // echo $userID;
 if (!isset($_GET['re'])) {
     // GET STATUS 0 CART OF LOGIN USER 'OK'
-        $getCart_arr = $DBsql->select('orders',array('buyerID' => $userID, 'status' => 0));
+        $getCart_arr = $DBsql->select('orders',array('buyerID' => $userID, 'status' => '0'));
         // var_dump($getCart_arr);
         
         //if user has status 0 cart
-        if ($getCart_arr) {
+        if ($getCart_arr != null) {
             // cartID
             $_SESSION['cartID'] = $getCart_arr[0]['orderID'];
             $cartID = $_SESSION['cartID'];

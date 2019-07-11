@@ -19,6 +19,7 @@ function addToCart (obj) {
     var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
+                console.log('add to cart function:');
                 console.log(xmlhttp);
                 // alert(xmlhttp.responseText);
                 if (xmlhttp.responseText == 1 || xmlhttp.responseText == 3) {

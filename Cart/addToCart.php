@@ -103,8 +103,8 @@ if (isset($_REQUEST['i']) && $_REQUEST['i']!=""){
 			} else {
 				$_SESSION['cartItems'] = array_replace($_SESSION['cartItems'],$cartItems);
 				setcookie('tempCart', json_encode($_SESSION['cartItems']), time() + (86400 * 30), '/');
-				// echo 4;
-				echo var_dump($_SESSION['cartItems']).var_dump($cartItems);
+				echo 4;
+				// echo var_dump($_SESSION['cartItems']).var_dump($cartItems);
 			}
 		} else {
 			$_SESSION['cartItems'] = $cartItems;
