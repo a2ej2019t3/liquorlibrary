@@ -144,10 +144,7 @@ include('connection.php');
             <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
           </div>
           <div class="card">
-            <!-- <ul class="nav nav-tabs">
-              <li class="nav-item"><a href="#home" data-toggle="tab" class="mytabs active">Store Information</a></li>
-              <li class="nav-item"><a href="#update" data-toggle="tab" class="mytabs">Manager Info</a></li>
-            </ul> -->
+    
 
             <nav>
               <div class="nav nav-tabs nav-fill" id="nav-tab nav nav-tabs" role="tablist">
@@ -161,7 +158,7 @@ include('connection.php');
                 <form id="tab">
                   <span class="maintop" style="margin-left:0;">
                     Store Info <span class="pull-right">
-                      <button type="button" data-toggle="modal" data-target="#edit1" class="btn btn-success btn-flat btn-sm"><i class="fa fa-edit"></i> UPDATE</button>
+                      <button type="button" data-toggle="modal" data-target="#editstore" class="btn btn-success btn-flat btn-sm"><i class="fa fa-edit"></i> UPDATE</button>
                     </span>
                   </span>
                   <div class="row">
