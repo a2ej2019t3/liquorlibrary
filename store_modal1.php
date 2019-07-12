@@ -9,14 +9,14 @@
         <form class="form-horizontal" method="POST" action="store_edit.php" enctype="multipart/form-data">
      
           <div class="form-group">
-            <label for="storeEmail" class="col-sm-3 control-label">Email</label>
+            <label for="storeEmail" class="col-sm-3 control-label" style="float:left;">Email</label>
 
             <div class="col-sm-9">
               <input type="text" class="form-control" id="storeEmail" name="storeEmail" value="<?php echo $_SESSION['warehouse']['email']; ?>">
             </div>
           </div>
           <div class="form-group">
-            <label for="storeContact" class="col-sm-3 control-label">Contact Info</label>
+            <label for="storeContact" class="col-sm-3 control-label" style="float:left;">Contact Info</label>
 
             <div class="col-sm-9">
               <input type="text" class="form-control" id="storeContact" name="storeContact" value="<?php echo $_SESSION['warehouse']['phone']; ?>">

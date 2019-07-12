@@ -144,7 +144,7 @@ include('connection.php');
             <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
           </div>
           <div class="card">
-    
+
 
             <nav>
               <div class="nav nav-tabs nav-fill" id="nav-tab nav nav-tabs" role="tablist">
@@ -217,6 +217,8 @@ include('connection.php');
                         <div class="maintop">
                           Store Manager Info <span style="font-size:0.7rem; font-weight:600;">Total: <?php echo count($orderRow) + 1; ?> managers<span>
                         </div>
+
+
                         <table class="table table-bordered">
                           <thead>
                             <th>UserID:</th>
@@ -264,42 +266,57 @@ include('connection.php');
 
                       <div class="tab-pane in" id="update">
                         <form id="tab2">
+                          <span class="maintop" style="margin-left:0;">
+                            User Info <span class="pull-right">
+                              <button type="button" data-toggle="modal" data-target="#edit" class="btn btn-success btn-flat btn-sm"><i class="fa fa-edit"></i> UPDATE</button>
+                            </span>
+                          </span>
                           <div class="row">
-                            <div class="col-sm-3">
-                              <h4>userID:</h4>
-                              <h4>Name:</h4>
-                              <h4>Contact Info:</h4>
-                              <h4>Email:</h4>
-                              <h4>Address:</h4>
-                            </div>
-                            <div calss="col-sm-3">
-                              <?php
-                              if (isset($_SESSION['user'])) {
-                                $user = $_SESSION['user'];
-                                echo $_SESSION['user']['userID'];
-                                $userID = $_SESSION['user']['userID'];
-                                $orders_list =  "SELECT * from users u where u.userID = '$userID'";
-                                $query = mysqli_query($connection, $orders_list);
-                                if (mysqli_num_rows($query) > 0) {
-                                  $orderRow = mysqli_fetch_all($query, MYSQLI_ASSOC);
-                                  ?>
-                                  <?php
-                                  //var_dump(count($orderRow));
-                                  for ($i = 0; $i < count($orderRow); $i++) {
-                                    //var_dump($i);
-                                    echo '
+
+
+                            <table class="table" style="margin-top:10px;">
+                              <thead class="thead-dark">
+                                <tr>
+                                  <th scope="col">#ID</th>
+                                  <th scope="col">First Name</th>
+                                  <th scope="col">Last Name</th>
+                                  <th scope="col">Contact</th>
+                                  <th scope="col">Email</th>
+                                  <th scope="col">Address</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <?php
+                                if (isset($_SESSION['user'])) {
+                                  $user = $_SESSION['user'];
+                                  // echo $_SESSION['user']['userID'];
+                                  $userID = $_SESSION['user']['userID'];
+                                  $orders_list =  "SELECT * from users u where u.userID = '$userID'";
+                                  $query = mysqli_query($connection, $orders_list);
+                                  if (mysqli_num_rows($query) > 0) {
+                                    $orderRow = mysqli_fetch_all($query, MYSQLI_ASSOC);
+                                    ?>
+                                    <?php
+                                    //var_dump(count($orderRow));
+                                    for ($i = 0; $i < count($orderRow); $i++) {
+                                      //var_dump($i);
+                                      echo '
 									
-											
-											<h6>' . $orderRow[$i]["firstName"] . '</h6>
-																					<h6><td>' . $orderRow[$i]["phone"] . '	</h6>
-											<h6>' . $orderRow[$i]["email"] . '</h6>
-                      <h6>' . $orderRow[$i]["address"] . ' </h6>                     
+                                    <tr>
+
+                                    <th scope="row">' . $orderRow[$i]["userID"] . '</th>
+                                    <td>' . $orderRow[$i]["firstName"] . '	</td>
+                                    <td>' . $orderRow[$i]["lastName"] . '</td>
+                                    <td>' . $orderRow[$i]["phone"] . ' </td>
+                                    <td>' . $orderRow[$i]["email"] . ' </td>
+                                     <td>' . $orderRow[$i]["address"] . ' </td>
+                                  </tr>                       
 										';
-                                  } ?>
-                                  <span class="pull-right">
-                                    <button type="button" href="#edit" class="btn btn-success btn-flat btn-sm" data-toggle="modal"><i class="fa fa-edit"></i> Edit</button>
-                                  </span>
-                                </div>
+                                    } ?>
+
+                                  </tbody>
+                                </table>
+                              </div>
 
                             </form>
                           </div>
