@@ -353,6 +353,8 @@ include('connection.php');
   <script type="text/javascript" src="js/sub.js"></script>
   <script type="text/javascript" src="js/main.js"></script>
   <script type="text/javascript" src="js/search.js"></script>
+  <script type="text/javascript" src="js/chart.js"></script>
+
   <!---------------------------------------------------------------------------------------------------------------->
 
 </body>
