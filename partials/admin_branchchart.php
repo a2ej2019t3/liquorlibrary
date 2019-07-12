@@ -8,7 +8,7 @@ if($branch_res){
     while($branch_arr = mysqli_fetch_array($branch_res, MYSQLI_ASSOC))
     {        
   /* Push the results in our array */
-        $point = array("y" =>  30 ,"label" =>  $branch_arr['whName']);
+        $point = array("y" =>  $branch_arr['whID'] ,"label" =>  $branch_arr['whName']);
         array_push($point_branchchart, $point);
     }
     // var_dump($point_branchchart);
@@ -16,6 +16,7 @@ if($branch_res){
     // var_dump($branch_arr);
     if (!empty($branch_arr)) {
         $branchbackorder=array();
+        $branch_arr_orders=array();
             for($a = 0; $a < count($branch_arr); $a++){
                 $whID=$branch_arr[$a]['whID'];
                 // echo $whID;
@@ -28,21 +29,29 @@ if($branch_res){
                         $wareID=$branch_staff_arr[$b]['whID'];
                             $getstafforder_sql="SELECT * from orders WHERE buyerID='$usersID' AND `paymentmethod`='null' AND `deliverymethod`='null'";
                             $getstafforder_res=mysqli_query($connection,$getstafforder_sql);
-                            if($getstafforder_res){
-                                $getstafforder_arr= mysqli_fetch_all($getstafforder_res,MYSQLI_ASSOC);
-                                var_dump($getstafforder_arr);
-                                // if(!empty($branchbackorder)){
-                                //     $branchbackorder[$wareID]=array_merge( $branchbackorder[$wareID],$getstafforder_arr[$b]['orderID']);
-                                // }
-                                // else{
-                                //     $branchbackorder[$wareID]=$getstafforder_arr[$b]['orderID'];
-                                // }
-                                // var_dump($branchbackorder);
-                            }
+                            // if($getstafforder_res){
+                            //     $getstafforder_arr= mysqli_fetch_all($getstafforder_res,MYSQLI_ASSOC);
+                            //     var_dump($getstafforder_arr);
+                            //     if($branch_arr_orders[$b]!=0 && count($getstafforder_arr)!=0){
+                            //         $branch_arr_orders[$b]= $branch_arr_orders[$b]+count($getstafforder_arr);
+                                   
+                            //     }
+                            //     else if( $branch_arr_orders[$b]!=0  && count($getstafforder_arr)=0){
+                            //         $branch_arr_orders[$b]= $branch_arr_orders[$b];
+                                    
+                            //     }
+                            //     else{
+                            //         $branch_arr_orders[$b]=0;
+                                    
+                            //     }
+                                
+                            // }
                     }
                 }
                 else{}
             }
+            echo  $branch_arr_orders[0]['orders'];
+            var_dump($branch_arr_orders);
 // var_dump($branchbackorder);
             
     }

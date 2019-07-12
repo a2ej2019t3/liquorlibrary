@@ -1,3 +1,6 @@
+ <?php
+ require_once('partials/admin_branchchart.php');
+//  var_dump($point_branchchart);?>
  <script>
      function addLoadEvent(func) {
          var oldonload = window.onload;
@@ -180,45 +183,29 @@ function toggleDataSeries(e) {
 
     // fourth chart
 
- function admin_annualchart_4() {
+//  function admin_annualchart_4() {
 	
-    var chart = new CanvasJS.Chart("backorderchartbranch", {
-        animationEnabled: true,
-        
-        title:{
-            text:"Fortune 500 Companies by Country"
-        },
-        axisX:{
-            interval: 1
-        },
-        axisY2:{
-            interlacedColor: "rgba(1,77,101,.2)",
-            gridColor: "rgba(1,77,101,.1)",
-            title: "Number of Companies"
-        },
-        data: [{
-            type: "bar",
-            name: "companies",
-            axisYType: "secondary",
-            color: "#393f63",
-            dataPoints: [
-                { y: 3, label: "Sweden" },
-                { y: 7, label: "Taiwan" },
-                { y: 5, label: "Russia" },
-                { y: 9, label: "Spain" },
-                { y: 7, label: "Brazil" },
-                { y: 7, label: "India" },
-                { y: 9, label: "Italy" },
-                { y: 8, label: "Australia" },
-                { y: 11, label: "Canada" },
-                { y: 15, label: "South Korea" },
-                { y: 12, label: "Netherlands" },
-                { y: 15, label: "Switzerland" },
-              
-            ]
-        }]
-    });
-    chart.render();
+//     var chart = new CanvasJS.Chart("backorderchartbranch", {
+//         animationEnabled: true,
+       
+//         axisX:{
+//             interval: 1
+//         },
+//         axisY2:{
+//             interlacedColor: "rgba(1,77,101,.2)",
+//             gridColor: "rgba(1,77,101,.1)",
+//             title: "Number of orders"
+//         },
+//         data: [{
+//             type: "bar",
+//             name: "orders",
+//             axisYType: "secondary",
+//             color: "#393f63",
+//             dataPoints: <?php echo json_encode($point_branchchart, JSON_NUMERIC_CHECK); ?>
+//         }]
+//     });
+//     chart.render();
     
-    }
+//     }
+    
  </script>
