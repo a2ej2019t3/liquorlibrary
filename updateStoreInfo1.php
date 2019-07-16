@@ -3,18 +3,7 @@ session_start();
 $_SESSION['location'] = 'updatestoreinfo1';
 include_once('connection.php');
 include_once('database/DBsql.php');
-// if (isset($_SESSION['user'])) {
-//   $user = $_SESSION['user'];
-//   //$orders_list = "SELECT product.productID,product.productName,product.price,orderitems.orderID,orderitems.quantity,orderitems.totalprice FROM product product, orderitems orderitems, orders orders Where orderitems.ItemID = product.productID and orders.orderID = orderitems.orderID '".$user['userID']."'";
-//             echo $_SESSION['warehouse']['whID'];
-//            $whID=$_SESSION['warehouse']['whID'];
-//             $orders_list =  "SELECT * from warehouse w where w.whID = '$whID'";
-//   $query = mysqli_query($connection, $orders_list);
-//   if (mysqli_num_rows($query) > 0)
-//   {
-//     $orderRow = mysqli_fetch_all($query, MYSQLI_ASSOC);
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -113,16 +102,15 @@ include_once('database/DBsql.php');
                                                 </div>
                                             </div>
                                         </div>
+                                    </form>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </form>
         </div>
     </div>
-
-</div>
-</div>
-</div>
-</form>
-</div>
 </div>
 
 <?php
@@ -133,11 +121,6 @@ include_once("partials/foot.php");
 <?php
 include_once("profile_modal1.php");
 ?>
-
-<!-- <script type="text/javascript" src="js/sub.js"></script>
-  <script type="text/javascript" src="js/main.js"></script>
-  <script type="text/javascript" src="js/search.js"></script>
-  -->
 
 </body>
 

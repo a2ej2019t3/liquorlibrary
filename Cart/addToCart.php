@@ -53,7 +53,8 @@ if (isset($_REQUEST['i']) && $_REQUEST['i']!=""){
 		if (empty($_SESSION['cartItems'])) {
 			$addCartToDB_res = $DBsql->insertItems("orderitems",$cartItems[$productID]);
 			$_SESSION['cartItems'] = $cartItems;
-			echo 0;
+			// echo 0;
+			var_dump($addCartToDB_res);
 		} else {
 			$existedProductID = array_keys($_SESSION['cartItems']);
 			if (in_array($productID,$existedProductID)) {
@@ -102,8 +103,8 @@ if (isset($_REQUEST['i']) && $_REQUEST['i']!=""){
 			} else {
 				$_SESSION['cartItems'] = array_replace($_SESSION['cartItems'],$cartItems);
 				setcookie('tempCart', json_encode($_SESSION['cartItems']), time() + (86400 * 30), '/');
-				// echo 4;
-				echo var_dump($_SESSION['cartItems']).var_dump($cartItems);
+				echo 4;
+				// echo var_dump($_SESSION['cartItems']).var_dump($cartItems);
 			}
 		} else {
 			$_SESSION['cartItems'] = $cartItems;

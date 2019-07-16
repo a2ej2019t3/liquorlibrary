@@ -1,13 +1,8 @@
 <?php
-        // $servername = "localhost";
-        // $username = "root";
-        // $password = "";
-        // $dbname = "liquorlibrary";
-
-        $servername = "liquorlibrary.cve0pualyi6x.ap-southeast-2.rds.amazonaws.com";
-        $username = "llAdmin";
-        $password = "ll1234567!";
-        $dbname = "liquorlibrary";
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "liquorlibrary";
 
 if (isset($_ENV['DATABASE_CONNECTION_URL'])) {
     $servername = $_ENV['DATABASE_CONNECTION_URL'];
