@@ -343,6 +343,10 @@ include_once('partials/admin_arr_function.php');
     <script type="text/javascript" src="js/main.js"></script>
     <script type="text/javascript" src="js/search.js"></script>
     <script type="text/javascript" src="js/chart.js"></script>
+    <script>
+        // $('.sorter,.secondsorter,.thirdsorter').attr('data-location', 'admin');
+        addLoadEvent(giveIdentifierToSorter);
+    </script>
     <!---------------------------------------------------------------------------------------------------------------->
 
 </body>

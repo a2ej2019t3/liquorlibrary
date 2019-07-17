@@ -45,10 +45,40 @@ $(document).ready(function () {
         setTimeout(function () {
             $('#stickyCart').css('display', 'none');
         }, 500);
-    })
+    });
+
+    // Set trigger and container variables
+    var trigger = $('.sortselect');
+    // Fire on click
+    trigger.on('click', function () {
+        // Set $this for re-use. Set target from data attribute
+        var $this = $(this),
+            val = $this.find(':selected').val();
+        // var val = document.getElementById("pricelow").value;
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                console.log(xmlhttp);
+                if (xmlhttp.responseText == 1) {
+                    // document.location.reload(true);
+
+                }
+            }
+        };
+        xmlhttp.open("GET", "./pricesort.php?sc=" + val, true);
+        xmlhttp.send();
+
+        return false;
+    });
+    loadSort();
+    loadSortsecond();
+    loadSortthird();
+    collapseShowEl();
 });
 
-
+function giveIdentifierToSorter () {
+    $('.sorter,.secondsorter,.thirdsorter').attr('data-location', 'admin');
+}
 
 // search function (Ajax - search.php)
 
@@ -203,33 +233,7 @@ function branchmode() {
 }
 
 $(document).ready(function () {
-    // Set trigger and container variables
-    var trigger = $('.sortselect');
-    // Fire on click
-    trigger.on('click', function () {
-        // Set $this for re-use. Set target from data attribute
-        var $this = $(this),
-            val = $this.find(':selected').val();
-        // var val = document.getElementById("pricelow").value;
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                console.log(xmlhttp);
-                if (xmlhttp.responseText == 1) {
-                    // document.location.reload(true);
-
-                }
-            }
-        };
-        xmlhttp.open("GET", "./pricesort.php?sc=" + val, true);
-        xmlhttp.send();
-
-        return false;
-    });
-    loadSort();
-    loadSortsecond();
-    loadSortthird();
-    collapseShowEl();
+    
     
 });
 
@@ -238,7 +242,14 @@ function loadSort() {
         var element = $(this);
         var keyword = element.attr('data-key');
         var sort = element.attr('data-sort');
-        $("#accordion").load("pickuporderhistory.php?key=" + keyword + "&sort=" + sort + " #accordion", function (responseTxt, statusTxt, xhr) {
+        var location = $(this).attr('data-location');
+        // alert(location);
+        if (location == 'admin') {
+            var filename = 'admin_backorderhistory.php';
+        } else {
+            var filename = 'pickuporderhistory.php';
+        }
+        $("#accordion").load(filename + "?key=" + keyword + "&sort=" + sort + " #accordion", function (responseTxt, statusTxt, xhr) {
             if (statusTxt == "success") {
                 collapseShowEl();
                 if (sort == 'asc') {
@@ -257,7 +268,15 @@ function loadSortsecond() {
         var element = $(this);
         var keyword = element.attr('data-key');
         var sort = element.attr('data-sort');
-        $("#accordion2").load("pickuporderhistory.php?key=" + keyword + "&sort=" + sort + " #accordion2", function (responseTxt, statusTxt, xhr) {
+        var location = $(this).attr('data-location');
+        // alert(location);
+        if (location == 'admin') {
+            var filename = 'admin_backorderhistory.php';
+        } else {
+            var filename = 'pickuporderhistory.php';
+        }
+
+        $("#accordion2").load(filename + "?key=" + keyword + "&sort=" + sort + " #accordion2", function (responseTxt, statusTxt, xhr) {
             if (statusTxt == "success") {
                 collapseShowEl();
                 if (sort == 'asc') {
@@ -277,7 +296,15 @@ function loadSortthird() {
         var element = $(this);
         var keyword = element.attr('data-key');
         var sort = element.attr('data-sort');
-        $("#accordion3").load("backorderhistory.php?key=" + keyword + "&sort=" + sort + " #accordion3", function (responseTxt, statusTxt, xhr) {
+        var location = $(this).attr('data-location');
+        // alert(location);
+        if (location == 'admin') {
+            var filename = 'admin_backorderhistory.php';
+        } else {
+            var filename = 'pickuporderhistory.php';
+        }
+
+        $("#accordion3").load(filename + "?key=" + keyword + "&sort=" + sort + " #accordion3", function (responseTxt, statusTxt, xhr) {
             if (statusTxt == "success") {
                 collapseShowEl();
                 if (sort == 'asc') {

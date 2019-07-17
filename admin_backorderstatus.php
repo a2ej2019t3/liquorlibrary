@@ -1,9 +1,9 @@
 <?php
 session_start();
 $_SESSION['location'] = 'admin_backorderstatus';
-include ('connection.php');
-include_once ('partials/arr_function.php');
-include_once ('partials/admin_arr_function.php');
+include('connection.php');
+include_once('partials/arr_function.php');
+include_once('partials/admin_arr_function.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,13 +29,13 @@ include_once ('partials/admin_arr_function.php');
     <!-- top header included--------------------------------------------------------------------------------- -->
     <section>
         <?php
-        include_once ("partials/header.php");
+        include_once("partials/header.php");
         ?>
     </section>
     <?php
     if (isset($_SESSION['admin'])) {
-        require_once ('partials/adminquery.php');
-        require_once ('Emailsending/adminemail_tobranch.php');
+        require_once('partials/adminquery.php');
+        require_once('Emailsending/adminemail_tobranch.php');
         ?>
         <!-- top header ends--------------------------------------------------------------------------------- -->
         <!-- Side Nav included--------------------------------------------------------------------------------- -->
@@ -116,7 +116,7 @@ include_once ('partials/admin_arr_function.php');
                     </a>
                     <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                                                        <a class="collapse-item" href="admin_branchreport.php">Branch Report</a>
+                            <a class="collapse-item" href="admin_branchreport.php">Branch Report</a>
 
                             <a class="collapse-item" href="updatestoreinfo.php">Staff Report</a>
                         </div>
@@ -175,22 +175,22 @@ include_once ('partials/admin_arr_function.php');
 
                                         <!--  -->
                                         <!-- <div class="row">
-                                            <div class="col-7">
+                                                <div class="col-7">
 
-                                                <?php
-                                                // include_once('partials/branchreportCtrl.php');
-                                                ?>
-                                            </div>
-                                            <div class="col-5" style="float:left;">
-                                                <div style="  border: 3px solid #00B4CC; background-color:#00B4CC; border-radius: 5px;  outline: none;  height:38px;  color: #9DBFAF;">
-                                                    <input id="searchinput" search-id="complete" autocomplete="off" spellcheck="false" type="search" placeholder="Search by customer name or order ID" style="width:80%; float: left; display:inline-block;   border: 3px solid #00B4CC">;
-                                                    <button type="submit" class="searchButton" style="display:inline-block; width:20%;   border: 1px solid #00B4CC; background: #00B4CC;text-align: center; color: #fff; border-radius: 5px;cursor: pointer; position:absolute; top: 8px; right:12px;">
-                                                        <i class="fa fa-search"></i>
-                                                    </button>
+                                                    <?php
+                                                    // include_once('partials/branchreportCtrl.php');
+                                                    ?>
                                                 </div>
+                                                <div class="col-5" style="float:left;">
+                                                    <div style="  border: 3px solid #00B4CC; background-color:#00B4CC; border-radius: 5px;  outline: none;  height:38px;  color: #9DBFAF;">
+                                                        <input id="searchinput" search-id="complete" autocomplete="off" spellcheck="false" type="search" placeholder="Search by customer name or order ID" style="width:80%; float: left; display:inline-block;   border: 3px solid #00B4CC">;
+                                                        <button type="submit" class="searchButton" style="display:inline-block; width:20%;   border: 1px solid #00B4CC; background: #00B4CC;text-align: center; color: #fff; border-radius: 5px;cursor: pointer; position:absolute; top: 8px; right:12px;">
+                                                            <i class="fa fa-search"></i>
+                                                        </button>
+                                                    </div>
 
-                                            </div>
-                                        </div> -->
+                                                </div>
+                                            </div> -->
                                         <!--  -->
 
 
@@ -272,6 +272,10 @@ include_once ('partials/admin_arr_function.php');
     <script type="text/javascript" src="js/main.js"></script>
     <script type="text/javascript" src="js/search.js"></script>
     <script type="text/javascript" src="js/chart.js"></script>
+    <script>
+        // $('.sorter,.secondsorter,.thirdsorter').attr('data-location', 'admin');
+        addLoadEvent(giveIdentifierToSorter);
+    </script>
     <!---------------------------------------------------------------------------------------------------------------->
 
 </body>

@@ -175,11 +175,11 @@ include_once ('partials/admin_arr_function.php');
                                     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
 
                                                                       <!--  -->
-                                        <!-- <div class="row">
+                                        <div class="row">
                                             <div class="col-7">
 
                                             <?php
-                                                // include_once('partials/branchreportCtrl.php');
+                                                include_once('partials/branchreportCtrl.php');
                                                 ?>
                                             </div>
                                             <div class="col-5" style="float:left;">
@@ -191,9 +191,7 @@ include_once ('partials/admin_arr_function.php');
                                                 </div>
 
                                             </div>
-                                        </div> -->
-                                        <!--  -->
-
+                                        </div>
 
                                         <p></p>
                                         <div id="newcontent">
@@ -273,6 +271,10 @@ include_once ('partials/admin_arr_function.php');
     <script type="text/javascript" src="js/main.js"></script>
     <script type="text/javascript" src="js/search.js"></script>
     <script type="text/javascript" src="js/chart.js"></script>
+    <script>
+        $('.sorter,.secondsorter,.thirdsorter').attr('data-location', 'admin_pickuporders.php');
+        // addLoadEvent(giveIdentifierToSorter);
+    </script>
     <!---------------------------------------------------------------------------------------------------------------->
 
 </body>

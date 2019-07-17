@@ -115,7 +115,7 @@ include_once('partials/admin_arr_function.php');
                     </a>
                     <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                                                        <a class="collapse-item" href="admin_branchreport.php">Branch Report</a>
+                            <a class="collapse-item" href="admin_branchreport.php">Branch Report</a>
 
                             <a class="collapse-item" href="updatestoreinfo.php">Staff Report</a>
                         </div>
@@ -172,12 +172,12 @@ include_once('partials/admin_arr_function.php');
 
                                     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
 
-                                                                      <!--  -->
-                                        <!-- <div class="row">
+                                        <!--  -->
+                                        <div class="row">
                                             <div class="col-7">
 
-                                            <?php
-                                                // include_once('partials/branchreportCtrl.php');
+                                                <?php
+                                                include_once('partials/branchreportCtrl.php');
                                                 ?>
                                             </div>
                                             <div class="col-5" style="float:left;">
@@ -189,8 +189,7 @@ include_once('partials/admin_arr_function.php');
                                                 </div>
 
                                             </div>
-                                        </div> -->
-                                        <!--  -->
+                                        </div>
 
 
                                         <p></p>
@@ -262,15 +261,14 @@ include_once('partials/admin_arr_function.php');
     <?php
     include_once("partials/foot.php");
     ?>
-    <script>
-
-
-
-    </script>
     <script type="text/javascript" src="js/sub.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
     <script type="text/javascript" src="js/search.js"></script>
     <script type="text/javascript" src="js/chart.js"></script>
+    <script>
+        // $('.sorter,.secondsorter,.thirdsorter').attr('data-location', 'admin');
+        addLoadEvent(giveIdentifierToSorter);
+    </script>
     <!---------------------------------------------------------------------------------------------------------------->
 
 </body>
