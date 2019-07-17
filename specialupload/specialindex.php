@@ -66,7 +66,8 @@
                                   <img src='.$imgpath.$searchSale_arr[$b][5].' class="img-fluid proimage" style="width:300px;">
                                     </div><br>
                                     <button type="button" class="btn btn-secondary btn-sm" id="checkbutton">
-                                    <a href="productlist.php?pid='.$searchSale_arr[$b][8].'">
+                                    <a href="categorysearch.php?pd='.$searchSale_arr[$b][8].'&location=category">
+                                    
                                     CHECK NOW
                                     </a>
                                     </button>';

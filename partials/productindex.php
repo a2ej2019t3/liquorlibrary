@@ -42,8 +42,8 @@
                         <div class="hoverm">
                         <div class="dealhead" style="margin-top:50px;">'.$searchSale_arr[$b][2].'</div>
                         <div class="dealhead"><span style="font-size: 20px; text-decoration: line-through;">$'.$searchSale_arr[$b][4].'</span><span style="color: red;"> $'.$searchSale_arr[$b][3].'<span></div>
-                        <button class="Go" onClick="window.location=;"> <a class="findmore" href="productlist.php?pid='.$searchSale_arr[$b][0].'">FIND MORE</a></button>
-                  
+                        <button class="Go" onClick="window.location=;"> <a class="findmore" href="categorysearch.php?pd='.$searchSale_arr[$b][0].'&location=category">FIND MORE</a></button>
+                        
                     
                       </div> 
                         <img src='.$imgpath.$searchSale_arr[$b][1].' class="cardimage" alt="img1">
