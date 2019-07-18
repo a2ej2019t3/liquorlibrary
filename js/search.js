@@ -76,7 +76,7 @@ $(document).ready(function () {
     collapseShowEl();
 });
 
-function giveIdentifierToSorter () {
+function giveIdentifierToSorter() {
     $('.sorter,.secondsorter,.thirdsorter').attr('data-location', 'admin');
 }
 
@@ -233,8 +233,8 @@ function branchmode() {
 }
 
 $(document).ready(function () {
-    
-    
+
+
 });
 
 function loadSort() {
@@ -242,14 +242,9 @@ function loadSort() {
         var element = $(this);
         var keyword = element.attr('data-key');
         var sort = element.attr('data-sort');
-        var location = $(this).attr('data-location');
-        // alert(location);
-        if (location == 'admin') {
-            var filename = 'admin_backorderhistory.php';
-        } else {
-            var filename = 'pickuporderhistory.php';
-        }
-        $("#accordion").load(filename + "?key=" + keyword + "&sort=" + sort + " #accordion", function (responseTxt, statusTxt, xhr) {
+        var filename = $(this).attr('data-location');
+        alert(filename);
+        $("#accordion").load(filename + ".php?key=" + keyword + "&sort=" + sort + " #accordion", function (responseTxt, statusTxt, xhr) {
             if (statusTxt == "success") {
                 collapseShowEl();
                 if (sort == 'asc') {
@@ -268,15 +263,9 @@ function loadSortsecond() {
         var element = $(this);
         var keyword = element.attr('data-key');
         var sort = element.attr('data-sort');
-        var location = $(this).attr('data-location');
-        // alert(location);
-        if (location == 'admin') {
-            var filename = 'admin_backorderhistory.php';
-        } else {
-            var filename = 'pickuporderhistory.php';
-        }
-
-        $("#accordion2").load(filename + "?key=" + keyword + "&sort=" + sort + " #accordion2", function (responseTxt, statusTxt, xhr) {
+        var filename = $(this).attr('data-location');
+        alert(filename);
+        $("#accordion2").load(filename + ".php?key=" + keyword + "&sort=" + sort + " #accordion2", function (responseTxt, statusTxt, xhr) {
             if (statusTxt == "success") {
                 collapseShowEl();
                 if (sort == 'asc') {
@@ -296,15 +285,9 @@ function loadSortthird() {
         var element = $(this);
         var keyword = element.attr('data-key');
         var sort = element.attr('data-sort');
-        var location = $(this).attr('data-location');
-        // alert(location);
-        if (location == 'admin') {
-            var filename = 'admin_backorderhistory.php';
-        } else {
-            var filename = 'pickuporderhistory.php';
-        }
-
-        $("#accordion3").load(filename + "?key=" + keyword + "&sort=" + sort + " #accordion3", function (responseTxt, statusTxt, xhr) {
+        var filename = $(this).attr('data-location');
+        alert(filename);
+        $("#accordion3").load(filename + ".php?key=" + keyword + "&sort=" + sort + " #accordion3", function (responseTxt, statusTxt, xhr) {
             if (statusTxt == "success") {
                 collapseShowEl();
                 if (sort == 'asc') {
@@ -346,38 +329,37 @@ document.getElementById("searchinput").onkeyup = function () {
             var res = xmlhttp.response;
 
             var resText = xmlhttp.responseText;
-            if(searchtype == "backorder"){
+            if (searchtype == "backorder") {
                 document.getElementById("accordion3").innerHTML = resText;
-                collapseShowEl();  
+                collapseShowEl();
             }
-            else{
-               document.getElementById("accordion").innerHTML = resText;
-            collapseShowEl();   
+            else {
+                document.getElementById("accordion").innerHTML = resText;
+                collapseShowEl();
             }
-          
+
 
             var res = resText.slice(0, 2);
             if (res == 000) {
+                var filename = $(this).attr('data-location');
                 if (searchtype == "ready") {
-                    $("#accordion").load("pickuporderstatus.php #accordion", function (responseTxt, statusTxt, xhr) {
+                    $("#accordion").load(filename + ".php" + " #accordion", function (responseTxt, statusTxt, xhr) {
                         if (statusTxt == "success")
                             // alert("External content loaded successfully!");
                             collapseShowEl();
-                    })
-                }
-                else if (searchtype == "complete") {
-                    $("#accordion").load("pickuporderhistory.php #accordion", function (responseTxt, statusTxt, xhr) {
+                    });
+                } else if (searchtype == "complete") {
+                    $("#accordion").load(filename + ".php" + " #accordion", function (responseTxt, statusTxt, xhr) {
                         if (statusTxt == "success")
                             // alert("External content loaded successfully!");
                             collapseShowEl();
-                    })
-                }
-                else if (searchtype == "backorder") {
-                    $("#accordion3").load("backorderhistory.php #accordion3", function (responseTxt, statusTxt, xhr) {
+                    });
+                } else if (searchtype == "backorder") {
+                    $("#accordion3").load(filename + ".php" + " #accordion3", function (responseTxt, statusTxt, xhr) {
                         if (statusTxt == "success")
                             // alert("External content loaded successfully!");
                             collapseShowEl();
-                    })
+                    });
                 }
             }
         }
@@ -402,7 +384,7 @@ function openEmail(json) {
     $('#adminemail_tobranch').modal({
         show: true
     })
-        var buyeridspot= document.getElementById('TobranchID');
+    var buyeridspot = document.getElementById('TobranchID');
     buyeridspot.setAttribute('value', buyerid);
-    buyeridspot.innerHTML='hello';
+    buyeridspot.innerHTML = 'hello';
 }

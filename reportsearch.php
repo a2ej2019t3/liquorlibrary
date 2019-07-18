@@ -3,7 +3,11 @@
 
 <?php
 session_start();
-    $whID=$_SESSION['warehouse']['whID'];
+if (isset($_SESSION['warehouse'])) {
+  $whID=$_SESSION['warehouse']['whID'];
+} else {
+  $whID = 'ANY (SELECT `whID` FROM warehouse)';
+}
     include ('connection.php');
 
     include_once("partials/head.php");
@@ -14,7 +18,7 @@ session_start();
 
     //search Customer
     $searchCustomer_sql = 
-        "SELECT DISTINCT  o.*, u.userID FROM `orders` AS o, `users` AS u WHERE u.userID=o.buyerID  AND o.status !=0  AND o.status !=5 AND o.status !=4 AND  whID='$whID' AND deliverymethod='pickup' AND CONCAT(u.firstname, u.lastname) LIKE '%$searchcontent%' ";
+        "SELECT DISTINCT  o.*, u.userID FROM `orders` AS o, `users` AS u WHERE u.userID=o.buyerID  AND o.status !=0  AND o.status !=5 AND o.status !=4 AND  whID=$whID AND deliverymethod='pickup' AND CONCAT(u.firstname, u.lastname) LIKE '%$searchcontent%' ";
 
     $searchCustomer_res = mysqli_query($connection, $searchCustomer_sql);
     if ($searchCustomer_res) {

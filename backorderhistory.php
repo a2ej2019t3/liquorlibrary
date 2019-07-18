@@ -171,6 +171,8 @@ include_once('partials/arr_function.php');
               if (isset($_GET['key']) && isset($_GET['sort'])) {
                 $keyword = $_GET['key'];
                 $sort = $_GET['sort'];
+                $_SESSION['arrName'] = "historyorder_arr";
+
                 completed_Arr("historyorder_arr", 'sort', $keyword, $sort);
               } else {
                 completed_Arr($arr = "historyorder_arr");
@@ -214,6 +216,13 @@ include_once('partials/arr_function.php');
     <script type="text/javascript" src="js/main.js"></script>
     <script type="text/javascript" src="js/search.js"></script>
     <script type="text/javascript" src="js/chart.js"></script>
+    <?php
+    echo '
+        <script>
+            $(".sorter, .secondsorter, .thirdsorter").attr("data-location", "' . $_SESSION['location'] . '");
+        </script>
+        ';
+    ?>
     <!---------------------------------------------------------------------------------------------------------------->
 
 </body>
