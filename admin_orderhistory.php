@@ -1,6 +1,6 @@
 <?php
 session_start();
-$_SESSION['location'] = 'admin_pickuporders';
+$_SESSION['location'] = 'admin_orderhistory';
 include('connection.php');
 include_once('partials/arr_function.php');
 include_once('partials/admin_arr_function.php');
@@ -34,10 +34,10 @@ include_once('partials/admin_arr_function.php');
         .sublink.active {
             background-color: rgba(144, 180, 148, 1) !important;
         }
+
         .sublink.active:after {
-            border-top-color: white!important;
+            border-top-color: white !important;
         }
-       
     </style>
 </head>
 
@@ -45,14 +45,14 @@ include_once('partials/admin_arr_function.php');
     <!-- top header included--------------------------------------------------------------------------------- -->
     <section>
         <?php
-        include_once ("partials/header.php");
+        include_once("partials/header.php");
         ?>
     </section>
     <?php
     if (isset($_SESSION['admin'])) {
-        require_once ('partials/adminquery.php');
-        require_once ('Emailsending/adminemail_tobranch.php');
-        require_once ('Emailsending/branchemail_customorinform.php');
+        require_once('partials/adminquery.php');
+        require_once('Emailsending/adminemail_tobranch.php');
+        require_once('Emailsending/branchemail_customorinform.php');
 
         ?>
         <!-- top header ends--------------------------------------------------------------------------------- -->
@@ -133,7 +133,7 @@ include_once('partials/admin_arr_function.php');
                     </a>
                     <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                                                        <a class="collapse-item" href="admin_branchreport.php">Branch Report</a>
+                            <a class="collapse-item" href="admin_branchreport.php">Branch Report</a>
 
                             <a class="collapse-item" href="updatestoreinfo.php">Staff Report</a>
                         </div>
@@ -185,7 +185,7 @@ include_once('partials/admin_arr_function.php');
                                     </div>
                                 </nav>
                                 <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
-                                        <br>
+                                    <br>
                                     <!--  -->
 
                                     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
@@ -210,6 +210,8 @@ include_once('partials/admin_arr_function.php');
                                                                 if (isset($_GET['key']) && isset($_GET['sort'])) {
                                                                     $keyword = $_GET['key'];
                                                                     $sort = $_GET['sort'];
+                                                                    $_SESSION['arrName'] = "completed_delivery_Arr";
+
                                                                     completed_Arr("completed_delivery_Arr", 'sort', $keyword, $sort);
                                                                 } else {
                                                                     completed_Arr($arr = "completed_delivery_Arr");
@@ -228,6 +230,7 @@ include_once('partials/admin_arr_function.php');
                                                                 if (isset($_GET['key']) && isset($_GET['sort'])) {
                                                                     $keyword = $_GET['key'];
                                                                     $sort = $_GET['sort'];
+                                                                    $_SESSION['arrName'] = "cancel_delivery_Arr";
                                                                     completed_Arr("cancel_delivery_Arr", 'sort', $keyword, $sort);
                                                                 } else {
                                                                     completed_Arr($arr = "cancel_delivery_Arr");
@@ -271,6 +274,7 @@ include_once('partials/admin_arr_function.php');
                                                                 if (isset($_GET['key']) && isset($_GET['sort'])) {
                                                                     $keyword = $_GET['key'];
                                                                     $sort = $_GET['sort'];
+                                                                    $_SESSION['arrName'] = "completed_pickup_Arr";
                                                                     completed_Arr("completed_pickup_Arr", 'sort', $keyword, $sort);
                                                                 } else {
                                                                     completed_Arr($arr = "completed_pickup_Arr");
@@ -290,6 +294,7 @@ include_once('partials/admin_arr_function.php');
                                                                 if (isset($_GET['key']) && isset($_GET['sort'])) {
                                                                     $keyword = $_GET['key'];
                                                                     $sort = $_GET['sort'];
+                                                                    $_SESSION['arrName'] = "cancel_pickup_Arr";
                                                                     completed_Arr("cancel_pickup_Arr", 'sort', $keyword, $sort);
                                                                 } else {
                                                                     completed_Arr($arr = "cancel_pickup_Arr");
@@ -304,7 +309,7 @@ include_once('partials/admin_arr_function.php');
                                         </div>
 
                                         <p></p>
-                                      
+
                                     </div><!-- tab2 ends -->
                                     <!--  -->
 
@@ -343,6 +348,13 @@ include_once('partials/admin_arr_function.php');
     <script type="text/javascript" src="js/main.js"></script>
     <script type="text/javascript" src="js/search.js"></script>
     <script type="text/javascript" src="js/chart.js"></script>
+    <?php
+    echo '
+        <script>
+            $(".sorter, .secondsorter, .thirdsorter, .searchinputs").attr("data-location", "' . $_SESSION['location'] . '");
+        </script>
+        ';
+    ?>
     <!---------------------------------------------------------------------------------------------------------------->
 
 </body>

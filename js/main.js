@@ -113,20 +113,6 @@ $(document).ready(function () {
     $('body').show();
 });
 
-function addLoadEvent(func) {
-    var oldonload = window.onload;
-    if (typeof window.onload != 'function') {
-        window.onload = func;
-    } else {
-        window.onload = function () {
-            if (oldonload) {
-                oldonload();
-            }
-            func();
-        }
-    }
-};
-
 addLoadEvent(function () {
     document.getElementsByName("typeID")[0].value = 1;
 })
