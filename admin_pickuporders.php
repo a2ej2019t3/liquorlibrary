@@ -264,7 +264,8 @@ include_once('partials/admin_arr_function.php');
     }
     ?>
     <?php
-    include_once("partials/foot.php");
+      include_once("partials/footer.php");
+ include_once("partials/foot.php");
     ?>
     <script>
 

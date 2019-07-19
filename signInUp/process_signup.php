@@ -33,7 +33,7 @@ if ($result = mysqli_query($connection, $selectQuery))
     $user = mysqli_fetch_array($result, MYSQLI_ASSOC);
     if (isset($user)) 
     {
-        $_SESSION['error'] = "Sorry. That user name  has already been taken.";
+        echo "Sorry. That user name  has already been taken.";
         // header("Location:signup.php");
     } else {
         /* add the user*/

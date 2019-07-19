@@ -105,7 +105,8 @@ var_dump($product_arr);
         </div>
     </div>
     <?php
-    include_once("partials/foot.php");
+      include_once("partials/footer.php");
+ include_once("partials/foot.php");
     ?>
 </body>
 

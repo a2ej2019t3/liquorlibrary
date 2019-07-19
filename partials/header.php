@@ -47,7 +47,7 @@
                             if( $_SESSION['user']['typeID']==3 || $_SESSION['user']['typeID']==2){
                     
                                 echo ' 
-                                <li class="col" id="firstcol"><a class="'.$className.'" href="index.php?#aboutus" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">About Us</a></li>
+                                <li class="col" id="firstcol"><a class="'.$className.'" href="index.php #aboutus" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">About Us</a></li>
                                 <li class="col"><a class="'.$className.'" href="findlocation/findus.php" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Find Us</a></li>
                                 <li class="col"><a class="'.$className.' js-open-modal" id="ourdrinks" data-toggle="modal" data-target="#subnav" href="#" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Our Drinks</a></li> 
                                 <li class="col"><a class="'.$className.'" href="specials.php" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Specials</a></li> 
@@ -81,7 +81,7 @@
                         }
                         else{
                             echo ' 
-                            <li class="col" id="firstcol"><a class="'.$className.'" href="#aboutus" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">About Us</a></li>
+                            <li class="col" id="firstcol"><a class="'.$className.'" href="index.php #aboutus" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">About Us</a></li>
                             <li class="col"><a class="'.$className.'" href="findlocation/findus.php" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Find Us</a></li>
                             <li class="col"><a class="'.$className.' js-open-modal" id="ourdrinks" data-toggle="modal" data-target="#subnav" href="#" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Our Drinks</a></li> 
                             <li class="col"><a class="'.$className.'" href="specials.php" style="color: white; font-size: 1rem; font-family: "Roboto", sans-serif;">Specials</a></li> 

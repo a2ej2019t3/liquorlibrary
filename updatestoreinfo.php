@@ -37,8 +37,6 @@ include('connection.php');
   if (isset($_SESSION['user'])) {
     include_once("profile_modal.php");
     include_once("store_modal1.php");
-    include_once("partials/foot.php");
-
     ?>
     <!-- top header ends--------------------------------------------------------------------------------- -->
     <!-- Side Nav included--------------------------------------------------------------------------------- -->
@@ -348,6 +346,7 @@ include('connection.php');
   }
   ?>
   <?php
+  include_once("partials/footer.php");
   include_once("partials/foot.php");
   ?>
   <script type="text/javascript" src="js/sub.js"></script>

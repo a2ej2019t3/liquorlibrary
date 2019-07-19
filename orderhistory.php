@@ -1,6 +1,6 @@
 <?php
 session_start();
-$_SESSION['location'] = 'index';
+$_SESSION['location'] = 'orderhistory';
 include(__DIR__ . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 'DBsql.php');
 $DBsql = new sql;
 
@@ -118,7 +118,8 @@ $DBsql = new sql;
     </div>
   </div>
   <?php
-  include_once("partials/foot.php");
+    include_once("partials/footer.php");
+    include_once("partials/foot.php");
   ?>
   <script src="https://www.google.com/recaptcha/api.js?render=6LeF6qwUAAAAAAdU7lgKBD5Bs7reJ6DxPSmhpQE8"></script>
   <script type="text/javascript" src="js/sub.js"></script>
