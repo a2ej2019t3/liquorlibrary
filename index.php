@@ -14,12 +14,15 @@ $_SESSION['location'] = "index";
 </head>
 
 <body>
-  <!-- <div style="background:red; width:100vw; height:100vh; z-index: 99999; position:fixed; top:0;">
-    <p style="width:inherit; height:inherit; text-align:center; top:50%;">loading...</p>
-  </div> -->
+  <div id='loadingScreen'>
+    <svg>
+      <path d="M10,10 L50,100 L90,50"></path>
+    </svg>
+    <p id="front" style="font-family: 'Cinzel', serif;">Liquor Library</p>
+    <p id="back" style="font-family: 'Cinzel', serif;">Liquor Library</p>
+    <p id="slogan">THE NEW INDUSTRY STANDARD</p>
+  </div>
   <?php
-  // var_dump($_SESSION['user']);
-  
   include_once("partials/header.php");
   include_once("partials/indicatorDown.php");
   ?>

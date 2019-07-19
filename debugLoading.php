@@ -74,12 +74,14 @@
 </head>
 
 <body>
-    <svg>
-        <path d="M10,10 L50,100 L90,50"></path>
-    </svg>
-    <p id="front" style="font-family: 'Cinzel', serif;">Liquor Library</p>
-    <p id="back" style="font-family: 'Cinzel', serif;">Liquor Library</p>
-    <p id="slogan">THE NEW INDUSTRY STANDARD</p>
+    <div id='loadingScreen'>
+        <svg>
+            <path d="M10,10 L50,100 L90,50"></path>
+        </svg>
+        <p id="front" style="font-family: 'Cinzel', serif;">Liquor Library</p>
+        <p id="back" style="font-family: 'Cinzel', serif;">Liquor Library</p>
+        <p id="slogan">THE NEW INDUSTRY STANDARD</p>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
     <script>
