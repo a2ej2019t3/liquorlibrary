@@ -1,6 +1,6 @@
 <?php
 session_start();
-$_SESSION['location'] = 'index';
+$_SESSION['location'] = 'orderhistory';
 include(__DIR__ . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 'DBsql.php');
 $DBsql = new sql;
 

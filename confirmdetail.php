@@ -12,7 +12,7 @@
         $note= $_GET['note'];
         $orderID=$_GET['orderId'];
         // echo $userID;
-        
+        // echo $orderID;
         if ($user_res != "") {
             $user_arr = mysqli_fetch_all($user_res);
             $username= $user_arr[0][2]. $user_arr[0][3];

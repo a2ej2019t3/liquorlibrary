@@ -134,7 +134,7 @@ addLoadEvent(function () {
 document.getElementById("businessOptionLable").onclick = function () {
     document.getElementById("forBusiness").style.display = "";
     document.getElementById("company_name").value = "";
-    document.getElementsByName("typeID")[0].value = 1;
+    document.getElementsByName("typeID")[0].value = 2;
 }
 document.getElementById("individualOptionLable").onclick = function () {
     document.getElementById("forBusiness").style.display = "none";
