@@ -122,9 +122,9 @@ $DBsql = new sql;
   ?>
   <script src="https://www.google.com/recaptcha/api.js?render=6LeF6qwUAAAAAAdU7lgKBD5Bs7reJ6DxPSmhpQE8"></script>
   <script type="text/javascript" src="js/sub.js"></script>
+  <script type="text/javascript" src="js/cart.js"></script>
   <script type="text/javascript" src="js/search.js"></script>
   <script type="text/javascript" src="js/main.js"></script>
-  <script type="text/javascript" src="js/cart.js"></script>
   <script type="text/javascript" src="js/orderhistory.js"></script>
   <script type="text/javascript" src="js/chart.js"></script>
   <script type="text/javascript" src="js/pay.js"></script>

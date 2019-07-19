@@ -12,7 +12,7 @@ function addLoadEvent(func) {
     }
   }
 
-addLoadEvent(getItems);
+addLoadEvent(getItems());
 
 function addToCart (obj) {
     var id = obj.getAttribute('data-productID');
@@ -53,6 +53,8 @@ function showCart () {
 }
 
 function getItems (re = 'Na') {
+    console.log(re);
+    // alert(re);
     if (re == 'Na') {
         var url = "Cart/getItems.php";
     } else {

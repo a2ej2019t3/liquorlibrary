@@ -231,9 +231,9 @@
               include_once("partials/foot.php");
               ?>
               <script type="text/javascript" src="js/sub.js"></script>
+              <script type="text/javascript" src="js/cart.js"></script>
               <script type="text/javascript" src="js/main.js"></script>
               <script type="text/javascript" src="js/search.js"></script>
-              <script type="text/javascript" src="js/cart.js"></script>
               <script type="text/javascript" src="js/pay.js"></script>
               <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
               <script>
