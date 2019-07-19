@@ -17,9 +17,7 @@ $_SESSION['location'] = "index";
   <!-- <div style="background:red; width:100vw; height:100vh; z-index: 99999; position:fixed; top:0;">
     <p style="width:inherit; height:inherit; text-align:center; top:50%;">loading...</p>
   </div> -->
-  <?php
-  var_dump($_SESSION['user']);
-  
+  <?php  
   include_once("partials/header.php");
   include_once("partials/indicatorDown.php");
   ?>
@@ -56,28 +54,36 @@ $_SESSION['location'] = "index";
     </div>
   </section>
   <section>
-    <div class="container-fluid">
-      <div class="container-fluid">
-        <div class="aboutmain container-fluid">
+   
+      <div class="container">
+        <div class="aboutmain container">
           <p class="fourth-text">DEDICATED FOR 15 YEARS</p>
         </div>
-        <div class="aboutdes container">
+       
           <!-- <img id="s3test" src="https://liquorlibrary-test.s3-ap-southeast-2.amazonaws.com/banner1.jpg" alt="asdf"> -->
-          <p class="aboutdes">With <b>over 15 years experience</b> in Alcohol industry Liquor Library combines innovation with <b>traditional liquor</b> with access to <b>hundreds of on premises</b> and off premise retail location Nation wide along with extensive networks Globally to offer what we believe.</p>
-        </div>
-        <div class="brand container-fluid">
-          <img class="brandlogo" src="images/brandlogo.jpg" alt="">
-        </div>
+          <div class="row">
+            <div class="col-6">
+              <img class="brandlogo" src="images/brandlogo.jpg" alt="">
+              
+            </div>
+            <div class="col-6">
+              
+              <p class="aboutdes" style="margin-top:50px;">With <b>over 15 years experience</b> in Alcohol industry Liquor Library combines innovation with <b>traditional liquor</b> with access to <b>hundreds of on premises</b> and off premise retail location Nation wide along with extensive networks Globally to offer what we believe.</p>
+            </div>
+          </div>
+        
+        
       </div>
-    </div>
+    
 
   </section>
   <?php
   include_once("partials/indicatorUp.php");
   ?>
   <?php
-  include_once("partials/foot.php");
+
   include_once("partials/footer.php");
+  include_once("partials/foot.php");
   
   ?>
   <script type="text/javascript" src="js/sub.js"></script>

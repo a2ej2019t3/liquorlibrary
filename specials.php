@@ -104,11 +104,15 @@ include ("partials/specialsModal.php");
   <?php
     include ('specialupload/speciallist.php');
   ?>
-<section>
+</section>
+      
 <?php
     include_once ("partials/indicatorUp.php");
   ?>
+  
 <?php
+    
+    include_once ("partials/footer.php");
     include_once ("partials/foot.php");
   ?>  
   <script type="text/javascript" src="js/subcategory.js"></script>

@@ -1,32 +1,31 @@
   <!-- Site footer -->
-  <footer class="site-footer">
-      <div class="container">
+  <footer class="site-footer" style="margin-top: 100px; width:100%;">
+      <div class="container"  style="width:100%;">
           <div class="row">
               <div class="col-sm-12 col-md-6">
                   <h6>About</h6>
-                  <p class="text-justify">Scanfcode.com <i>CODE WANTS TO BE SIMPLE </i> is an initiative to help the upcoming programmers with the code. Scanfcode focuses on providing the most efficient code or snippets as the code wants to be simple. We will help programmers build up concepts in different programming languages that include C, C++, Java, HTML, CSS, Bootstrap, JavaScript, PHP, Android, SQL and Algorithm.</p>
+                  <p class="text-justify">With over 15 years experience in Alcohol industry Liquor Library combines innovation with traditional liquor with access to hundreds of on premises and off premise retail location Nation wide along with extensive networks Globally to offer what we believe.</p>
               </div>
 
               <div class="col-xs-6 col-md-3">
-                  <h6>Categories</h6>
-                  <ul class="footer-links">
-                      <li><a href="http://scanfcode.com/category/c-language/">C</a></li>
-                      <li><a href="http://scanfcode.com/category/front-end-development/">UI Design</a></li>
-                      <li><a href="http://scanfcode.com/category/back-end-development/">PHP</a></li>
-                      <li><a href="http://scanfcode.com/category/java-programming-language/">Java</a></li>
-                      <li><a href="http://scanfcode.com/category/android/">Android</a></li>
-                      <li><a href="http://scanfcode.com/category/templates/">Templates</a></li>
-                  </ul>
+                  <h6>Service Hours</h6>
+                  <div>Mon-Fri: 9am-5pm</div>
+                  <div>Sat-Sun: 9am-3pm</div>
+                  <h6>Contact Info</h6>
+                  <div>KK Pusarla</div>
+                  <div><i class="fas fa-envelope" style="margin-right: 10px;"></i>sales@liquorlibrary.co.nz</div>
+                  <div><i class="fas fa-mobile-alt" style="margin-right: 10px;"></i>021 230 3935</div>
               </div>
 
               <div class="col-xs-6 col-md-3">
                   <h6>Quick Links</h6>
                   <ul class="footer-links">
-                      <li><a href="http://scanfcode.com/about/">About Us</a></li>
-                      <li><a href="http://scanfcode.com/contact/">Contact Us</a></li>
-                      <li><a href="http://scanfcode.com/contribute-at-scanfcode/">Contribute</a></li>
-                      <li><a href="http://scanfcode.com/privacy-policy/">Privacy Policy</a></li>
-                      <li><a href="http://scanfcode.com/sitemap/">Sitemap</a></li>
+                      <li><a href="index.php #aboutus">About Us</a></li>
+                      <li><a href="contact.php">Contact Us</a></li>
+                      <li><a href="findlocation/findus.php">Find US</a></li>
+                      <li><a href="#">Privacy Policy</a></li>
+                      <li><a href="specials.php">Specials</a></li>
+                      <li><a href="paymentprocess.php">Cart</a></li>
                   </ul>
               </div>
           </div>
@@ -35,24 +34,34 @@
       <div class="container">
           <div class="row">
               <div class="col-md-8 col-sm-6 col-xs-12">
-                  <p class="copyright-text">Copyright &copy; 2017 All Rights Reserved by
-                      <a href="#">Scanfcode</a>.
+                  <p class="copyright-text">Copyright &copy; 2009 All Rights Reserved by
+                      <a href="#">Liquor Library</a>.
                   </p>
               </div>
 
               <div class="col-md-4 col-sm-6 col-xs-12">
                   <ul class="social-icons">
-                      <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-                      <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-                      <li><a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>
-                      <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
+
+                      <li><a class="facebook" href="#"><i class="fab fa-facebook-f"></i></a></li>
+                      <li><a class="twitter" href="#"><i class="fab fa-google-plus-g"></i></a></li>
+                      <li><a class="dribbble" href="findlocation/findus.php"><i class="fas fa-map-marker"></i></a></li>
+                      <li><a class="linkedin" href="#"><i class="fab fa-linkedin"></i></a></li>
                   </ul>
               </div>
           </div>
       </div>
   </footer>
   <style>
+      .saboxplugin-socials .fa {
+          font-family: FontAwesome;
+      }
+
+      h6 {
+          text-align: center;
+      }
+
       .site-footer {
+          width: 100%;
           background-color: #26272b;
           padding: 45px 0 20px;
           font-size: 15px;
