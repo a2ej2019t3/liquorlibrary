@@ -4,6 +4,7 @@ include_once(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'objectToArray.php');
 $DBsql = new sql();
 
 if (isset($_SESSION['user'])) {
+    echo 'login';
     $userID = $_SESSION['user']['userID'];
     // var_dump(isset($_GET['re']));
 if (!isset($_GET['re'])) {
@@ -15,6 +16,7 @@ if (!isset($_GET['re'])) {
         if ($getCart_arr != null) {
             // cartID
             $_SESSION['cartID'] = $getCart_arr[0]['orderID'];
+            echo 'has cart'. $_SESSION['cartID'];
             $cartID = $_SESSION['cartID'];
             // var_dump($cartID);
             
@@ -24,6 +26,7 @@ if (!isset($_GET['re'])) {
             
             // merge cookie cart to DB if exists
             if (isset($_COOKIE['tempCart'])) {
+                echo 'has cookie cart';
                 // convert cookieCart to array
                 $coockieCart = objectToArray(json_decode($_COOKIE['tempCart']));
                 
@@ -35,6 +38,7 @@ if (!isset($_GET['re'])) {
                 
                 // if DBcart is empty, insert cookiecart into dbcart
                 if ($getItems_arr === null) {
+                    echo 'db cart is empty';
                     $getItems_arr = array();
                     foreach ($coockieCart as $key => $value) {
                         $res = $DBsql->insertItems('orderitems', $value);
@@ -46,6 +50,7 @@ if (!isset($_GET['re'])) {
                     // echo 'DBcart is empty, insert cookiecart into dbcart';
                 // if DBcart is not empty
                 } else {
+                    echo 'db cart not empty';
                     // get DB cart keys
                     $DBCartKeys = array_keys($getItems_arr);
                     #var_dump($DBCartKeys);
@@ -74,6 +79,7 @@ if (!isset($_GET['re'])) {
                 }
             // cookie cart not exist
             } else {
+                echo 'cookie cart not exist';
                 if ($getItems_arr === null) {
                     $_SESSION['cartItems'] = array();
                 } else {
@@ -86,7 +92,7 @@ if (!isset($_GET['re'])) {
         // !!! dont forget to give new dbcart id to items in cookie cart
         } else {
             $cartID = $DBsql->insertOrder($userID);
-            // var_dump($cartID);
+            echo 'user does not have status 0 cart';
             $_SESSION['cartID'] = $cartID;
             if (isset($_COOKIE['tempCart'])) {
                 foreach ($coockieCart as $key => $value) {
@@ -133,8 +139,10 @@ if (!isset($_GET['re'])) {
 
 // if user didn't logged in
 } else {
+    echo 'not login';
     unset($_SESSION['cartID']);
     if (isset($_COOKIE['tempCart'])) {
+        echo 'cookie cart exist';
         $cartArr = objectToArray(json_decode($_COOKIE['tempCart']));
         $idArr = array();
         $outcomearr = array();
@@ -154,6 +162,7 @@ if (!isset($_GET['re'])) {
         $_SESSION['cartItems'] = $outcomearr;
         // var_dump($idArr);
     } else {
+        echo 'cookie cart not exist';
         $_SESSION['cartItems'] = array();
     }
     // echo 'user did not logged in';
