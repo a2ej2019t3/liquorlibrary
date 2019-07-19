@@ -60,9 +60,10 @@
             $res = '';
             if (is_array($value)) {
                 foreach ($value as $k => $v) {
-                    $res .= "$key = $v OR ";
+                    $res .= "$v, ";
                 }
-                $res = trim($res, "OR ");
+                $res = trim($res, ", ");
+                $res = " $key IN (".$res.") ";
             } else if ($value == null) {
                 $res = "$key = NULL";
             } else {

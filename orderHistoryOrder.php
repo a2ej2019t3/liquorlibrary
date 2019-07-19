@@ -29,7 +29,7 @@ if (isset($_SESSION['user'])) {
             'statusID' => $statusID
         );
         $result = $DBsql->select('orders LEFT JOIN status ON orders.status = status.statusID', $consArr);
-        // echo var_dump($result);
+        // var_dump($result);
         if ($result !== null) {
             foreach ($result as $key => $value) {
                 $sorted[$value['orderID']] = $value;

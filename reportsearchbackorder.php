@@ -3,11 +3,15 @@
     include ('connection.php');
     // include_once ('partials/branchquery.php');
     session_start();
-    $whID=$_SESSION['warehouse']['whID'];
+    if (isset($_SESSION['warehouse'])) {
+      $whID=$_SESSION['warehouse']['whID'];
+    } else {
+      $whID = 'ANY (SELECT `whID` FROM warehouse)';
+    }
     include_once("partials/head.php");
     include(__DIR__ . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 'DBsql.php');
     $DBsql = new sql;
-    $select_user="SELECT userID FROM staff WHERE whID='$whID'";
+    $select_user="SELECT userID FROM staff WHERE whID=$whID";
     $selectuser_result=mysqli_query($connection, $select_user);
     if ( $selectuser_result != ""){
         $selectuser_arr = mysqli_fetch_all($selectuser_result);

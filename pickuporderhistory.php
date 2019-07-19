@@ -1,8 +1,8 @@
 <?php
 session_start();
-$_SESSION['location'] = 'backorderhistory';
+$_SESSION['location'] = 'pickuporderhistory';
 include('connection.php');
-include_once ('partials/arr_function.php');
+include_once('partials/arr_function.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,8 +13,8 @@ include_once ('partials/arr_function.php');
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Branch Admin pickup orders history</title>
   <?php
-  include_once ("partials/head.php");
-  include_once (__DIR__ . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 'DBsql.php');
+  include_once("partials/head.php");
+  include_once(__DIR__ . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 'DBsql.php');
   $DBsql = new sql;
   ?>
   <link rel="stylesheet" href="css/branchreport.css">
@@ -79,7 +79,7 @@ include_once ('partials/arr_function.php');
               <h6 class="collapse-header">Back Order</h6>
               <a class="collapse-item" href="backorderstatus.php">Order status</a>
               <a class="collapse-item" href="backorderhistory.php">Order history</a>
-             
+
             </div>
           </div>
         </li>
@@ -95,7 +95,7 @@ include_once ('partials/arr_function.php');
               <h6 class="collapse-header">Customer Order</h6>
               <a class="collapse-item" href="pickuporderstatus.php">Order status</a>
               <a class="collapse-item active" href="pickuporderhistory.php">Order history</a>
-            
+
             </div>
           </div>
         </li>
@@ -147,26 +147,26 @@ include_once ('partials/arr_function.php');
           <!-- ------------copy -->
           <div class="container-fluid">
             <div class="row">
-              <div class="col-12 " >
+              <div class="col-12 ">
                 <nav>
                   <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                    <a onclick=activechecking(); class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true" >COMPLETED PICKUPS</a>
+                    <a onclick=activechecking(); class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">COMPLETED PICKUPS</a>
                     <a onclick=activechecking(); class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">CANCELLED PICKUPS</a>
                   </div>
                 </nav>
 
                 <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
                   <!--  -->
-                  
+
                   <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                  
+
                     <!--  -->
                     <div class="row">
                       <div class="col-7">
 
-                      <?php
-                      include_once ('partials/branchreportCtrl.php');
-                       ?>
+                        <?php
+                        include_once('partials/branchreportCtrl.php');
+                        ?>
                       </div>
                       <div class="col-5" style="float:left;">
                         <div style="  border: 3px solid #00B4CC; background-color:#00B4CC; border-radius: 5px;  outline: none;  height:38px;  color: #9DBFAF;">
@@ -183,17 +183,18 @@ include_once ('partials/arr_function.php');
 
                     <p></p>
                     <div id="newcontent">
-                      
+
                       <div id="accordion">
-                        
+
                         <?php
-                        
+
                         if (isset($_GET['key']) && isset($_GET['sort'])) {
                           $keyword = $_GET['key'];
                           $sort = $_GET['sort'];
-                          completed_Arr("complete_arr",'sort', $keyword, $sort);
+                          $_SESSION['arrName'] = "complete_arr";
+                          completed_Arr("complete_arr", 'sort', $keyword, $sort);
                         } else {
-                          completed_Arr($arr="complete_arr");
+                          completed_Arr($arr = "complete_arr");
                         }
                         ?>
 
@@ -202,24 +203,25 @@ include_once ('partials/arr_function.php');
                   </div> <!-- tab1 ends -->
                   <!--  -->
                   <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                  <?php
-                      include_once('partials/branchreportCtrl2.php');
-                  ?>
-                  <p></p>
+                    <?php
+                    include_once('partials/branchreportCtrl2.php');
+                    ?>
+                    <p></p>
                     <div id="newcontent2">
-                    
-                    <div id="accordion2">
-                      <?php
-                      if (isset($_GET['key']) && isset($_GET['sort'])) {
-                        $keyword = $_GET['key'];
-                        $sort = $_GET['sort'];
-                        completed_Arr("cancelled_arr",'sort', $keyword, $sort);
-                      } else {
-                        completed_Arr($arr="cancelled_arr");
-                      }
-                      
-                      ?>
-                    </div> <!-- accordion ends -->
+
+                      <div id="accordion2">
+                        <?php
+                        if (isset($_GET['key']) && isset($_GET['sort'])) {
+                          $keyword = $_GET['key'];
+                          $sort = $_GET['sort'];
+                          $_SESSION['arrName'] = "cancelled_arr";
+                          completed_Arr("cancelled_arr", 'sort', $keyword, $sort);
+                        } else {
+                          completed_Arr($arr = "cancelled_arr");
+                        }
+
+                        ?>
+                      </div> <!-- accordion ends -->
                     </div><!-- newcontents2 ends -->
                   </div><!-- tab2 ends -->
                   <!--  -->
@@ -243,22 +245,24 @@ include_once ('partials/arr_function.php');
     <!--id wrapper finishes-->
     <!-- --------------------------------------------------------------------------------------------------------- -->
   <?php
-} else {
-  echo '<h4 style="position: absolute; top: 40%; left: 40%;">This page needs a valid authentification to read.</h4> ';
-}
-?>
+  } else {
+    echo '<h4 style="position: absolute; top: 40%; left: 40%;">This page needs a valid authentification to read.</h4> ';
+  }
+  ?>
   <?php
   include_once("partials/foot.php");
   ?>
-  <script>
-
-
-
-  </script>
   <script type="text/javascript" src="js/sub.js"></script>
   <script type="text/javascript" src="js/main.js"></script>
   <script type="text/javascript" src="js/search.js"></script>
   <script type="text/javascript" src="js/chart.js"></script>
+  <?php
+  echo '
+        <script>
+            $(".sorter, .secondsorter, .thirdsorter").attr("data-location", "' . $_SESSION['location'] . '");
+        </script>
+        ';
+  ?>
   <!---------------------------------------------------------------------------------------------------------------->
 
 </body>
