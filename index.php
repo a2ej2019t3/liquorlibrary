@@ -14,7 +14,12 @@ $_SESSION['location'] = "index";
 </head>
 
 <body>
+  <!-- <div style="background:red; width:100vw; height:100vh; z-index: 99999; position:fixed; top:0;">
+    <p style="width:inherit; height:inherit; text-align:center; top:50%;">loading...</p>
+  </div> -->
   <?php
+  var_dump($_SESSION['user']);
+  
   include_once("partials/header.php");
   include_once("partials/indicatorDown.php");
   ?>

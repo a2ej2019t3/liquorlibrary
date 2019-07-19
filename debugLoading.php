@@ -10,21 +10,21 @@
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400,700&subset=latin-ext" rel="stylesheet">
     <style>
         svg {
-            margin-left: -10px;
-            margin-top:45vh;
+            margin-left: -8px;
+            margin-top: 42vh;
             width: 100vw;
             height: 100vh;
         }
 
         path {
             stroke: #fded81;
-            stroke-width: 80vh;
+            stroke-width: 100vh;
             stroke-linecap: round;
             fill: none;
         }
 
         #front {
-            color: rgba(255, 255, 255, 0.5);
+            color: rgba(255, 255, 255, 0.4);
             top: 50%;
             left: 0;
             position: fixed;
@@ -51,7 +51,23 @@
             font-size: 6rem;
         }
 
+        #slogan {
+            z-index: 100;
+            color: rgba(0, 0, 0, 0.7);
+            top: 100%;
+            left: 0;
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            padding-top: 0px;
+            margin-top: -5rem;
+            text-align: center;
+            font-size: 1rem;
+            font-family: 'Open Sans', sans-serif;
+        }
+
         body {
+            background-color: #fdf9ef;
             overflow-y: hidden;
         }
     </style>
@@ -63,21 +79,26 @@
     </svg>
     <p id="front" style="font-family: 'Cinzel', serif;">Liquor Library</p>
     <p id="back" style="font-family: 'Cinzel', serif;">Liquor Library</p>
+    <p id="slogan">THE NEW INDUSTRY STANDARD</p>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
     <script>
         let xs = [];
-        for (var i = 0; i <= 2000; i++) {
+        let windowWidth = window.innerWidth;
+        let windowHeight = window.innerHeight;
+        // alert(windowWidth);
+        for (var i = 0; i <= windowWidth; i++) {
             xs.push(i);
         }
-
         let t = 0;
 
-        function animate () {
+        function animate() {
             let points = xs.map(x => {
-                let y = 400 + 20 * Math.sin((x + t) / 300);
-                return [x,y];
+                let y = (windowHeight * 0.57) + 20 * Math.sin((x + t) / 400);
+                return [x, y];
             })
 
-            let path = "M" + points.map(p =>{
+            let path = "M" + points.map(p => {
                 return p[0] + "," + p[1]
             }).join("L")
 
@@ -85,12 +106,19 @@
 
             document.querySelector("path").setAttribute("d", path);
 
-            t += 3;
+            t += 5;
 
             requestAnimationFrame(animate);
         }
-
-        animate()
+        var x = 0;
+        $(window).resize(function() {
+            windowWidth = window.innerWidth;
+            windowHeight = window.innerHeight;
+            for (var i = 0; i <= windowWidth; i++) {
+                xs.push(i);
+            }
+        });
+        animate();
     </script>
 </body>
 
