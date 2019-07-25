@@ -139,6 +139,7 @@ function completed_Arr($arr = " ", $index = "all", $keyword = "orderID", $sort =
                                                               <h5 class="orderdate">' . $complete_arr['date'] . '</h5>
                                                           </div>
                                                      </div>
+                                                     
                                                      <div class="col-1 p-1 my-auto text-left pl-5" style="font-size:1.25rem;">
                                                          <span class="badge ' . $badgeType . '">' . $statusName . '</span>
                                                     </div>

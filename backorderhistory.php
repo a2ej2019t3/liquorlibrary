@@ -185,6 +185,7 @@ include_once('partials/arr_function.php');
           </div>
         </div>
       </div>
+            </div>
       <!-- --------------------------------------------------------------------------------------------------------- -->
     <?php
     } else {
@@ -192,8 +193,8 @@ include_once('partials/arr_function.php');
     }
     ?>
     <?php
-      include_once("partials/footer.php");
- include_once("partials/foot.php");
+     include_once("partials/footer.php");
+    include_once("partials/foot.php");
     ?>
     <script>
       $(function() {
@@ -223,6 +224,7 @@ include_once('partials/arr_function.php');
             $(".sorter, .secondsorter, .thirdsorter").attr("data-location", "' . $_SESSION['location'] . '");
         </script>
         ';
+        
     ?>
     <!---------------------------------------------------------------------------------------------------------------->
 
