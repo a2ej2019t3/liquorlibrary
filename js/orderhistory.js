@@ -56,7 +56,7 @@ function loadHome() {
         if (this.readyState == 4 && this.status == 200) {
             console.log(xmlhttp);
             document.getElementById('content_wrapper').innerHTML = xmlhttp.response;
-            showMessage();
+            ();
             getItems();
             goToOrder();
             editProfile();

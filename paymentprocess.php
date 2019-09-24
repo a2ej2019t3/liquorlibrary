@@ -10,11 +10,7 @@
   if (isset($_SESSION['user']['userID'])) {
     $userID = $_SESSION['user']['userID'];
     $cartID = $_SESSION['cartID'];
-    // $cartitem_sql = "SELECT o.orderID, o.buyerId, o.whID, o.status, oi.itemID, oi.quantity, p.productID, p.productName, p.price, p.discountprice, p.img, b.11brandName, c.categoryName, oi.totalprice FROM orders AS o, orderitems AS oi, product AS p, brand AS b, category AS c WHERE o.orderID=oi.orderID and oi.itemID=p.productID and p.brandID=b.brandID and p.categoryID= c.categoryID and o.status=0 and o.buyerID='$userID';";
     $res = $DBsql->getOrderInfo($cartID, null);
-    // var_dump($res);
-    // $cartitem_sql = "SELECT o.orderID, o.buyerId, o.whID, o.status, oi.itemID, oi.quantity, p.productID, p.productName, p.price, p.discountprice, p.img, b.brandName, c.categoryName, oi.totalprice FROM orders AS o, orderitems AS oi, product AS p, brand AS b, category AS c WHERE o.orderID=oi.orderID and oi.itemID=p.productID and p.brandID=b.brandID and p.categoryID= c.categoryID and o.status=0 and o.buyerID='$userID';";
-    // $cartitem_res = mysqli_query($connection, $cartitem_sql);
 
     if ($res != "") {
       // var_dump($cartitem_arr);
