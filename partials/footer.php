@@ -1,6 +1,6 @@
   <!-- Site footer -->
   <footer class="site-footer" style="margin-top: 100px; width:100%;">
-      <div class="container"  style="width:100%;">
+      <div class="container"  style="width:100%; text-align:center;">
           <div class="row">
               <div class="col-sm-12 col-md-6">
                   <h6>About</h6>
