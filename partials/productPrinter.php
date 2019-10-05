@@ -4,10 +4,10 @@ $_SESSION['location'] = 'productlist';
 include_once('../connection.php');
 include(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 'DBsql.php');
 $DBsql = new sql;
+
 // product detail
 if (isset($_GET['pd'])) {
     $productID = $_GET['pd'];
-
     $product_arr = $DBsql->select($DBsql->getProductInfo(), array('productID' => $productID));
     if ($product_arr != "") {
         // var_dump($product_arr);

@@ -97,7 +97,7 @@ function pushHistoryState () {
 function checkLocationPara (locationPara) {
     switch (locationPara) {
         case 'category':
-            fileName = 'partials/discountrate.php',
+            fileName = 'partials/productPrinter.php',
             // onloadfileName = 'categorysearch.php';
             pricesortDropdown.style.display = "none";
             break;
@@ -107,13 +107,13 @@ function checkLocationPara (locationPara) {
             pricesortDropdown.style.display = "none";
             break;
         case 'brandproduct':
-            fileName = 'partials/discountrate.php';
+            fileName = 'partials/productPrinter.php';
             // onloadfileName = 'categorysearch.php';
             pricesortDropdown.style.display = "none";
             break;
         case 'salelist':
             document.getElementById('selectsort').selectedIndex = 0;
-            fileName = 'partials/discountrate.php';
+            fileName = 'partials/productPrinter.php';
             // onloadfileName = 'categorysearch.php';
             pricesortDropdown.style.display = "block";
             break;
@@ -128,17 +128,17 @@ function checkIfSelected () {
     var condition;
     if (condition = obj.options[obj.selectedIndex].getAttribute('value')) {
         var Json = {
-            searchPara: 'partials/discountrate.php?condition=' + condition + '&location=salelist'
+            searchPara: 'partials/productPrinter.php?condition=' + condition + '&location=salelist'
         }
     } else {
         var filename = obj.options[obj.selectedIndex].getAttribute('data-target');
         if (filename == 'discountrate') {
             var Json = {
-                searchPara: 'partials/discountrate.php?location=salelist&opt=dr'
+                searchPara: 'partials/productPrinter.php?location=salelist&opt=dr'
             }
         } else if (filename == 'onsalelist') {
             var Json = {
-                searchPara: 'partials/discountrate.php?location=salelist&opt=all'
+                searchPara: 'partials/productPrinter.php?location=salelist&opt=all'
             }
         }
     }

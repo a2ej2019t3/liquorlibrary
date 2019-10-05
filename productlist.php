@@ -15,7 +15,7 @@
         $resultcount=count($searchItem_arr);
         
     } else {
-        alert("result empty");
+        // alert("result empty");
     }
  ?>
 

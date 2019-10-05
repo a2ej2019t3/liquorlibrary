@@ -80,13 +80,13 @@ if ($parentCategory_res != "") {
         echo '
                       <li class="childlink">';
         if ($i == 35) {
-          $priceJson['searchPara'] = 'partials' . DIRECTORY_SEPARATOR . 'discountrate.php?searchstart=' . $i . '&location=priceRange';
+          $priceJson['searchPara'] = 'partials' . DIRECTORY_SEPARATOR . 'productPrinter.php?searchstart=' . $i . '&location=priceRange';
           echo '
                           <a class="childprice"><button value=' . json_encode($priceJson) . ' class="pricetrigger" type="button" onclick="showProductAjax(this.value)">NZ$' . $i . '-</button></a>
                       </li>
                       ';
         } else {
-          $priceJson['searchPara'] = 'partials' . DIRECTORY_SEPARATOR . 'discountrate.php?searchstart=' . $i . '&searchend=' . ($i + 5) . '&location=priceRange';
+          $priceJson['searchPara'] = 'partials' . DIRECTORY_SEPARATOR . 'productPrinter.php?searchstart=' . $i . '&searchend=' . ($i + 5) . '&location=priceRange';
           echo '
                           <a class="childprice"><button value=' . json_encode($priceJson) . ' class="pricetrigger" type="button" onclick="showProductAjax(this.value)">NZ$' . $i . '-NZ$' . ($i + 5) . '</button></a>
                       </li>

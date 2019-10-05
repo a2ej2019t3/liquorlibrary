@@ -1,6 +1,7 @@
 <?php
 session_start();
 $_SESSION['location'] = "index";
+include_once "init.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,7 +9,7 @@ $_SESSION['location'] = "index";
 <head>
   <title>Liquor Library Homepage</title>
   <?php
-  include_once("partials/head.php");
+  include_once(ROOT_DIR . "partials/head.php");
   ?>
   <link rel="stylesheet" href="css/index.css">
 </head>
@@ -18,8 +19,8 @@ $_SESSION['location'] = "index";
     <p style="width:inherit; height:inherit; text-align:center; top:50%;">loading...</p>
   </div> -->
   <?php  
-  include_once("partials/header.php");
-  include_once("partials/indicatorDown.php");
+  include_once(ROOT_DIR . "partials/header.php");
+  include_once(ROOT_DIR . "partials/indicatorDown.php");
   ?>
   <section>
     <div class="container-fluid">
@@ -32,7 +33,7 @@ $_SESSION['location'] = "index";
   <section id="specialindex" style="margin-top:150px;">
     <div class="container">
       <?php
-      include('specialupload/specialindex.php');
+      include(ROOT_DIR . 'specialupload/specialindex.php');
       ?>
     </div>
   </section>
@@ -41,7 +42,7 @@ $_SESSION['location'] = "index";
   <section style="margin-top:150px;">
 
     <?php
-    include('partials/productindex.php');
+    include(ROOT_DIR . 'partials/productindex.php');
     ?>
 
   </section>
@@ -78,13 +79,9 @@ $_SESSION['location'] = "index";
 
   </section>
   <?php
-  include_once("partials/indicatorUp.php");
-  ?>
-  <?php
-
-  include_once("partials/footer.php");
-  include_once("partials/foot.php");
-  
+  include_once(ROOT_DIR . "partials/indicatorUp.php");
+  include_once(ROOT_DIR . "partials/footer.php");
+  include_once(ROOT_DIR . "partials/foot.php");
   ?>
   <script type="text/javascript" src="js/sub.js"></script>
   <script type="text/javascript" src="js/cart.js"></script>
