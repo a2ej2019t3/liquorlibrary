@@ -3,7 +3,7 @@
     $DBsql = new sql;
     
     $cartID = $_GET['oi'];
-    echo $cartID;
+    // echo $cartID;
     $res = $DBsql->getOrderInfo($cartID, null);
     // var_dump($res);
     $tagForCategory = 'Category: ';
